@@ -3,8 +3,9 @@ import { SideEffectChecker } from "./SideEffectChecker";
 import { SutType } from "./SutType";
 
 export class Meanwhile<T extends SutType> extends ShallEntity<T> {
-    meanwhile(arg0: string, arg1: SideEffectChecker<T>) {
-        throw new Error("Method not implemented.");
+    meanwhile(reason: string, checker: SideEffectChecker<T>) {
+        this.sideEffectChecks.push([reason,checker])
+        return this
     }
 
 }

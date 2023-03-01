@@ -1,4 +1,4 @@
-export function applyMixins(derivedCtor: any, constructors: any[]) {
+export function applyMixins<T extends {prototype:any}>(derivedCtor: T, constructors: any[]):T {
     constructors.forEach((baseCtor) => {
         Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
             Object.defineProperty(
