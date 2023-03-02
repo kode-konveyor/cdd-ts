@@ -1,45 +1,57 @@
-import { SideEffectChecker } from "src/SideEffectChecker";
+import { mock, mockFn } from "jest-mock-extended";
+
 import { Shall } from "../src/Shall";
-
-export function testedFunction(arg:number, arg2: string) {
-    return String(arg)
-}
-
-export class SeChecker implements SideEffectChecker<(a1:number,a2:number)=> number> {
-    setUp(): undefined {
-        throw new Error("Method not implemented.")
-    }
-    test(): undefined {
-        throw new Error("Method not implemented.")
-    }
-    tearDown(): undefined {
-        throw new Error("Method not implemented.")
-    }
-
-}
+import { SeChecker } from "./SeChecker";
+import { testedFunction } from "./testedFunction";
 
 describe("Contract define the contract for a function", () => {
 
     test("contracts can be checked", () => {
-        new Shall(testedFunction)
+        new Shall("A nice tested functions",testedFunction)
         .ifCalledWith(1,"a")
         .thenReturn("1")
         .suchThat(
             "the return value is the string representation of the first parameter",
             (returnValue: string, parameter1: number, parameter2: string) => (returnValue === String(parameter1))
             )
-        .meanwhile("logs to console", new SeChecker())
+        .meanwhile("logs to console", new SeChecker([["hello a"]]))
         .check()
     });
 
     test("if the return value does not correspond to the contract, an error is thrown", () => {
         
-        const check =  () => new Shall(testedFunction)
+        const check =  () => new Shall("Function which is tested",testedFunction)
         .ifCalledWith(1,"a")
         .thenReturn("1a")
         .check()
         
-        expect(check).toThrow(new RegExp('expect.*toEqual'))
+        expect(check).toThrow('Function which is tested: return value mismatch')
+    });
+
+    test("if a return value constraint does not hold, an error is thrown", () => {
+        
+        const check =  () => new Shall("For test fun",testedFunction)
+        .ifCalledWith(1,"a")
+        .thenReturn("1")
+        .suchThat(
+            "the return value is the string representation of the first parameter",
+            (returnValue: string, parameter1: number, parameter2: string) => (expect(returnValue).toEqual("a"+String(parameter1)))
+        )
+        .check()
+        
+        expect(check).toThrow(new RegExp('For test fun: the return value is the string representation of the first parameter: return value check did not hold'))
+    });
+
+
+    test("if a side effect check does not check, an error is thrown", () => {
+        
+        const check =  () => new Shall("For test fun",testedFunction)
+        .ifCalledWith(1,"a")
+        .thenReturn("1")
+        .meanwhile("logs to console", new SeChecker([["hello b"]]))
+        .check()
+        
+        expect(check).toThrow(new RegExp('For test fun: logs to console: did not hold'))
     });
 
 });

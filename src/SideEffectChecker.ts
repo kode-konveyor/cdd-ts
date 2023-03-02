@@ -1,6 +1,6 @@
 
 export interface SideEffectChecker<T> {
-    setUp(): undefined;
-    test(): undefined;
-    tearDown(): undefined;
+    setUp(): void;
+    check(): void;
+    tearDown(): void;
 }
