@@ -1,27 +1,19 @@
-import { mockFn } from "jest-mock-extended";
 import { applyMixins } from "./applyMixins";
 import { Check } from "./Check";
 import { IfCalledWith } from "./IfCalledWith";
 import { Meanwhile } from "./Meanwhile";
 import { ShallEntity } from "./ShallEntity";
+import { Stub } from "./Stub";
 import { SuchThat } from "./SuchThat";
 import { SutType } from "./SutType";
 import { ThenReturn } from "./ThenReturn";
+import { ThenThrow } from "./ThenThrow";
 
-interface _Shall<T extends SutType> extends IfCalledWith<T>, ThenReturn<T>, SuchThat<T>, Meanwhile<T>, Check<T> {
+interface _BeThat<T extends SutType> extends IfCalledWith<T>, ThenReturn<T>, SuchThat<T>, Meanwhile<T>, Check<T>, Stub<T>, ThenThrow<T> {
 
 }
 
-class _Shall<T extends SutType> extends ShallEntity<T>  {
-    stub(): T {
-        const stub= mockFn<T>()
-        stub.calledWith(...this.parameters).mockReturnValue(this.returnValue)
-        return stub
-    }
-    thenThrow( expectedRegex: string ) {
-        this.thrown=expectedRegex
-        return this
-    }
+class _BeThat<T extends SutType> extends ShallEntity<T>  {
     
     constructor(
         explanation: string,
@@ -36,4 +28,4 @@ class _Shall<T extends SutType> extends ShallEntity<T>  {
 
 }
 
-export const Shall= applyMixins(_Shall,[IfCalledWith,ThenReturn,SuchThat, Meanwhile, Check])
+export const BeThat= applyMixins(_BeThat,[IfCalledWith,ThenReturn,SuchThat, Meanwhile, Check,Stub,ThenThrow])

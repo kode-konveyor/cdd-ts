@@ -1,13 +1,13 @@
 import { mock, mockFn } from "jest-mock-extended";
 
-import { Shall } from "../src/Shall";
+import { BeThat } from "../src/BeThat";
 import { SeChecker } from "./SeChecker";
 import { testedFunction } from "./testedFunction";
 
 describe("Contract define the contract for a function", () => {
 
     test("contracts can be checked", () => {
-        new Shall("A nice tested functions",testedFunction)
+        new BeThat("A nice tested functions",testedFunction)
         .ifCalledWith(1,"a")
         .thenReturn("1")
         .suchThat(
@@ -20,7 +20,7 @@ describe("Contract define the contract for a function", () => {
 
     test("if the return value does not correspond to the contract, an error is thrown", () => {
         
-        const check =  () => new Shall("Function which is tested",testedFunction)
+        const check =  () => new BeThat("Function which is tested",testedFunction)
         .ifCalledWith(1,"a")
         .thenReturn("1a")
         .check()
@@ -30,7 +30,7 @@ describe("Contract define the contract for a function", () => {
 
     test("if a return value constraint does not hold, an error is thrown", () => {
         
-        const check =  () => new Shall("For test fun",testedFunction)
+        const check =  () => new BeThat("For test fun",testedFunction)
         .ifCalledWith(1,"a")
         .thenReturn("1")
         .suchThat(
@@ -45,7 +45,7 @@ describe("Contract define the contract for a function", () => {
 
     test("if a side effect check does not check, an error is thrown", () => {
         
-        const check =  () => new Shall("For test fun",testedFunction)
+        const check =  () => new BeThat("For test fun",testedFunction)
         .ifCalledWith(1,"a")
         .thenReturn("1")
         .meanwhile("logs to console", new SeChecker([["hello b"]]))
