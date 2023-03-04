@@ -1,7 +1,9 @@
 import { applyMixins } from "./applyMixins";
+import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
 import { Check } from "./Check";
 import { IfCalledWith } from "./IfCalledWith";
 import { Meanwhile } from "./Meanwhile";
+import { RunDescriptorEntity } from "./RunDescriptorEntity";
 import { ShallEntity } from "./ShallEntity";
 import { Stub } from "./Stub";
 import { SuchThat } from "./SuchThat";
@@ -13,7 +15,26 @@ interface _BeThat<T extends SutType> extends IfCalledWith<T>, ThenReturn<T>, Suc
 
 }
 
+type EnvironmentManipulator = {
+    setUp: () => void;
+    tearDown: () => void;
+};
+
 class _BeThat<T extends SutType> extends ShallEntity<T>  {
+    when(explanation: string, environmentManipulator: EnvironmentManipulator):this {
+        if(this.currentRun) {
+            const currentCase = (this.currentCase)? this.currentCase : "";
+            this.cases[currentCase].runs.push(this.currentRun)
+        }
+
+        this.currentCase = explanation
+        const caseDescriptor = new CaseDescriptorEntity();
+        caseDescriptor.setUp = environmentManipulator.setUp
+        caseDescriptor.tearDown = environmentManipulator.tearDown
+        this.cases[explanation] = caseDescriptor
+        this.currentRun = undefined
+        return this
+    }
     
     constructor(
         explanation: string,
@@ -22,8 +43,7 @@ class _BeThat<T extends SutType> extends ShallEntity<T>  {
         super();
         this.explanation = explanation
         this.testedFunction = testedFunction
-        this.returnValueChecks = []
-        this.sideEffectChecks = []
+        this.cases[""] = new CaseDescriptorEntity()
     }
 
 }

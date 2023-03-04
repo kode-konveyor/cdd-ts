@@ -1,0 +1,23 @@
+{
+  "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
+  "mutate": [
+    "src/**/*.ts"
+  ],
+  "thresholds": {
+    "low": 100,
+    "high": 100
+  },
+  "ignoreStatic": false,
+  "warnings": {
+    "slow": false
+  },
+  "testRunner": "jest",
+  "reporters": [
+    "progress",
+    "clear-text",
+    "html",
+    "json"
+  ],
+  "concurrency": 2,
+  "coverageAnalysis": "perTest"
+}

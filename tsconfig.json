@@ -18,6 +18,7 @@
     "importHelpers": true,
     "target": "ES5",
     "module": "CommonJS",
+    "esModuleInterop": true,
     "useDefineForClassFields": false,
     "lib": [
       "ES2022",

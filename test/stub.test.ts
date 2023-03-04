@@ -1,7 +1,7 @@
+import equal = require("fast-deep-equal");
 import { BeThat } from "../src/BeThat";
 import { SeChecker } from "./SeChecker";
 import { testedFunction } from "./testedFunction";
-
 
 function callerFunction(arg: number, fun:(arg: number, arg2: string) => string) {
     return fun(arg,"text")
@@ -9,6 +9,9 @@ function callerFunction(arg: number, fun:(arg: number, arg2: string) => string) 
 
 describe("The contract can be used as a stub", () => {
 
+    test("foo",() => {
+        expect(equal([1,"foo"],[1,"foo"])).toBe(true)
+    })
     test("contracts can be used for stub", () => {
 
         const calledContract = new BeThat("A nice tested function",testedFunction)
