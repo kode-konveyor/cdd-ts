@@ -1,7 +1,6 @@
 import glob from "fast-glob" 
-import { FooEntity } from "./FooEntity";
 
-const counter = {count: 0}
+type FooEntity  = Record<string, {getter: () => number}>
 
 export async function asyncFunc() {
     const names = await glob(['src/**/*foo.ts'],{})
@@ -20,7 +19,7 @@ async function runOneModule(name:string) {
     const fooModule = await import(dir + "/" + name);
     const key = "stryker was not here";
     const entity: FooEntity = fooModule["foo"];
-    entity.modifier();
-    return fooModule["foo"].entries[key].getter() as number;
+    const value = entity[key].getter() as number;
+    return value
 }
 
