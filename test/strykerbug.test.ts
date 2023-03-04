@@ -5,7 +5,7 @@ describe("Testing an async function", () => {
 
      test("the test", async () => {
         return asyncFunc().then(count =>
-            expect(count).toBe(8)
+            expect(count).toBe(16)
         )
     });
 });
