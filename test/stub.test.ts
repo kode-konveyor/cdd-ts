@@ -1,4 +1,4 @@
-import { Contract } from "../src/Contract";
+import { Contract } from "src/Contract";
 import { SeChecker } from "./SeChecker";
 
 function callerFunction(arg: number, fun:(arg: number, arg2: string) => string) {

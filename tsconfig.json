@@ -2,7 +2,7 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "baseUrl": "./",
+    "baseUrl": ".",
     "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -28,6 +28,11 @@
       "jest"
     ]
   },
+  "include": [
+    "**/*.ts",
+    "test/**/*.ts",
+    "contracts/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ],

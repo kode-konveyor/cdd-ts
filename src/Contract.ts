@@ -41,3 +41,4 @@ class _Contract<T extends SutType> extends ContractEntity<T>  {
 }
 
 export const Contract= applyMixins(_Contract,[When, IfCalledWith,ThenReturn,SuchThat, Meanwhile, Check,Stub,ThenThrow])
+export type Contract<T extends SutType>=_Contract<T>
