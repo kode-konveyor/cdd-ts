@@ -3,7 +3,7 @@ import { RunDescriptorEntity } from "./RunDescriptorEntity";
 import { SideEffectChecker } from "./SideEffectChecker";
 import { SutType } from "./SutType";
 
-export class ShallEntity<T extends SutType> {
+export class ContractEntity<T extends SutType> {
     explanation!: string;
     currentCase?: string;
     currentRun?:  RunDescriptorEntity<T>;

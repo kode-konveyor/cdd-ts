@@ -1,10 +1,12 @@
-import { BeThat } from "../src/BeThat";
+import { Contract } from "../src/Contract";
 import { SeChecker } from "../test/SeChecker";
 import { testedFunction } from "../test/testedFunction";
 
-export const testedFunctionContract = new BeThat("A nice tested functions", testedFunction)
+export const testedFunctionContractParties = [testedFunction]
+
+export const testedFunctionContract = new Contract("A nice tested functions")
     .ifCalledWith(1, "a")
-    .thenReturn("1")
+    .thenReturn("returns the first parameter as string","1")
     .suchThat(
         "the return value is the string representation of the first parameter",
         (returnValue: string, parameter1: number, parameter2: string) => (returnValue === String(parameter1))

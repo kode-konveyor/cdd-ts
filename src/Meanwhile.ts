@@ -1,8 +1,8 @@
-import { ShallEntity } from "./ShallEntity";
+import { ContractEntity } from "./ContractEntity";
 import { SideEffectChecker } from "./SideEffectChecker";
 import { SutType } from "./SutType";
 
-export class Meanwhile<T extends SutType> extends ShallEntity<T> {
+export class Meanwhile<T extends SutType> extends ContractEntity<T> {
     meanwhile(reason: string, checker: SideEffectChecker<T>):this {
         if(!this.currentRun)
             this.sideEffectChecks.push([reason,checker])

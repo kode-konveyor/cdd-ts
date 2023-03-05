@@ -1,8 +1,8 @@
 import equal = require("fast-deep-equal");
-import { ShallEntity } from "./ShallEntity";
+import { ContractEntity } from "./ContractEntity";
 import { SutType } from "./SutType";
 
-export class Stub<T extends SutType> extends ShallEntity<T> {
+export class Stub<T extends SutType> extends ContractEntity<T> {
     stub(caseName?: string): T {
         if (caseName === undefined) 
             caseName = ""
@@ -21,7 +21,7 @@ export class Stub<T extends SutType> extends ShallEntity<T> {
                   if(run.thrown === undefined)
                     retvals.push(run.returnValue as ReturnType<T>)
                    else
-                     throw new Error(run.thrown)
+                     throw new Error(String(run.thrown))
             })
             if(retvals.length != 1)
                 throw new Error("those parameters are not defined exactly once for this case:\n"+

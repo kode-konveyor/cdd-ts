@@ -8,7 +8,10 @@
     "test": "test"
   },
   "scripts": {
-    "test": "jest"
+    "qa": "npm run lint &&npm run test&& npm run mutate",
+    "mutate": "stryker run",
+    "test": "jest",
+    "lint": "eslint"
   },
   "jest": {
     "preset": "ts-jest",

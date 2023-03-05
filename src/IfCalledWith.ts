@@ -1,8 +1,8 @@
 import { RunDescriptorEntity } from "./RunDescriptorEntity";
-import { ShallEntity } from "./ShallEntity";
+import { ContractEntity } from "./ContractEntity";
 import { SutType } from "./SutType";
 
-export class IfCalledWith<T extends SutType> extends ShallEntity<T> {
+export class IfCalledWith<T extends SutType> extends ContractEntity<T> {
 
     ifCalledWith(...parameters: Parameters<T>):this {
         if(this.currentRun) {

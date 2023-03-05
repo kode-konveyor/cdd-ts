@@ -1,4 +1,4 @@
-import {BeThat} from "./BeThat"
+import {Contract} from "./Contract"
 import { Check } from "./Check";
 
 export async function runContractsfromList(contracts: string[], dir: string) {
@@ -19,6 +19,11 @@ async function runOneContract(dir: string, contractFile: string, contractName: s
     const modulePromise = import(dir + "/" + contractFile);
     const module = await modulePromise;
     const contract: Check<any> = module[contractName];
-    return contract.check() as number;
+    const parties:[] = module[contractName+"Parties"]
+    let count = 0
+    for(const party of parties) {
+        count += contract.check(party)
+    }
+    return count as number;
 }
 

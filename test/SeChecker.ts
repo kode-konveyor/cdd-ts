@@ -13,6 +13,7 @@ export class SeChecker implements SideEffectChecker<(a1: number, a2: number) => 
     }
 
     setUp = () => {
+        this.received = [];
         this.oldLog = console.log;
         console.log = (...params) => { this.received.push(params); };
     };

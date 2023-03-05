@@ -1,12 +1,14 @@
 import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
 import { RunDescriptorEntity } from "./RunDescriptorEntity";
-import { ShallEntity } from "./ShallEntity";
+import { ContractEntity } from "./ContractEntity";
 import { SutType } from "./SutType";
 
-export class Check<T extends SutType> extends ShallEntity<T> {
+export class Check<T extends SutType> extends ContractEntity<T> {
     checkedCase!: string;
+    currentRunExplanation!: string;
 
-    check() {
+    check(sut: T) {
+        this.testedFunction = sut
         let checked = 0;
         if(this.currentRun) {
             const currentCase = (this.currentCase)? this.currentCase : "";
@@ -18,7 +20,7 @@ export class Check<T extends SutType> extends ShallEntity<T> {
             if(thisCase.setUp)
                 thisCase.setUp()
             thisCase.runs.forEach(currentRun => {
-                checked += this.handleCase(currentRun)
+                checked += this.handleRun(currentRun)
             })
             if(thisCase.tearDown)
                 thisCase.tearDown()
@@ -27,12 +29,13 @@ export class Check<T extends SutType> extends ShallEntity<T> {
     }
 
     private caseName(): string {
-        return this.explanation+":"+this.checkedCase
+        return this.explanation+":"+this.checkedCase+":"+this.currentRunExplanation
     }
 
-    private handleCase(currentRun: RunDescriptorEntity<T>) {
+    private handleRun(currentRun: RunDescriptorEntity<T>) {
+        this.currentRunExplanation = currentRun.explanation
         if (currentRun.parameters === undefined)
-            throw new Error();
+            throw new Error(this.caseName()+": no ifcalledWith");
         const returnValue = currentRun.returnValue;
         const thrown = currentRun.thrown;
         this.setUpSideEffectChecks(currentRun);
@@ -54,12 +57,11 @@ export class Check<T extends SutType> extends ShallEntity<T> {
     }
 
     private handleException(currentRun: RunDescriptorEntity<T>, catched: unknown) {
-        const cc = this.currentCase? this.currentCase: ""
         if (currentRun.thrown === undefined) {
             throw new Error(this.caseName() + ": unexpected exception:" + catched);
         }
         if(!String(catched).match(currentRun.thrown))
-            throw new Error(this.caseName()+":expected exception not thrown. Got:"+ catched)
+            throw new Error(this.caseName()+":Not the expected exception thrown. Got:"+ catched)
     }
 
     private checkReturnValue(currentRun: RunDescriptorEntity<T>, result: ReturnType<T>) {
@@ -68,6 +70,19 @@ export class Check<T extends SutType> extends ShallEntity<T> {
                 this.caseName() + ": return value mismatch:" +
                 "\nexpected:" + currentRun.returnValue +
                 "\nactual:" + result);
+    }
+
+    private setUpSideEffectChecks(currentRun: RunDescriptorEntity<T>) {
+        this.sideEffectChecks.forEach(
+            (entry) => {
+                entry[1].setUp();
+            }
+        )
+        currentRun.sideEffectChecks.forEach(
+            (entry) => {
+                entry[1].setUp();
+            }
+        );
     }
 
     private runSideEffectChecks(currentRun: RunDescriptorEntity<T>) {
@@ -101,19 +116,6 @@ export class Check<T extends SutType> extends ShallEntity<T> {
                 } catch (error) {
                     throw new Error(this.caseName() + ": " + entry[0] + ": return value check did not hold:" + error);
                 }
-            }
-        );
-    }
-
-    private setUpSideEffectChecks(currentRun: RunDescriptorEntity<T>) {
-        this.sideEffectChecks.forEach(
-            (entry) => {
-                entry[1].setUp();
-            }
-        )
-        currentRun.sideEffectChecks.forEach(
-            (entry) => {
-                entry[1].setUp();
             }
         );
     }

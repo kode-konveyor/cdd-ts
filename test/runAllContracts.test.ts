@@ -4,7 +4,7 @@ describe("Checking all contracts", () => {
 
      test("running contracts", async () => {
         return runAllContracts().then( count =>
-            expect(count).toBe(8)
+            expect(count).toBe(13)
         )
     });
 });
