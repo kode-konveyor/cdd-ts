@@ -5,15 +5,13 @@ export async function runContractsfromList(contracts: string[], dir: string) {
     let promises: Promise<number>[] = []
     contracts.forEach(  (contractFile) => {
         const baseName = contractFile.split('/').pop();
-        if (!baseName)
-            throw new Error(contractFile);
-        const contractName = baseName.replace(".ts", "");
-        console.log("running "+ contractName)
+        const contractName = (baseName as string).replace(".ts", "");
         promises.push(runOneContract(dir, contractFile, contractName));
     });
+    const counts= await Promise.all(promises)
     let count = 0
-    for(const countPromise of promises) {
-        count += await countPromise
+    for(const oneCount of counts) {
+        count += oneCount
     }
     return count
 }

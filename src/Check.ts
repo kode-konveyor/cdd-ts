@@ -18,8 +18,7 @@ export class Check<T extends SutType> extends ShallEntity<T> {
             if(thisCase.setUp)
                 thisCase.setUp()
             thisCase.runs.forEach(currentRun => {
-                this.handleCase(currentRun)
-                checked++;
+                checked += this.handleCase(currentRun)
             })
             if(thisCase.tearDown)
                 thisCase.tearDown()
@@ -44,13 +43,14 @@ export class Check<T extends SutType> extends ShallEntity<T> {
             result = this.testedFunction(...parameters);
         } catch (e) {
             this.handleException(currentRun, e);
-            return
+            return 1
         }
         if (currentRun.thrown)
             throw new Error( this.caseName() + ": Exception expected but not thrown");
         this.checkReturnValue(currentRun,result);
         this.runReturnValueChecks(currentRun);
         this.runSideEffectChecks(currentRun);
+        return 1
     }
 
     private handleException(currentRun: RunDescriptorEntity<T>, catched: unknown) {
