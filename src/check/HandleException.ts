@@ -1,9 +1,13 @@
-import { RunDescriptorEntity } from "../RunDescriptorEntity";
-import { ContractEntity } from "../ContractEntity";
-import { SutType } from "../SutType";
+import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { CaseName } from "./CaseName";
 import { injectable } from "tsyringe";
+import { messageFormat } from "src/util/messageFormat";
+import { ContractEntity } from "src/contract/ContractEntity";
+import { SutType } from "src/contract/SutType";
 
+
+const UNEXPECTED_EXCEPTION_MESSAGE_FORMAT = "{1}: unexpected exception:{2}";
+const NOT_THE_EXPECTED_EXCEPTION_THROWN_FORMAT = "{1}:Not the expected exception thrown. Got:{2}";
 
 @injectable()
 export class HandleException<T extends SutType> {
@@ -15,9 +19,15 @@ export class HandleException<T extends SutType> {
 
     handleException(contract: ContractEntity<T>, currentRun: RunDescriptorEntity<T>, catched: unknown) {
         if (currentRun.thrown === undefined) {
-            throw new Error(this.caseName.caseName(contract) + ": unexpected exception:" + catched);
+            throw new Error(messageFormat(
+                UNEXPECTED_EXCEPTION_MESSAGE_FORMAT,
+                this.caseName.caseName(contract),
+                String(catched)));
         }
         if (!String(catched).match(currentRun.thrown))
-            throw new Error(this.caseName.caseName(contract) + ":Not the expected exception thrown. Got:" + catched);
+            throw new Error(messageFormat(
+                NOT_THE_EXPECTED_EXCEPTION_THROWN_FORMAT,
+                this.caseName.caseName(contract),
+                String(catched)));
     }
 }

@@ -1,6 +1,6 @@
 import "reflect-metadata";
 import { Check } from "src/check/Check";
-import { Contract } from "src/Contract";
+import { Contract } from "src/contract/Contract";
 import { container } from "tsyringe";
 import { SeChecker } from "./SeChecker";
 

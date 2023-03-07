@@ -1,7 +1,7 @@
-import { RunDescriptorEntity } from "../RunDescriptorEntity";
-import { ContractEntity } from "../ContractEntity";
-import { SutType } from "../SutType";
+import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { injectable } from "tsyringe";
+import { ContractEntity } from "src/contract/ContractEntity";
+import { SutType } from "src/contract/SutType";
 
 
 @injectable()

@@ -1,6 +1,6 @@
 import "reflect-metadata";
 
-import { runAllContracts } from "src/runAllContracts";
+import { runAllContracts } from "src/runner/runAllContracts";
 
 describe("Checking all contracts", () => {
 

@@ -1,6 +1,4 @@
-import { RunDescriptorEntity } from "../RunDescriptorEntity";
-import { ContractEntity } from "../ContractEntity";
-import { SutType } from "../SutType";
+import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { CaseName } from "./CaseName";
 import { injectable } from "tsyringe";
 import { RunSideEffectChecks } from "./RunSideEffectChecks";
@@ -8,7 +6,12 @@ import { RunReturnValueChecks } from "./RunReturnValueChecks";
 import { CheckReturnValue } from "./CheckReturnValue";
 import { HandleException } from "./HandleException";
 import { SetUpSideEffectChecks } from "./SetUpSideEffectChecks";
+import { messageFormat } from "src/util/messageFormat";
+import { ContractEntity } from "src/contract/ContractEntity";
+import { SutType } from "src/contract/SutType";
 
+
+const EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT = "{1}: Exception expected but not thrown";
 
 @injectable()
 export class HandleRun<T extends SutType> {
@@ -32,14 +35,15 @@ export class HandleRun<T extends SutType> {
         let catched;
         try {
             const parameters: Parameters<T> = currentRun.parameters;
-            "Type 'Parameters<T>' must have a '[Symbol.iterator]()' method that returns an iterator.";
             result = contract.testedFunction(...(parameters as any[]));
         } catch (e) {
             this.handleException.handleException(contract, currentRun, e);
             return 1;
         }
         if (currentRun.thrown)
-            throw new Error(this.caseName.caseName(contract) + ": Exception expected but not thrown");
+            throw new Error(messageFormat(
+                EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT,
+                this.caseName.caseName(contract)));
         this.checkReturnValue.checkReturnValue(contract, currentRun, result);
         this.runReturnValueChecks.runReturnValueChecks(contract, currentRun);
         this.runSideEffectChecks.runSideEffectChecks(contract, currentRun);

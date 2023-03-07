@@ -1,4 +1,4 @@
-import { Contract } from "src/Contract";
+import { Contract } from "src/contract/Contract";
 import { SeChecker } from "test/SeChecker";
 import { testedFunction } from "test/testedFunction";
 

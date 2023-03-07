@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import { runAllContracts } from "./runAllContracts";
+import { runAllContracts } from "./runner/runAllContracts";
 
 console.error("running contracts")
 runAllContracts()

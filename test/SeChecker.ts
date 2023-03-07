@@ -1,4 +1,4 @@
-import { SideEffectChecker } from "src/SideEffectChecker";
+import { SideEffectChecker } from "src/contract/SideEffectChecker";
 
 export const GLobalObject = {
     value: [] as any[]

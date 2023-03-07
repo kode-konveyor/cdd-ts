@@ -1,9 +1,9 @@
-import { RunDescriptorEntity } from "../RunDescriptorEntity";
-import { ContractEntity } from "../ContractEntity";
-import { SutType } from "../SutType";
+import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { CaseName } from "./CaseName";
-import { autoInjectable, inject } from "tsyringe";
+import { autoInjectable } from "tsyringe";
 import { HandleRun } from "./HandleRun";
+import { ContractEntity } from "src/contract/ContractEntity";
+import { SutType } from "src/contract/SutType";
 
 @autoInjectable()
 export class Check<T extends SutType>  {

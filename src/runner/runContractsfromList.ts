@@ -1,5 +1,5 @@
-import {Contract} from "./Contract"
-import { Check } from "./check/Check";
+import { Check } from "src/check/Check";
+import { Contract } from "src/contract/Contract";
 import { container } from "tsyringe";
 
 export function runContractsfromList(contracts: string[], dir: string) {

@@ -1,10 +1,12 @@
-import { RunDescriptorEntity } from "../RunDescriptorEntity";
-import { ContractEntity } from "../ContractEntity";
-import { SutType } from "../SutType";
+import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { CaseName } from "./CaseName";
 import { injectable } from "tsyringe";
+import { messageFormat } from "src/util/messageFormat";
+import { ContractEntity } from "src/contract/ContractEntity";
+import { SutType } from "src/contract/SutType";
 
 
+const RETURN_VALUE_MISMATCH_MESSAGE_FORMAT = "{1}: return value mismatch:\nexpected:{2}\nactual:{3}";
 @injectable()
 export class CheckReturnValue<T extends SutType> {
     constructor(
@@ -14,9 +16,10 @@ export class CheckReturnValue<T extends SutType> {
 
     checkReturnValue(contract: ContractEntity<T>, currentRun: RunDescriptorEntity<T>, result: ReturnType<T>) {
         if (result !== currentRun.returnValue)
-            throw new Error(
-                this.caseName.caseName(contract) + ": return value mismatch:" +
-                "\nexpected:" + currentRun.returnValue +
-                "\nactual:" + result);
+            throw new Error(messageFormat(
+                RETURN_VALUE_MISMATCH_MESSAGE_FORMAT,
+                this.caseName.caseName(contract),
+                String(currentRun.returnValue),
+                result));
     }
 }
