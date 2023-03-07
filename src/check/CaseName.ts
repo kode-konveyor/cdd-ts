@@ -2,8 +2,8 @@ import { ContractEntity } from "src/contract/ContractEntity";
 import { SutType } from "src/contract/SutType";
 import { messageFormat } from "src/util/messageFormat";
 import { injectable, singleton } from "tsyringe";
+import { RUN_IDENTIFIER_FORMAT } from "./Messages";
 
-const RUN_IDENTIFIER_FORMAT = "{1}:{2}:{3}";
 @injectable()
 export class CaseName<T extends SutType> {
     caseName( contract: ContractEntity<T>): string {

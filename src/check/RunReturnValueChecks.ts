@@ -4,9 +4,9 @@ import { injectable } from "tsyringe";
 import { messageFormat } from "src/util/messageFormat";
 import { ContractEntity } from "src/contract/ContractEntity";
 import { SutType } from "src/contract/SutType";
+import { RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT } from "./Messages";
 
 
-const RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT = "{1}: {2}: return value check did not hold:{3}";
 
 @injectable()
 export class RunReturnValueChecks<T extends SutType> {

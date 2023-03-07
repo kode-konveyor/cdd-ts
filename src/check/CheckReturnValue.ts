@@ -4,9 +4,9 @@ import { injectable } from "tsyringe";
 import { messageFormat } from "src/util/messageFormat";
 import { ContractEntity } from "src/contract/ContractEntity";
 import { SutType } from "src/contract/SutType";
+import { RETURN_VALUE_MISMATCH_MESSAGE_FORMAT } from "./Messages";
 
 
-const RETURN_VALUE_MISMATCH_MESSAGE_FORMAT = "{1}: return value mismatch:\nexpected:{2}\nactual:{3}";
 @injectable()
 export class CheckReturnValue<T extends SutType> {
     constructor(

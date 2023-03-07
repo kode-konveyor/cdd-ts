@@ -1,7 +1,7 @@
 import { ContractEntity } from "./ContractEntity";
+import { THENRETURN_MISSING_IFCALLEDWITH_MESSAGE_FORMAT } from "./Messages";
 import { SutType } from "./SutType";
 
-const THENRETURN_MISSING_IFCALLEDWITH_MESSAGE_FORMAT = "thenReturn can only be used after an ifCalledWith";
 
 export class ThenReturn<T extends SutType> extends ContractEntity<T> {
 

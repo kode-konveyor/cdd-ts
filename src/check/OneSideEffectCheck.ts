@@ -4,8 +4,7 @@ import { messageFormat } from "src/util/messageFormat";
 import { ContractEntity } from "src/contract/ContractEntity";
 import { SideEffectChecker } from "src/contract/SideEffectChecker";
 import { SutType } from "src/contract/SutType";
-
-export const SIDE_EFFECT_CHECK_FAILURE_MESSAGE = "{1}: side effect check: {2}: did not hold:{3}";
+import { SIDE_EFFECT_CHECK_FAILURE_MESSAGE } from "./Messages";
 
 @injectable()
 export class OneSideEffectCheck<T extends SutType> {

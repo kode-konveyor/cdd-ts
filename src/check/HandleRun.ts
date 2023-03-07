@@ -9,9 +9,7 @@ import { SetUpSideEffectChecks } from "./SetUpSideEffectChecks";
 import { messageFormat } from "src/util/messageFormat";
 import { ContractEntity } from "src/contract/ContractEntity";
 import { SutType } from "src/contract/SutType";
-
-
-const EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT = "{1}: Exception expected but not thrown";
+import { EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT } from "./Messages";
 
 @injectable()
 export class HandleRun<T extends SutType> {
