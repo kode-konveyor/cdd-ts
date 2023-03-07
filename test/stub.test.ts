@@ -1,5 +1,7 @@
-import { Check } from "src/Check";
+import "reflect-metadata";
+import { Check } from "src/check/Check";
 import { Contract } from "src/Contract";
+import { container } from "tsyringe";
 import { SeChecker } from "./SeChecker";
 
 function callerFunction(arg: number, fun:(arg: number, arg2: string) => string) {
@@ -8,7 +10,7 @@ function callerFunction(arg: number, fun:(arg: number, arg2: string) => string) 
 
 describe("The contract can be used as a stub", () => {
 
-    test("contracts can be used for stub", () => {
+    test("contracts can be used for stub", (done) => {
 
         const calledContract = new Contract()
             .init("A nice tested function")
@@ -24,9 +26,9 @@ describe("The contract can be used as a stub", () => {
             .init("Caller function")
             .ifCalledWith(1,calledContract.stub())
             .thenReturn("returns the return value of the called function","1")
-            
-        new Check().check(testedContract,callerFunction)
-
+        
+        container.resolve(Check).check(testedContract,callerFunction)
+        done()
     });
 
 });

@@ -1,13 +1,14 @@
-import { Check } from "src/Check"
+import { Check } from "src/check/Check"
 import { Contract } from "src/Contract"
 import { testedFunction } from "test/testedFunction"
+import { container } from "tsyringe"
 import { checkExceptionCheckBehaviour } from "./checkExceptionCheckBehaviour"
 import { checkSideEffectBehaviour } from "./checkSideEffectBehaviour"
 import { theRun, RUN_IDENTIFICATION, failingReturnValueCHeck, getContract } from "./CheckTestData"
 
 export const testedContract = getContract();
 
-export const CheckContractParties = [(fun: typeof testedFunction) => new Check().check(testedContract,fun)]
+export const CheckContractParties = [(fun: typeof testedFunction) => container.resolve(Check).check(testedContract,fun)]
 export const CheckContract = 
     new Contract()
     .init("check checks whether the contract actually corresponds to the behaviour of the SUT")

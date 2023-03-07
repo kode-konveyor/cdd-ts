@@ -1,6 +1,6 @@
 import { applyMixins } from "./applyMixins";
 import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
-import { Check } from "./Check";
+import { Check } from "./check/Check";
 import { IfCalledWith } from "./IfCalledWith";
 import { Meanwhile } from "./Meanwhile";
 import { RunDescriptorEntity } from "./RunDescriptorEntity";

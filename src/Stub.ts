@@ -1,4 +1,4 @@
-import equal = require("fast-deep-equal");
+import equal  from "fast-deep-equal"
 import { ContractEntity } from "./ContractEntity";
 import { SutType } from "./SutType";
 

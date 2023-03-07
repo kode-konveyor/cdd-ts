@@ -1,4 +1,3 @@
-import { Check } from "src/Check";
 import { Contract } from "src/Contract";
 import { RunDescriptorEntity } from "src/RunDescriptorEntity";
 import { SideEffectChecker } from "src/SideEffectChecker";
