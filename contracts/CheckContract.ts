@@ -3,14 +3,15 @@ import { Contract } from "src/Contract"
 import { testedFunction } from "test/testedFunction"
 import { checkExceptionCheckBehaviour } from "./checkExceptionCheckBehaviour"
 import { checkSideEffectBehaviour } from "./checkSideEffectBehaviour"
-import { theRun, RUN_IDENTIFICATION, failingReturnValueCHeck, getCheckInstance } from "./CheckTestData"
+import { theRun, RUN_IDENTIFICATION, failingReturnValueCHeck, getContract } from "./CheckTestData"
 
-export const checkInstance = getCheckInstance();
+export const testedContract = getContract();
 
-export const CheckContractParties = [() => checkInstance.check(testedFunction)]
+export const CheckContractParties = [(fun: typeof testedFunction) => new Check().check(testedContract,fun)]
 export const CheckContract = 
-    new Contract("check checks whether the contract actually corresponds to the behaviour of the SUT")
-    .ifCalledWith()
+    new Contract()
+    .init("check checks whether the contract actually corresponds to the behaviour of the SUT")
+    .ifCalledWith(testedFunction)
     .thenReturn("returns the number of runs checked in the contract",1)
  
     .when(
@@ -20,7 +21,7 @@ export const CheckContract =
             tearDown: () => {theRun.parameters = [1,"a"]}
         }
     )
-    .ifCalledWith()
+    .ifCalledWith(testedFunction)
     .thenThrow("a 'no ifCalledWith' error is thrown",RUN_IDENTIFICATION+" no ifcalledWith")
 
     .when(
@@ -30,7 +31,7 @@ export const CheckContract =
             tearDown: () => {theRun.returnValue="1"}
         }
     )
-    .ifCalledWith()
+    .ifCalledWith(testedFunction)
     .thenThrow("a 'return value mismatch' error is thrown",RegExp(RUN_IDENTIFICATION+" return value mismatch:.*expected:2.*actual:1","ms"))
  
     .when(
@@ -40,7 +41,7 @@ export const CheckContract =
             tearDown: () => {theRun.returnValueChecks.pop()}
         }
     )
-    .ifCalledWith()
+    .ifCalledWith(testedFunction)
     .thenThrow("a 'return value check did not hold' error is thrown",RUN_IDENTIFICATION+" fail: return value check did not hold")
  
     checkSideEffectBehaviour(CheckContract)

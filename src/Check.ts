@@ -1,79 +1,76 @@
-import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
 import { RunDescriptorEntity } from "./RunDescriptorEntity";
 import { ContractEntity } from "./ContractEntity";
 import { SutType } from "./SutType";
 
-export class Check<T extends SutType> extends ContractEntity<T> {
-    checkedCase!: string;
-    currentRunExplanation!: string;
+export class Check<T extends SutType>  {
 
-    check(sut: T) {
-        this.testedFunction = sut
+    check(contract: ContractEntity<T>, sut: T) {
+        contract.testedFunction = sut
         let checked = 0;
-        if(this.currentRun) {
-            const currentCase = (this.currentCase)? this.currentCase : "";
-            this.cases[currentCase].runs.push(this.currentRun)
+        if(contract.currentRun) {
+            const currentCase = (contract.currentCase)? contract.currentCase : "";
+            contract.cases[currentCase].runs.push(contract.currentRun)
         }
-        for(const casename in this.cases) {
-            const thisCase = this.cases[casename];
-            this.checkedCase = casename
-            if(thisCase.setUp)
-                thisCase.setUp()
-            thisCase.runs.forEach(currentRun => {
-                checked += this.handleRun(currentRun)
+        for(const casename in contract.cases) {
+            const contractCase = contract.cases[casename];
+            contract.checkedCase = casename
+            if(contractCase.setUp)
+                contractCase.setUp()
+            contractCase.runs.forEach(currentRun => {
+                checked += this.handleRun(contract,currentRun)
             })
-            if(thisCase.tearDown)
-                thisCase.tearDown()
+            if(contractCase.tearDown)
+                contractCase.tearDown()
         }
         return checked
     }
 
-    private caseName(): string {
-        return this.explanation+":"+this.checkedCase+":"+this.currentRunExplanation
+    private caseName(contract: ContractEntity<T>): string {
+        return contract.explanation+":"+contract.checkedCase+":"+contract.currentRunExplanation
     }
 
-    private handleRun(currentRun: RunDescriptorEntity<T>) {
-        this.currentRunExplanation = currentRun.explanation
+    private handleRun(contract: ContractEntity<T>,currentRun: RunDescriptorEntity<T>) {
+        contract.currentRunExplanation = currentRun.explanation
         if (currentRun.parameters === undefined)
-            throw new Error(this.caseName()+": no ifcalledWith");
+            throw new Error(this.caseName(contract)+": no ifcalledWith");
         const returnValue = currentRun.returnValue;
         const thrown = currentRun.thrown;
-        this.setUpSideEffectChecks(currentRun);
+        this.setUpSideEffectChecks(contract,currentRun);
         let result;
         let catched;
         try {
             const parameters:Parameters<T> = currentRun.parameters;
-            result = this.testedFunction(...parameters);
+            result = contract.testedFunction(...parameters);
         } catch (e) {
-            this.handleException(currentRun, e);
+            this.handleException(contract,currentRun, e);
             return 1
         }
         if (currentRun.thrown)
-            throw new Error( this.caseName() + ": Exception expected but not thrown");
-        this.checkReturnValue(currentRun,result);
-        this.runReturnValueChecks(currentRun);
-        this.runSideEffectChecks(currentRun);
+            throw new Error( this.caseName(contract) + ": Exception expected but not thrown");
+        this.checkReturnValue(contract, currentRun,result);
+        this.runReturnValueChecks(contract,currentRun);
+        this.runSideEffectChecks(contract,currentRun);
         return 1
     }
 
-    private handleException(currentRun: RunDescriptorEntity<T>, catched: unknown) {
+    private handleException(contract: ContractEntity<T>,currentRun: RunDescriptorEntity<T>, catched: unknown) {
         if (currentRun.thrown === undefined) {
-            throw new Error(this.caseName() + ": unexpected exception:" + catched);
+            throw new Error(this.caseName(contract) + ": unexpected exception:" + catched);
         }
         if(!String(catched).match(currentRun.thrown))
-            throw new Error(this.caseName()+":Not the expected exception thrown. Got:"+ catched)
+            throw new Error(this.caseName(contract)+":Not the expected exception thrown. Got:"+ catched)
     }
 
-    private checkReturnValue(currentRun: RunDescriptorEntity<T>, result: ReturnType<T>) {
+    private checkReturnValue(contract: ContractEntity<T>,currentRun: RunDescriptorEntity<T>, result: ReturnType<T>) {
         if (result !== currentRun.returnValue)
             throw new Error(
-                this.caseName() + ": return value mismatch:" +
+                this.caseName(contract) + ": return value mismatch:" +
                 "\nexpected:" + currentRun.returnValue +
                 "\nactual:" + result);
     }
 
-    private setUpSideEffectChecks(currentRun: RunDescriptorEntity<T>) {
-        this.sideEffectChecks.forEach(
+    private setUpSideEffectChecks(contract: ContractEntity<T>,currentRun: RunDescriptorEntity<T>) {
+        contract.sideEffectChecks.forEach(
             (entry) => {
                 entry[1].setUp();
             }
@@ -85,13 +82,13 @@ export class Check<T extends SutType> extends ContractEntity<T> {
         );
     }
 
-    private runSideEffectChecks(currentRun: RunDescriptorEntity<T>) {
-        this.sideEffectChecks.forEach(
+    private runSideEffectChecks(contract: ContractEntity<T>,currentRun: RunDescriptorEntity<T>) {
+        contract.sideEffectChecks.forEach(
             (entry) => {
                 try {
                     entry[1].check();
                 } catch (error) {
-                    throw new Error(this.caseName() + ": side effect check: " + entry[0] + ": did not hold:"+error);
+                    throw new Error(this.caseName(contract) + ": side effect check: " + entry[0] + ": did not hold:"+error);
                 }
                 entry[1].tearDown();
             }
@@ -101,20 +98,20 @@ export class Check<T extends SutType> extends ContractEntity<T> {
                 try {
                     entry[1].check();
                 } catch (error) {
-                    throw new Error(this.caseName() + ": side effect check: " + entry[0] + ": did not hold:"+error);
+                    throw new Error(this.caseName(contract) + ": side effect check: " + entry[0] + ": did not hold:"+error);
                 }
                 entry[1].tearDown();
             }
         );
     }
 
-    private runReturnValueChecks(currentRun: RunDescriptorEntity<T>) {
+    private runReturnValueChecks(contract: ContractEntity<T>,currentRun: RunDescriptorEntity<T>) {
         currentRun.returnValueChecks.forEach(
             entry => {
                 try {
                     entry[1](currentRun.returnValue as ReturnType<T>, ...(currentRun.parameters as Parameters<T>));
                 } catch (error) {
-                    throw new Error(this.caseName() + ": " + entry[0] + ": return value check did not hold:" + error);
+                    throw new Error(this.caseName(contract) + ": " + entry[0] + ": return value check did not hold:" + error);
                 }
             }
         );

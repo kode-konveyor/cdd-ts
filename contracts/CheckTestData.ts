@@ -1,4 +1,5 @@
 import { Check } from "src/Check";
+import { Contract } from "src/Contract";
 import { RunDescriptorEntity } from "src/RunDescriptorEntity";
 import { SideEffectChecker } from "src/SideEffectChecker";
 import { SeChecker } from "test/SeChecker";
@@ -21,8 +22,8 @@ function setTherun() {
 
 setTherun()
 
-export function getCheckInstance() {
-    const checkInstance = new Check<typeof testedFunction>()
+export function getContract() {
+    const checkInstance = new Contract<typeof testedFunction>()
 
     checkInstance.currentCase="default"
     checkInstance.testedFunction = testedFunction

@@ -1,28 +1,26 @@
 import { SideEffectChecker } from "src/SideEffectChecker";
 
+export const GLobalObject = {
+    value: [] as any[]
+}
 
 export class SeChecker implements SideEffectChecker<(a1: number, a2: number) => number> {
 
-    oldLog!: (...data: any[]) => void;
     expected: any[];
-    received: any[];
 
     constructor(expected: any[]) {
         this.expected = expected;
-        this.received = [];
     }
 
     setUp = () => {
-        this.received = [];
-        this.oldLog = console.log;
-        console.log = (...params) => { this.received.push(params); };
+        GLobalObject.value = []
     };
 
     check() {
-        expect(this.expected).toEqual(this.received);
+        expect(GLobalObject.value).toEqual(this.expected);
     }
+
     tearDown = () => {
-        console.log = this.oldLog;
     };
 
 }

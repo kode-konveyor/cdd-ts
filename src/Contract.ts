@@ -30,12 +30,12 @@ export type EnvironmentManipulator = {
 
 class _Contract<T extends SutType> extends ContractEntity<T>  {
     
-    constructor(
+    init(
         explanation: string,
-        ) {
-        super();
+        ): this {
         this.explanation = explanation
         this.cases[""] = new CaseDescriptorEntity()
+        return this
     }
 
 }
