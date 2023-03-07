@@ -8,7 +8,7 @@ describe("Checking all contracts", () => {
         const t = async () => {
         try {
             const count =  await runAllContracts();
-            expect(count).toBe(12);
+            expect(count).toBe(21);
             done()
         } catch(e) {
             done(e)

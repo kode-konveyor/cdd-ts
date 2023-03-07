@@ -1,6 +1,7 @@
 import { Contract } from "src/contract/Contract";
+import { GLobalObject } from "test/SeChecker";
 import { testedFunction } from "test/testedFunction";
-import { getRunDescriptor } from "./RunDescriptorTestData";
+import { getRunDescriptor, getRunDescriptorWithDoubleReturn } from "./RunDescriptorTestData";
 import { getSideEffectChecker, getSideEffectCheckerFailing } from "./SideEffectCheckerTestData";
 
 export const EXCEPTION_THROWER_PARAMETERS:[arg: number, arg2: string] = [2, "a"];
@@ -15,17 +16,65 @@ export function getReturnValueCheckFailing(): [string, (returnValue: string, arg
         }];
 }
 
-export function getContract() {
-    const checkInstance = new Contract<typeof testedFunction>()
-
-    checkInstance.currentCase="default"
-    checkInstance.explanation="The function under test"
-    checkInstance.cases = {
-        "": { runs: [getRunDescriptor()]},
-    }
-    return checkInstance
+export const manipulator =  {
+    setUp: () => 1,
+    tearDown: () => 1
 }
 
+export function getContract() {
+    const contract = new Contract<typeof testedFunction>()
+
+    contract.explanation="The function under test"
+    contract.cases = {
+        "": { runs: [getRunDescriptor()]},
+    }
+    return contract
+}
+
+export function getContractEmpty() {
+    const contract = getContract()
+    contract.cases[""].runs.pop()
+    return contract
+}
+
+export function getContractWithExistingRun() {
+    const contract = getContractEmpty()
+    contract.currentRun = getRunDescriptor();
+    return contract
+}
+
+export function getContractWithManipulatorSetAndRunAdded() {
+    const contract = getContractWithManipulatorSet()
+    contract.cases[""].runs.push(getRunDescriptor())
+    return contract
+}
+export function getContractWithManipulatorSet() {
+    const contract = getContractEmpty()
+    contract.currentCase = "when title"
+    contract.cases["when title"] = {
+        runs: [],
+        setUp: manipulator.setUp,
+        tearDown: manipulator.tearDown
+    }
+    return contract
+}
+
+export function getContractWithDescriptionSet() {
+    const contract = getContractEmpty()
+    contract.explanation = "contract title"
+    return contract;
+}
+
+export function getContractWithACase() {
+    const contract = getContract()
+    contract.cases["Global multiplier is 3"] = {
+        runs: [getRunDescriptorWithDoubleReturn()],
+        setUp: () => {GLobalObject.multiplier = 3},
+        tearDown: () => {GLobalObject.multiplier= 1}
+    }
+
+    return contract
+}
 
 export function getContractThrowingAnotherException() {
     const contract = getContract()

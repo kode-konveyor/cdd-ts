@@ -15,3 +15,11 @@ export function getRunDescriptor():RunDescriptorEntity<(arg: number, arg2: strin
     )
     return runDescriptorEntity;
 }
+
+export function getRunDescriptorWithDoubleReturn() {
+    const runDescriptor = getRunDescriptor()
+    runDescriptor.explanation="triple return"
+    runDescriptor.returnValue="3"
+    runDescriptor.sideEffectChecks.pop()
+    return runDescriptor
+}

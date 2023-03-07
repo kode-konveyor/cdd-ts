@@ -4,14 +4,14 @@ import { testedFunction } from "test/testedFunction"
 import { container } from "tsyringe"
 import { checkExceptionCheckBehaviour } from "./checkExceptionCheckBehaviour"
 import { checkSideEffectBehaviour } from "./checkSideEffectBehaviour"
-import { RUN_IDENTIFICATION, getContract, getContractWithoutIfcalledWith, getContractWithOtherReturnValue, getContractWithFailingReturnvalueCheck } from "./ContractTestdata"
+import { RUN_IDENTIFICATION, getContract, getContractWithoutIfcalledWith, getContractWithOtherReturnValue, getContractWithFailingReturnvalueCheck, getContractWithACase } from "./ContractTestdata"
 
 
 export const CheckContractParties = [(contract: Contract<typeof testedFunction>,fun: typeof testedFunction) => container.resolve(Check).check(contract,fun)]
 
 export const CheckContract = 
     new Contract<(contract: Contract<typeof testedFunction>,fun: typeof testedFunction) =>number>()
-    .init("check checks whether the contract actually corresponds to the behaviour of the SUT")
+    .setTitle("check checks whether the contract actually corresponds to the behaviour of the SUT")
 
     .ifCalledWith(getContract(),testedFunction)
     .thenReturn("it returns the number of runs checked in the contract",1)
@@ -22,10 +22,13 @@ export const CheckContract =
  
 
     .ifCalledWith(getContractWithOtherReturnValue(),testedFunction)
-    .thenThrow("if the return value is not according to the contract a 'return value mismatch' error is thrown",RegExp(RUN_IDENTIFICATION+" return value mismatch:.*expected:2.*actual:1","ms"))
+    .thenThrow("if the return value is not according to the contract a 'return value mismatch' error is thrown",RegExp(RUN_IDENTIFICATION+" return value mismatch:.*expected:.2.*actual  :.1","ms"))
  
     .ifCalledWith(getContractWithFailingReturnvalueCheck(),testedFunction)
     .thenThrow("if a return value check fails, a 'return value check did not hold' error is thrown",RUN_IDENTIFICATION+" fail: return value check did not hold")
  
+    .ifCalledWith(getContractWithACase(),testedFunction)
+    .thenReturn("with a 'when' we can use an environment manipulator to set up the environment",2)
+
     checkSideEffectBehaviour(CheckContract)
     checkExceptionCheckBehaviour(CheckContract)

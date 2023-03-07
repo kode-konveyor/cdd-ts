@@ -5,7 +5,7 @@ import { testedFunction } from "test/testedFunction";
 export const testedFunctionContractParties = [testedFunction]
 
 export const testedFunctionContract = new Contract()
-    .init("A nice tested functions")
+    .setTitle("A nice tested functions")
     .ifCalledWith(1, "a")
     .thenReturn("returns the first parameter as string","1")
     .suchThat(

@@ -13,7 +13,7 @@ describe("The contract can be used as a stub", () => {
     test("contracts can be used for stub", (done) => {
 
         const calledContract = new Contract()
-            .init("A nice tested function")
+            .setTitle("A nice tested function")
             .ifCalledWith(1,"text")
             .thenReturn("returns the first argument as string","1")
             .suchThat(
@@ -23,7 +23,7 @@ describe("The contract can be used as a stub", () => {
             .meanwhile("logs to console", new SeChecker([["hello a"]]))
 
         const testedContract = new Contract()
-            .init("Caller function")
+            .setTitle("Caller function")
             .ifCalledWith(1,calledContract.stub())
             .thenReturn("returns the return value of the called function","1")
         

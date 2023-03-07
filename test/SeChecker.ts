@@ -1,7 +1,8 @@
 import { SideEffectChecker } from "src/contract/SideEffectChecker";
 
 export const GLobalObject = {
-    value: [] as any[]
+    value: [] as any[],
+    multiplier: 1
 }
 
 export class SeChecker implements SideEffectChecker<(a1: number, a2: number) => number> {

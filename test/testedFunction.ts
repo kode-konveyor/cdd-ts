@@ -5,5 +5,5 @@ export function testedFunction(arg: number, arg2: string) {
     throw new Error("first arg cannot be two")
     if(arg!=3)
         GLobalObject.value.push(["hello " + arg2]);
-    return String(arg);
+    return String(arg*GLobalObject.multiplier);
 }
