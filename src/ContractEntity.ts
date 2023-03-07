@@ -11,5 +11,7 @@ export class ContractEntity<T extends SutType> {
     returnValueChecks: [string, (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void][] = []
     sideEffectChecks: [string, SideEffectChecker<T>][] = []
     cases: Record<string, CaseDescriptorEntity<T>> = {}
+    checkedCase!: string;
+    currentRunExplanation!: string;
 
 }

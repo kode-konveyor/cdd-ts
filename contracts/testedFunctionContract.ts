@@ -4,7 +4,8 @@ import { testedFunction } from "test/testedFunction";
 
 export const testedFunctionContractParties = [testedFunction]
 
-export const testedFunctionContract = new Contract("A nice tested functions")
+export const testedFunctionContract = new Contract()
+    .setTitle("A nice tested functions")
     .ifCalledWith(1, "a")
     .thenReturn("returns the first parameter as string","1")
     .suchThat(

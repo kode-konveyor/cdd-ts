@@ -1,11 +1,11 @@
-import { Contract } from "src/Contract";
-import { SutType } from "src/SutType";
-import { checkInstance } from "./CheckContract";
+import { SeChecker } from "test/SeChecker";
+import { testedFunction } from "test/testedFunction";
+import { CheckContract, testedContract } from "./CheckContract";
 import { theRun, sideEffectChecks, RUN_IDENTIFICATION, failingSideEffectCheck } from "./CheckTestData";
 
 
-export function checkSideEffectBehaviour(contract: Contract<SutType>) {
-    contract
+export function checkSideEffectBehaviour(checkContract: typeof CheckContract) {
+    checkContract
         .when(
             "a side effect definition does not hold",
             {
@@ -13,17 +13,17 @@ export function checkSideEffectBehaviour(contract: Contract<SutType>) {
                 tearDown: () => {theRun.sideEffectChecks.pop()}
             }
         )
-        .ifCalledWith()
-        .thenThrow("A 'side effect check: (name): did not hold' error is thrown",RUN_IDENTIFICATION+" side effect check: logs to console: did not hold")
+        .ifCalledWith(testedFunction)
+        .thenThrow("A 'side effect check: (name): did not hold' error is thrown",RUN_IDENTIFICATION+" side effect check: failing sideEffectCheck: did not hold")
 
 
         .when(
             "meanWhile is before the first ifCalledWith",
             {
-                setUp: () => { theRun.sideEffectChecks = [], checkInstance.sideEffectChecks = sideEffectChecks; },
-                tearDown: () => { theRun.sideEffectChecks = sideEffectChecks; checkInstance.sideEffectChecks = []; }
+                setUp: () => { theRun.sideEffectChecks = [], checkContract.sideEffectChecks = sideEffectChecks; },
+                tearDown: () => { theRun.sideEffectChecks = sideEffectChecks; checkContract.sideEffectChecks = []; }
             }
-        ).ifCalledWith()
+        ).ifCalledWith(testedFunction)
         .thenReturn("the side effect check is done for all of the runs", 1)
 
         .when(
@@ -33,15 +33,15 @@ export function checkSideEffectBehaviour(contract: Contract<SutType>) {
                     theRun.parameters = [3, "a"];
                     theRun.returnValue = "3";
                     theRun.sideEffectChecks = [];
-                    checkInstance.sideEffectChecks = sideEffectChecks;
+                    testedContract.sideEffectChecks = [["logs to console", new SeChecker([["hello a"]])],];
                 },
                 tearDown: () => {
                     theRun.parameters = [1, "a"];
                     theRun.returnValue = "1";
                     theRun.sideEffectChecks = sideEffectChecks;
-                    checkInstance.sideEffectChecks = [];
+                    testedContract.sideEffectChecks = [];
                 }
             }
-        ).ifCalledWith()
+        ).ifCalledWith(testedFunction)
         .thenThrow("it throws the same error as a local one", RUN_IDENTIFICATION + " side effect check: logs to console: did not hold");
 }

@@ -1,18 +1,19 @@
 import { applyMixins } from "./applyMixins";
-import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
 import { Check } from "./Check";
 import { IfCalledWith } from "./IfCalledWith";
 import { Meanwhile } from "./Meanwhile";
 import { RunDescriptorEntity } from "./RunDescriptorEntity";
-import { ContractEntity } from "./ContractEntity";
 import { Stub } from "./Stub";
 import { SuchThat } from "./SuchThat";
 import { SutType } from "./SutType";
 import { ThenReturn } from "./ThenReturn";
 import { ThenThrow } from "./ThenThrow";
 import { When } from "./When";
+import { SetTitle } from "./SetTitle";
+import { ContractEntity } from "./ContractEntity";
 
 interface _Contract<T extends SutType> extends
+    SetTitle<T>,
     When<T>,
     IfCalledWith<T>,
     ThenReturn<T>,
@@ -23,22 +24,9 @@ interface _Contract<T extends SutType> extends
     Stub<T>
     {}
 
-export type EnvironmentManipulator = {
-    setUp: () => void;
-    tearDown: () => void;
-};
-
-class _Contract<T extends SutType> extends ContractEntity<T>  {
-    
-    constructor(
-        explanation: string,
-        ) {
-        super();
-        this.explanation = explanation
-        this.cases[""] = new CaseDescriptorEntity()
-    }
+class _Contract<T extends SutType> extends ContractEntity<T> {
 
 }
 
-export const Contract= applyMixins(_Contract,[When, IfCalledWith,ThenReturn,SuchThat, Meanwhile, Check,Stub,ThenThrow])
+export const Contract= applyMixins(_Contract,[SetTitle, When, IfCalledWith,ThenReturn,SuchThat, Meanwhile, Check,Stub,ThenThrow])
 export type Contract<T extends SutType>=_Contract<T>

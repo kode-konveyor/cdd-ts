@@ -1,7 +1,7 @@
 import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
 import { ContractEntity } from "./ContractEntity";
+import { EnvironmentManipulator } from "./EnvironmentManipulator";
 import { SutType } from "./SutType";
-import { EnvironmentManipulator } from "./Contract";
 
 export class When<T extends SutType> extends ContractEntity<T> {
     when(explanation: string, environmentManipulator: EnvironmentManipulator): this {

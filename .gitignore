@@ -3,3 +3,5 @@ package-lock.json
 dist
 reports
 stryker.log
+coverage
+.stryker-tmp
