@@ -1,35 +1,25 @@
-import "reflect-metadata"
-import { autoInjectable } from "tsyringe";
-import { HandleRun } from "./HandleRun";
+import { handleRun } from "./HandleRun";
 import { ContractEntity } from "../contract/ContractEntity";
 import { SutType } from "../contract/SutType";
 
-@autoInjectable()
-export class Check<T extends SutType>  {
 
-    constructor(
-        readonly handleRun: HandleRun<T>
-        ) {
+export function check<T extends SutType,THIS extends ContractEntity<T>>(this: THIS, sut: T):number {
+    this.testedFunction = sut
+    let checked = 0;
+    if(this.currentRun) {
+        const currentCase = (this.currentCase)? this.currentCase : "";
+        this.cases[currentCase].runs.push(this.currentRun)
     }
-    check(contract: ContractEntity<T>, sut: T) {
-        contract.testedFunction = sut
-        let checked = 0;
-        if(contract.currentRun) {
-            const currentCase = (contract.currentCase)? contract.currentCase : "";
-            contract.cases[currentCase].runs.push(contract.currentRun)
-        }
-        for(const casename in contract.cases) {
-            const contractCase = contract.cases[casename];
-            contract.checkedCase = casename
-            if(contractCase.setUp)
-                contractCase.setUp()
-            contractCase.runs.forEach(currentRun => {
-                console.log(this)
-                checked += this.handleRun.handleRun(contract,currentRun)
-            })
-            if(contractCase.tearDown)
-                contractCase.tearDown()
-        }
-        return checked
+    for(const casename in this.cases) {
+        const thisCase = this.cases[casename];
+        this.checkedCase = casename
+        if(thisCase.setUp)
+            thisCase.setUp()
+        thisCase.runs.forEach(currentRun => {
+            checked += handleRun.apply(this,[currentRun])
+        })
+        if(thisCase.tearDown)
+            thisCase.tearDown()
     }
+    return checked
 }

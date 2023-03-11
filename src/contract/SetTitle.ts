@@ -1,13 +1,13 @@
 import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
+import { Contract } from "./Contract";
 import { ContractEntity } from "./ContractEntity";
 import { SutType } from "./SutType";
 
-export class SetTitle<T extends SutType> extends ContractEntity<T> {
-    public setTitle(
-        explanation: string
-    ): this {
-        this.explanation = explanation;
-        this.cases[""] = new CaseDescriptorEntity();
-        return this;
-    }
+export function setTitle<T extends SutType,THIS extends ContractEntity<T>>(
+    this: THIS,
+    explanation: string
+    ):THIS {
+    this.explanation = explanation;
+    this.cases[""] = new CaseDescriptorEntity();
+    return this;
 }

@@ -4,13 +4,12 @@ import { messageFormat } from "../util/messageFormat";
 import { injectable } from "tsyringe";
 import { RUN_IDENTIFIER_FORMAT } from "./Messages";
 
-@injectable()
-export class CaseName<T extends SutType> {
-    caseName( contract: ContractEntity<T>): string {
-        return messageFormat(
-            RUN_IDENTIFIER_FORMAT,
-            contract.explanation,
-            contract.checkedCase,
-            contract.currentRunExplanation);
-    }
+export function caseName<T extends SutType,THIS extends ContractEntity<T>>(
+    this: THIS
+    ): string {
+    return messageFormat(
+        RUN_IDENTIFIER_FORMAT,
+        this.explanation,
+        this.checkedCase,
+        this.currentRunExplanation);
 }

@@ -1,9 +1,10 @@
 import { Contract } from "src/contract/Contract";
-import { SetTitle } from "src/contract/SetTitle";
+import { setTitle } from "src/contract/SetTitle";
 import { testedFunction } from "test/testedFunction";
 import { getContractEmpty, getContractWithDescriptionSet } from "./ContractTestdata";
 
-const setTitleFunction = (title: string) => new SetTitle<typeof testedFunction>().setTitle.apply(getContractEmpty(),[title]);
+
+const setTitleFunction = (title: string) => setTitle.apply(getContractEmpty(),[title]);
 const contractFunction = (title: string) => new Contract<typeof testedFunction>().setTitle.apply(getContractEmpty(),[title]);
 
 export const SetTitleContractParties = [

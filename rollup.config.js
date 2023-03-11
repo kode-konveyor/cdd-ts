@@ -3,14 +3,14 @@ export default [
     {
         input: 'dist/src/index.d.ts',
         output: {
-            file: 'index.d.ts'
+            file: 'src/index.d.ts'
         },
         plugins: [dts()]
     },
     {
         input: 'dist/src/index.js',
         output: {
-            file: 'index.js'
+            file: 'src/index.js'
         }
     }
 ]

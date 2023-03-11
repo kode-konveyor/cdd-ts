@@ -1,6 +1,5 @@
-import { Check } from "src/check/Check";
 import { Contract } from "src/contract/Contract";
-import { container } from "tsyringe";
+import { SutType } from "../contract/SutType";
 
 export function runContractsfromList(contracts: string[], dir: string) {
     let promises: Promise<number>[] = []
@@ -15,11 +14,11 @@ async function runOneContract(dir: string, contractFile: string, contractName: s
     const modulePromise = import(dir + "/" + contractFile);
     try {
         const module = await modulePromise;
-        const contract: Contract<any> = module[contractName];
+        const contract: Contract<SutType> = module[contractName];
         const parties:[] = module[contractName+"Parties"]
         let count = 0
         for(const party of parties) {
-            count += container.resolve(Check).check(contract,party)
+            count += contract.check(party)
         }
         return count as number;
     } catch (e) {

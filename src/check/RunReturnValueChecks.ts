@@ -1,34 +1,25 @@
 import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
-import { CaseName } from "./CaseName";
-import { injectable } from "tsyringe";
+import { caseName } from "./CaseName";
 import { RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT } from "./Messages";
 import { ContractEntity } from "../contract/ContractEntity";
 import { SutType } from "../contract/SutType";
 import { messageFormat } from "../util/messageFormat";
 
-
-
-@injectable()
-export class RunReturnValueChecks<T extends SutType> {
-
-    constructor(
-        readonly caseName: CaseName<T>
-
-    ) {}
-
-    runReturnValueChecks(contract: ContractEntity<T>, currentRun: RunDescriptorEntity<T>) {
-        currentRun.returnValueChecks.forEach(
-            entry => {
-                try {
-                    entry[1](currentRun.returnValue as ReturnType<T>, ...(currentRun.parameters as Parameters<T>));
-                } catch (error) {
-                    throw new Error(messageFormat(
-                        RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT,
-                        this.caseName.caseName(contract),
-                        entry[0],
-                        String(error)));
-                }
+export function runReturnValueChecks<T extends SutType,THIS extends ContractEntity<T>>(
+    this: THIS,
+    currentRun: RunDescriptorEntity<T>) {
+    currentRun.returnValueChecks.forEach(
+        entry => {
+            try {
+                entry[1](currentRun.returnValue as ReturnType<T>, ...(currentRun.parameters as Parameters<T>));
+            } catch (error) {
+                throw new Error(messageFormat(
+                    RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT,
+                    caseName.apply(this),
+                    entry[0],
+                    String(error)));
             }
-        );
-    }
+        }
+    );
 }
+

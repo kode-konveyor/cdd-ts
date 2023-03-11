@@ -1,27 +1,24 @@
-import { IfCalledWith } from "./IfCalledWith";
-import { Meanwhile } from "./Meanwhile";
+import { meanwhile } from "./Meanwhile";
 import { ContractEntity } from "./ContractEntity";
-import { SuchThat } from "./SuchThat";
+import { suchThat } from "./SuchThat";
 import { SutType } from "./SutType";
-import { ThenReturn } from "./ThenReturn";
-import { ThenThrow } from "./ThenThrow";
-import { When } from "./When";
-import { Stub } from "./Stub";
-import { SetTitle } from "./SetTitle";
-import { applyMixins } from "../util/applyMixins";
+import { thenReturn } from "./ThenReturn";
+import { thenThrow } from "./ThenThrow";
+import { when } from "./When";
+import { stub } from "./Stub";
+import { setTitle } from "./SetTitle";
+import { ifCalledWith } from "./IfCalledWith";
+import { check } from "../check/Check";
 
-interface _Contract<T extends SutType> extends
-    SetTitle<T>,
-    When<T>,
-    IfCalledWith<T>,
-    ThenReturn<T>,
-    ThenThrow<T>,
-    SuchThat<T>,
-    Meanwhile<T>,
-    Stub<T>
-    {}
+export class Contract<T extends SutType> extends ContractEntity<T>  {
+    setTitle = setTitle<T,Contract<T>>
+    when = when<T,Contract<T>>
+    ifCalledWith = ifCalledWith<T,Contract<T>>
+    thenReturn = thenReturn<T,Contract<T>>
+    thenThrow = thenThrow<T,Contract<T>>
+    suchThat = suchThat<T,Contract<T>>
+    meanwhile = meanwhile<T,Contract<T>>
+    stub = stub<T,Contract<T>>
+    check = check<T,Contract<T>>
+}
 
-class _Contract<T extends SutType> extends ContractEntity<T>  {}
-
-export const Contract= applyMixins(_Contract,[SetTitle, When, IfCalledWith,ThenReturn,SuchThat, Meanwhile,Stub,ThenThrow])
-export type Contract<T extends SutType>=_Contract<T>

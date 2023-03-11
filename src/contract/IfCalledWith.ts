@@ -2,9 +2,7 @@ import { RunDescriptorEntity } from "./RunDescriptorEntity";
 import { ContractEntity } from "./ContractEntity";
 import { SutType } from "./SutType";
 
-export class IfCalledWith<T extends SutType> extends ContractEntity<T> {
-
-    ifCalledWith(...parameters: Parameters<T>):this {
+export function ifCalledWith<T extends SutType,THIS extends ContractEntity<T>>(this: THIS,...parameters: Parameters<T>):THIS {
         if(this.currentRun) {
             const currentCase = (this.currentCase)? this.currentCase : "";
             this.cases[currentCase].runs.push(this.currentRun)
@@ -13,5 +11,3 @@ export class IfCalledWith<T extends SutType> extends ContractEntity<T> {
         this.currentRun.parameters = parameters;
         return this;
     }
-
-}
