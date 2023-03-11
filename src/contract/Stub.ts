@@ -10,16 +10,16 @@ export function stub<T extends SutType,THIS extends ContractEntity<T>>(
 ): T {
     if (caseName === undefined) 
         caseName = ""
-    if(this.currentRun) {
-        const currentCase = (this.currentCase)? this.currentCase : "";
+    if(this.currentRun != null) {
+        const currentCase = (this.currentCase != null)? this.currentCase : "";
         this.cases[currentCase].runs.push(this.currentRun)
     }
 
     const currentCase = this.cases[caseName];
 
-    const stub = (...params: Parameters<T>) =>
+    const stub = (...params: Parameters<T>): ReturnType<T> =>
     {
-        const retvals:ReturnType<T>[] = []
+        const retvals:Array<ReturnType<T>> = []
         currentCase.runs.forEach( run => {
             if(equal(run.parameters, params))
                 if(run.thrown === undefined)
@@ -27,7 +27,7 @@ export function stub<T extends SutType,THIS extends ContractEntity<T>>(
                 else
                     throw new Error(String(run.thrown))
         })
-        if(retvals.length != 1)
+        if(retvals.length !== 1)
             throw new Error(messageFormat(
                 MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT,
                 params,

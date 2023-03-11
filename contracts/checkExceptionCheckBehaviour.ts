@@ -3,7 +3,9 @@ import { testedFunction } from "test/testedFunction";
 import { RUN_IDENTIFICATION, getContractThrowingAnotherException, getContractNotThrowingDefinedException, getContractThrowingUnexpectedException, getContractThrowingTheDefinedException } from "./ContractTestdata";
 
 
-export function checkExceptionCheckBehaviour(contract: Contract<(contract: Contract<typeof testedFunction>,fun: typeof testedFunction) =>number>) {
+export function checkExceptionCheckBehaviour(
+    contract: Contract<(contract: Contract<typeof testedFunction>, fun: typeof testedFunction) =>number>
+): void {
     contract
         .ifCalledWith(getContractThrowingTheDefinedException(),testedFunction)
         .thenReturn("if an exception is defined with thenThrow, then the check expects the error message to conform to the regex", 1)

@@ -7,7 +7,8 @@ import { messageFormat } from "../util/messageFormat";
 
 export function runReturnValueChecks<T extends SutType,THIS extends ContractEntity<T>>(
     this: THIS,
-    currentRun: RunDescriptorEntity<T>) {
+    currentRun: RunDescriptorEntity<T>
+    ):void {
     currentRun.returnValueChecks.forEach(
         entry => {
             try {

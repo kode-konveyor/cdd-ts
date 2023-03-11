@@ -8,7 +8,7 @@ import { SIDE_EFFECT_CHECK_FAILURE_MESSAGE } from "./Messages";
 export function oneSideEffectCheck<T extends SutType,THIS extends ContractEntity<T>>(
     this: THIS)
 {
-    return (entry: [string, SideEffectChecker<T>]) => {
+    return (entry: [string, SideEffectChecker]) => {
         try {
             entry[1].check();
         } catch (error) {

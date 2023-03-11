@@ -1,4 +1,19 @@
 {
-    "javascript.preferences.importModuleSpecifier": "relative",
-    "typescript.preferences.importModuleSpecifier": "relative"
+  "editor.formatOnSave": true,
+  "javaPMD.rulesets": [
+    "pmd.xml"
+  ],
+  "java.configuration.updateBuildConfiguration": "automatic",
+  "[Makefile]": {
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false
+  },
+  "[makefile]": {
+    "editor.insertSpaces": false,
+    "editor.detectIndentation": false
+  },
+  "eslint.lintTask.enable": true,
+  "eslint.run": "onSave",
+  "files.autoSave": "onFocusChange",
+  "eslint.format.enable": true
 }

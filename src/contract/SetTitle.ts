@@ -1,5 +1,4 @@
 import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
-import { Contract } from "./Contract";
 import { ContractEntity } from "./ContractEntity";
 import { SutType } from "./SutType";
 

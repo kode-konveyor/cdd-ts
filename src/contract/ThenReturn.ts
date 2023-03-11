@@ -7,7 +7,7 @@ export function thenReturn<T extends SutType,THIS extends ContractEntity<T>>(
     explanation: string,
     returnValue: ReturnType<T>
 ):THIS {
-    if(!this.currentRun)
+    if(this.currentRun == null)
         throw new Error(THENRETURN_MISSING_IFCALLEDWITH_MESSAGE_FORMAT)
     this.currentRun.explanation = explanation;
     this.currentRun.returnValue = returnValue;

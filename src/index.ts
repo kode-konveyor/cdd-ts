@@ -1,11 +1,2 @@
-export { Check } from "./check/Check"
+export { runAllContracts } from "./runner/runAllContracts"
 export { Contract } from "./contract/Contract"
-export { IfCalledWith } from "./contract/IfCalledWith"
-export { Meanwhile } from "./contract/Meanwhile"
-export { SetTitle } from "./contract/SetTitle"
-export { Stub } from "./contract/Stub"
-export { SuchThat } from "./contract/SuchThat"
-export { ThenReturn } from "./contract/ThenReturn"
-export { ThenThrow } from "./contract/ThenThrow"
-export { When } from "./contract/When"
-

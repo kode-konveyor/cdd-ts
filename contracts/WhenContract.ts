@@ -1,17 +1,18 @@
 import { Contract } from "src/contract/Contract";
 import { EnvironmentManipulator } from "src/contract/EnvironmentManipulator";
+import { SutType } from "src/contract/SutType";
 import { when } from "src/contract/When";
 import { testedFunction } from "test/testedFunction";
 import { ContractEntity } from "../src/contract/ContractEntity";
 import { getContractEmpty, getContractWithExistingRun, getContractWithManipulatorSet, getContractWithManipulatorSetAndRunAdded, manipulator } from "./ContractTestdata";
 
 const whenFunction = 
-    (contract: Contract<typeof testedFunction>, title: string,environmentManipulator: EnvironmentManipulator, ) =>
+    (contract: Contract<typeof testedFunction>, title: string,environmentManipulator: EnvironmentManipulator ): ContractEntity<SutType> =>
     when.apply(
         contract,
         [title,environmentManipulator]);
 const contractFunction =
-    (contract: Contract<typeof testedFunction>,title: string, environmentManipulator: EnvironmentManipulator) =>
+    (contract: Contract<typeof testedFunction>,title: string, environmentManipulator: EnvironmentManipulator): Contract<(arg: number, arg2: string) => string> =>
     new Contract<typeof testedFunction>().when.apply(
         contract,
         [title,environmentManipulator]);
@@ -31,7 +32,7 @@ function newCaseChecker(
 function currentCaseChecker(
     returnValue: ContractEntity<WhenType>,
 ):boolean {
-    return returnValue.currentCase == "when title";
+    return returnValue.currentCase === "when title";
 }
 
 export const WhenContract:Contract<typeof whenFunction> = new Contract<typeof whenFunction>()

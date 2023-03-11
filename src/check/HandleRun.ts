@@ -17,11 +17,8 @@ export function handleRun <T extends SutType,THIS extends ContractEntity<T>>(
     this.currentRunExplanation = currentRun.explanation;
     if (currentRun.parameters === undefined)
         throw new Error(caseName.apply(this) + ": no ifcalledWith");
-    const returnValue = currentRun.returnValue;
-    const thrown = currentRun.thrown;
     setUpSideEffectChecks.apply(this,[currentRun]);
     let result;
-    let catched;
     try {
         const parameters: Parameters<T> = currentRun.parameters;
         result = this.testedFunction(...(parameters as any[]));
@@ -29,7 +26,7 @@ export function handleRun <T extends SutType,THIS extends ContractEntity<T>>(
         handleException.apply(this,[currentRun, e]);
         return 1;
     }
-    if (currentRun.thrown)
+    if (currentRun.thrown != null)
         throw new Error(messageFormat(
             EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT,
             caseName.apply(this)));

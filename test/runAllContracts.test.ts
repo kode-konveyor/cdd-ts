@@ -3,7 +3,7 @@ import { runAllContracts } from "src/runner/runAllContracts";
 describe("Checking all contracts", () => {
 
      test("running contracts",   (done) => {
-        const t = async () => {
+        const t = async (): Promise<void> => {
         try {
             const count =  await runAllContracts();
             expect(count).toBe(34);
@@ -12,7 +12,7 @@ describe("Checking all contracts", () => {
             done(e)
         }
     }
-    t()
+    void t()
     });
 });
 

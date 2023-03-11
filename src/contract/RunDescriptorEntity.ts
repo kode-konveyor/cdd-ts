@@ -5,7 +5,7 @@ export class RunDescriptorEntity<T extends SutType> {
     thrown?: string|RegExp;
     parameters?: Parameters<T>;
     returnValue?: ReturnType<T>;
-    returnValueChecks: [string, (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void][] = [];
-    sideEffectChecks: [string, SideEffectChecker<T>][] = [];
+    returnValueChecks: Array<[string, (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void]> = [];
+    sideEffectChecks: Array<[string, SideEffectChecker]> = [];
     explanation!: string;
 }

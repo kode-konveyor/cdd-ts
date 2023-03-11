@@ -1,6 +1,6 @@
 
-export interface SideEffectChecker<T> {
-    setUp(): void;
-    check(): void;
-    tearDown(): void;
+export interface SideEffectChecker {
+    setUp: () => void;
+    check: () => void;
+    tearDown: () => void;
 }

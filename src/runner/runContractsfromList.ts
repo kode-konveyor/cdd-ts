@@ -1,8 +1,8 @@
-import { Contract } from "src/contract/Contract";
+import { Contract } from "../contract/Contract";
 import { SutType } from "../contract/SutType";
 
-export function runContractsfromList(contracts: string[], dir: string) {
-    let promises: Promise<number>[] = []
+export function runContractsfromList(contracts: string[], dir: string): Array<Promise<number>> {
+    const promises: Array<Promise<number>> = []
     contracts.forEach(  (contractFile) => {
         const baseName = contractFile.split('/').pop();
         const contractName = (baseName as string).replace(".ts", "");
@@ -10,7 +10,7 @@ export function runContractsfromList(contracts: string[], dir: string) {
     });
     return promises
 }
-async function runOneContract(dir: string, contractFile: string, contractName: string) {
+async function runOneContract(dir: string, contractFile: string, contractName: string): Promise<number> {
     const modulePromise = import(dir + "/" + contractFile);
     try {
         const module = await modulePromise;
@@ -20,7 +20,7 @@ async function runOneContract(dir: string, contractFile: string, contractName: s
         for(const party of parties) {
             count += contract.check(party)
         }
-        return count as number;
+        return count ;
     } catch (e) {
         throw e
     }

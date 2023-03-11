@@ -1,7 +1,6 @@
 import { ContractEntity } from "../contract/ContractEntity";
 import { SutType } from "../contract/SutType";
 import { messageFormat } from "../util/messageFormat";
-import { injectable } from "tsyringe";
 import { RUN_IDENTIFIER_FORMAT } from "./Messages";
 
 export function caseName<T extends SutType,THIS extends ContractEntity<T>>(

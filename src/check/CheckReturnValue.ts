@@ -9,10 +9,10 @@ export function checkReturnValue<T extends SutType,THIS extends ContractEntity<T
     this: THIS,
     currentRun: RunDescriptorEntity<T>,
     result: ReturnType<T>
-) {
+): void {
     const expected = JSON.stringify(currentRun.returnValue);
     const actual = JSON.stringify(result);
-    if (actual != expected)
+    if (actual !== expected)
         throw new Error(messageFormat(
             RETURN_VALUE_MISMATCH_MESSAGE_FORMAT,
             caseName.apply(this),

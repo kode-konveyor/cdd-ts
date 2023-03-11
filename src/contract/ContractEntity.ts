@@ -8,8 +8,8 @@ export class ContractEntity<T extends SutType> {
     currentCase?: string;
     currentRun?:  RunDescriptorEntity<T>;
     testedFunction!: T;
-    returnValueChecks: [string, (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void][] = []
-    sideEffectChecks: [string, SideEffectChecker<T>][] = []
+    returnValueChecks: Array<[string, (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void]> = []
+    sideEffectChecks: Array<[string, SideEffectChecker]> = []
     cases: Record<string, CaseDescriptorEntity<T>> = {}
     checkedCase!: string;
     currentRunExplanation!: string;

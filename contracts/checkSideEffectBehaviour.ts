@@ -3,7 +3,7 @@ import { testedFunction } from "test/testedFunction";
 import { RUN_IDENTIFICATION, getContractWithFailingSideEffectCheck, getContractWithGlobalSideEffectCheck, getContractWithGlobalSideEffectCheckNotHolding } from "./ContractTestdata";
 
 
-export function checkSideEffectBehaviour(contract: Contract<(contract: Contract<typeof testedFunction>,fun: typeof testedFunction) =>number>) {
+export function checkSideEffectBehaviour(contract: Contract<(contract: Contract<typeof testedFunction>,fun: typeof testedFunction) =>number>):void {
     contract
         .ifCalledWith(getContractWithFailingSideEffectCheck(),testedFunction)
         .thenThrow(

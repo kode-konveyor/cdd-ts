@@ -16,7 +16,7 @@ export function getRunDescriptor():RunDescriptorEntity<(arg: number, arg2: strin
     return runDescriptorEntity;
 }
 
-export function getRunDescriptorWithDoubleReturn() {
+export function getRunDescriptorWithDoubleReturn(): RunDescriptorEntity<(arg: number, arg2: string) => string> {
     const runDescriptor = getRunDescriptor()
     runDescriptor.explanation="triple return"
     runDescriptor.returnValue="3"

@@ -8,8 +8,8 @@ export function when<T extends SutType,THIS extends ContractEntity<T>>(
     explanation: string,
     environmentManipulator: EnvironmentManipulator
 ):THIS {
-    if (this.currentRun) {
-        const currentCase = (this.currentCase) ? this.currentCase : "";
+    if (this.currentRun != null) {
+        const currentCase = (this.currentCase != null) ? this.currentCase : "";
         this.cases[currentCase].runs.push(this.currentRun);
     }
 

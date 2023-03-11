@@ -1,7 +1,7 @@
 import { Contract } from "src/contract/Contract";
 import { SeChecker } from "./SeChecker";
 
-function callerFunction(arg: number, fun:(arg: number, arg2: string) => string) {
+function callerFunction(arg: number, fun:(arg: number, arg2: string) => string): string {
     return fun(arg,"text")
 }
 

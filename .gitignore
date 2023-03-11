@@ -4,3 +4,5 @@ dist
 reports
 stryker.log
 coverage
+src/index.d.ts
+src/index.js

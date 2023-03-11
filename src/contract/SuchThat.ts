@@ -8,7 +8,7 @@ export function suchThat<T extends SutType,THIS extends ContractEntity<T>>(
         ...parameters: Parameters<T>
         ) => void
     ):THIS {
-    if(this.currentRun)
+    if(this.currentRun != null)
         this.currentRun.returnValueChecks.push([explanation, checker]);
     else
         this.returnValueChecks.push([explanation, checker]);

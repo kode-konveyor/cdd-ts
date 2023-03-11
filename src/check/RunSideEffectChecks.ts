@@ -6,7 +6,7 @@ import { SutType } from "../contract/SutType";
 export function runSideEffectChecks<T extends SutType,THIS extends ContractEntity<T>>(
     this: THIS,
     currentRun: RunDescriptorEntity<T>
-    ) {
+    ):void {
     this.sideEffectChecks.forEach(oneSideEffectCheck.apply(this))
     currentRun.sideEffectChecks.forEach(oneSideEffectCheck.apply(this))
 }

@@ -2,7 +2,7 @@ import { runContractsfromList } from "./runContractsfromList";
 
 import glob from "fast-glob" 
 
-export async function runAllContracts() {
+export async function runAllContracts(): Promise<number> {
     const dir = process.cwd();
     try {
         const contracts = await glob(['contracts/**/*Contract.ts'],{})

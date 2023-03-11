@@ -5,7 +5,7 @@ export const GLobalObject = {
     multiplier: 1
 }
 
-export class SeChecker implements SideEffectChecker<(a1: number, a2: number) => number> {
+export class SeChecker implements SideEffectChecker {
 
     expected: any[];
 
@@ -13,15 +13,15 @@ export class SeChecker implements SideEffectChecker<(a1: number, a2: number) => 
         this.expected = expected;
     }
 
-    setUp = () => {
+    setUp = (): void => {
         GLobalObject.value = []
     };
 
-    check() {
+    check(): void {
         expect(GLobalObject.value).toEqual(this.expected);
     }
 
-    tearDown = () => {
+    tearDown = ():void => {
     };
 
 }
