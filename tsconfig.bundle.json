@@ -1,0 +1,13 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./bundle",
+    "types": []
+  },
+  "files": [
+    "src/cdd-ts.ts",
+  ],
+  "include": [
+    "src/**/*.d.ts"
+  ]
+}

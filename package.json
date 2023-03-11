@@ -1,15 +1,15 @@
 {
   "name": "cdd-ts",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "Test-time Contract Development framework for TypeScript",
-  "main": "src/index.js",
+  "main": "bundle/cdd-ts.js",
   "type": "module",
   "directories": {
     "test": "test"
   },
   "scripts": {
     "qa": "npm run lint &&npm run test&& npm run mutate",
-    "prepublishOnly": "npm run qa&&tsc && rollup -c",
+    "prepublishOnly": "npx tsc --project tsconfig.bundle.json",
     "mutate": "stryker run",
     "test": "jest",
     "lint": "eslint . --ext .ts"
@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "@jest/globals": "^29.4.3",
-    "@stryker-mutator/jest-runner": "^6.4.1",
     "@stryker-mutator/core": "^6.4.1",
+    "@stryker-mutator/jest-runner": "^6.4.1",
     "@types/jest": "^29.4.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "eslint": "^8.30.0",
@@ -52,6 +52,10 @@
     "rollup-plugin-dts": "^5.2.0",
     "stryker-cli": "^1.0.2",
     "ts-jest": "^28.0.8",
-    "typescript": "~4.8.2"
+    "typescript": "~4.8.2",
+    "typescript-bundle": "^1.0.18",
+    "webpack": "^5.76.1",
+    "webpack-cli": "^5.0.1",
+    "webpack-node-externals": "^3.0.0"
   }
 }
