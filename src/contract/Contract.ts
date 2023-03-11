@@ -6,9 +6,9 @@ import { SutType } from "./SutType";
 import { ThenReturn } from "./ThenReturn";
 import { ThenThrow } from "./ThenThrow";
 import { When } from "./When";
-import { applyMixins } from "src/util/applyMixins";
 import { Stub } from "./Stub";
 import { SetTitle } from "./SetTitle";
+import { applyMixins } from "../util/applyMixins";
 
 interface _Contract<T extends SutType> extends
     SetTitle<T>,

@@ -10,6 +10,7 @@ export class Stub<T extends SutType> extends ContractEntity<T> {
             caseName = ""
         if(this.currentRun) {
             const currentCase = (this.currentCase)? this.currentCase : "";
+console.log(this)
             this.cases[currentCase].runs.push(this.currentRun)
         }
     

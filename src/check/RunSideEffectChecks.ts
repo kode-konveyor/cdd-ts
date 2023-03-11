@@ -2,8 +2,8 @@ import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { CaseName } from "./CaseName";
 import { injectable } from "tsyringe";
 import { OneSideEffectCheck } from "./OneSideEffectCheck";
-import { ContractEntity } from "src/contract/ContractEntity";
-import { SutType } from "src/contract/SutType";
+import { ContractEntity } from "../contract/ContractEntity";
+import { SutType } from "../contract/SutType";
 
 @injectable()
 export class RunSideEffectChecks<T extends SutType> {

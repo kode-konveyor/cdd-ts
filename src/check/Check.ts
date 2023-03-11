@@ -1,21 +1,15 @@
-import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
-import { CaseName } from "./CaseName";
+import "reflect-metadata"
 import { autoInjectable } from "tsyringe";
 import { HandleRun } from "./HandleRun";
-import { ContractEntity } from "src/contract/ContractEntity";
-import { SutType } from "src/contract/SutType";
+import { ContractEntity } from "../contract/ContractEntity";
+import { SutType } from "../contract/SutType";
 
 @autoInjectable()
 export class Check<T extends SutType>  {
-    caseName: (contract: ContractEntity<T>) => string;
-    handleRun: (contract: ContractEntity<T>, currentRun: RunDescriptorEntity<T>) => number;
 
     constructor(
-        caseName:CaseName<T>,
-        handleRun: HandleRun<T>
+        readonly handleRun: HandleRun<T>
         ) {
-        this.caseName = caseName.caseName;
-        this.handleRun = handleRun.handleRun;
     }
     check(contract: ContractEntity<T>, sut: T) {
         contract.testedFunction = sut
@@ -30,7 +24,8 @@ export class Check<T extends SutType>  {
             if(contractCase.setUp)
                 contractCase.setUp()
             contractCase.runs.forEach(currentRun => {
-                checked += this.handleRun(contract,currentRun)
+                console.log(this)
+                checked += this.handleRun.handleRun(contract,currentRun)
             })
             if(contractCase.tearDown)
                 contractCase.tearDown()

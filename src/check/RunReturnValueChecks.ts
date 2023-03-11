@@ -1,10 +1,10 @@
 import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { CaseName } from "./CaseName";
 import { injectable } from "tsyringe";
-import { messageFormat } from "src/util/messageFormat";
-import { ContractEntity } from "src/contract/ContractEntity";
-import { SutType } from "src/contract/SutType";
 import { RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT } from "./Messages";
+import { ContractEntity } from "../contract/ContractEntity";
+import { SutType } from "../contract/SutType";
+import { messageFormat } from "../util/messageFormat";
 
 
 

@@ -1,11 +1,10 @@
 import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { CaseName } from "./CaseName";
 import { injectable } from "tsyringe";
-import { messageFormat } from "src/util/messageFormat";
-import { ContractEntity } from "src/contract/ContractEntity";
-import { SutType } from "src/contract/SutType";
+import { messageFormat } from "../util/messageFormat";
+import { ContractEntity } from "../contract/ContractEntity";
+import { SutType } from "../contract/SutType";
 import { RETURN_VALUE_MISMATCH_MESSAGE_FORMAT } from "./Messages";
-import equal from "fast-deep-equal";
 
 
 @injectable()

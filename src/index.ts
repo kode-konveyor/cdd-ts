@@ -1,5 +1,11 @@
-import "reflect-metadata"
-import { runAllContracts } from "./runner/runAllContracts";
+export { Check } from "./check/Check"
+export { Contract } from "./contract/Contract"
+export { IfCalledWith } from "./contract/IfCalledWith"
+export { Meanwhile } from "./contract/Meanwhile"
+export { SetTitle } from "./contract/SetTitle"
+export { Stub } from "./contract/Stub"
+export { SuchThat } from "./contract/SuchThat"
+export { ThenReturn } from "./contract/ThenReturn"
+export { ThenThrow } from "./contract/ThenThrow"
+export { When } from "./contract/When"
 
-console.error("running contracts")
-runAllContracts()

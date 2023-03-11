@@ -1,9 +1,9 @@
 import { CaseName } from "./CaseName";
 import { injectable } from "tsyringe";
-import { messageFormat } from "src/util/messageFormat";
-import { ContractEntity } from "src/contract/ContractEntity";
-import { SideEffectChecker } from "src/contract/SideEffectChecker";
-import { SutType } from "src/contract/SutType";
+import { messageFormat } from "../util/messageFormat";
+import { ContractEntity } from "../contract/ContractEntity";
+import { SideEffectChecker } from "../contract/SideEffectChecker";
+import { SutType } from "../contract/SutType";
 import { SIDE_EFFECT_CHECK_FAILURE_MESSAGE } from "./Messages";
 
 @injectable()

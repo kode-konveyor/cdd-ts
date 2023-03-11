@@ -1,9 +1,9 @@
 import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { CaseName } from "./CaseName";
 import { injectable } from "tsyringe";
-import { messageFormat } from "src/util/messageFormat";
-import { ContractEntity } from "src/contract/ContractEntity";
-import { SutType } from "src/contract/SutType";
+import { messageFormat } from "../util/messageFormat";
+import { ContractEntity } from "../contract/ContractEntity";
+import { SutType } from "../contract/SutType";
 import { NOT_THE_EXPECTED_EXCEPTION_THROWN_FORMAT, UNEXPECTED_EXCEPTION_MESSAGE_FORMAT } from "./Messages";
 
 

@@ -3,7 +3,7 @@
   "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "./dist/out-tsc",
+    "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -11,13 +11,13 @@
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
-    "declaration": false,
+    "declaration": true,
     "downlevelIteration": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES2017",
+    "target": "ES5",
     "module": "CommonJS",
     "esModuleInterop": true,
     "useDefineForClassFields": false,
@@ -30,7 +30,7 @@
     ]
   },
   "include": [
-    "**/*.ts",
+    "src/**/*.ts",
     "test/**/*.ts",
     "contracts/**/*.ts"
   ],
