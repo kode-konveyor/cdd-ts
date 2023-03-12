@@ -12,6 +12,7 @@ export const CheckContractParties = [
     
 ]
 
+
 export const CheckContract = 
     new Contract<(contract: Contract<typeof testedFunction>,fun: typeof testedFunction) =>number>()
     .setTitle("check checks whether the contract actually corresponds to the behaviour of the SUT")

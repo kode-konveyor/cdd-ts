@@ -1,7 +1,7 @@
 import { Contract } from "src/contract/Contract";
 import { GLobalObject } from "test/SeChecker";
 import { testedFunction } from "test/testedFunction";
-import { getRunDescriptor, getRunDescriptorWithDoubleReturn } from "./RunDescriptorTestData";
+import { getRunDescriptorwithParametersReturnAndSideeffectcheck, getRunDescriptorWithDoubleReturn, getRunDescriptorParametersSet } from "./RunDescriptorTestData";
 import { getSideEffectChecker, getSideEffectCheckerFailing } from "./SideEffectCheckerTestData";
 
 export const EXCEPTION_THROWER_PARAMETERS:[arg: number, arg2: string] = [2, "a"];
@@ -26,7 +26,7 @@ export function getContract(): Contract<(arg: number, arg2: string) => string> {
 
     contract.explanation="The function under test"
     contract.cases = {
-        "": { runs: [getRunDescriptor()]},
+        "": { runs: [getRunDescriptorwithParametersReturnAndSideeffectcheck()]},
     }
     return contract
 }
@@ -37,15 +37,28 @@ export function getContractEmpty(): Contract<(arg: number, arg2: string) => stri
     return contract
 }
 
+export function  getContractParametersSet(): Contract<(arg: number, arg2: string) => string> {
+    const contract = getContractEmpty()
+    contract.currentRun = getRunDescriptorParametersSet()
+    return contract
+
+}
+
+export function getContractWithRunWithParameter(): Contract<(arg: number, arg2: string) => string> {
+    const contract = getContractParametersSet()
+    contract.cases[""].runs.push(getRunDescriptorParametersSet())
+    return contract
+}
+
 export function getContractWithExistingRun(): Contract<(arg: number, arg2: string) => string> {
     const contract = getContractEmpty()
-    contract.currentRun = getRunDescriptor();
+    contract.currentRun = getRunDescriptorwithParametersReturnAndSideeffectcheck();
     return contract
 }
 
 export function getContractWithManipulatorSetAndRunAdded(): Contract<(arg: number, arg2: string) => string> {
     const contract = getContractWithManipulatorSet()
-    contract.cases[""].runs.push(getRunDescriptor())
+    contract.cases[""].runs.push(getRunDescriptorwithParametersReturnAndSideeffectcheck())
     return contract
 }
 export function getContractWithManipulatorSet(): Contract<(arg: number, arg2: string) => string> {

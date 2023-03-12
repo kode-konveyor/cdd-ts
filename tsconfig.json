@@ -1,9 +1,8 @@
-/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "baseUrl": ".",
-    "outDir": "dist",
+    "baseUrl": "./",
+    "outDir": "bundle",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -29,6 +28,9 @@
       "jest"
     ]
   },
+  "files": [
+    "src/cdd-ts.ts",
+  ],
   "include": [
     "src/**/*.ts",
     "test/**/*.ts",

@@ -1,3 +1,4 @@
+import { messageFormat } from "src/util/messageFormat";
 import { Contract } from "../contract/Contract";
 import { SutType } from "../contract/SutType";
 
@@ -15,7 +16,11 @@ async function runOneContract(dir: string, contractFile: string, contractName: s
     try {
         const module = await modulePromise;
         const contract: Contract<SutType> = module[contractName];
+        if(contract === undefined)
+            throw new Error(messageFormat("{1}:{2}: undefined",contractFile,contractName))
         const parties:[] = module[contractName+"Parties"]
+        if(parties === undefined)
+            throw new Error(messageFormat("{1}:{2}: undefined",contractFile,contractName+"Parties"))
         let count = 0
         for(const party of parties) {
             count += contract.check(party)

@@ -9,7 +9,7 @@
   },
   "scripts": {
     "qa": "npm run lint &&npm run test&& npm run mutate",
-    "prepublishOnly": "npx tsc --project tsconfig.bundle.json",
+    "prepublishOnly": "npx tsc --project tsconfig.json",
     "mutate": "stryker run",
     "test": "jest",
     "lint": "eslint . --ext .ts"
@@ -34,10 +34,10 @@
     "tslib": "^2.3.0"
   },
   "devDependencies": {
-    "@jest/globals": "^29.4.3",
+    "@types/jest": "^29.4.0",
+    "@hapi/lab": "^25.1.2",
     "@stryker-mutator/core": "^6.4.1",
     "@stryker-mutator/jest-runner": "^6.4.1",
-    "@types/jest": "^29.4.0",
     "@typescript-eslint/eslint-plugin": "^5.54.1",
     "eslint": "^8.30.0",
     "eslint-config-prettier": "^8.7.0",
@@ -46,12 +46,10 @@
     "eslint-plugin-n": "^15.6.1",
     "eslint-plugin-promise": "^6.1.1",
     "jasmine-core": "~4.5.0",
-    "jest": "^28.1.3",
-    "jest-mock-extended": "^3.0.3",
+    "lab-transform-typescript": "^3.0.1",
     "rollup": "^3.18.0",
     "rollup-plugin-dts": "^5.2.0",
     "stryker-cli": "^1.0.2",
-    "ts-jest": "^28.0.8",
     "typescript": "~4.8.2",
     "typescript-bundle": "^1.0.18",
     "webpack": "^5.76.1",

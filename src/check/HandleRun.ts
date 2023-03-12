@@ -2,13 +2,14 @@ import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { caseName } from "./CaseName";
 import { runSideEffectChecks } from "./RunSideEffectChecks";
 import { runReturnValueChecks } from "./RunReturnValueChecks";
-import { checkReturnValue } from "./CheckReturnValue";
 import { handleException } from "./HandleException";
 import { setUpSideEffectChecks } from "./SetUpSideEffectChecks";
 import { messageFormat } from "../util/messageFormat";
 import { ContractEntity } from "../contract/ContractEntity";
 import { SutType } from "../contract/SutType";
 import { EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT } from "./Messages";
+import { checkReturnValue } from "./CheckReturnValue";
+
 
 export function handleRun <T extends SutType,THIS extends ContractEntity<T>>(
     this: THIS,
@@ -18,10 +19,10 @@ export function handleRun <T extends SutType,THIS extends ContractEntity<T>>(
     if (currentRun.parameters === undefined)
         throw new Error(caseName.apply(this) + ": no ifcalledWith");
     setUpSideEffectChecks.apply(this,[currentRun]);
-    let result;
+    let result: ReturnType<T>;
     try {
         const parameters: Parameters<T> = currentRun.parameters;
-        result = this.testedFunction(...(parameters as any[]));
+        result = this.testedFunction(...(parameters));
     } catch (e) {
         handleException.apply(this,[currentRun, e]);
         return 1;
@@ -30,8 +31,8 @@ export function handleRun <T extends SutType,THIS extends ContractEntity<T>>(
         throw new Error(messageFormat(
             EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT,
             caseName.apply(this)));
-    checkReturnValue.apply(this,[currentRun, result]);
-    runReturnValueChecks.apply(this,[currentRun]);
-    runSideEffectChecks.apply(this,[currentRun]);
+    checkReturnValue.call(this,currentRun,result)
+    runReturnValueChecks.call(this,currentRun);
+    runSideEffectChecks.call(this,currentRun);
     return 1;
 }
