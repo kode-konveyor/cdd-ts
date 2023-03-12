@@ -4,8 +4,8 @@ import { testedFunction } from "../test/testedFunction";
 import { getRunDescriptorwithParametersReturnAndSideeffectcheck, getRunDescriptorWithDoubleReturn, getRunDescriptorParametersSet } from "./RunDescriptorTestData";
 import { getSideEffectChecker, getSideEffectCheckerFailing } from "./SideEffectCheckerTestData";
 
-export const EXCEPTION_THROWER_PARAMETERS:[arg: number, arg2: string] = [2, "a"];
-export const NORMAL_PARAMETERS:[arg: number, arg2: string] = [1, "b"];
+export const EXCEPTION_THROWER_PARAMETERS: [arg: number, arg2: string] = [2, "a"];
+export const NORMAL_PARAMETERS: [arg: number, arg2: string] = [1, "b"];
 export const RUN_IDENTIFICATION = "The function under test::run explanation:"
 
 export function getReturnValueCheckFailing(): [string, (returnValue: string, arg: number, arg2: string) => void] {
@@ -16,7 +16,7 @@ export function getReturnValueCheckFailing(): [string, (returnValue: string, arg
         }];
 }
 
-export const manipulator =  {
+export const manipulator = {
     setUp: () => 1,
     tearDown: () => 1
 }
@@ -24,10 +24,37 @@ export const manipulator =  {
 export function getContract(): Contract<(arg: number, arg2: string) => string> {
     const contract = new Contract<typeof testedFunction>()
 
-    contract.explanation="The function under test"
+    contract.explanation = "The function under test"
     contract.cases = {
-        "": { runs: [getRunDescriptorwithParametersReturnAndSideeffectcheck()]},
+        "": { runs: [getRunDescriptorwithParametersReturnAndSideeffectcheck()] },
     }
+    return contract
+}
+
+const NONDEFAULT_CASE_NAME = "Strange case";
+export function getContractWithCurrentCase(): Contract<(arg: number, arg2: string) => string> {
+    const contract = getContractEmpty()
+
+    contract.currentCase = NONDEFAULT_CASE_NAME
+    contract.cases[contract.currentCase] = { runs: [] }
+
+    return contract
+}
+
+export function getContractWithCurrentCaseContainingARun(): Contract<(arg: number, arg2: string) => string> {
+    const contract = getContractWithCurrentCase()
+
+    contract.cases[NONDEFAULT_CASE_NAME].runs.push(getRunDescriptorwithParametersReturnAndSideeffectcheck())
+    contract.currentRun = getRunDescriptorParametersSet()
+    return contract
+}
+
+
+export function getContractWithCurrentCaseAndCurrentRun(): Contract<(arg: number, arg2: string) => string> {
+    const contract = getContractWithCurrentCase()
+
+    contract.currentRun = getRunDescriptorwithParametersReturnAndSideeffectcheck()
+
     return contract
 }
 
@@ -37,7 +64,7 @@ export function getContractEmpty(): Contract<(arg: number, arg2: string) => stri
     return contract
 }
 
-export function  getContractParametersSet(): Contract<(arg: number, arg2: string) => string> {
+export function getContractWithInvalidRun(): Contract<(arg: number, arg2: string) => string> {
     const contract = getContractEmpty()
     contract.currentRun = getRunDescriptorParametersSet()
     return contract
@@ -45,7 +72,7 @@ export function  getContractParametersSet(): Contract<(arg: number, arg2: string
 }
 
 export function getContractWithRunWithParameter(): Contract<(arg: number, arg2: string) => string> {
-    const contract = getContractParametersSet()
+    const contract = getContractWithInvalidRun()
     contract.cases[""].runs.push(getRunDescriptorParametersSet())
     return contract
 }
@@ -82,8 +109,8 @@ export function getContractWithACase(): Contract<(arg: number, arg2: string) => 
     const contract = getContract()
     contract.cases["Global multiplier is 3"] = {
         runs: [getRunDescriptorWithDoubleReturn()],
-        setUp: () => {GLobalObject.multiplier = 3},
-        tearDown: () => {GLobalObject.multiplier= 1}
+        setUp: () => { GLobalObject.multiplier = 3 },
+        tearDown: () => { GLobalObject.multiplier = 1 }
     }
 
     return contract
