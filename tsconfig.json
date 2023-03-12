@@ -32,9 +32,7 @@
     "src/cdd-ts.ts",
   ],
   "include": [
-    "src/**/*.ts",
-    "test/**/*.ts",
-    "contracts/**/*.ts"
+    "**/*.ts",
   ],
   "exclude": [
     "node_modules"
