@@ -1,4 +1,4 @@
-import { messageFormat } from "src/util/messageFormat";
+import { messageFormat } from "../util/messageFormat";
 import { Contract } from "../contract/Contract";
 import { SutType } from "../contract/SutType";
 

@@ -1,4 +1,6 @@
-import { SideEffectChecker } from "src/contract/SideEffectChecker";
+import equal from "fast-deep-equal";
+import { messageFormat } from "../src/util/messageFormat";
+import { SideEffectChecker } from "../src/contract/SideEffectChecker";
 
 export const GLobalObject = {
     value: [] as any[],
@@ -18,7 +20,12 @@ export class SeChecker implements SideEffectChecker {
     };
 
     check(): void {
-        expect(GLobalObject.value).toEqual(this.expected);
+        if(!equal(GLobalObject.value,this.expected))
+            throw new Error(messageFormat(
+                "SeChecker:\nexpected:{1}\nactual  :{2}",
+                GLobalObject.value.toString(),
+                this.expected.toString()
+            ))
     }
 
     tearDown = ():void => {

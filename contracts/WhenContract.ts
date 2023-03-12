@@ -1,8 +1,8 @@
-import { Contract } from "src/contract/Contract";
-import { EnvironmentManipulator } from "src/contract/EnvironmentManipulator";
-import { SutType } from "src/contract/SutType";
-import { when } from "src/contract/When";
-import { testedFunction } from "test/testedFunction";
+import { Contract } from "../src/contract/Contract";
+import { EnvironmentManipulator } from "../src/contract/EnvironmentManipulator";
+import { SutType } from "../src/contract/SutType";
+import { when } from "../src/contract/When";
+import { testedFunction } from "../test/testedFunction";
 import { ContractEntity } from "../src/contract/ContractEntity";
 import { getContractEmpty, getContractWithExistingRun, getContractWithManipulatorSet, getContractWithManipulatorSetAndRunAdded, manipulator } from "./ContractTestdata";
 

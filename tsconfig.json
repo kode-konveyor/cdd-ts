@@ -35,6 +35,8 @@
     "**/*.ts",
   ],
   "exclude": [
+    ".stryker-tmp",
+    "bundle",
     "node_modules"
   ],
 }

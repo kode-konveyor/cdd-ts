@@ -1,4 +1,4 @@
-import { RunDescriptorEntity } from "src/contract/RunDescriptorEntity";
+import { RunDescriptorEntity } from "../src/contract/RunDescriptorEntity";
 import { getSideEffectChecker } from "./SideEffectCheckerTestData";
 
 export function getRunDescriptor(): RunDescriptorEntity<import("/home/mag/project/KodeKonveyor/cdd-ts/src/contract/SutType").SutType> {

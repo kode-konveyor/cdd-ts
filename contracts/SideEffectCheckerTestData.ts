@@ -1,5 +1,5 @@
-import { SideEffectChecker } from "src/contract/SideEffectChecker";
-import { SeChecker } from "test/SeChecker";
+import { SideEffectChecker } from "../src/contract/SideEffectChecker";
+import { SeChecker } from "../test/SeChecker";
 
 export function getSideEffectChecker():[string, SideEffectChecker] {
     return [

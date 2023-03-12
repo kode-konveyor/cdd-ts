@@ -1,6 +1,6 @@
-import { Contract } from "src/contract/Contract";
-import { SeChecker } from "test/SeChecker";
-import { testedFunction } from "test/testedFunction";
+import { Contract } from "../src/contract/Contract";
+import { SeChecker } from "../test/SeChecker";
+import { testedFunction } from "../test/testedFunction";
 
 export const testedFunctionContractParties = [testedFunction]
 

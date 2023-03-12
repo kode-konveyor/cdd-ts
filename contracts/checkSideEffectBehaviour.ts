@@ -1,5 +1,5 @@
-import { Contract } from "src/contract/Contract";
-import { testedFunction } from "test/testedFunction";
+import { Contract } from "../src/contract/Contract";
+import { testedFunction } from "../test/testedFunction";
 import { RUN_IDENTIFICATION, getContractWithFailingSideEffectCheck, getContractWithGlobalSideEffectCheck, getContractWithGlobalSideEffectCheckNotHolding } from "./ContractTestdata";
 
 

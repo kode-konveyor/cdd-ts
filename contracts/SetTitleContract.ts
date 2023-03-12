@@ -1,8 +1,8 @@
-import { Contract } from "src/contract/Contract";
-import { ContractEntity } from "src/contract/ContractEntity";
-import { setTitle } from "src/contract/SetTitle";
-import { SutType } from "src/contract/SutType";
-import { testedFunction } from "test/testedFunction";
+import { Contract } from "../src/contract/Contract";
+import { ContractEntity } from "../src/contract/ContractEntity";
+import { setTitle } from "../src/contract/SetTitle";
+import { SutType } from "../src/contract/SutType";
+import { testedFunction } from "../test/testedFunction";
 import { getContractEmpty, getContractWithDescriptionSet } from "./ContractTestdata";
 
 

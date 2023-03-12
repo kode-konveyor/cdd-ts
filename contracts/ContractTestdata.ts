@@ -1,6 +1,6 @@
-import { Contract } from "src/contract/Contract";
-import { GLobalObject } from "test/SeChecker";
-import { testedFunction } from "test/testedFunction";
+import { Contract } from "../src/contract/Contract";
+import { GLobalObject } from "../test/SeChecker";
+import { testedFunction } from "../test/testedFunction";
 import { getRunDescriptorwithParametersReturnAndSideeffectcheck, getRunDescriptorWithDoubleReturn, getRunDescriptorParametersSet } from "./RunDescriptorTestData";
 import { getSideEffectChecker, getSideEffectCheckerFailing } from "./SideEffectCheckerTestData";
 
