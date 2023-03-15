@@ -6,11 +6,13 @@ import { RUN_IDENTIFICATION, getContractWithOtherReturnValue, getContractWithFai
 
 
 const checkFunction = (contract: ContractEntity<typeof testedFunction>, sut: typeof testedFunction): number => check.call(contract, sut)
+const checkFunctionFromContract = (contract: ContractEntity<typeof testedFunction>, sut: typeof testedFunction): number => {
+    return new Contract<typeof testedFunction>().check.call(contract as Contract<typeof testedFunction>, sut)
+}
 
 export const CheckContractParties = [
     checkFunction,
-//    new Contract().check.call,
-    
+    checkFunctionFromContract
 ]
 
 type CheckType = typeof checkFunction

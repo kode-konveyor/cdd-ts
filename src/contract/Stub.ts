@@ -3,7 +3,6 @@ import { ContractEntity } from "./ContractEntity";
 import { messageFormat } from "../util/messageFormat";
 import { MethodType } from "./MethodType";
 import { MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT } from "./Messages";
-import { ParameterGetters } from "src/contract/ParameterGetters";
 
 export function getStub<T extends MethodType>(
     contract: ContractEntity<T>,
