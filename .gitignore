@@ -1,8 +1,2 @@
 node_modules
 package-lock.json
-dist
-reports
-stryker.log
-coverage
-src/index.d.ts
-src/index.js

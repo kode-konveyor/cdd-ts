@@ -28,10 +28,6 @@
       "jest"
     ]
   },
-  "files": [
-    "src/cdd-ts.ts",
-    "./src/contract/ParameterGetters.ts",
-  ],
   "include": [
     "**/*.ts",
   ],
