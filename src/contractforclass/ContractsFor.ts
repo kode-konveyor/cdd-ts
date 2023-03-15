@@ -1,7 +1,7 @@
 import { Contract } from "../contract/Contract";
-import { SutType } from "../contract/SutType";
+import { MethodType } from "../contract/MethodType";
 import { Methods } from "./Methods";
 
 export type ContractsFor<T> = {
-    [K in Methods<T>]: T[K] extends SutType ? Contract<T[K]> : never;
+    [K in Methods<T>]: T[K] extends MethodType ? Contract<T[K]> : never;
 };

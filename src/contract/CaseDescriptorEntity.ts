@@ -1,7 +1,7 @@
 import { RunDescriptorEntity } from "./RunDescriptorEntity";
-import { SutType } from "./SutType";
+import { MethodType } from "./MethodType";
 
-export class CaseDescriptorEntity<T extends SutType> {
+export class CaseDescriptorEntity<T extends MethodType> {
     runs: Array<RunDescriptorEntity<T>> = [];
     setUp?: () => void;
     tearDown?: () => void;

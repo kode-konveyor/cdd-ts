@@ -4,10 +4,10 @@ import { testedFunction } from "../test/testedFunction";
 
 export const testedFunctionContractParties = [testedFunction]
 
-export const testedFunctionContract = new Contract()
+export const testedFunctionContract = new Contract<typeof testedFunction>()
     .setTitle("A nice tested functions")
-    .ifCalledWith(1, "a")
-    .thenReturn("returns the first parameter as string","1")
+    .ifCalledWith(()=>1, ()=>"a")
+    .thenReturn("returns the first parameter as string",()=>"1")
     .suchThat(
         "the return value is the string representation of the first parameter",
         (returnValue: string, parameter1: number, parameter2: string) => (returnValue === String(parameter1))

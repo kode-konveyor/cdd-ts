@@ -23,8 +23,8 @@ export class SeChecker implements SideEffectChecker {
         if(!equal(GLobalObject.value,this.expected))
             throw new Error(messageFormat(
                 "SeChecker:\nexpected:{1}\nactual  :{2}",
-                GLobalObject.value.toString(),
-                this.expected.toString()
+                this.expected.toString(),
+                GLobalObject.value.toString()
             ))
     }
 

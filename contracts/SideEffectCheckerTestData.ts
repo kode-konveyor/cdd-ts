@@ -4,7 +4,7 @@ import { SeChecker } from "../test/SeChecker";
 export function getSideEffectChecker():[string, SideEffectChecker] {
     return [
         "logs to console",
-        new SeChecker([["hello a"]])];
+        new SeChecker([["hello b"]])];
 }
 
 export function getSideEffectCheckerFailing():[string, SideEffectChecker] {

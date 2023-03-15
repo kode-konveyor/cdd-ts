@@ -1,9 +1,9 @@
 import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
 import { RunDescriptorEntity } from "./RunDescriptorEntity";
 import { SideEffectChecker } from "./SideEffectChecker";
-import { SutType } from "./SutType";
+import { MethodType } from "./MethodType";
 
-export class ContractEntity<T extends SutType> {
+export class ContractEntity<T extends MethodType> {
     explanation!: string;
     currentCase?: string;
     currentRun?:  RunDescriptorEntity<T>;

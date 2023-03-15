@@ -1,11 +1,13 @@
 import { SideEffectChecker } from "./SideEffectChecker";
-import { SutType } from "./SutType";
+import { MethodType } from "./MethodType";
+import { ParameterGetters } from "./ParameterGetters";
 
-export class RunDescriptorEntity<T extends SutType> {
+export class RunDescriptorEntity<T extends MethodType> {
     thrown?: string|RegExp;
-    parameters?: Parameters<T>;
-    returnValue?: ReturnType<T>;
+    parameterGetters?: ParameterGetters<T>;
+    returnValueGetter?: ()=> ReturnType<T>;
     returnValueChecks: Array<[string, (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void]> = [];
     sideEffectChecks: Array<[string, SideEffectChecker]> = [];
     explanation!: string;
 }
+

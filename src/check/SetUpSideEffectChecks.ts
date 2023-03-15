@@ -1,11 +1,11 @@
 import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
 import { ContractEntity } from "../contract/ContractEntity";
-import { SutType } from "../contract/SutType";
+import { MethodType } from "../contract/MethodType";
 
-export function setUpSideEffectChecks<T extends SutType,THIS extends ContractEntity<T>>(
+export function setUpSideEffectChecks<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,
     currentRun: RunDescriptorEntity<T>
-):void {
+): void {
     this.sideEffectChecks.forEach(
         (entry) => {
             entry[1].setUp();
