@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/array-type */
-
 
 interface Options {
     opt: boolean;

@@ -2,7 +2,6 @@
   "compileOnSave": true,
   "compilerOptions": {
     "baseUrl": ".",
-    "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -19,21 +18,12 @@
     "target": "ESNext",
     "module": "NodeNext",
     "esModuleInterop": true,
-    "useDefineForClassFields": false,
-    "lib": [
-      "ES2022",
-      "dom"
-    ],
-    "types": [
-      "jest"
-    ]
+    "useDefineForClassFields": false
   },
   "include": [
     "**/*.ts",
   ],
   "exclude": [
-    ".stryker-tmp",
-    "dist",
     "node_modules"
   ],
 }
