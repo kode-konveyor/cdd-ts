@@ -6,4 +6,3 @@ stryker.log
 coverage
 src/index.d.ts
 src/index.js
-bundle

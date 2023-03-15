@@ -1,4 +1,4 @@
-#!/usr/bin/env ts-node
+#!/usr/bin/env node
 import { runAllContracts } from "./cdd-ts";
 
 runAllContracts()

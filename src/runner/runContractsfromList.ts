@@ -1,19 +1,30 @@
-import { messageFormat } from "../util/messageFormat";
-import { Contract } from "../contract/Contract";
+import { Contract } from "../cdd-ts";
 import { MethodType } from "../contract/MethodType";
+import { messageFormat } from "../util/messageFormat";
+import { readFileSync } from "fs"
+import {relative} from "path"
 
-export function runContractsfromList(contracts: string[], dir: string): Array<Promise<number>> {
+interface CDDConfiguration {
+    jsDir: string
+}
+const config: CDDConfiguration = JSON.parse(readFileSync("cdd-ts.json").toString())
+
+const myPath = module.path
+
+export function runContractsfromList(contracts: string[]): Array<Promise<number>> {
     const promises: Array<Promise<number>> = []
     contracts.forEach((contractFile) => {
         const baseName = contractFile.split('/').pop();
         const contractName = (baseName as string).replace(".ts", "");
-        promises.push(runOneContract(dir, contractFile, contractName));
+        promises.push(runOneContract(contractFile, contractName));
     });
     return promises
 }
-async function runOneContract(dir: string, contractFile: string, contractName: string): Promise<number> {
-    const modulePromise = import(dir + "/" + contractFile);
+
+async function runOneContract(contractFile: string, contractName: string): Promise<number> {
     try {
+        const modulePath =  relative(myPath, config.jsDir)+'/' + contractFile.replace(".ts", ".js");
+        const modulePromise = import(modulePath);
         const module = await modulePromise;
         const contract: Contract<MethodType> = module[contractName];
         if (contract === undefined)

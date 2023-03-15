@@ -1,8 +1,8 @@
 {
   "compileOnSave": true,
   "compilerOptions": {
-    "baseUrl": "./",
-    "outDir": "bundle",
+    "baseUrl": ".",
+    "outDir": "dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
     "noImplicitOverride": true,
@@ -16,8 +16,8 @@
     "emitDecoratorMetadata": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "ES5",
-    "module": "Node16",
+    "target": "ESNext",
+    "module": "NodeNext",
     "esModuleInterop": true,
     "useDefineForClassFields": false,
     "lib": [
@@ -37,7 +37,7 @@
   ],
   "exclude": [
     ".stryker-tmp",
-    "bundle",
+    "dist",
     "node_modules"
   ],
 }

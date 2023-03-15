@@ -1,7 +1,7 @@
-import { manipulator } from "contracts/ContractTestdata";
-import { getRunDescriptorCorrectlyBuilt, getRunDescriptorWithTripleReturn } from "contracts/RunDescriptorTestData";
-import { CaseDescriptorEntity } from "src/contract/CaseDescriptorEntity";
-import { MethodType } from "src/contract/MethodType";
+import { CaseDescriptorEntity } from "../src/contract/CaseDescriptorEntity";
+import { MethodType } from "../src/contract/MethodType";
+import { manipulator } from "./ContractTestdata";
+import { getRunDescriptorCorrectlyBuilt, getRunDescriptorWithTripleReturn } from "./RunDescriptorTestData";
 
 export function getCaseDescriptor(): CaseDescriptorEntity<MethodType> {
     return new CaseDescriptorEntity();

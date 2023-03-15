@@ -8,8 +8,10 @@ import { diffLines } from "diff";
 import { enable } from "colors"
 
 function rewriter(key:string,value:any): any {
-    if(typeof value === "function")
-        return value.toString()
+    if(typeof value === "function") {
+        const consolidatedValue = value.toString().replace(/[ \t]+/g, "");
+        return consolidatedValue
+    }
     return value
 }
 

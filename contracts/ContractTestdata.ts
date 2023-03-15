@@ -1,9 +1,9 @@
-import { getCaseDescriptor, getCaseDescriptorWithCorrectRun, getCaseDescriptorWithManipulatorset, getCaseDescriptorWithManipulatorsetAndRun } from "contracts/CaseDescriptorTestData";
-import { ContractEntity } from "src/contract/ContractEntity";
+import { ContractEntity } from "../src/contract/ContractEntity";
 import { GLobalObject } from "../test/SeChecker";
 import { testedFunction } from "../test/testedFunction";
-import { getRunDescriptorCorrectlyBuilt, getRunDescriptorWithExplanation, getRunDescriptorNotTriggeringSideEffect, getRunDescriptorCheckingException, getRunDescriptorParametersSet } from "./RunDescriptorTestData";
-import { getSideEffectChecker, getSideEffectCheckerFailing } from "./SideEffectCheckerTestData";
+import { getCaseDescriptor, getCaseDescriptorWithCorrectRun, getCaseDescriptorWithManipulatorset, getCaseDescriptorWithManipulatorsetAndRun } from "./CaseDescriptorTestData";
+import { getRunDescriptorWithExplanation, getRunDescriptorParametersSet, getRunDescriptorCorrectlyBuilt, getRunDescriptorCheckingException, getRunDescriptorNotTriggeringSideEffect } from "./RunDescriptorTestData";
+import { getSideEffectCheckerFailing, getSideEffectChecker } from "./SideEffectCheckerTestData";
 
 export const CONTRACT_EXPLANATION = "The function under test";
 

@@ -2,7 +2,7 @@ import { ContractEntity } from "./ContractEntity";
 import { MethodType } from "./MethodType";
 import { EnvironmentManipulator } from "./EnvironmentManipulator";
 import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
-import { messageFormat } from "src/util/messageFormat";
+import { messageFormat } from "../util/messageFormat";
 
 export function when<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,

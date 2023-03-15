@@ -1,6 +1,6 @@
-import { EXCEPTION_IDENTIFIER_ACTUALLY_THROWN, EXCEPTION_THROWER_PARAMETERS, NORMAL_PARAMETERS, NO_SIDE_EFFECT_PARAMETERS } from "contracts/ContractTestdata";
-import { testedFunction } from "test/testedFunction";
 import { RunDescriptorEntity } from "../src/contract/RunDescriptorEntity";
+import { testedFunction } from "../test/testedFunction";
+import { NORMAL_PARAMETERS, NO_SIDE_EFFECT_PARAMETERS, EXCEPTION_THROWER_PARAMETERS, EXCEPTION_IDENTIFIER_ACTUALLY_THROWN } from "./ContractTestdata";
 import { getSideEffectChecker } from "./SideEffectCheckerTestData";
 
 export const CORRECT_RETURN_VALUE = ():string =>"1";
