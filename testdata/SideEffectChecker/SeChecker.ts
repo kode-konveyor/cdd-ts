@@ -1,17 +1,17 @@
 import equal from "fast-deep-equal";
-import { messageFormat } from "../src/util/messageFormat";
-import { SideEffectChecker } from "../src/contract/SideEffectChecker";
+import { messageFormat } from "../../src/util/messageFormat";
+import { SideEffectCheckerType } from "../../src/types/SideEffectChecker";
 
 export const GLobalObject = {
-    value: [] as any[],
+    value: [] as Array<any>,
     multiplier: 1
 }
 
-export class SeChecker implements SideEffectChecker {
+export class SeChecker implements SideEffectCheckerType {
 
-    expected: any[];
+    expected: Array<any>;
 
-    constructor(expected: any[]) {
+    constructor(expected: Array<any>) {
         this.expected = expected;
     }
 
@@ -20,7 +20,7 @@ export class SeChecker implements SideEffectChecker {
     };
 
     check(): void {
-        if(!equal(GLobalObject.value,this.expected))
+        if (!equal(GLobalObject.value, this.expected))
             throw new Error(messageFormat(
                 "SeChecker:\nexpected:{1}\nactual  :{2}",
                 this.expected.toString(),
@@ -28,7 +28,7 @@ export class SeChecker implements SideEffectChecker {
             ))
     }
 
-    tearDown = ():void => {
+    tearDown = (): void => {
     };
 
 }

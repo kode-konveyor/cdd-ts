@@ -1,5 +1,5 @@
-import { ContractEntity } from "../contract/ContractEntity";
-import { MethodType } from "../contract/MethodType";
+import { ContractEntity } from "../types/ContractEntity";
+import { MethodType } from "../types/MethodType";
 import { messageFormat } from "../util/messageFormat";
 import { RUN_IDENTIFIER_FORMAT } from "./Messages";
 

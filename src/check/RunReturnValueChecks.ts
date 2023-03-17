@@ -1,8 +1,8 @@
-import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
+import { RunDescriptorEntity } from "../types/RunDescriptorEntity";
 import { caseName } from "./CaseName";
 import { RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT } from "./Messages";
-import { ContractEntity } from "../contract/ContractEntity";
-import { MethodType } from "../contract/MethodType";
+import { ContractEntity } from "../types/ContractEntity";
+import { MethodType } from "../types/MethodType";
 import { messageFormat } from "../util/messageFormat";
 
 export function runReturnValueChecks<T extends MethodType, THIS extends ContractEntity<T>>(

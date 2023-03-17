@@ -17,6 +17,12 @@
     ]
   },
   "rules": {
-    "no-useless-catch": "off"
+    "no-useless-catch": "off",
+    "@typescript-eslint/array-type": [
+      2,
+      {
+        "default": "generic"
+      }
+    ]
   }
 }

@@ -1,6 +1,6 @@
-import { ContractEntity } from "./ContractEntity";
+import { ContractEntity } from "../types/ContractEntity";
 import { THENTHROW_MISSING_IFCALEDWITH_MESSAGE_FORMAT } from "./Messages";
-import { MethodType } from "./MethodType";
+import { MethodType } from "../types/MethodType";
 
 export function thenThrow<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,

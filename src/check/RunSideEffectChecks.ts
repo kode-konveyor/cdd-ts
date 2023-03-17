@@ -1,7 +1,7 @@
-import { RunDescriptorEntity } from "../contract/RunDescriptorEntity";
+import { RunDescriptorEntity } from "../types/RunDescriptorEntity";
 import { oneSideEffectCheck } from "./OneSideEffectCheck";
-import { ContractEntity } from "../contract/ContractEntity";
-import { MethodType } from "../contract/MethodType";
+import { ContractEntity } from "../types/ContractEntity";
+import { MethodType } from "../types/MethodType";
 
 export function runSideEffectChecks<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,

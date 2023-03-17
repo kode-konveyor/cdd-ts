@@ -1,21 +1,26 @@
 import { Contract } from "../src/contract/Contract";
-import { EnvironmentManipulator } from "../src/contract/EnvironmentManipulator";
-import { MethodType } from "../src/contract/MethodType";
+import { EnvironmentManipulatorType } from "../src/types/EnvironmentManipulatorType";
+import { MethodType } from "../src/types/MethodType";
 import { when } from "../src/contract/When";
-import { testedFunction } from "../test/testedFunction";
-import { ContractEntity } from "../src/contract/ContractEntity";
-import { getContractWithCorrectCurrentRun, getContractWithDefaultCase, getContractWithManipulatorSet, getContractWithRunInNonDefaultCaseNoCurrentRun, manipulator, NONDEFAULT_CASE_NAME } from "./ContractTestdata";
+import { ContractEntity } from "../src/types/ContractEntity";
+import { NONDEFAULT_CASE_NAME } from "../testdata/Contract/ContractTestdata";
+import { getEnvironmentManipulatorThrice } from "../testdata/EnvironmentManipulator/getEnvironmentManipulatorThrice";
+import { getContractWithManipulatorSet } from "../testdata/Contract/getContractWithManipulatorSet";
+import { getContractWithRunInNonDefaultCaseNoCurrentRun } from "../testdata/Contract/getContractWithRunInNonDefaultCaseNoCurrentRun";
+import { getContractWithCorrectCurrentRun } from "../testdata/Contract/getContractWithCorrectCurrentRun";
+import { getContractWithDefaultCase } from "../testdata/Contract/getContractWithDefaultCase";
+import { TestedFunctionType } from "../testdata/Method/TestedFunctionType";
 
 const whenFunction =
-    (contract: ContractEntity<typeof testedFunction>, title: string, environmentManipulator: EnvironmentManipulator): ContractEntity<MethodType> =>
+    (contract: ContractEntity<TestedFunctionType>, title: string, environmentManipulator: EnvironmentManipulatorType): ContractEntity<MethodType> =>
         when.call(
             contract,
             title,
             environmentManipulator);
 const contractFunction =
-    (contract: ContractEntity<typeof testedFunction>, title: string, environmentManipulator: EnvironmentManipulator): ContractEntity<typeof testedFunction> =>
-        new Contract<typeof testedFunction>().when.call(
-            contract as Contract<typeof testedFunction>,
+    (contract: ContractEntity<TestedFunctionType>, title: string, environmentManipulator: EnvironmentManipulatorType): ContractEntity<TestedFunctionType> =>
+        new Contract<TestedFunctionType>().when.call(
+            contract as Contract<TestedFunctionType>,
             title, environmentManipulator);
 
 export const WhenContractParties = [
@@ -38,10 +43,10 @@ function currentCaseChecker(
 
 export const WhenContract: Contract<typeof whenFunction> = new Contract<typeof whenFunction>()
     .setTitle("when sets up a case with a title, using an environment manipulator")
-    .ifCalledWith(getContractWithDefaultCase, ()=>NONDEFAULT_CASE_NAME, ()=>manipulator)
+    .ifCalledWith(getContractWithDefaultCase, () => NONDEFAULT_CASE_NAME, getEnvironmentManipulatorThrice)
     .thenReturn("a contract with the title set", getContractWithManipulatorSet)
     .suchThat("a new case is created using the title", newCaseChecker)
-    .suchThat( "the current case is set to the title", currentCaseChecker)
-    .ifCalledWith(getContractWithCorrectCurrentRun, ()=>NONDEFAULT_CASE_NAME, ()=>manipulator)
-    .thenReturn( "if there was already a run (ifCalledWith was called), it is put into the previously active case", getContractWithRunInNonDefaultCaseNoCurrentRun)
+    .suchThat("the current case is set to the title", currentCaseChecker)
+    .ifCalledWith(getContractWithCorrectCurrentRun, () => NONDEFAULT_CASE_NAME, getEnvironmentManipulatorThrice)
+    .thenReturn("if there was already a run (ifCalledWith was called), it is put into the previously active case", getContractWithRunInNonDefaultCaseNoCurrentRun)
 

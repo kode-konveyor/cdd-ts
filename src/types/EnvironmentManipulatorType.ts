@@ -1,5 +1,5 @@
 
-export interface EnvironmentManipulator {
+export interface EnvironmentManipulatorType {
     setUp: () => void;
     tearDown: () => void;
 }

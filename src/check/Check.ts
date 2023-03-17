@@ -1,6 +1,6 @@
 import { handleRun } from "./HandleRun";
-import { ContractEntity } from "../contract/ContractEntity";
-import { MethodType } from "../contract/MethodType";
+import { ContractEntity } from "../types/ContractEntity";
+import { MethodType } from "../types/MethodType";
 
 
 export function check<T extends MethodType, THIS extends ContractEntity<T>>(this: THIS, sut: T): number {

@@ -1,11 +1,11 @@
-import { ContractEntity } from "./ContractEntity";
+import { ContractEntity } from "../types/ContractEntity";
 import { THENRETURN_MISSING_IFCALLEDWITH_MESSAGE_FORMAT } from "./Messages";
-import { MethodType } from "./MethodType";
+import { MethodType } from "../types/MethodType";
 
 export function thenReturn<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,
     explanation: string,
-    returnValue: ()=> ReturnType<T>
+    returnValue: () => ReturnType<T>
 ): THIS {
     if (this.currentRun == null)
         throw new Error(THENRETURN_MISSING_IFCALLEDWITH_MESSAGE_FORMAT)

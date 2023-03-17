@@ -1,5 +1,5 @@
 import { Contract } from "../contract/Contract";
-import { MethodType } from "../contract/MethodType";
+import { MethodType } from "../types/MethodType";
 import { Methods } from "./Methods";
 
 export type ContractsFor<T> = {

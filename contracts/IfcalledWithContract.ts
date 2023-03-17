@@ -1,27 +1,32 @@
-import { Contract } from "../src/cdd-ts"
-import { ContractEntity } from "../src/contract/ContractEntity"
+import { Contract } from "../src/contract/Contract"
+import { ContractEntity } from "../src/types/ContractEntity"
 import { ifCalledWith } from "../src/contract/IfCalledWith"
-import { testedFunction } from "../test/testedFunction"
-import { getContractWithNonDefaultCaseCaseAndCurrentRun, getContractWithFreshRun, getContractWithNonDefaultCaseWithARunStored, getContractWithParametersSet, getContractWithDefaultCase } from "./ContractTestdata"
+import { getContractWithNonDefaultCaseWithARunStored } from "../testdata/Contract/getContractWithNonDefaultCaseWithARunStored"
+import { getContractWithNonDefaultCaseCaseAndCurrentRun } from "../testdata/Contract/getContractWithNonDefaultCaseCaseAndCurrentRun"
+import { getContractWithParametersSet } from "../testdata/Contract/getContractWithParametersSet"
+import { getContractWithFreshRun } from "../testdata/Contract/getContractWithFreshRun"
+import { getContractWithDefaultCase } from "../testdata/Contract/getContractWithDefaultCase"
+import { getParametersGetter } from "../testdata/ParametersGetter/getParametersGetter"
+import { TestedFunctionType } from "../testdata/Method/TestedFunctionType"
 
-type IfCalledWithFortestedFunctionType = (contract: ContractEntity<typeof testedFunction>, arg: () => number, arg2: () => string) => ContractEntity<typeof testedFunction>
+type IfCalledWithFortestedFunctionType = (contract: ContractEntity<TestedFunctionType>, arg: () => number, arg2: () => string) => ContractEntity<TestedFunctionType>
 
 function ifCalledWithFunction(
-    contract: Contract<typeof testedFunction>,
+    contract: Contract<TestedFunctionType>,
     arg: () => number,
     arg2: () => string
-): ContractEntity<typeof testedFunction> {
+): ContractEntity<TestedFunctionType> {
     return (ifCalledWith.call as IfCalledWithFortestedFunctionType)(contract, arg, arg2)
 }
 
 export const IfcalledWithContractParties = [ifCalledWithFunction]
 export const IfcalledWithContract = new Contract<IfCalledWithFortestedFunctionType>()
     .setTitle("ifCalledWith sets the parameter for the run")
-    .ifCalledWith(getContractWithDefaultCase, () => () => 1, () => () => "b")
+    .ifCalledWith(getContractWithDefaultCase, ...getParametersGetter())
     .thenReturn("The Parameters are put into the run", getContractWithParametersSet)
-    .ifCalledWith(getContractWithFreshRun, () => () => 1, () => () => "b")
+    .ifCalledWith(getContractWithFreshRun, ...getParametersGetter())
     .thenThrow("if there is a current run, and it is not fully defined, an error is thrown", "current run is incomplete")
-    .ifCalledWith(getContractWithNonDefaultCaseCaseAndCurrentRun, () => () => 1, () => () => "b")
+    .ifCalledWith(getContractWithNonDefaultCaseCaseAndCurrentRun, ...getParametersGetter())
     .thenReturn("if there is a current case, we put the current run into the current case", getContractWithNonDefaultCaseWithARunStored)
 
 

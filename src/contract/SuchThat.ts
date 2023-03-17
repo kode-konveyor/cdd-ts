@@ -1,5 +1,5 @@
-import { ContractEntity } from "./ContractEntity";
-import { MethodType } from "./MethodType";
+import { ContractEntity } from "../types/ContractEntity";
+import { MethodType } from "../types/MethodType";
 
 export function suchThat<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,

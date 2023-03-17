@@ -1,7 +1,7 @@
 import { meanwhile } from "./Meanwhile";
-import { ContractEntity } from "./ContractEntity";
+import { ContractEntity } from "../types/ContractEntity";
 import { suchThat } from "./SuchThat";
-import { MethodType } from "./MethodType";
+import { MethodType } from "../types/MethodType";
 import { thenReturn } from "./ThenReturn";
 import { thenThrow } from "./ThenThrow";
 import { when } from "./When";

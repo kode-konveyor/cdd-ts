@@ -1,15 +1,16 @@
 import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
 import { RunDescriptorEntity } from "./RunDescriptorEntity";
-import { SideEffectChecker } from "./SideEffectChecker";
 import { MethodType } from "./MethodType";
+import { ReturnValueCheckCaseType } from "./ReturnValueCheckCaseType";
+import { SideEffectCheckCaseType } from "./SideEffectCheckCaseType";
 
 export class ContractEntity<T extends MethodType> {
     explanation!: string;
     currentCase?: string;
-    currentRun?:  RunDescriptorEntity<T>;
+    currentRun?: RunDescriptorEntity<T>;
     testedFunction!: T;
-    returnValueChecks: Array<[string, (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void]> = []
-    sideEffectChecks: Array<[string, SideEffectChecker]> = []
+    returnValueChecks: Array<ReturnValueCheckCaseType<T>> = []
+    sideEffectChecks: Array<SideEffectCheckCaseType> = []
     cases: Record<string, CaseDescriptorEntity<T>> = {}
     checkedCase!: string;
     currentRunExplanation!: string;

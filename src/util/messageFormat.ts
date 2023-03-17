@@ -1,5 +1,5 @@
 
-export function messageFormat (format: string, ...parameters:string[]): string {
+export function messageFormat (format: string, ...parameters:Array<string>): string {
     if (parameters.length > 0) {
         const t = typeof arguments[0];
         let key;

@@ -1,5 +1,6 @@
 #!/usr/bin/env node
-import { runAllContracts } from "./cdd-ts";
+
+import { runAllContracts } from "./runner/runAllContracts";
 
 runAllContracts()
 .then((value:number) =>

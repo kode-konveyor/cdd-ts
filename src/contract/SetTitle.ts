@@ -1,6 +1,6 @@
-import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
-import { ContractEntity } from "./ContractEntity";
-import { MethodType } from "./MethodType";
+import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity";
+import { ContractEntity } from "../types/ContractEntity";
+import { MethodType } from "../types/MethodType";
 
 export function setTitle<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,
