@@ -1,19 +1,21 @@
 import { runContractsfromList } from "./runContractsfromList";
 
-import glob from "fast-glob" 
+import glob from "fast-glob"
+import { ContractRunnerOptions } from "../types/ContractRunnerOptions";
 
-export async function runAllContracts(): Promise<number> {
+export async function runAllContracts(options: ContractRunnerOptions): Promise<number> {
     try {
         const contracts = await glob(['contracts/**/*Contract.ts'],{})
-        console.log(contracts)
-        const promises = runContractsfromList(contracts);
-        const counts = await Promise.all(promises);
-        let count = 0;
-        for (const oneCount of counts) {
-            count += oneCount;
-        }
-        return count
+        const count = await runContractsfromList(contracts);
+        console.log("number of contracts tested: ",count)
+        if(options.watch)
+            return count
+        process.exit(0)
     } catch(e) {
+        if(options.watch) {
+            console.log(e)
+            return(-1)
+        }
         throw e
     }
 }

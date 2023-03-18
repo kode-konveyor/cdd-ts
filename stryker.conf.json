@@ -11,7 +11,10 @@
   "warnings": {
     "slow": false
   },
-  "testRunner": "jest",
+  "commandRunner": {
+    "command": "runContracts"
+  },
+  "buildCommand": "tsc",
   "reporters": [
     "progress",
     "clear-text",

@@ -24,9 +24,6 @@
       "ES2022",
       "dom"
     ],
-    "types": [
-      "jest"
-    ]
   },
   "files": [
     "src/contract/Contract.ts",

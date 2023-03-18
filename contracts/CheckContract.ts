@@ -30,13 +30,12 @@ export const CheckContractParties = [
 
 type CheckType = typeof checkFunction
 
-
 export const CheckContract =
     new Contract<CheckType>()
         .setTitle("check checks whether the contract actually corresponds to the behaviour of the SUT")
 
         .ifCalledWith(getContractWithCorrectCurrentRun, getMethod)
-        .thenReturn("it returns the number of runs checked in the contract", () => 1)
+        .thenReturn("it returns the number of runs checked in the contract", () =>  1)
 
         .ifCalledWith(getContractWithFreshRun, getMethod)
         .thenThrow("if there is no ifCalledWith, a 'no ifCalledWith' error is thrown", RUN_IDENTIFICATION + " no ifcalledWith")

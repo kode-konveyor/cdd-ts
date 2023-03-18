@@ -1,44 +1,33 @@
-import { MethodType } from "../types/MethodType";
-import { messageFormat } from "../util/messageFormat";
 import { readFileSync } from "fs"
-import { relative } from "path"
-import { Contract } from "../contract/Contract";
+import { runOneContract } from "./runOneContract";
 
 interface CDDConfiguration {
     jsDir: string
 }
-const config: CDDConfiguration = JSON.parse(readFileSync("cdd-ts.json").toString())
+export const config: CDDConfiguration = JSON.parse(readFileSync("cdd-ts.json").toString())
 
-const myPath = module.path
+export const myPath = module.path
 
-export function runContractsfromList(contracts: Array<string>): Array<Promise<number>> {
-    const promises: Array<Promise<number>> = []
-    contracts.forEach((contractFile) => {
-        const baseName = contractFile.split('/').pop();
-        const contractName = (baseName as string).replace(".ts", "");
-        promises.push(runOneContract(contractFile, contractName));
-    });
-    return promises
-}
-
-async function runOneContract(contractFile: string, contractName: string): Promise<number> {
+export async function runContractsfromList(contracts: Array<string>): Promise<number> {
     try {
-        const modulePath = relative(myPath, config.jsDir) + '/' + contractFile.replace(".ts", ".js");
-        const modulePromise = import(modulePath);
-        const module = await modulePromise;
-        const contract: Contract<MethodType> = module[contractName];
-        if (contract === undefined)
-            throw new Error(messageFormat("{1}:{2}: undefined", contractFile, contractName))
-        const parties: [] = module[contractName + "Parties"]
-        if (parties === undefined)
-            throw new Error(messageFormat("{1}:{2}: undefined", contractFile, contractName + "Parties"))
-        let count = 0
-        for (const party of parties) {
-            count += contract.check(party)
-        }
-        return count;
+        const nullPromise = new Promise<number>((resolve) => resolve(0));
+    return await contracts.reduce(
+        async (prev,contractFile):Promise<number> => {
+            try {
+                const baseName = contractFile.split('/').pop();
+                const contractName = (baseName as string).replace(".ts", "");
+                const previous = await prev;
+                const current = await runOneContract(contractFile, contractName);
+                return previous + current;
+            } catch (e) {
+                throw e
+            }
+        },
+        nullPromise
+    );
     } catch (e) {
         throw e
     }
 }
+
 

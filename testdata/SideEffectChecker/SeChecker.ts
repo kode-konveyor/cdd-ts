@@ -9,11 +9,7 @@ export const GLobalObject = {
 
 export class SeChecker implements SideEffectCheckerType {
 
-    expected: Array<any>;
-
-    constructor(expected: Array<any>) {
-        this.expected = expected;
-    }
+    public expected: Array<any> = [["hello b"]]
 
     setUp = (): void => {
         GLobalObject.value = []
