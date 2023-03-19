@@ -1,7 +1,7 @@
-import { ContractEntity } from "../../src/types/ContractEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getRunDescriptorParametersSet } from "../RunDescriptor/getRunDescriptorParametersSet";
-import { getContractWithDefaultCase } from "./getContractWithDefaultCase";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getRunDescriptorParametersSet } from "../RunDescriptor/getRunDescriptorParametersSet.js";
+import { getContractWithDefaultCase } from "./getContractWithDefaultCase.js";
 
 
 export function getContractWithParametersSet(): ContractEntity<TestedFunctionType> {

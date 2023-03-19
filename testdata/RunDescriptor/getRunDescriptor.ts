@@ -1,5 +1,5 @@
-import { RunDescriptorEntity } from "../../src/types/RunDescriptorEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
+import { RunDescriptorEntity } from "../../src/types/RunDescriptorEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
 
 
 export function getRunDescriptor(): RunDescriptorEntity<TestedFunctionType> {

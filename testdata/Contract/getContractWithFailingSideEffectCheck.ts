@@ -1,7 +1,7 @@
-import { ContractEntity } from "../../src/types/ContractEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getSideEffectCheckCaseFailing } from "../SideEffectCheckCase/getSideEffectCheckCaseFailing";
-import { getContractWithRunInDefaultCase } from "./getContractWithRunInDefaultCase";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getSideEffectCheckCaseFailing } from "../SideEffectCheckCase/getSideEffectCheckCaseFailing.js";
+import { getContractWithRunInDefaultCase } from "./getContractWithRunInDefaultCase.js";
 
 
 export function getContractWithFailingSideEffectCheck(): ContractEntity<TestedFunctionType> {

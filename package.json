@@ -6,7 +6,7 @@
   "bin": {
     "runContracts": "dist/src/run.js"
   },
-  "type": "commonjs",
+  "type": "module",
   "directories": {
     "test": "test"
   },

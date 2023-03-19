@@ -1,6 +1,6 @@
-import { SideEffectCheckerType } from "../../src/types/SideEffectChecker";
-import { getSideEffectChecker } from "./getSideEffectChecker";
-import { SeChecker } from "./SeChecker";
+import { SideEffectCheckerType } from "../../src/types/SideEffectChecker.js";
+import { getSideEffectChecker } from "./getSideEffectChecker.js";
+import { SeChecker } from "./SeChecker.js";
 
 export function getSideEffectCheckerFailing(): SideEffectCheckerType {
     const sideEffectChecker = getSideEffectChecker() as SeChecker

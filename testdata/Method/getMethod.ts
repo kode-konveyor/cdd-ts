@@ -1,5 +1,5 @@
-import { GLobalObject } from "../SideEffectChecker/SeChecker";
-import { TestedFunctionType } from "./TestedFunctionType";
+import { GLobalObject } from "../SideEffectChecker/SeChecker.js";
+import { TestedFunctionType } from "./TestedFunctionType.js";
 
 function testedFunction(arg: number, arg2: string): string {
     if (arg === 2)

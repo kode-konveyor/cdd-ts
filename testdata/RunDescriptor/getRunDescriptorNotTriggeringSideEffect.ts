@@ -1,8 +1,8 @@
-import { RunDescriptorEntity } from "../../src/types/RunDescriptorEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getParametersWithoutSideEffects } from "../Parameters/getParametersWithoutSideEffects";
-import { getRunDescriptorWithExplanation } from "./getRunDescriptorWithExplanation";
-import { getReturnValueSideEffect } from "../ReturnValue/getReturnValueSideEffect";
+import { RunDescriptorEntity } from "../../src/types/RunDescriptorEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getParametersWithoutSideEffects } from "../Parameters/getParametersWithoutSideEffects.js";
+import { getRunDescriptorWithExplanation } from "./getRunDescriptorWithExplanation.js";
+import { getReturnValueSideEffect } from "../ReturnValue/getReturnValueSideEffect.js";
 
 
 export function getRunDescriptorNotTriggeringSideEffect(): RunDescriptorEntity<TestedFunctionType> {

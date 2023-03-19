@@ -1,15 +1,15 @@
-import { Contract } from "../src/contract/Contract";
-import { EnvironmentManipulatorType } from "../src/types/EnvironmentManipulatorType";
-import { MethodType } from "../src/types/MethodType";
-import { when } from "../src/contract/When";
-import { ContractEntity } from "../src/types/ContractEntity";
-import { NONDEFAULT_CASE_NAME } from "../testdata/Contract/ContractTestdata";
-import { getEnvironmentManipulatorThrice } from "../testdata/EnvironmentManipulator/getEnvironmentManipulatorThrice";
-import { getContractWithManipulatorSet } from "../testdata/Contract/getContractWithManipulatorSet";
-import { getContractWithRunInNonDefaultCaseNoCurrentRun } from "../testdata/Contract/getContractWithRunInNonDefaultCaseNoCurrentRun";
-import { getContractWithCorrectCurrentRun } from "../testdata/Contract/getContractWithCorrectCurrentRun";
-import { getContractWithDefaultCase } from "../testdata/Contract/getContractWithDefaultCase";
-import { TestedFunctionType } from "../testdata/Method/TestedFunctionType";
+import { Contract } from "../src/contract/Contract.js";
+import { EnvironmentManipulatorType } from "../src/types/EnvironmentManipulatorType.js";
+import { MethodType } from "../src/types/MethodType.js";
+import { when } from "../src/contract/When.js";
+import { ContractEntity } from "../src/types/ContractEntity.js";
+import { NONDEFAULT_CASE_NAME } from "../testdata/Contract/ContractTestdata.js";
+import { getEnvironmentManipulatorThrice } from "../testdata/EnvironmentManipulator/getEnvironmentManipulatorThrice.js";
+import { getContractWithManipulatorSet } from "../testdata/Contract/getContractWithManipulatorSet.js";
+import { getContractWithRunInNonDefaultCaseNoCurrentRun } from "../testdata/Contract/getContractWithRunInNonDefaultCaseNoCurrentRun.js";
+import { getContractWithCorrectCurrentRun } from "../testdata/Contract/getContractWithCorrectCurrentRun.js";
+import { getContractWithDefaultCase } from "../testdata/Contract/getContractWithDefaultCase.js";
+import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js";
 
 const whenFunction =
     (contract: ContractEntity<TestedFunctionType>, title: string, environmentManipulator: EnvironmentManipulatorType): ContractEntity<MethodType> =>

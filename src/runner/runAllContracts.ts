@@ -1,7 +1,7 @@
-import { runContractsfromList } from "./runContractsfromList";
+import { runContractsfromList } from "./runContractsfromList.js";
 
 import glob from "fast-glob"
-import { ContractRunnerOptions } from "../types/ContractRunnerOptions";
+import { ContractRunnerOptions } from "../types/ContractRunnerOptions.js";
 
 export async function runAllContracts(options: ContractRunnerOptions): Promise<number> {
     try {

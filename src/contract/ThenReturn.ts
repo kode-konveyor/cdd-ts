@@ -1,6 +1,6 @@
-import { ContractEntity } from "../types/ContractEntity";
-import { THENRETURN_MISSING_IFCALLEDWITH_MESSAGE_FORMAT } from "./Messages";
-import { MethodType } from "../types/MethodType";
+import { ContractEntity } from "../types/ContractEntity.js";
+import { THENRETURN_MISSING_IFCALLEDWITH_MESSAGE_FORMAT } from "./Messages.js";
+import { MethodType } from "../types/MethodType.js";
 
 export function thenReturn<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,

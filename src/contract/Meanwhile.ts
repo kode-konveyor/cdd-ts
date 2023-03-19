@@ -1,6 +1,6 @@
-import { ContractEntity } from "../types/ContractEntity";
-import { SideEffectCheckerType } from "../types/SideEffectChecker";
-import { MethodType } from "../types/MethodType";
+import { ContractEntity } from "../types/ContractEntity.js";
+import { SideEffectCheckerType } from "../types/SideEffectChecker.js";
+import { MethodType } from "../types/MethodType.js";
 
 export function meanwhile<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,

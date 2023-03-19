@@ -1,6 +1,6 @@
-import { SideEffectCheckerType } from "./SideEffectChecker";
-import { MethodType } from "./MethodType";
-import { ParameterGetters } from "./ParameterGettersType";
+import { SideEffectCheckerType } from "./SideEffectChecker.js";
+import { MethodType } from "./MethodType.js";
+import { ParameterGetters } from "./ParameterGettersType.js";
 
 export class RunDescriptorEntity<T extends MethodType> {
     thrown?: string | RegExp;

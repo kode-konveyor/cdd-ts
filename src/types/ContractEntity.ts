@@ -1,8 +1,8 @@
-import { CaseDescriptorEntity } from "./CaseDescriptorEntity";
-import { RunDescriptorEntity } from "./RunDescriptorEntity";
-import { MethodType } from "./MethodType";
-import { ReturnValueCheckCaseType } from "./ReturnValueCheckCaseType";
-import { SideEffectCheckCaseType } from "./SideEffectCheckCaseType";
+import { CaseDescriptorEntity } from "./CaseDescriptorEntity.js";
+import { RunDescriptorEntity } from "./RunDescriptorEntity.js";
+import { MethodType } from "./MethodType.js";
+import { ReturnValueCheckCaseType } from "./ReturnValueCheckCaseType.js";
+import { SideEffectCheckCaseType } from "./SideEffectCheckCaseType.js";
 
 export class ContractEntity<T extends MethodType> {
     explanation!: string;

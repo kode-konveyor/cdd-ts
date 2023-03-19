@@ -1,14 +1,14 @@
-import { meanwhile } from "./Meanwhile";
-import { ContractEntity } from "../types/ContractEntity";
-import { suchThat } from "./SuchThat";
-import { MethodType } from "../types/MethodType";
-import { thenReturn } from "./ThenReturn";
-import { thenThrow } from "./ThenThrow";
-import { when } from "./When";
-import { getStub } from "./Stub";
-import { setTitle } from "./SetTitle";
-import { ifCalledWith } from "./IfCalledWith";
-import { check } from "../check/Check";
+import { meanwhile } from "./Meanwhile.js";
+import { ContractEntity } from "../types/ContractEntity.js";
+import { suchThat } from "./SuchThat.js";
+import { MethodType } from "../types/MethodType.js";
+import { thenReturn } from "./ThenReturn.js";
+import { thenThrow } from "./ThenThrow.js";
+import { when } from "./When.js";
+import { getStub } from "./Stub.js";
+import { setTitle } from "./SetTitle.js";
+import { ifCalledWith } from "./IfCalledWith.js";
+import { check } from "../check/Check.js";
 
 export class Contract<T extends MethodType> extends ContractEntity<T>  {
     setTitle = setTitle<T, Contract<T>>

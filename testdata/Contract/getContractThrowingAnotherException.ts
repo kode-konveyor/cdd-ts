@@ -1,8 +1,8 @@
-import { ContractEntity } from "../../src/types/ContractEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getContractWithRunInDefaultCase } from "./getContractWithRunInDefaultCase";
-import { NOT_THE_EXCEPTION_IDENTIFIER_WHICH_IS_THROWN } from "./ContractTestdata";
-import { getParametersThrowingException } from "../Parameters/getParametersThrowingException";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getContractWithRunInDefaultCase } from "./getContractWithRunInDefaultCase.js";
+import { NOT_THE_EXCEPTION_IDENTIFIER_WHICH_IS_THROWN } from "./ContractTestdata.js";
+import { getParametersThrowingException } from "../Parameters/getParametersThrowingException.js";
 
 
 export function getContractThrowingAnotherException(): ContractEntity<TestedFunctionType> {

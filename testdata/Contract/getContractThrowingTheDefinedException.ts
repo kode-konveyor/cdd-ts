@@ -1,7 +1,7 @@
-import { ContractEntity } from "../../src/types/ContractEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getRunDescriptorCheckingException } from "../RunDescriptor/getRunDescriptorCheckingException";
-import { getContractWithDefaultCase } from "./getContractWithDefaultCase";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getRunDescriptorCheckingException } from "../RunDescriptor/getRunDescriptorCheckingException.js";
+import { getContractWithDefaultCase } from "./getContractWithDefaultCase.js";
 
 
 export function getContractThrowingTheDefinedException(): ContractEntity<TestedFunctionType> {

@@ -1,9 +1,9 @@
-import { Contract } from "../src/contract/Contract";
-import { getMethod } from "../testdata/Method/getMethod";
-import { TestedFunctionType } from "../testdata/Method/TestedFunctionType";
-import { getParameters } from "../testdata/Parameters/getParameters";
-import { getReturnValue } from "../testdata/ReturnValue/getReturnValue";
-import { getSideEffectChecker } from "../testdata/SideEffectChecker/getSideEffectChecker";
+import { Contract } from "../src/contract/Contract.js";
+import { getMethod } from "../testdata/Method/getMethod.js";
+import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js";
+import { getParameters } from "../testdata/Parameters/getParameters.js";
+import { getReturnValue } from "../testdata/ReturnValue/getReturnValue.js";
+import { getSideEffectChecker } from "../testdata/SideEffectChecker/getSideEffectChecker.js";
 
 export const testedFunctionContractParties = [getMethod()]
 

@@ -1,5 +1,5 @@
-import { ContractEntity } from "../types/ContractEntity";
-import { MethodType } from "../types/MethodType";
+import { ContractEntity } from "../types/ContractEntity.js";
+import { MethodType } from "../types/MethodType.js";
 
 export function suchThat<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,

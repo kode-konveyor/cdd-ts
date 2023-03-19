@@ -1,6 +1,6 @@
-import { Contract } from "../contract/Contract";
-import { ContractsFor } from "./ContractsFor";
-import { Methods } from "./Methods";
+import { Contract } from "../contract/Contract.js";
+import { ContractsFor } from "./ContractsFor.js";
+import { Methods } from "./Methods.js";
 
 export class ContractForClass<T extends Record<string, any>> {
 

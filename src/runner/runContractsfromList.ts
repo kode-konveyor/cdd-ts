@@ -1,12 +1,14 @@
 import { readFileSync } from "fs"
-import { runOneContract } from "./runOneContract";
+import { runOneContract } from "./runOneContract.js";
+import url from 'url';
 
 interface CDDConfiguration {
     jsDir: string
 }
 export const config: CDDConfiguration = JSON.parse(readFileSync("cdd-ts.json").toString())
 
-export const myPath = module.path
+
+export const myPath = url.fileURLToPath(import.meta.url);
 
 export async function runContractsfromList(contracts: Array<string>): Promise<number> {
     try {

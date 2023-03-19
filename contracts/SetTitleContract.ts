@@ -1,11 +1,11 @@
-import { Contract } from "../src/contract/Contract";
-import { ContractEntity } from "../src/types/ContractEntity";
-import { setTitle } from "../src/contract/SetTitle";
-import { MethodType } from "../src/types/MethodType";
-import { CONTRACT_EXPLANATION } from "../testdata/Contract/ContractTestdata";
-import { getContractWithDefaultCase } from "../testdata/Contract/getContractWithDefaultCase";
-import { getContract } from "../testdata/Contract/getContract";
-import { TestedFunctionType } from "../testdata/Method/TestedFunctionType";
+import { Contract } from "../src/contract/Contract.js";
+import { ContractEntity } from "../src/types/ContractEntity.js";
+import { setTitle } from "../src/contract/SetTitle.js";
+import { MethodType } from "../src/types/MethodType.js";
+import { CONTRACT_EXPLANATION } from "../testdata/Contract/ContractTestdata.js";
+import { getContractWithDefaultCase } from "../testdata/Contract/getContractWithDefaultCase.js";
+import { getContract } from "../testdata/Contract/getContract.js";
+import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js";
 
 
 const setTitleFunction = (title: string): ContractEntity<MethodType> => setTitle.call(getContract(), title);

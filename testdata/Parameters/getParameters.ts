@@ -1,4 +1,4 @@
-import { makeGetters } from "../../src/util/makeGetters";
+import { makeGetters } from "../../src/util/makeGetters.js";
 
 export const PARAMETERS = [1, "b"]
 export const PARAMETERS_THROWING_EXCEPTION = [2, "a"]

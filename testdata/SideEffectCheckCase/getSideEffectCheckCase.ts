@@ -1,5 +1,5 @@
-import { SideEffectCheckerType } from "../../src/types/SideEffectChecker";
-import { getSideEffectChecker } from "../SideEffectChecker/getSideEffectChecker";
+import { SideEffectCheckerType } from "../../src/types/SideEffectChecker.js";
+import { getSideEffectChecker } from "../SideEffectChecker/getSideEffectChecker.js";
 
 
 export function getSideEffectCheckCase(): [string, SideEffectCheckerType] {

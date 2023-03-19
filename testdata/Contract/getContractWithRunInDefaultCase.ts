@@ -1,7 +1,7 @@
-import { ContractEntity } from "../../src/types/ContractEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getCaseDescriptorWithCorrectRun } from "../CaseDescriptor/getCaseDescriptorWithCorrectRun";
-import { getContractWithFreshRun } from "./getContractWithFreshRun";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getCaseDescriptorWithCorrectRun } from "../CaseDescriptor/getCaseDescriptorWithCorrectRun.js";
+import { getContractWithFreshRun } from "./getContractWithFreshRun.js";
 
 
 export function getContractWithRunInDefaultCase(): ContractEntity<TestedFunctionType> {

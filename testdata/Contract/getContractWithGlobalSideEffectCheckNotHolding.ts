@@ -1,7 +1,7 @@
-import { ContractEntity } from "../../src/types/ContractEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getRunDescriptorNotTriggeringSideEffect } from "../RunDescriptor/getRunDescriptorNotTriggeringSideEffect";
-import { getContractWithGlobalSideEffectCheck } from "./getContractWithGlobalSideEffectCheck";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getRunDescriptorNotTriggeringSideEffect } from "../RunDescriptor/getRunDescriptorNotTriggeringSideEffect.js";
+import { getContractWithGlobalSideEffectCheck } from "./getContractWithGlobalSideEffectCheck.js";
 
 
 export function getContractWithGlobalSideEffectCheckNotHolding(): ContractEntity<TestedFunctionType> {

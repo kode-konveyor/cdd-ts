@@ -1,7 +1,7 @@
-import { CaseDescriptorEntity } from "../../src/types/CaseDescriptorEntity";
-import { MethodType } from "../../src/types/MethodType";
-import { getRunDescriptorCorrectlyBuilt } from "../RunDescriptor/getRunDescriptorCorrectlyBuilt";
-import { getCaseDescriptor } from "./getCaseDescriptor";
+import { CaseDescriptorEntity } from "../../src/types/CaseDescriptorEntity.js";
+import { MethodType } from "../../src/types/MethodType.js";
+import { getRunDescriptorCorrectlyBuilt } from "../RunDescriptor/getRunDescriptorCorrectlyBuilt.js";
+import { getCaseDescriptor } from "./getCaseDescriptor.js";
 
 
 export function getCaseDescriptorWithCorrectRun(): CaseDescriptorEntity<MethodType> {

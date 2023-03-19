@@ -1,7 +1,7 @@
-import { CaseDescriptorEntity } from "../../src/types/CaseDescriptorEntity";
-import { MethodType } from "../../src/types/MethodType";
-import { getRunDescriptorWithTripleReturn } from "../RunDescriptor/getRunDescriptorWithTripleReturn";
-import { getCaseDescriptorWithManipulatorset } from "./getCaseDescriptorWithManipulatorset";
+import { CaseDescriptorEntity } from "../../src/types/CaseDescriptorEntity.js";
+import { MethodType } from "../../src/types/MethodType.js";
+import { getRunDescriptorWithTripleReturn } from "../RunDescriptor/getRunDescriptorWithTripleReturn.js";
+import { getCaseDescriptorWithManipulatorset } from "./getCaseDescriptorWithManipulatorset.js";
 
 
 export function getCaseDescriptorWithManipulatorsetAndRun(): CaseDescriptorEntity<MethodType> {

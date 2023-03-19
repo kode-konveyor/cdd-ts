@@ -1,15 +1,15 @@
-import { RunDescriptorEntity } from "../types/RunDescriptorEntity";
-import { caseName } from "./CaseName";
-import { runSideEffectChecks } from "./RunSideEffectChecks";
-import { runReturnValueChecks } from "./RunReturnValueChecks";
-import { handleException } from "./HandleException";
-import { setUpSideEffectChecks } from "./SetUpSideEffectChecks";
-import { messageFormat } from "../util/messageFormat";
-import { ContractEntity } from "../types/ContractEntity";
-import { MethodType } from "../types/MethodType";
-import { EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT } from "./Messages";
-import { checkReturnValue } from "./CheckReturnValue";
-import { getParametersFromGetters } from "../util/getParametersFromGetters";
+import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+import { caseName } from "./CaseName.js";
+import { runSideEffectChecks } from "./RunSideEffectChecks.js";
+import { runReturnValueChecks } from "./RunReturnValueChecks.js";
+import { handleException } from "./HandleException.js";
+import { setUpSideEffectChecks } from "./SetUpSideEffectChecks.js";
+import { messageFormat } from "../util/messageFormat.js";
+import { ContractEntity } from "../types/ContractEntity.js";
+import { MethodType } from "../types/MethodType.js";
+import { EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT } from "./Messages.js";
+import { checkReturnValue } from "./CheckReturnValue.js";
+import { getParametersFromGetters } from "../util/getParametersFromGetters.js";
 
 export function handleRun<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,

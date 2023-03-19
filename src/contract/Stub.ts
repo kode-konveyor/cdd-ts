@@ -1,9 +1,9 @@
 import equal from "fast-deep-equal"
-import { ContractEntity } from "../types/ContractEntity";
-import { messageFormat } from "../util/messageFormat";
-import { MethodType } from "../types/MethodType";
-import { MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT } from "./Messages";
-import { getParametersFromGetters } from "../util/getParametersFromGetters";
+import { ContractEntity } from "../types/ContractEntity.js";
+import { messageFormat } from "../util/messageFormat.js";
+import { MethodType } from "../types/MethodType.js";
+import { MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT } from "./Messages.js";
+import { getParametersFromGetters } from "../util/getParametersFromGetters.js";
 
 export function getStub<T extends MethodType>(
     contract: ContractEntity<T>,

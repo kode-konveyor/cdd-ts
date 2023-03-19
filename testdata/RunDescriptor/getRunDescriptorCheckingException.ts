@@ -1,8 +1,8 @@
-import { RunDescriptorEntity } from "../../src/types/RunDescriptorEntity";
-import { EXCEPTION_IDENTIFIER_ACTUALLY_THROWN } from "../Contract/ContractTestdata";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getParametersThrowingException } from "../Parameters/getParametersThrowingException";
-import { getRunDescriptorWithExplanation } from "./getRunDescriptorWithExplanation";
+import { RunDescriptorEntity } from "../../src/types/RunDescriptorEntity.js";
+import { EXCEPTION_IDENTIFIER_ACTUALLY_THROWN } from "../Contract/ContractTestdata.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getParametersThrowingException } from "../Parameters/getParametersThrowingException.js";
+import { getRunDescriptorWithExplanation } from "./getRunDescriptorWithExplanation.js";
 
 
 export function getRunDescriptorCheckingException(): RunDescriptorEntity<TestedFunctionType> {

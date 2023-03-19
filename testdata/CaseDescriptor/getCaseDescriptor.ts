@@ -1,5 +1,5 @@
-import { CaseDescriptorEntity } from "../../src/types/CaseDescriptorEntity";
-import { MethodType } from "../../src/types/MethodType";
+import { CaseDescriptorEntity } from "../../src/types/CaseDescriptorEntity.js";
+import { MethodType } from "../../src/types/MethodType.js";
 
 
 export function getCaseDescriptor(): CaseDescriptorEntity<MethodType> {

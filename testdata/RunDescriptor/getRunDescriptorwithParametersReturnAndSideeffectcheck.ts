@@ -1,8 +1,8 @@
-import { RunDescriptorEntity } from "../../src/types/RunDescriptorEntity";
-import { getSideEffectCheckCase } from "../SideEffectCheckCase/getSideEffectCheckCase";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getRunDescriptorParametersAndExplanationSet } from "./getRunDescriptorParametersAndExplanationSet";
-import { getReturnValue } from "../ReturnValue/getReturnValue";
+import { RunDescriptorEntity } from "../../src/types/RunDescriptorEntity.js";
+import { getSideEffectCheckCase } from "../SideEffectCheckCase/getSideEffectCheckCase.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getRunDescriptorParametersAndExplanationSet } from "./getRunDescriptorParametersAndExplanationSet.js";
+import { getReturnValue } from "../ReturnValue/getReturnValue.js";
 
 
 export function getRunDescriptorwithParametersReturnAndSideeffectcheck(): RunDescriptorEntity<TestedFunctionType> {

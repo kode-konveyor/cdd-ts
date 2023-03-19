@@ -16,7 +16,7 @@
     "moduleResolution": "node",
     "importHelpers": true,
     "target": "ESNext",
-    "module": "NodeNext",
+    "module": "ESNext",
     "esModuleInterop": true,
     "useDefineForClassFields": false,
     "inlineSourceMap": true,

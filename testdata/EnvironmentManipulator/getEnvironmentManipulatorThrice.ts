@@ -1,4 +1,4 @@
-import { GLobalObject } from "../SideEffectChecker/SeChecker";
+import { GLobalObject } from "../SideEffectChecker/SeChecker.js";
 
 export function getEnvironmentManipulatorThrice(): { setUp: () => void; tearDown: () => void; } {
     return {

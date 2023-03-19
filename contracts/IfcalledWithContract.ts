@@ -1,13 +1,13 @@
-import { Contract } from "../src/contract/Contract"
-import { ContractEntity } from "../src/types/ContractEntity"
-import { ifCalledWith } from "../src/contract/IfCalledWith"
-import { getContractWithNonDefaultCaseWithARunStored } from "../testdata/Contract/getContractWithNonDefaultCaseWithARunStored"
-import { getContractWithNonDefaultCaseCaseAndCurrentRun } from "../testdata/Contract/getContractWithNonDefaultCaseCaseAndCurrentRun"
-import { getContractWithParametersSet } from "../testdata/Contract/getContractWithParametersSet"
-import { getContractWithFreshRun } from "../testdata/Contract/getContractWithFreshRun"
-import { getContractWithDefaultCase } from "../testdata/Contract/getContractWithDefaultCase"
-import { getParametersGetter } from "../testdata/ParametersGetter/getParametersGetter"
-import { TestedFunctionType } from "../testdata/Method/TestedFunctionType"
+import { Contract } from "../src/contract/Contract.js"
+import { ContractEntity } from "../src/types/ContractEntity.js"
+import { ifCalledWith } from "../src/contract/IfCalledWith.js"
+import { getContractWithNonDefaultCaseWithARunStored } from "../testdata/Contract/getContractWithNonDefaultCaseWithARunStored.js"
+import { getContractWithNonDefaultCaseCaseAndCurrentRun } from "../testdata/Contract/getContractWithNonDefaultCaseCaseAndCurrentRun.js"
+import { getContractWithParametersSet } from "../testdata/Contract/getContractWithParametersSet.js"
+import { getContractWithFreshRun } from "../testdata/Contract/getContractWithFreshRun.js"
+import { getContractWithDefaultCase } from "../testdata/Contract/getContractWithDefaultCase.js"
+import { getParametersGetter } from "../testdata/ParametersGetter/getParametersGetter.js"
+import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js"
 
 type IfCalledWithFortestedFunctionType = (contract: ContractEntity<TestedFunctionType>, arg: () => number, arg2: () => string) => ContractEntity<TestedFunctionType>
 

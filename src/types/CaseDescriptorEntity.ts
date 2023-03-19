@@ -1,5 +1,5 @@
-import { RunDescriptorEntity } from "./RunDescriptorEntity";
-import { MethodType } from "./MethodType";
+import { RunDescriptorEntity } from "./RunDescriptorEntity.js";
+import { MethodType } from "./MethodType.js";
 
 export class CaseDescriptorEntity<T extends MethodType> {
     runs: Array<RunDescriptorEntity<T>> = [];

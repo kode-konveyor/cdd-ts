@@ -1,7 +1,7 @@
-import { ContractEntity } from "../../src/types/ContractEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getSideEffectCheckCase } from "../SideEffectCheckCase/getSideEffectCheckCase";
-import { getContractWithCorrectCurrentRun } from "./getContractWithCorrectCurrentRun";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getSideEffectCheckCase } from "../SideEffectCheckCase/getSideEffectCheckCase.js";
+import { getContractWithCorrectCurrentRun } from "./getContractWithCorrectCurrentRun.js";
 
 
 export function getContractWithGlobalSideEffectCheck(): ContractEntity<TestedFunctionType> {

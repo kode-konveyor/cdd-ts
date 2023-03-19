@@ -1,9 +1,9 @@
-import { RunDescriptorEntity } from "../types/RunDescriptorEntity";
-import { caseName } from "./CaseName";
-import { messageFormat } from "../util/messageFormat";
-import { ContractEntity } from "../types/ContractEntity";
-import { MethodType } from "../types/MethodType";
-import { NOT_THE_EXPECTED_EXCEPTION_THROWN_FORMAT, UNEXPECTED_EXCEPTION_MESSAGE_FORMAT } from "./Messages";
+import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+import { caseName } from "./CaseName.js";
+import { messageFormat } from "../util/messageFormat.js";
+import { ContractEntity } from "../types/ContractEntity.js";
+import { MethodType } from "../types/MethodType.js";
+import { NOT_THE_EXPECTED_EXCEPTION_THROWN_FORMAT, UNEXPECTED_EXCEPTION_MESSAGE_FORMAT } from "./Messages.js";
 
 export function handleException<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS,

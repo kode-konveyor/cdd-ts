@@ -1,9 +1,9 @@
-import { caseName } from "./CaseName";
-import { messageFormat } from "../util/messageFormat";
-import { ContractEntity } from "../types/ContractEntity";
-import { SideEffectCheckerType } from "../types/SideEffectChecker";
-import { MethodType } from "../types/MethodType";
-import { SIDE_EFFECT_CHECK_FAILURE_MESSAGE } from "./Messages";
+import { caseName } from "./CaseName.js";
+import { messageFormat } from "../util/messageFormat.js";
+import { ContractEntity } from "../types/ContractEntity.js";
+import { SideEffectCheckerType } from "../types/SideEffectChecker.js";
+import { MethodType } from "../types/MethodType.js";
+import { SIDE_EFFECT_CHECK_FAILURE_MESSAGE } from "./Messages.js";
 
 export function oneSideEffectCheck<T extends MethodType, THIS extends ContractEntity<T>>(
     this: THIS) {

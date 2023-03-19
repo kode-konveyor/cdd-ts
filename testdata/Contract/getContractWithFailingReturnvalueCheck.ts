@@ -1,7 +1,7 @@
-import { ContractEntity } from "../../src/types/ContractEntity";
-import { TestedFunctionType } from "../Method/TestedFunctionType";
-import { getContractWithRunInDefaultCase } from "./getContractWithRunInDefaultCase";
-import { getReturnValueCheckFailing } from "../ReturnValueCheck/getReturnValueCheckFailing";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { TestedFunctionType } from "../Method/TestedFunctionType.js";
+import { getContractWithRunInDefaultCase } from "./getContractWithRunInDefaultCase.js";
+import { getReturnValueCheckFailing } from "../ReturnValueCheck/getReturnValueCheckFailing.js";
 
 
 export function getContractWithFailingReturnvalueCheck(): ContractEntity<TestedFunctionType> {

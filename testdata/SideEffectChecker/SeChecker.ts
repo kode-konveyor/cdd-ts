@@ -1,6 +1,6 @@
 import equal from "fast-deep-equal";
-import { messageFormat } from "../../src/util/messageFormat";
-import { SideEffectCheckerType } from "../../src/types/SideEffectChecker";
+import { messageFormat } from "../../src/util/messageFormat.js";
+import { SideEffectCheckerType } from "../../src/types/SideEffectChecker.js";
 
 export const GLobalObject = {
     value: [] as Array<any>,

@@ -1,11 +1,13 @@
-import { RunDescriptorEntity } from "../types/RunDescriptorEntity";
-import { caseName } from "./CaseName";
-import { messageFormat } from "../util/messageFormat";
-import { ContractEntity } from "../types/ContractEntity";
-import { MethodType } from "../types/MethodType";
-import { RETURN_VALUE_MISMATCH_MESSAGE_FORMAT } from "./Messages";
+import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+import { caseName } from "./CaseName.js";
+import { messageFormat } from "../util/messageFormat.js";
+import { ContractEntity } from "../types/ContractEntity.js";
+import { MethodType } from "../types/MethodType.js";
+import { RETURN_VALUE_MISMATCH_MESSAGE_FORMAT } from "./Messages.js";
 import { diffLines } from "diff";
-import { enable } from "colors"
+import colors from "colors"
+
+const { enable } = colors
 
 function rewriter(key: string, value: any): any {
     if (typeof value === "function") {
