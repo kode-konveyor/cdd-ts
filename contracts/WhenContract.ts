@@ -1,7 +1,6 @@
 import { Contract } from "../src/contract/Contract.js";
 import { EnvironmentManipulatorType } from "../src/types/EnvironmentManipulatorType.js";
 import { MethodType } from "../src/types/MethodType.js";
-import { when } from "../src/contract/When.js";
 import { ContractEntity } from "../src/types/ContractEntity.js";
 import { NONDEFAULT_CASE_NAME } from "../testdata/Contract/ContractTestdata.js";
 import { getEnvironmentManipulatorThrice } from "../testdata/EnvironmentManipulator/getEnvironmentManipulatorThrice.js";
@@ -10,10 +9,11 @@ import { getContractWithRunInNonDefaultCaseNoCurrentRun } from "../testdata/Cont
 import { getContractWithCorrectCurrentRun } from "../testdata/Contract/getContractWithCorrectCurrentRun.js";
 import { getContractWithDefaultCase } from "../testdata/Contract/getContractWithDefaultCase.js";
 import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js";
+import { When } from "../src/contract/When.js";
 
 const whenFunction =
     (contract: ContractEntity<TestedFunctionType>, title: string, environmentManipulator: EnvironmentManipulatorType): ContractEntity<MethodType> =>
-        when.call(
+        When.prototype.when.call(
             contract,
             title,
             environmentManipulator);

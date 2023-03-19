@@ -1,3 +1,4 @@
 {
-    "jsDir": "dist"
+    "jsDir": "dist",
+    "moduleResolution": "ES"
 }

@@ -1,12 +1,21 @@
 import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
-import { oneSideEffectCheck } from "./OneSideEffectCheck.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { MethodType } from "../types/MethodType.js";
+import { CaseName } from "./CaseName.js";
+import { OneSideEffectCheck } from "./OneSideEffectCheck.js";
 
-export function runSideEffectChecks<T extends MethodType, THIS extends ContractEntity<T>>(
-    this: THIS,
-    currentRun: RunDescriptorEntity<T>
-): void {
-    this.sideEffectChecks.forEach(oneSideEffectCheck.call(this))
-    currentRun.sideEffectChecks.forEach(oneSideEffectCheck.call(this))
+export class RunSideEffectChecks <T extends MethodType> extends ContractEntity<T> {
+    constructor(
+        readonly oneSideEffectCheck = OneSideEffectCheck.prototype.oneSideEffectCheck,
+        readonly caseName = CaseName.prototype.caseName,
+    ) {
+        super();
+    }
+
+    runSideEffectChecks(
+        currentRun: RunDescriptorEntity<T>
+    ): void {
+        this.sideEffectChecks.forEach(this.oneSideEffectCheck())
+        currentRun.sideEffectChecks.forEach(this.oneSideEffectCheck())
+    }
 }

@@ -1,17 +1,12 @@
 
-export function messageFormat (format: string, ...parameters:Array<string>): string {
-    if (parameters.length > 0) {
-        const t = typeof arguments[0];
-        let key;
-        const args = (t === "string" || t === "number") ?
-            Array.prototype.slice.call(arguments)
-            : arguments[0];
-
-        for (key in args) {
-            format = format.replace(new RegExp("\\{" + key + "\\}", "gi"), args[key]);
+export function messageFormat (format: string, ...parameters:Array<string>|[Record<string,any>]): string {
+        const t = typeof parameters[0];
+        const args = (t === "string") ?
+            (Array.prototype.slice.call(arguments) as unknown) as Record<string,any>
+            : parameters[0] as Record<string,string>;
+        for (const key in args) {
+            format = format.replace(new RegExp("\\{" + key + "\\}", "gi"), String(args[key]));
         }
-    }
 
     return format;
 };
-

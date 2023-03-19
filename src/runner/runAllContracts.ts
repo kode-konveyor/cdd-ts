@@ -7,6 +7,8 @@ export async function runAllContracts(options: ContractRunnerOptions): Promise<n
     try {
         const contracts = await glob(['contracts/**/*Contract.ts'],{})
         const count = await runContractsfromList(contracts);
+        if(count < 1)
+            throw new Error("no contracts tested")
         console.log("number of contracts tested: ",count)
         if(options.watch)
             return count

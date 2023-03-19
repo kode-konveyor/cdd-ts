@@ -9,3 +9,5 @@ export function getContractWithTitle(): ContractEntity<TestedFunctionType> {
     contract.explanation = CONTRACT_EXPLANATION;
     return contract;
 }
+
+

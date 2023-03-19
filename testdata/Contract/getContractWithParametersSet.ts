@@ -9,3 +9,5 @@ export function getContractWithParametersSet(): ContractEntity<TestedFunctionTyp
     contract.currentRun = getRunDescriptorParametersSet();
     return contract;
 }
+
+

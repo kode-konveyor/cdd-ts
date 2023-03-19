@@ -1,4 +1,3 @@
-import { check } from "../src/check/Check.js"
 import { Contract } from "../src/contract/Contract.js"
 import { RUN_IDENTIFICATION } from "../testdata/Contract/ContractTestdata.js"
 import { getContractWithGlobalSideEffectCheckNotHolding } from "../testdata/Contract/getContractWithGlobalSideEffectCheckNotHolding.js"
@@ -16,9 +15,11 @@ import { getContractWithFreshRun } from "../testdata/Contract/getContractWithFre
 import { getMethod } from "../testdata/Method/getMethod.js"
 import { ContractEntity } from "../src/types/ContractEntity.js"
 import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js"
+import { getContractWithTitle } from "../testdata/Contract/getContractWithTitle.js"
+import { Check } from "../src/check/Check.js"
 
 
-const checkFunction = (contract: ContractEntity<TestedFunctionType>, sut: TestedFunctionType): number => check.call(contract, sut)
+const checkFunction = (contract: ContractEntity<TestedFunctionType>, sut: TestedFunctionType): number => Check.prototype.check.call(contract, sut)
 const checkFunctionFromContract = (contract: ContractEntity<TestedFunctionType>, sut: TestedFunctionType): number => {
     return new Contract<TestedFunctionType>().check.call(contract as Contract<TestedFunctionType>, sut)
 }
@@ -81,6 +82,7 @@ export const CheckContract =
         .ifCalledWith(getContractWithGlobalSideEffectCheckNotHolding, getMethod)
         .thenThrow(
             "A global side effect check throws the same error as a local one",
-            RUN_IDENTIFICATION + " side effect check: logs to console: did not hold");
-
+            RUN_IDENTIFICATION + " side effect check: logs to console: did not hold")
+        .ifCalledWith(getContractWithTitle,getMethod)
+        .thenThrow("invalid contract wwill result in an exception","Error: no checks in contract The function under test")
 

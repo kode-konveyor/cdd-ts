@@ -1,12 +1,11 @@
 import { MethodType } from "../types/MethodType.js";
 import { messageFormat } from "../util/messageFormat.js";
-import { relative } from "path";
 import { Contract } from "../contract/Contract.js";
-import { myPath, config } from "./runContractsfromList.js";
+import { resolveModule } from "./resolveModule.js";
 
 export async function runOneContract(contractFile: string, contractName: string): Promise<number> {
     try {
-        const modulePath = relative(myPath, config.jsDir) +'/'+config.jsDir+ '/' + contractFile.replace(".ts", ".js");
+        const modulePath = resolveModule(contractFile);
         const modulePromise = import(modulePath);
         const module = await modulePromise;
         const contract: Contract<MethodType> = module[contractName];
@@ -22,3 +21,4 @@ export async function runOneContract(contractFile: string, contractName: string)
         throw e;
     }
 }
+

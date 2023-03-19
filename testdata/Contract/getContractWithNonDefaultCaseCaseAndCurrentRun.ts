@@ -4,7 +4,7 @@ import { getRunDescriptorCorrectlyBuilt } from "../RunDescriptor/getRunDescripto
 import { getContractWithNonDefaultCase } from "./getContractWithNonDefaultCase.js";
 
 
-export function getContractWithNonDefaultCaseCaseAndCurrentRun(): ContractEntity<TestedFunctionType> {
+export function getContractWithNonDefaultCaseAndCurrentRun(): ContractEntity<TestedFunctionType> {
     const contract = getContractWithNonDefaultCase();
 
     contract.currentRun = getRunDescriptorCorrectlyBuilt();

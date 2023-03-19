@@ -6,6 +6,7 @@ import glob from "fast-glob"
 import fs from "node:fs"
 import url from 'url';
 import child_process from 'child_process';
+import "@angular/compiler"
 
 const myPath = url.fileURLToPath(import.meta.url);
 
