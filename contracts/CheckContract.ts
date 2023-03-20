@@ -2,8 +2,10 @@ import { Contract } from "../src/contract/Contract.js"
 import { getMethod, TestedFunctionType } from "../testdata/MethodTestData.js"
 import { ContractEntity } from "../src/types/ContractEntity.js"
 import { Check } from "../src/check/Check.js"
-import { ContractTestData, RUN_IDENTIFICATION } from "../testdata/ContractTestdata.js"
+import { ContractTestDataDescriptor, RUN_IDENTIFICATION } from "../testdata/ContractTestdata.js"
+import { makeTestData } from "../src/util/makeTestData.js"
 
+const ContractTestData = makeTestData<Contract<TestedFunctionType>>(ContractTestDataDescriptor,()=>new Contract<TestedFunctionType>())
 
 const checkFunction = (contract: ContractEntity<TestedFunctionType>, sut: TestedFunctionType): number => Check.prototype.check.call(contract, sut)
 const checkFunctionFromContract = (contract: ContractEntity<TestedFunctionType>, sut: TestedFunctionType): number => {

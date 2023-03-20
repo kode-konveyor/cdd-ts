@@ -2,10 +2,13 @@ import { Contract } from "../src/contract/Contract.js";
 import { EnvironmentManipulatorType } from "../src/types/EnvironmentManipulatorType.js";
 import { MethodType } from "../src/types/MethodType.js";
 import { ContractEntity } from "../src/types/ContractEntity.js";
-import { ContractTestData, NONDEFAULT_CASE_NAME } from "../testdata/ContractTestdata.js";
+import { ContractTestDataDescriptor, NONDEFAULT_CASE_NAME } from "../testdata/ContractTestdata.js";
 import { getEnvironmentManipulatorThrice } from "../testdata/EnvironmentManipulatorTestData.js";
 import { When } from "../src/contract/When.js";
 import { TestedFunctionType } from "../testdata/MethodTestData.js";
+import { makeTestData } from "../src/util/makeTestData.js";
+
+const ContractTestData = makeTestData<Contract<TestedFunctionType>>(ContractTestDataDescriptor,()=>new Contract<TestedFunctionType>())
 
 const whenFunction =
     (contract: ContractEntity<TestedFunctionType>, title: string, environmentManipulator: EnvironmentManipulatorType): ContractEntity<MethodType> =>

@@ -16,3 +16,9 @@ export const serializeContract = new Contract<typeof serialize>()
          c: annotateFunction(()=>String(1))
         }})
     .thenReturn("the fields are serialized to json, plus the functions with their displayName or toString",() =>'{\n "a": "foo",\n "b": "() => { const egy = 1; return String(egy); }",\n "c": "() => \\"1\\""\n}')
+    .ifCalledWith(() => {
+        const e = new Error("hello")
+        e.stack = "fake stacktrace"
+        return e
+    })
+    .thenReturn("can serialize error", () => "{\n \"__class\": \"Error\",\n \"stack\": \"fake stacktrace\",\n \"message\": \"hello\"\n}")

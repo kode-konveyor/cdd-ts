@@ -8,9 +8,9 @@ import { CheckCurrentRun } from "./CheckCurrentRun.js";
 export class IfCalledWith<T extends MethodType> extends ContractEntity<T>{
 
     constructor(
-        readonly checkCurrentRun= CheckCurrentRun.prototype.checkCurrentRun,
-        readonly caseName = CaseName.prototype.caseName,
-
+        public checkCurrentRun= CheckCurrentRun.prototype.checkCurrentRun,
+        
+        public caseName = CaseName.prototype.caseName,
     ) {
         super();
     }

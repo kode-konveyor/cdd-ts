@@ -2,10 +2,24 @@ import { Contract } from "../src/contract/Contract.js"
 import { ContractEntity } from "../src/types/ContractEntity.js"
 import { getParametersGetter } from "../testdata/ParametersGetterTestData.js"
 import { IfCalledWith } from "../src/contract/IfCalledWith.js"
-import { ContractTestData } from "../testdata/ContractTestdata.js"
 import { TestedFunctionType } from "../testdata/MethodTestData.js"
+import { makeTestData } from "../src/util/makeTestData.js"
+import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js"
+import { CheckCurrentRun } from "../src/contract/CheckCurrentRun.js"
+import { CaseName } from "../src/check/CaseName.js"
+
+
+function getIfCalledWith(): ContractEntity<TestedFunctionType> {
+    const contractEntity = new ContractEntity<TestedFunctionType>();
+    (contractEntity as IfCalledWith<TestedFunctionType>).checkCurrentRun = CheckCurrentRun.prototype.checkCurrentRun;
+    (contractEntity as IfCalledWith<TestedFunctionType>).caseName = CaseName.prototype.caseName;
+    return contractEntity
+}
+
+const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>>(ContractTestDataDescriptor,()=>getIfCalledWith())
 
 type IfCalledWithFortestedFunctionType = (contract: ContractEntity<TestedFunctionType>, arg: () => number, arg2: () => string) => ContractEntity<TestedFunctionType>
+
 
 function ifCalledWithFunction(
     contract: Contract<TestedFunctionType>,
