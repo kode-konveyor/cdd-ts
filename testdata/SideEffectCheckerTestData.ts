@@ -1,11 +1,12 @@
 import equal from "fast-deep-equal";
-import { messageFormat } from "../../src/util/messageFormat.js";
-import { SideEffectCheckerType } from "../../src/types/SideEffectChecker.js";
+import { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
+import { messageFormat } from "../src/util/messageFormat.js";
 
 export const GLobalObject = {
     value: [] as Array<any>,
     multiplier: 1
 }
+
 
 export class SeChecker implements SideEffectCheckerType {
 
@@ -16,7 +17,7 @@ export class SeChecker implements SideEffectCheckerType {
     };
 
     check = (): void => {
-        if (!equal(GLobalObject.value, this.expected))
+        if (!(equal(GLobalObject.value, this.expected)))
             throw new Error(messageFormat(
                 "SeChecker:\nexpected:{1}\nactual  :{2}",
                 this.expected.toString(),
@@ -27,4 +28,14 @@ export class SeChecker implements SideEffectCheckerType {
     tearDown = (): void => {
     };
 
+}
+
+export function getSideEffectChecker(): SideEffectCheckerType {
+    return new SeChecker();
+}
+
+export function getSideEffectCheckerFailing(): SideEffectCheckerType {
+    const sideEffectChecker = getSideEffectChecker() as SeChecker
+    sideEffectChecker.expected = [["these are not the droids you are looking for"]];
+    return sideEffectChecker
 }

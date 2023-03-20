@@ -1,5 +1,6 @@
-import { GLobalObject } from "../SideEffectChecker/SeChecker.js";
-import { TestedFunctionType } from "./TestedFunctionType.js";
+import { GLobalObject } from "./SideEffectCheckerTestData.js";
+
+export type TestedFunctionType = (arg: number, arg2: string) => string;
 
 function testedFunction(arg: number, arg2: string): string {
     if (arg === 2)
@@ -9,6 +10,6 @@ function testedFunction(arg: number, arg2: string): string {
     return String(arg * GLobalObject.multiplier);
 }
 
-export function getMethod():TestedFunctionType {
+export function getMethod(): TestedFunctionType {
     return testedFunction
 }

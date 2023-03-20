@@ -3,7 +3,7 @@ import { CDDConfiguration } from "../src/runner/config.js";
 import { annotateFunction } from "../src/util/annotateFunction.js";
 import { diff } from "../src/util/diff.js";
 import { makeGetters } from "../src/util/makeGetters.js";
-import { CDDConfigurationTestData } from "../testdata/CDDConfiguration/CDDConfigurationTestData.js";
+import { CDDConfigurationTestData } from "../testdata/CDDConfigurationTestData.js";
 
 const a=makeGetters([1])[0]
 export const b=makeGetters([2])[0]

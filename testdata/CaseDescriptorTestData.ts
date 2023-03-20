@@ -1,8 +1,8 @@
-import { CaseDescriptorEntity } from "../../src/types/CaseDescriptorEntity.js";
-import { MethodType } from "../../src/types/MethodType.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
-import { getEnvironmentManipulatorThrice } from "../EnvironmentManipulator/getEnvironmentManipulatorThrice.js";
-import { RunDescriptorTestData } from "../RunDescriptor/RunDescriptorTestData.js";
+import { CaseDescriptorEntity } from "../src/types/CaseDescriptorEntity.js";
+import { MethodType } from "../src/types/MethodType.js";
+import { makeTestData } from "../src/util/makeTestData.js";
+import { getEnvironmentManipulatorThrice } from "./EnvironmentManipulatorTestData.js";
+import { RunDescriptorTestData } from "./RunDescriptorTestData.js";
 
 export const CaseDescriptorTestData = makeTestData<CaseDescriptorEntity<MethodType>>({
     getCaseDescriptor: { __from: "" },

@@ -1,9 +1,9 @@
 import { Contract } from "../src/contract/Contract.js";
 import { ContractEntity } from "../src/types/ContractEntity.js";
 import { MethodType } from "../src/types/MethodType.js";
-import { ContractTestData, CONTRACT_EXPLANATION } from "../testdata/Contract/ContractTestdata.js";
-import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js";
+import { ContractTestData, CONTRACT_EXPLANATION } from "../testdata/ContractTestdata.js";
 import { SetTitle } from "../src/contract/SetTitle.js";
+import { TestedFunctionType } from "../testdata/MethodTestData.js";
 
 
 const setTitleFunction = (title: string): ContractEntity<MethodType> => SetTitle.prototype.setTitle.call(ContractTestData["getContract"](), title);

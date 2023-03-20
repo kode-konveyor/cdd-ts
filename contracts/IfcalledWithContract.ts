@@ -1,9 +1,9 @@
 import { Contract } from "../src/contract/Contract.js"
 import { ContractEntity } from "../src/types/ContractEntity.js"
-import { getParametersGetter } from "../testdata/ParametersGetter/getParametersGetter.js"
-import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js"
+import { getParametersGetter } from "../testdata/ParametersGetterTestData.js"
 import { IfCalledWith } from "../src/contract/IfCalledWith.js"
-import { ContractTestData } from "../testdata/Contract/ContractTestdata.js"
+import { ContractTestData } from "../testdata/ContractTestdata.js"
+import { TestedFunctionType } from "../testdata/MethodTestData.js"
 
 type IfCalledWithFortestedFunctionType = (contract: ContractEntity<TestedFunctionType>, arg: () => number, arg2: () => string) => ContractEntity<TestedFunctionType>
 

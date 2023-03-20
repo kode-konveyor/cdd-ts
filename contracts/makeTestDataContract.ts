@@ -2,7 +2,7 @@ import { Contract } from "../src/contract/Contract.js";
 import { CDDConfiguration } from "../src/runner/config.js";
 import { makeTestData, TestDataDescriptor } from "../src/util/makeTestData.js";
 import { annotateFunction } from "../src/util/annotateFunction.js";
-import { CDDConfigurationTestData, JS_DIR } from "../testdata/CDDConfiguration/CDDConfigurationTestData.js";
+import { CDDConfigurationTestData, JS_DIR } from "../testdata/CDDConfigurationTestData.js";
 
 export const makeTestDataContractParties = [makeTestData]
 export const makeTestDataContract = new Contract<typeof makeTestData<CDDConfiguration>>()

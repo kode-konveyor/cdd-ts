@@ -1,5 +1,5 @@
-import { CDDConfiguration } from "../../src/runner/config.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
+import { CDDConfiguration } from "../src/runner/config.js";
+import { makeTestData } from "../src/util/makeTestData.js";
 
 export const JS_DIR = "some_directory/far/far/away";
 

@@ -1,11 +1,7 @@
 import { Contract } from "../src/contract/Contract.js";
 import { resolveModule } from "../src/runner/resolveModule.js";
-import { getModuleName } from "../testdata/ModuleName/getModuleName.js";
-import { getModuleNameES } from "../testdata/ModuleName/getModuleNameES.js";
-import { getModuleNameEsbuild } from "../testdata/ModuleName/getModuleNameEsbuild.js";
-import { getModuleResolutionSetter } from "../testdata/ModuleResolutionSetter/getModuleResolutionSetter.js";
-import { getModuleResolutionSetterES } from "../testdata/ModuleResolutionSetter/getModuleResolutionSetterES.js";
-import { getModuleResolutionSetterEsbuild } from "../testdata/ModuleResolutionSetter/getModuleResolutionSetterEsbuild.js";
+import { getModuleName, getModuleNameES, getModuleNameEsbuild } from "../testdata/ModuleNameTestData.js";
+import { getModuleResolutionSetter, getModuleResolutionSetterES, getModuleResolutionSetterEsbuild } from "../testdata/ModuleResolutionSetterTestData.js";
 
 
 export const resolveModuleContractParties = [resolveModule]

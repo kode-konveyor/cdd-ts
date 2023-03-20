@@ -1,9 +1,8 @@
 import { Contract } from "../src/contract/Contract.js"
-import { getMethod } from "../testdata/Method/getMethod.js"
+import { getMethod, TestedFunctionType } from "../testdata/MethodTestData.js"
 import { ContractEntity } from "../src/types/ContractEntity.js"
-import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js"
 import { Check } from "../src/check/Check.js"
-import { ContractTestData, RUN_IDENTIFICATION } from "../testdata/Contract/ContractTestdata.js"
+import { ContractTestData, RUN_IDENTIFICATION } from "../testdata/ContractTestdata.js"
 
 
 const checkFunction = (contract: ContractEntity<TestedFunctionType>, sut: TestedFunctionType): number => Check.prototype.check.call(contract, sut)
