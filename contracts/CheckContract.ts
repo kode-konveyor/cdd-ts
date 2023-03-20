@@ -85,4 +85,3 @@ export const CheckContract =
             RUN_IDENTIFICATION + " side effect check: logs to console: did not hold")
         .ifCalledWith(getContractWithTitle,getMethod)
         .thenThrow("invalid contract wwill result in an exception","Error: no checks in contract The function under test")
-

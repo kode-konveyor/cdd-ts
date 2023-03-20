@@ -1,10 +1,9 @@
 import { CDDConfiguration } from "../../src/runner/config.js";
-import { JS_DIR } from "./CDDConfigurationTestData.js";
-import { getCDDConfiguration } from "./getCDDConfiguration.js";
+import { getCDDConfigurationWithJsDir } from "./getCDDConfigurationWithJsDir.js";
 
 export function getCDDConfigurationES(): CDDConfiguration {
-    const cDDConfiguration = getCDDConfiguration();
+    const cDDConfiguration = getCDDConfigurationWithJsDir();
     cDDConfiguration.moduleResolution = "ES";
-    cDDConfiguration.jsDir = JS_DIR;
     return cDDConfiguration;
 }
+

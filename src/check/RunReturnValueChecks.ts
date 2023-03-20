@@ -20,7 +20,7 @@ export class RunReturnValueChecks<T extends MethodType> extends ContractEntity<T
         currentRun.returnValueChecks.forEach(
             entry => {
                 try {
-                    entry[1](result, ...(parameters));
+                    entry[1](result, ...(parameters))
                 } catch (error) {
                     throw new Error(messageFormat(
                         RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT,

@@ -1,11 +1,9 @@
 import { CDDConfiguration, config } from "../../src/runner/config.js";
 import { EnvironmentManipulatorType } from "../../src/types/EnvironmentManipulatorType.js";
+import { getCDDConfiguration } from "../CDDConfiguration/getCDDConfiguration.js";
 
 export class ModuleResolutionSetter implements EnvironmentManipulatorType {
-    oldconfig: CDDConfiguration = {
-        moduleResolution: "",
-        jsDir: ""
-    };
+    oldconfig: CDDConfiguration = getCDDConfiguration()
 
     constructor(readonly newConfig: CDDConfiguration) {
     }

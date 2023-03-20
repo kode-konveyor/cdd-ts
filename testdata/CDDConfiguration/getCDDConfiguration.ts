@@ -1,5 +1,6 @@
 import { CDDConfiguration } from "../../src/runner/config.js";
+import { annotateFunction } from "../../src/util/annotateFunction.js";
 
-export function getCDDConfiguration(): CDDConfiguration {
+export const getCDDConfiguration = annotateFunction(():CDDConfiguration => {
     return { moduleResolution: "", jsDir: "" };
-}
+})

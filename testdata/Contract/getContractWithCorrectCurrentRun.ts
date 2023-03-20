@@ -9,3 +9,5 @@ export function getContractWithCorrectCurrentRun(): ContractEntity<TestedFunctio
     contract.currentRun = getRunDescriptorCorrectlyBuilt();
     return contract;
 }
+
+

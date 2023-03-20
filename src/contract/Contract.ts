@@ -1,7 +1,7 @@
 import { MeanWhile } from "./Meanwhile.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { MethodType } from "../types/MethodType.js";
-import { GetStub } from "./Stub.js";
+import { GetStub } from "./GetStub.js";
 import { SetTitle } from "./SetTitle.js";
 import { Check } from "../check/Check.js";
 import { IfCalledWith } from "./IfCalledWith.js";
