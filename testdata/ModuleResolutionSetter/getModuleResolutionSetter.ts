@@ -1,6 +1,6 @@
-import { getCDDConfiguration } from "../CDDConfiguration/getCDDConfiguration.js";
+import { CDDConfigurationTestData } from "../CDDConfiguration/CDDConfigurationTestData.js";
 import { ModuleResolutionSetter } from "./ModuleResolutionSetter.js";
 
 export function getModuleResolutionSetter(): ModuleResolutionSetter {
-    return new ModuleResolutionSetter(getCDDConfiguration());
+    return new ModuleResolutionSetter(CDDConfigurationTestData["getCDDConfiguration"]());
 }

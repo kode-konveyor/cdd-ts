@@ -1,2 +1,2 @@
-export { runAllContracts } from "./runner/runAllContracts"
-export { Contract } from "./contract/Contract"
+export { runAllContracts } from "./runner/runAllContracts.js"
+export { Contract } from "./contract/Contract.js"

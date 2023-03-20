@@ -1,22 +1,9 @@
 import { Contract } from "../src/contract/Contract.js"
-import { RUN_IDENTIFICATION } from "../testdata/Contract/ContractTestdata.js"
-import { getContractWithGlobalSideEffectCheckNotHolding } from "../testdata/Contract/getContractWithGlobalSideEffectCheckNotHolding.js"
-import { getContractWithGlobalSideEffectCheck } from "../testdata/Contract/getContractWithGlobalSideEffectCheck.js"
-import { getContractWithFailingSideEffectCheck } from "../testdata/Contract/getContractWithFailingSideEffectCheck.js"
-import { getContractWithFailingReturnvalueCheck } from "../testdata/Contract/getContractWithFailingReturnvalueCheck.js"
-import { getContractWithOtherReturnValue } from "../testdata/Contract/getContractWithOtherReturnValue.js"
-import { getContractThrowingTheDefinedException } from "../testdata/Contract/getContractThrowingTheDefinedException.js"
-import { getContractThrowingUnexpectedException } from "../testdata/Contract/getContractThrowingUnexpectedException.js"
-import { getContractNotThrowingDefinedException } from "../testdata/Contract/getContractNotThrowingDefinedException.js"
-import { getContractThrowingAnotherException } from "../testdata/Contract/getContractThrowingAnotherException.js"
-import { getContractWithManipulatorSetAndRun } from "../testdata/Contract/getContractWithManipulatorSetAndRun.js"
-import { getContractWithCorrectCurrentRun } from "../testdata/Contract/getContractWithCorrectCurrentRun.js"
-import { getContractWithFreshRun } from "../testdata/Contract/getContractWithFreshRun.js"
 import { getMethod } from "../testdata/Method/getMethod.js"
 import { ContractEntity } from "../src/types/ContractEntity.js"
 import { TestedFunctionType } from "../testdata/Method/TestedFunctionType.js"
-import { getContractWithTitle } from "../testdata/Contract/getContractWithTitle.js"
 import { Check } from "../src/check/Check.js"
+import { ContractTestData, RUN_IDENTIFICATION } from "../testdata/Contract/ContractTestdata.js"
 
 
 const checkFunction = (contract: ContractEntity<TestedFunctionType>, sut: TestedFunctionType): number => Check.prototype.check.call(contract, sut)
@@ -35,53 +22,53 @@ export const CheckContract =
     new Contract<CheckType>()
         .setTitle("check checks whether the contract actually corresponds to the behaviour of the SUT")
 
-        .ifCalledWith(getContractWithCorrectCurrentRun, getMethod)
+        .ifCalledWith(ContractTestData["getContractWithCorrectCurrentRun"], getMethod)
         .thenReturn("it returns the number of runs checked in the contract", () =>  1)
 
-        .ifCalledWith(getContractWithFreshRun, getMethod)
+        .ifCalledWith(ContractTestData["getContractWithFreshRun"], getMethod)
         .thenThrow("if there is no ifCalledWith, a 'no ifCalledWith' error is thrown", RUN_IDENTIFICATION + " no ifcalledWith")
 
-        .ifCalledWith(getContractWithOtherReturnValue, getMethod)
+        .ifCalledWith(ContractTestData["getContractWithOtherReturnValue"], getMethod)
         .thenThrow("if the return value is not according to the contract a 'return value mismatch' error is thrown", RegExp(RUN_IDENTIFICATION + " return value mismatch:.*expected:.2.*actual  :.1", "ms"))
 
-        .ifCalledWith(getContractWithFailingReturnvalueCheck, getMethod)
+        .ifCalledWith(ContractTestData["getContractWithFailingReturnvalueCheck"], getMethod)
         .thenThrow("if a return value check fails, a 'return value check did not hold' error is thrown", RUN_IDENTIFICATION + " fail: return value check did not hold")
 
-        .ifCalledWith(getContractWithManipulatorSetAndRun, getMethod)
+        .ifCalledWith(ContractTestData["getContractWithManipulatorSetAndRun"], getMethod)
         .thenReturn("with a 'when' we can use an environment manipulator to set up the environment", () => 1)
 
-        .ifCalledWith(getContractThrowingTheDefinedException, getMethod)
+        .ifCalledWith(ContractTestData["getContractThrowingTheDefinedException"], getMethod)
         .thenReturn("if an exception is defined with thenThrow, then the check expects the error message to conform to the regex", () => 1)
 
-        .ifCalledWith(getContractThrowingUnexpectedException, getMethod)
+        .ifCalledWith(ContractTestData["getContractThrowingUnexpectedException"], getMethod)
         .thenThrow(
             "in case if an exception which is not in the contract is thrown, an 'unexpected exception' error is thrown",
             RUN_IDENTIFICATION + " unexpected exception:")
 
-        .ifCalledWith(getContractNotThrowingDefinedException, getMethod)
+        .ifCalledWith(ContractTestData["getContractNotThrowingDefinedException"], getMethod)
         .thenThrow(
             "in case an exception is defined in the contract but not thrown, an 'Exception expected but not thrown' error is thrown",
             RUN_IDENTIFICATION + " Exception expected but not thrown")
 
-        .ifCalledWith(getContractThrowingAnotherException, getMethod)
+        .ifCalledWith(ContractTestData["getContractThrowingAnotherException"], getMethod)
         .thenThrow(
             "in case a different exception is thrown than what is in the contract, a 'Not the expected exception thrown' error is thrown",
             RUN_IDENTIFICATION + "Not the expected exception thrown. Got:Error: first arg cannot be two")
 
-        .ifCalledWith(getContractWithFailingSideEffectCheck, getMethod)
+        .ifCalledWith(ContractTestData["getContractWithFailingSideEffectCheck"], getMethod)
         .thenThrow(
             "In case a side effect check fails, a 'side effect check: (name): did not hold' error is thrown",
             RUN_IDENTIFICATION + " side effect check: failing sideEffectCheck: did not hold")
 
 
-        .ifCalledWith(getContractWithGlobalSideEffectCheck, getMethod)
+        .ifCalledWith(ContractTestData["getContractWithGlobalSideEffectCheck"], getMethod)
         .thenReturn(
             "In case a side effect check is defined globally (before the first ifCalledWith), the side effect check is done for all of the runs",
             () => 1)
 
-        .ifCalledWith(getContractWithGlobalSideEffectCheckNotHolding, getMethod)
+        .ifCalledWith(ContractTestData["getContractWithGlobalSideEffectCheckNotHolding"], getMethod)
         .thenThrow(
             "A global side effect check throws the same error as a local one",
             RUN_IDENTIFICATION + " side effect check: logs to console: did not hold")
-        .ifCalledWith(getContractWithTitle,getMethod)
+        .ifCalledWith(ContractTestData["getContractWithTitle"],getMethod)
         .thenThrow("invalid contract wwill result in an exception","Error: no checks in contract The function under test")

@@ -28,7 +28,7 @@ export class CheckReturnValue<T extends MethodType> {
                 ""
             ))
         const expected = serialize(returnValueGetter());
-        if (actual !== expected)
+        if (actual !== expected) {
             throw new Error(messageFormat(
                 RETURN_VALUE_MISMATCH_MESSAGE_FORMAT,
                 this.caseName(),
@@ -36,5 +36,6 @@ export class CheckReturnValue<T extends MethodType> {
                 actual,
                 diff(expected, actual)
             ));
+        }
     }
 }

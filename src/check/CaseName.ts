@@ -7,7 +7,7 @@ export class CaseName<T extends MethodType> extends ContractEntity<T> {
     caseName(): string {
         return messageFormat(
             RUN_IDENTIFIER_FORMAT,
-            this.explanation,
+            String(this.explanation),
             this.checkedCase,
             this.currentRunExplanation);
     }

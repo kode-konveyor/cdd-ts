@@ -10,6 +10,7 @@ import { getModuleResolutionSetterEsbuild } from "../testdata/ModuleResolutionSe
 
 export const resolveModuleContractParties = [resolveModule]
 export const resolveModuleContract = new Contract<typeof resolveModule>()
+    .setTitle("resolves the module from name")
     .when("no meaningful module resolution is defined",getModuleResolutionSetter())
     .ifCalledWith(getModuleName)
     .thenReturn("it returns the input", getModuleName)
@@ -19,4 +20,3 @@ export const resolveModuleContract = new Contract<typeof resolveModule>()
     .when("module resolution is set to esbuild",getModuleResolutionSetterEsbuild())
     .ifCalledWith(getModuleName)
     .thenReturn("The place where the defauil esbuild puts it", getModuleNameEsbuild)
-

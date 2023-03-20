@@ -15,7 +15,7 @@ export class SeChecker implements SideEffectCheckerType {
         GLobalObject.value = []
     };
 
-    check(): void {
+    check = (): void => {
         if (!equal(GLobalObject.value, this.expected))
             throw new Error(messageFormat(
                 "SeChecker:\nexpected:{1}\nactual  :{2}",
