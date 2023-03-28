@@ -34,7 +34,10 @@ export class HandleRun <T extends MethodType> extends ContractEntity<T> {
         let result: ReturnType<T>;
         const parameters: Parameters<T> = getParametersFromGetters(currentRun.parameterGetters) as Parameters<T>
         try {
+            console.log("handleRun",this.testedFunction.toString())
+            console.log("type", typeof this.testedFunction)
             result = this.testedFunction(...(parameters));
+            console.log("nem ez")
         } catch (e) {
             this.handleException(currentRun, e);
             return 1;

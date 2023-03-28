@@ -17,6 +17,8 @@ export class CheckReturnValue<T extends MethodType> {
         currentRun: RunDescriptorEntity<T>,
         result: ReturnType<T>
     ): void {
+        if(currentRun.returnValueChecks.length !== 0)
+            return
         const actual = serialize(result);
         const returnValueGetter = currentRun.returnValueGetter;
         if (returnValueGetter == null)

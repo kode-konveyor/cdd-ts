@@ -5,23 +5,25 @@ import { MethodType } from "../types/MethodType.js";
 import { MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT } from "./Messages.js";
 import { getParametersFromGetters } from "../util/getParametersFromGetters.js";
 
-export class GetStub {
-    getStub<T extends MethodType>(
-        this: ContractEntity<T>,
+export class GetStub<T extends MethodType> extends ContractEntity<T> {
+    getStub(
         caseName?: string
     ): T {
+        console.log("this:", this)
         if (caseName == null)
             caseName = ""
-        if (this.currentRun != null) {
+            console.log("caseName:", caseName)
+            if (this.currentRun != null) {
             const currentCase = (this.currentCase != null) ? this.currentCase : "";
             this.cases[currentCase].runs.push(this.currentRun)
         }
-
+        console.log(this)
         const currentCase = this.cases[caseName];
 
         const stub = (...params: Parameters<T>): ReturnType<T> => {
             console.log("stub called with ", params)
             const retvals: Array<ReturnType<T>> = []
+            console.log("currentCase:", currentCase)
             currentCase.runs.forEach(run => {
                 if (run.parameterGetters == null)
                     throw new Error(messageFormat(

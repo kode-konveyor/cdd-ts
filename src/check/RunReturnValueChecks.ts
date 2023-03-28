@@ -30,7 +30,8 @@ export class RunReturnValueChecks<T extends MethodType> extends ContractEntity<T
                         RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT,
                         this.caseName(),
                         entry[0],
-                        String(error)));
+                        String(error),
+                        String((error as Error).stack)));
                 }
             }
         );

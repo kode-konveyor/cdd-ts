@@ -20,12 +20,14 @@ export class HandleException<T extends MethodType> extends ContractEntity<T>{
             throw new Error(messageFormat(
                 UNEXPECTED_EXCEPTION_MESSAGE_FORMAT,
                 this.caseName(),
-                String(catched)));
+                String(catched),
+                String((catched as Error).stack)));
         }
         if (String(catched).match(currentRun.thrown) == null)
             throw new Error(messageFormat(
                 NOT_THE_EXPECTED_EXCEPTION_THROWN_FORMAT,
                 this.caseName(),
-                String(catched)));
+                String(catched),
+                String((catched as Error).stack)));
     }
 }
