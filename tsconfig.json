@@ -40,6 +40,8 @@
     "src/types/CaseDescriptorEntity.ts",
     "src/types/MethodType.ts",
     "src/types/EnvironmentManipulatorType.ts",
+    "./src/types/ParameterConstraintType.ts",
+    "./src/types/ParameterConstraintCaseType.ts",
   ],
   "include": [
     "**/*.ts",

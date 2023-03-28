@@ -4,26 +4,33 @@ import { messageFormat } from "../util/messageFormat.js";
 import { MethodType } from "../types/MethodType.js";
 import { MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT } from "./Messages.js";
 import { getParametersFromGetters } from "../util/getParametersFromGetters.js";
+import { CaseName } from "../check/CaseName.js";
+import { CheckCurrentRun } from "./CheckCurrentRun.js";
+import { serialize } from "../util/serialize.js";
 
 export class GetStub<T extends MethodType> extends ContractEntity<T> {
+    constructor(
+        public checkCurrentRun= CheckCurrentRun.prototype.checkCurrentRun,
+        
+        public caseName = CaseName.prototype.caseName,
+    ) {
+        super();
+    }
+
     getStub(
         caseName?: string
     ): T {
-        console.log("this:", this)
+        this.checkCurrentRun()
         if (caseName == null)
             caseName = ""
-            console.log("caseName:", caseName)
             if (this.currentRun != null) {
             const currentCase = (this.currentCase != null) ? this.currentCase : "";
             this.cases[currentCase].runs.push(this.currentRun)
         }
-        console.log(this)
         const currentCase = this.cases[caseName];
 
         const stub = (...params: Parameters<T>): ReturnType<T> => {
-            console.log("stub called with ", params)
             const retvals: Array<ReturnType<T>> = []
-            console.log("currentCase:", currentCase)
             currentCase.runs.forEach(run => {
                 if (run.parameterGetters == null)
                     throw new Error(messageFormat(
@@ -31,23 +38,20 @@ export class GetStub<T extends MethodType> extends ContractEntity<T> {
                         // made sure that it is not null as the first thing. TS forgot that here
                         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                         caseName!))
-
-                const parameters: Parameters<T> = getParametersFromGetters(run.parameterGetters) as Parameters<T>
-                console.log("checking ", parameters)
-                if (equal(parameters, params))
+                if(run.returnValueChecks.length > 0 || equal(getParametersFromGetters(run.parameterGetters), params)) {
                     if (run.thrown === undefined)
                         retvals.push(run.returnValueGetter as ReturnType<T>)
                     else
                         throw new Error(String(run.thrown))
+                }
             })
             if (retvals.length !== 1) {
-                console.log("this=",this)
+                console.log("this=",serialize(this))
                 throw new Error(messageFormat(
                     MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT,
                     params.toString(),
                     retvals.length.toString()))
             }
-            console.log("stub returns", retvals[0])
             return retvals[0]()
         }
         return stub as T;

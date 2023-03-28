@@ -17,9 +17,6 @@ export const ContractTestDataDescriptor:TestDataDescriptor<ContractEntity<Tested
             getContractWithTitleAndRun: { __from: "getContractWithTitle",
                 currentRun: RunDescriptorTestData["getRunDescriptorCorrectlyBuilt"]()
             },
-                getContractWithTitleAndRunAndTestedFunction: { __from: "getContractWithTitle",
-                    currentRun: RunDescriptorTestData["getRunDescriptorCorrectlyBuiltWithTestedFunction"]()
-                },
             getContractWithDefaultCase: { __from: "getContractWithTitle",
                 cases: {"": CaseDescriptorTestData["getCaseDescriptor"]()}
             },

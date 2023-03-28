@@ -44,10 +44,6 @@ export const RunDescriptorTestData = makeTestData<RunDescriptorEntity<TestedFunc
         __from: "getRunDescriptorParametersAndExplanationSet",
         returnValueGetter: getReturnValue
     },
-        getRunDescriptorCorrectlyBuiltWithTestedFunction: {
-            __from: "getRunDescriptorCorrectlyBuilt",
-            returnValueGetter: getReturnValue
-        },
     getRunDescriptorWithReturnValueCheckFailing: {
         __from: "getRunDescriptorCorrectlyBuilt",
         returnValueChecks: [getReturnValueCheckFailing()]

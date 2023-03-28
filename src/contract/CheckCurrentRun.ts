@@ -23,6 +23,7 @@ export class CheckCurrentRun<T extends MethodType> extends ContractEntity<T> {
                 this.cases[currentCase] = new CaseDescriptorEntity();
             }
             this.cases[currentCase].runs.push(this.currentRun);
+            this.currentRun = undefined
         }
     }
 }

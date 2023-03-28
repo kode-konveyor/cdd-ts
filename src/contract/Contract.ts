@@ -18,6 +18,7 @@ import { RunSideEffectChecks } from "../check/RunSideEffectChecks.js";
 import { RunReturnValueChecks } from "../check/RunReturnValueChecks.js";
 import { CheckReturnValue } from "../check/CheckReturnValue.js";
 import { GetStubForMixin } from "./GetStubForMixin.js";
+import { WithParameterConstraints } from "./WithParameterConstraints.js";
 
 type SuchThatType<T extends MethodType> = (explanation: string, checker: (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void) => Contract<T>;
 
@@ -28,9 +29,10 @@ export class Contract<T extends MethodType> extends ContractEntity<T>  {
         private readonly checkCurrentRun = CheckCurrentRun.prototype.checkCurrentRun,
         readonly setTitle: typeof SetTitle.prototype.setTitle<Contract<T>>  = SetTitle.prototype.setTitle,
         readonly when: typeof When.prototype.when<Contract<T>>  = When.prototype.when,
-        readonly thenReturn: (explanation: string, returnValue: () => ReturnType<T>) => Contract<T>  = ThenReturn.prototype.thenReturn,
+        readonly thenReturn: typeof ThenReturn.prototype.thenReturn<Contract<T>>  = ThenReturn.prototype.thenReturn,
         readonly thenThrow: typeof ThenThrow.prototype.thenThrow<Contract<T>>  = ThenThrow.prototype.thenThrow,
         readonly suchThat: SuchThatType<T>  = SuchThat.prototype.suchThat as SuchThatType<T>,
+        readonly withParameterConstraints   = WithParameterConstraints.prototype.withParameterConstraints,
         readonly meanwhile: typeof MeanWhile.prototype.meanwhile<Contract<T>>  = MeanWhile.prototype.meanwhile,
         readonly getStub: typeof GetStub.prototype.getStub  = GetStub.prototype.getStub,
         readonly check: typeof Check.prototype.check  = Check.prototype.check,
