@@ -28,6 +28,18 @@ export const checkCurrentRunContract = new Contract<typeof CheckCurrentRun.proto
     )
     .thenReturn("if there is a correct rurrent run, puts it into the current case",() => undefined)
 
+    .ifCalledWith(contractTestData.getContractWithCorrectRunInDefaultCase)
+    .suchThat("The contract is put to the current case",(retval,contract) => 
+        (contract as ContractEntity<MethodType>).cases[""].runs[0].explanation === RUN_EXPLANATION ? undefined : serialize(contract)
+    )
+    .suchThat("After the case which is currently there",(retval,contract) => 
+        (contract as ContractEntity<MethodType>).cases[""].runs[1].explanation === RUN_EXPLANATION ? undefined : serialize(contract)
+    )
+    .suchThat("The current run is cleared",(retval,contract) => 
+        (contract as ContractEntity<MethodType>).currentRun === undefined ? undefined : "oops"
+    )
+    .thenReturn("if there is a correct rurrent run and non-empty current case, puts it into the current case after the existing one",() => undefined)
+
     .ifCalledWith(contractTestData.getContractWithFreshRun)
     .thenThrow("throws error for a run without both return and thrown value",
     "NAME OF CONTRACT:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called")

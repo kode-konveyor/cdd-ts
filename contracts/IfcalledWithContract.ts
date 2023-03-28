@@ -37,7 +37,7 @@ export const IfcalledWithContract = new Contract<IfCalledWithFortestedFunctionTy
     .ifCalledWith(ContractTestData.getContractWithNonDefaultCaseAndCurrentRun, ...getParametersGetter())
     .thenReturn("we put the current run into the current case", ContractTestData.getContractWithNonDefaultCaseWithARunStored)
     .ifCalledWith(ContractTestData.getContractWithTitleAndRun, ...getParametersGetter())
-    .thenReturn("if there was no current case, we create it", ContractTestData.getContractWithCorrectRunInDefaultCase)
+    .thenReturn("if there was no current case, we create it", ContractTestData.getContractWithParametersInDefaultCase)
     .ifCalledWith(ContractTestData.getContractWithFreshRun)
     .thenThrow("if the previous run is not defined with at least a return value or exception, an error is signalled",
         "NAME OF CONTRACT:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called")

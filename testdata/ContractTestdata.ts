@@ -59,9 +59,12 @@ export const ContractTestDataDescriptor
                 getContractWithRunWithParametersInDefaultCase: { __from: "getContractWithDefaultCase",
                     cases: {"": CaseDescriptorTestData.getCaseDescriptorWithCorrectRun()}
                 },
-                    getContractWithCorrectRunInDefaultCase: { __from: "getContractWithRunWithParametersInDefaultCase",
+                    getContractWithParametersInDefaultCase: { __from: "getContractWithRunWithParametersInDefaultCase",
                         currentRun: RunDescriptorTestData.getRunDescriptorParametersSet()
                     },
+                    getContractWithCorrectRunInDefaultCase: { __from: "getContractWithRunWithParametersInDefaultCase",
+                            currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt()
+                        },
                 getContractWithNonDefaultCase: { __from: "getContractWithDefaultCase",
                     currentCase:NONDEFAULT_CASE_NAME,
                     __add: ["cases", NONDEFAULT_CASE_NAME, CaseDescriptorTestData.getCaseDescriptor()] as DescriptorAddType,
