@@ -1,3 +1,4 @@
+import { CheckCurrentRun } from "../src/contract/CheckCurrentRun.js";
 import { Contract } from "../src/contract/Contract.js";
 import { GetStub } from "../src/contract/GetStub.js";
 import { MethodType } from "../src/types/MethodType.js";
@@ -8,19 +9,23 @@ import { getMethod } from "../testdata/MethodTestData.js";
 import { getParameters, getParametersThrowingException } from "../testdata/ParametersTestData.js";
 import { getReturnValue } from "../testdata/ReturnValueTestData.js";
 import { EXCEPTION_IDENTIFIER_ACTUALLY_THROWN } from "../testdata/RunDescriptorTestData.js";
+import { caseNameContract } from "./caseNameContract.js";
 
 export const getStubContractParties = [GetStub.prototype.getStub.call.bind(GetStub.prototype.getStub)]
 
-const contractTestData = makeTestData(ContractTestDataDescriptor,() => new GetStub<MethodType>())
+const contractTestData = makeTestData(ContractTestDataDescriptor,() => new GetStub<MethodType>(
+    CheckCurrentRun.prototype.checkCurrentRun,
+    caseNameContract.getStubForMixin()
+))
 
 export const getStubContract = new Contract<typeof GetStub.prototype.getStub>()
     .setTitle("returns a stub behaving according to the contract")
-    .ifCalledWith(contractTestData["getContractWithTitleAndRun"])
+    .ifCalledWith(contractTestData.getContractWithTitleAndRun)
     .suchThat("For the parameters defined it returns the defined return value",(stub) => {
         return (stub(...getParametersFromGetters(getParameters()))=== getReturnValue())? undefined: "oops"
     })
     .thenReturn("for a simple contract returns a function behaving according to the contract", getMethod)
-    .ifCalledWith(contractTestData["getContractThrowingTheDefinedException"])
+    .ifCalledWith(contractTestData.getContractThrowingTheDefinedException)
     .suchThat("For the parameters defined to throw an exception, throw the defined exception", (stub) => {
         try {
             stub(...getParametersFromGetters(getParametersThrowingException()))

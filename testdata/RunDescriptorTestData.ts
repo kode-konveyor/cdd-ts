@@ -11,7 +11,7 @@ export const NONEXISTING_EXCEPTION_IDENTIFIER = "no one expects the spanish inqu
 export const NOT_THE_EXCEPTION_IDENTIFIER_WHICH_IS_THROWN = "cannot be three";
 export const RUN_EXPLANATION = "run explanation";
 
-export const RunDescriptorTestData = makeTestData<RunDescriptorEntity<TestedFunctionType>>({
+const runDescriptorTestDataDescriptor = {
     getRunDescriptor: {
         __from: ""
     },
@@ -77,4 +77,6 @@ export const RunDescriptorTestData = makeTestData<RunDescriptorEntity<TestedFunc
         returnValueGetter: () => "3",
         sideEffectChecks: [],
     },
-}, () => new RunDescriptorEntity<TestedFunctionType>())
+}
+export const RunDescriptorTestData = makeTestData<RunDescriptorEntity<TestedFunctionType>, typeof runDescriptorTestDataDescriptor>
+    (runDescriptorTestDataDescriptor, () => new RunDescriptorEntity<TestedFunctionType>())

@@ -7,17 +7,17 @@ import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js";
 import { TestedFunctionType } from "../testdata/MethodTestData.js";
 
 
-const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>>(ContractTestDataDescriptor,()=>new ContractEntity<TestedFunctionType>())
+const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>, typeof ContractTestDataDescriptor>(ContractTestDataDescriptor,()=>new ContractEntity<TestedFunctionType>())
 
 
 export const caseNameContractParties = [(contract:ContractEntity<MethodType>) => CaseName.prototype.caseName.call(contract)]
 export const caseNameContract = new Contract<CaseName<MethodType>["caseName"]>()
     .setTitle("returns the name of the currently checked case")
-    .ifCalledWith(ContractTestData["getContractWithNonDefaultCaseAndCurrentRunInCheck"])
+    .ifCalledWith(ContractTestData.getContractWithNonDefaultCaseAndCurrentRunInCheck)
     .thenReturn("contains the name of the contract, the current case, and the current run",()=>"The function under test:Global multiplier is 3:run explanation")
-    .ifCalledWith(ContractTestData["getContract"])
+    .ifCalledWith(ContractTestData.getContract)
     .thenReturn("For each undefined things uses 'undefined'",()=>"undefined:undefined:undefined")
-    .ifCalledWith(ContractTestData["getContractWithFreshRun"])
+    .ifCalledWith(ContractTestData.getContractWithFailingReturnvalueCheck)
     .suchThat("we have no constraints on input", () => undefined)
     .thenReturn("a totally made up string signalling that the stub was called",
         ()=>"NAME OF CONTRACT:undefined:undefined")

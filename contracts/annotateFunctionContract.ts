@@ -10,11 +10,11 @@ export const b=makeGetters([2])[0]
 
 
 export const annotateFunctionContractParties = [annotateFunction]
-const annotatedFunction = (): () => CDDConfiguration => CDDConfigurationTestData["getCDDConfiguration"];
+const annotatedFunction = (): () => CDDConfiguration => CDDConfigurationTestData.getCDDConfiguration;
 const name = "() => {\n \"moduleResolution\": \"\",\n \"jsDir\": \"\"\n}"
 export const annotateFunctionContract = new Contract<typeof annotateFunction>()
     .setTitle("Annotates a getter such that it is serialized showing the data it returns with")
-    .ifCalledWith(()=>CDDConfigurationTestData["getCDDConfiguration"])
+    .ifCalledWith(()=>CDDConfigurationTestData.getCDDConfiguration)
     .thenReturn("shows the data",annotatedFunction)
     .suchThat("the displayName attribute contains the annotation", returnValueCheckerForFunctionAnnotation(name))
     .ifCalledWith(()=>a)

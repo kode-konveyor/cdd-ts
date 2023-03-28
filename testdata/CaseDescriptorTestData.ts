@@ -4,36 +4,37 @@ import { makeTestData } from "../src/util/makeTestData.js";
 import { getEnvironmentManipulatorThrice } from "./EnvironmentManipulatorTestData.js";
 import { RunDescriptorTestData } from "./RunDescriptorTestData.js";
 
-export const CaseDescriptorTestData = makeTestData<CaseDescriptorEntity<MethodType>>({
+const caseDescriptorTestdataDescriptor = {
     getCaseDescriptor: { __from: "" },
     getCaseDescriptorWithCorrectRun: { __from: "getCaseDescriptor",
-        runs: [RunDescriptorTestData["getRunDescriptorCorrectlyBuilt"]()]
+        runs: [RunDescriptorTestData.getRunDescriptorCorrectlyBuilt()]
     },
     getCaseDescriptorWithOtherReturnValue: { __from: "getCaseDescriptor",
-        runs: [RunDescriptorTestData["getRunDescriptorWithOtherreturnValue"]()]
+        runs: [RunDescriptorTestData.getRunDescriptorWithOtherreturnValue()]
     },
     getCaseDescriptorWithReturnValueCheckFailing: { __from: "getCaseDescriptor",
-        runs: [RunDescriptorTestData["getRunDescriptorWithReturnValueCheckFailing"]()]
+        runs: [RunDescriptorTestData.getRunDescriptorWithReturnValueCheckFailing()]
     },
     getCaseDescriptorWithSideEffectCheckCheckFailing: { __from: "getCaseDescriptor",
-        runs: [RunDescriptorTestData["getRunDescriptorWithSideEffectCheckCheckFailing"]()]
+        runs: [RunDescriptorTestData.getRunDescriptorWithSideEffectCheckCheckFailing()]
     },
     getCaseDescriptorWithThrowingRun: { __from: "getCaseDescriptor",
-        runs: [RunDescriptorTestData["getRunDescriptorThrowing"]()]
+        runs: [RunDescriptorTestData.getRunDescriptorThrowing()]
     },
     getCaseDescriptorWithThrowingExceptio: { __from: "getCaseDescriptor",
-        runs: [RunDescriptorTestData["getRunDescriptorThrowingException"]()]
+        runs: [RunDescriptorTestData.getRunDescriptorThrowingException()]
     },
     getCaseDescriptorWithThrowingAnotherExceptionRun: { __from: "getCaseDescriptor",
-        runs: [RunDescriptorTestData["getRunDescriptorThrowingAnotherException"]()]
+        runs: [RunDescriptorTestData.getRunDescriptorThrowingAnotherException()]
     },
     getCaseDescriptorWithManipulatorset: { __from: "getCaseDescriptor",
         setUp: getEnvironmentManipulatorThrice().setUp,
         tearDown: getEnvironmentManipulatorThrice().tearDown
     },
     getCaseDescriptorWithManipulatorsetAndRun: { __from: "getCaseDescriptorWithManipulatorset",
-        runs: [RunDescriptorTestData["getRunDescriptorWithTripleReturn"]()]
+        runs: [RunDescriptorTestData.getRunDescriptorWithTripleReturn()]
     },
-},
-() => new CaseDescriptorEntity())
+}
+
+export const CaseDescriptorTestData = makeTestData<CaseDescriptorEntity<MethodType>,typeof caseDescriptorTestdataDescriptor>(caseDescriptorTestdataDescriptor,() => new CaseDescriptorEntity())
 

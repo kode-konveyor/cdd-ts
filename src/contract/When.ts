@@ -15,7 +15,7 @@ export class When<T extends MethodType> extends ContractEntity<T>{
             const currentCase = (this.currentCase != null) ? this.currentCase : "";
             const lastCase = this.cases[currentCase];
             if (lastCase == null)
-                throw new Error(messageFormat("no such case:" + currentCase + JSON.stringify(this)))
+                throw new Error(messageFormat("no such case:{1} in {2}",currentCase,JSON.stringify(this)))
             lastCase.runs.push(this.currentRun);
         }
 

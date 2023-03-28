@@ -8,8 +8,8 @@ import { makeTestData } from "../src/util/makeTestData.js";
 
 const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>>(ContractTestDataDescriptor,()=>new ContractEntity<TestedFunctionType>())
 
-const setTitleFunction = (title: string): ContractEntity<MethodType> => SetTitle.prototype.setTitle.call(ContractTestData["getContract"](), title);
-const contractFunction = (title: string): Contract<(arg: number, arg2: string) => string> => new Contract<TestedFunctionType>().setTitle.call(ContractTestData["getContract"](), title);
+const setTitleFunction = (title: string): ContractEntity<MethodType> => SetTitle.prototype.setTitle.call(ContractTestData.getContract(), title);
+const contractFunction = (title: string): Contract<(arg: number, arg2: string) => string> => new Contract<TestedFunctionType>().setTitle.call(ContractTestData.getContract(), title);
 
 export const SetTitleContractParties = [
     setTitleFunction,
@@ -18,7 +18,7 @@ export const SetTitleContractParties = [
 export const SetTitleContract = new Contract<typeof setTitleFunction>()
     .setTitle("setTitle sets the title of the contract")
     .ifCalledWith(() => CONTRACT_EXPLANATION)
-    .thenReturn("a contract with the title set and an empty default case", ContractTestData["getContractWithDefaultCase"])
+    .thenReturn("a contract with the title set and an empty default case", ContractTestData.getContractWithDefaultCase)
 
 /*
 .setTitle("setTitle sets the title of the contract")

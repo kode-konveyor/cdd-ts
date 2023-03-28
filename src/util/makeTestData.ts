@@ -2,14 +2,18 @@ import { annotateFunction } from "./annotateFunction.js";
 import { deepCopy } from "./deepCopy.js";
 import { messageFormat } from "./messageFormat.js";
 
+export type DescriptorAddType = [string, string, unknown];
+
 interface Descriptorfields {
     __from: string;
-    __add?: [string, string, unknown];
+    __add?: DescriptorAddType;
 };
 
 export type TestDataDescriptor<T extends unknown> = Record<string,Partial<T> & Descriptorfields>
 
-export function makeTestData<T extends unknown>(descriptor: TestDataDescriptor<T>, constructor?: () => T): Record<string, () => T> {
+export type TestData<T extends unknown, D extends TestDataDescriptor<T>> = Record< keyof D, () => T>
+
+export function makeTestData<T extends unknown, K extends TestDataDescriptor<T>>(descriptor: K, constructor?: () => T): TestData<T,K> {
     const ret: Record<string, () => T> = {};
     if(constructor === undefined) {
         constructor = (() => {return {}}) as unknown as () => T
@@ -33,7 +37,7 @@ export function makeTestData<T extends unknown>(descriptor: TestDataDescriptor<T
         }
         ret[key] = annotateFunction(() => deepCopy(data))
     }
-    return ret;
+    return ret as TestData<T,K>;
 }
 
 

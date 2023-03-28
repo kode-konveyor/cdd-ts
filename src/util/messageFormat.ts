@@ -1,5 +1,5 @@
 
-export function messageFormat (format: string, ...parameters:Array<string>|[Record<string,any>]): string {
+export function messageFormat (format: string, ...parameters:[string, ...Array<unknown>]|[Record<string,any>]): string {
         const t = typeof parameters[0];
         const args = (t === "string") ?
             (Array.prototype.slice.call(arguments) as unknown) as Record<string,any>

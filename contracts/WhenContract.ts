@@ -46,10 +46,10 @@ function currentCaseChecker(
 
 export const WhenContract: Contract<typeof whenFunction> = new Contract<typeof whenFunction>()
     .setTitle("when sets up a case with a title, using an environment manipulator")
-    .ifCalledWith(ContractTestData["getContractWithDefaultCase"], () => NONDEFAULT_CASE_NAME, getEnvironmentManipulatorThrice)
-    .thenReturn("a contract with the title set", ContractTestData["getContractWithManipulatorSet"])
+    .ifCalledWith(ContractTestData.getContractWithDefaultCase, () => NONDEFAULT_CASE_NAME, getEnvironmentManipulatorThrice)
+    .thenReturn("a contract with the title set", ContractTestData.getContractWithManipulatorSet)
     .suchThat("a new case is created using the title", newCaseChecker)
     .suchThat("the current case is set to the title", currentCaseChecker)
-    .ifCalledWith(ContractTestData["getContractWithCorrectCurrentRun"], () => NONDEFAULT_CASE_NAME, getEnvironmentManipulatorThrice)
-    .thenReturn("if there was already a run (ifCalledWith was called), it is put into the previously active case", ContractTestData["getContractWithRunInNonDefaultCaseNoCurrentRun"])
+    .ifCalledWith(ContractTestData.getContractWithCorrectCurrentRun, () => NONDEFAULT_CASE_NAME, getEnvironmentManipulatorThrice)
+    .thenReturn("if there was already a run (ifCalledWith was called), it is put into the previously active case", ContractTestData.getContractWithRunInNonDefaultCaseNoCurrentRun)
 
