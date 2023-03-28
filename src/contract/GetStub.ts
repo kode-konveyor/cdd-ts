@@ -20,6 +20,7 @@ export class GetStub {
         const currentCase = this.cases[caseName];
 
         const stub = (...params: Parameters<T>): ReturnType<T> => {
+            console.log("stub called with ", params)
             const retvals: Array<ReturnType<T>> = []
             currentCase.runs.forEach(run => {
                 if (run.parameterGetters == null)
@@ -30,6 +31,7 @@ export class GetStub {
                         caseName!))
 
                 const parameters: Parameters<T> = getParametersFromGetters(run.parameterGetters) as Parameters<T>
+                console.log("checking ", parameters)
                 if (equal(parameters, params))
                     if (run.thrown === undefined)
                         retvals.push(run.returnValueGetter as ReturnType<T>)
@@ -37,12 +39,13 @@ export class GetStub {
                         throw new Error(String(run.thrown))
             })
             if (retvals.length !== 1) {
-                console.log(this)
+                console.log("this=",this)
                 throw new Error(messageFormat(
                     MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT,
                     params.toString(),
                     retvals.length.toString()))
             }
+            console.log("stub returns", retvals[0])
             return retvals[0]()
         }
         return stub as T;

@@ -9,7 +9,7 @@ import { getSideEffectCheckCase, getSideEffectCheckCaseFailing } from "./SideEff
 export const EXCEPTION_IDENTIFIER_ACTUALLY_THROWN = "cannot be two";
 export const NONEXISTING_EXCEPTION_IDENTIFIER = "no one expects the spanish inquisition";
 export const NOT_THE_EXCEPTION_IDENTIFIER_WHICH_IS_THROWN = "cannot be three";
-
+export const RUN_EXPLANATION = "run explanation";
 
 export const RunDescriptorTestData = makeTestData<RunDescriptorEntity<TestedFunctionType>>({
     getRunDescriptor: {
@@ -21,7 +21,7 @@ export const RunDescriptorTestData = makeTestData<RunDescriptorEntity<TestedFunc
     },
     getRunDescriptorWithExplanation: {
         __from: "getRunDescriptor",
-        explanation: "run explanation"
+        explanation: RUN_EXPLANATION
     },
     getRunDescriptorThrowingException: {
         __from: "getRunDescriptorWithExplanation",

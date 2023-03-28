@@ -20,7 +20,11 @@ export class RunReturnValueChecks<T extends MethodType> extends ContractEntity<T
         currentRun.returnValueChecks.forEach(
             entry => {
                 try {
-                    entry[1](result, ...(parameters))
+                    const checkResult = entry[1](result, ...(parameters))
+                    if(checkResult !== undefined) {
+                        // eslint-disable-next-line @typescript-eslint/no-throw-literal
+                        throw checkResult
+                    }
                 } catch (error) {
                     throw new Error(messageFormat(
                         RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT,

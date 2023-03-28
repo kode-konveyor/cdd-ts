@@ -6,7 +6,7 @@ export class RunDescriptorEntity<T extends MethodType> {
     thrown?: string | RegExp;
     parameterGetters?: ParameterGetters<T>;
     returnValueGetter?: () => ReturnType<T>;
-    returnValueChecks: Array<[string, (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void]> = [];
+    returnValueChecks: Array<[string, (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => unknown]> = [];
     sideEffectChecks: Array<[string, SideEffectCheckerType]> = [];
     explanation!: string;
 }

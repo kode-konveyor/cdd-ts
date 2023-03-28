@@ -17,6 +17,7 @@ import { OneSideEffectCheck } from "../check/OneSideEffectCheck.js";
 import { RunSideEffectChecks } from "../check/RunSideEffectChecks.js";
 import { RunReturnValueChecks } from "../check/RunReturnValueChecks.js";
 import { CheckReturnValue } from "../check/CheckReturnValue.js";
+import { GetStubForMixin } from "./GetStubForMixin.js";
 
 type SuchThatType<T extends MethodType> = (explanation: string, checker: (returnValue: ReturnType<T>, ...parameters: Parameters<T>) => void) => Contract<T>;
 
@@ -33,6 +34,7 @@ export class Contract<T extends MethodType> extends ContractEntity<T>  {
         readonly meanwhile: typeof MeanWhile.prototype.meanwhile<Contract<T>>  = MeanWhile.prototype.meanwhile,
         readonly getStub: typeof GetStub.prototype.getStub  = GetStub.prototype.getStub,
         readonly check: typeof Check.prototype.check  = Check.prototype.check,
+        readonly getStubForMixin = GetStubForMixin.prototype.getStubForMixin,
         private readonly handleRun =  HandleRun.prototype.handleRun,
         private readonly handleException = HandleException.prototype.handleException,
         private readonly caseName = CaseName.prototype.caseName,

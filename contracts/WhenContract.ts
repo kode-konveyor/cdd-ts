@@ -30,14 +30,18 @@ type WhenType = (arg: number, arg2: string) => string;
 
 function newCaseChecker(
     returnValue: ContractEntity<WhenType>,
-): boolean {
-    return returnValue.cases[NONDEFAULT_CASE_NAME] != null;
+): "no case added" | undefined {
+    if( returnValue.cases[NONDEFAULT_CASE_NAME] != null )
+        return undefined
+    return "no case added"
 }
 
 function currentCaseChecker(
     returnValue: ContractEntity<WhenType>,
-): boolean {
-    return returnValue.currentCase === NONDEFAULT_CASE_NAME;
+): "currentCase is not the expected" | undefined {
+    if (returnValue.currentCase === NONDEFAULT_CASE_NAME)
+        return undefined
+    return "currentCase is not the expected"
 }
 
 export const WhenContract: Contract<typeof whenFunction> = new Contract<typeof whenFunction>()

@@ -1,9 +1,7 @@
 
-export function getReturnValueCheckFailing(): [string, (returnValue: string, arg: number, arg2: string) => void] {
+export function getReturnValueCheckFailing(): [string, (returnValue: string, arg: number, arg2: string) => unknown] {
     return [
         "fail",
-        (a, b) => {
-            throw new Error("returnvalue check failure");
-        }
+        (a, b) =>"returnvalue check failure"
     ];
 }

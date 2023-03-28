@@ -2,7 +2,7 @@ import { ContractEntity } from "../src/types/ContractEntity.js";
 import { TestDataDescriptor } from "../src/util/makeTestData.js";
 import { CaseDescriptorTestData } from "./CaseDescriptorTestData.js";
 import { TestedFunctionType } from "./MethodTestData.js";
-import { RunDescriptorTestData } from "./RunDescriptorTestData.js";
+import { RunDescriptorTestData, RUN_EXPLANATION } from "./RunDescriptorTestData.js";
 import { getSideEffectCheckCase } from "./SideEffectCheckCaseTestData.js";
 
 export const CONTRACT_EXPLANATION = "The function under test";
@@ -78,6 +78,10 @@ export const ContractTestDataDescriptor:TestDataDescriptor<ContractEntity<Tested
                     getContractWithNonDefaultCaseAndCurrentRun: { __from: "getContractWithNonDefaultCase",
                         currentRun: RunDescriptorTestData["getRunDescriptorCorrectlyBuilt"](),
                     },
+                        getContractWithNonDefaultCaseAndCurrentRunInCheck: { __from: "getContractWithNonDefaultCaseAndCurrentRun",
+                            currentRunExplanation: RUN_EXPLANATION,
+                            checkedCase: NONDEFAULT_CASE_NAME
+                        },
                     getContractWithNonDefaultCaseWithARunStored: { __from: "getContractWithNonDefaultCaseAndCurrentRun",
                         currentRun: RunDescriptorTestData["getRunDescriptorParametersSet"](),
                         __add: ["cases", NONDEFAULT_CASE_NAME, CaseDescriptorTestData["getCaseDescriptorWithCorrectRun"]()],

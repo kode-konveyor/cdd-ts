@@ -19,3 +19,9 @@ export const SetTitleContract = new Contract<typeof setTitleFunction>()
     .setTitle("setTitle sets the title of the contract")
     .ifCalledWith(() => CONTRACT_EXPLANATION)
     .thenReturn("a contract with the title set and an empty default case", ContractTestData["getContractWithDefaultCase"])
+
+/*
+.setTitle("setTitle sets the title of the contract")
+
+
+*/
