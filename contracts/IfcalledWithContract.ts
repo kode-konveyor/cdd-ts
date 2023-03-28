@@ -7,13 +7,11 @@ import { makeTestData } from "../src/util/makeTestData.js"
 import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js"
 import { CheckCurrentRun } from "../src/contract/CheckCurrentRun.js"
 import { caseNameContract } from "./caseNameContract.js"
-import { CaseName } from "../src/check/CaseName.js"
 
 function getIfCalledWith(): ContractEntity<TestedFunctionType> {
     return new IfCalledWith<TestedFunctionType>(
         CheckCurrentRun.prototype.checkCurrentRun,
-        //  caseNameContract.getStubForMixin())
-        CaseName.prototype.caseName)
+        caseNameContract.getStubForMixin())
 }
 
 const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>>(ContractTestDataDescriptor, getIfCalledWith)
@@ -42,4 +40,4 @@ export const IfcalledWithContract = new Contract<IfCalledWithFortestedFunctionTy
     .thenReturn("if there was no current case, we create it", ContractTestData["getContractWithCorrectRunInDefaultCase"])
     .ifCalledWith(ContractTestData["getContractWithFreshRun"])
     .thenThrow("if the previous run is not defined with at least a return value or exception, an error is signalled",
-        "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called")
+        "NAME OF CONTRACT:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called")
