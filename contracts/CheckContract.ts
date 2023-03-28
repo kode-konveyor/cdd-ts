@@ -5,7 +5,7 @@ import { Check } from "../src/check/Check.js"
 import { ContractTestDataDescriptor, RUN_IDENTIFICATION } from "../testdata/ContractTestdata.js"
 import { makeTestData } from "../src/util/makeTestData.js"
 
-const ContractTestData = makeTestData<Contract<TestedFunctionType>>(ContractTestDataDescriptor,()=>new Contract<TestedFunctionType>())
+const ContractTestData = makeTestData<Contract<TestedFunctionType>,typeof ContractTestDataDescriptor>(ContractTestDataDescriptor,()=>new Contract<TestedFunctionType>())
 
 const checkFunction = (contract: ContractEntity<TestedFunctionType>, sut: TestedFunctionType): number => Check.prototype.check.call(contract, sut)
 const checkFunctionFromContract = (contract: ContractEntity<TestedFunctionType>, sut: TestedFunctionType): number => {

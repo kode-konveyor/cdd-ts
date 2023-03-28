@@ -6,7 +6,7 @@ import { SetTitle } from "../src/contract/SetTitle.js";
 import { TestedFunctionType } from "../testdata/MethodTestData.js";
 import { makeTestData } from "../src/util/makeTestData.js";
 
-const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>>(ContractTestDataDescriptor,()=>new ContractEntity<TestedFunctionType>())
+const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>,typeof ContractTestDataDescriptor>(ContractTestDataDescriptor,()=>new ContractEntity<TestedFunctionType>())
 
 const setTitleFunction = (title: string): ContractEntity<MethodType> => SetTitle.prototype.setTitle.call(ContractTestData.getContract(), title);
 const contractFunction = (title: string): Contract<(arg: number, arg2: string) => string> => new Contract<TestedFunctionType>().setTitle.call(ContractTestData.getContract(), title);

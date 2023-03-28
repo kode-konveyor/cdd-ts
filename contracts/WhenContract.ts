@@ -8,7 +8,7 @@ import { When } from "../src/contract/When.js";
 import { TestedFunctionType } from "../testdata/MethodTestData.js";
 import { makeTestData } from "../src/util/makeTestData.js";
 
-const ContractTestData = makeTestData<Contract<TestedFunctionType>>(ContractTestDataDescriptor,()=>new Contract<TestedFunctionType>())
+const ContractTestData = makeTestData<Contract<TestedFunctionType>,typeof ContractTestDataDescriptor>(ContractTestDataDescriptor,()=>new Contract<TestedFunctionType>())
 
 const whenFunction =
     (contract: ContractEntity<TestedFunctionType>, title: string, environmentManipulator: EnvironmentManipulatorType): ContractEntity<MethodType> =>

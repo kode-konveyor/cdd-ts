@@ -14,7 +14,7 @@ function getIfCalledWith(): ContractEntity<TestedFunctionType> {
         caseNameContract.getStubForMixin())
 }
 
-const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>>(ContractTestDataDescriptor, getIfCalledWith)
+const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>,typeof ContractTestDataDescriptor>(ContractTestDataDescriptor, getIfCalledWith)
 
 type IfCalledWithFortestedFunctionType = (contract: ContractEntity<TestedFunctionType>, arg: () => number, arg2: () => string) => ContractEntity<TestedFunctionType>
 

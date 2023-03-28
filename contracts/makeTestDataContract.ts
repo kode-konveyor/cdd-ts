@@ -2,10 +2,10 @@ import { Contract } from "../src/contract/Contract.js";
 import { CDDConfiguration } from "../src/runner/config.js";
 import { makeTestData, TestDataDescriptor } from "../src/util/makeTestData.js";
 import { annotateFunction } from "../src/util/annotateFunction.js";
-import { CDDConfigurationTestData, JS_DIR } from "../testdata/CDDConfigurationTestData.js";
+import { CDDConfigurationTestData, CDDConfigurationTestDataDescriptor, JS_DIR } from "../testdata/CDDConfigurationTestData.js";
 
 export const makeTestDataContractParties = [makeTestData]
-export const makeTestDataContract = new Contract<typeof makeTestData<CDDConfiguration>>()
+export const makeTestDataContract = new Contract<typeof makeTestData<CDDConfiguration,TestDataDescriptor<CDDConfiguration>>>()
     .setTitle("makes test data from configuration descriptor")
     .ifCalledWith(getTestDataDescriptor)
     .thenReturn("empy descriptor yields empty testData",() => {return {}})
@@ -26,7 +26,7 @@ export const makeTestDataContract = new Contract<typeof makeTestData<CDDConfigur
         getTwo: annotateFunction(CDDConfigurationTestData.getCDDConfigurationES)
     }})
     .suchThat("the getter referenced in __from is not modified",value => {
-        if(value.getOne().moduleResolution!=="") {
+        if(value['getOne']().moduleResolution!=="") {
             throw new Error("leak detected")
         }
     })
