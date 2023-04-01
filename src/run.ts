@@ -1,37 +1,35 @@
 #!/usr/bin/env node
 
 import { runAllContracts } from "./runner/runAllContracts.js";
-import { ContractRunnerOptions } from "./types/ContractRunnerOptions.js";
 import glob from "fast-glob" 
 import fs from "node:fs"
 import url from 'url';
 import child_process from 'child_process';
 import "@angular/compiler"
+import { makeConfig, mkargv } from "./runner/config.js";
 
 const myPath = url.fileURLToPath(import.meta.url);
 
+const config = makeConfig()
 
-const options:ContractRunnerOptions = {
-    watch: false
-}
-if(process.argv[2] === "-w") {
-    options.watch = true
+if(config.debug) {
+    console.log(process.argv)
 }
 
-if(options.watch) {
-    console.log("watching")
-    glob(['dist/**/*.js'],{})
+if(config.watch) {
+    console.log("watching", config.distFiles)
+    glob(config.distFiles,{})
     .then((files) => {
         for(const file of files) {
             fs.watch(file,() => {
                 console.log("running contracts because ",file)
-                child_process.fork(myPath)
+                child_process.fork(myPath,mkargv())
             })
         }
     })
     .catch(reason => console.log(reason))
-    void runAllContracts(options)
-} else {
-    void runAllContracts(options)
+    void runAllContracts(config)
+}else {
+    void runAllContracts(config)
 }
 

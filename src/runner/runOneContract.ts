@@ -2,10 +2,11 @@ import { MethodType } from "../types/MethodType.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { Contract } from "../contract/Contract.js";
 import { resolveModule } from "./resolveModule.js";
+import { CDDConfiguration } from "../types/CDDConfiguration.js";
 
-export async function runOneContract(contractFile: string, contractName: string): Promise<number> {
+export async function runOneContract(config:CDDConfiguration, contractFile: string, contractName: string): Promise<number> {
     try {
-        const modulePath = resolveModule(contractFile);
+        const modulePath = resolveModule(config, contractFile);
         const modulePromise = import(modulePath);
         const module = await modulePromise;
         const contract: Contract<MethodType> = module[contractName];

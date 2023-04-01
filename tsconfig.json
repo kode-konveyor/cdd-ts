@@ -57,6 +57,7 @@
     "./src/types/ReturnValueGetterType.ts",
     "./src/types/ParameterConstraintType.ts",
     "./src/types/ParameterConstraintCaseType.ts",
+    "src/types/CDDConfiguration.ts",
   ],
   "include": [
     "**/*.ts",
