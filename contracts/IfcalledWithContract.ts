@@ -8,27 +8,16 @@ import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js"
 import { CheckCurrentRun } from "../src/contract/CheckCurrentRun.js"
 import { caseNameContract } from "./caseNameContract.js"
 
-function getIfCalledWith(): ContractEntity<TestedFunctionType> {
-    return new IfCalledWith<TestedFunctionType>(
+const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>,typeof ContractTestDataDescriptor>(
+    ContractTestDataDescriptor,
+    () => new IfCalledWith(
         CheckCurrentRun.prototype.checkCurrentRun,
-        caseNameContract.getStubForMixin())
-}
-
-const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>,typeof ContractTestDataDescriptor>(ContractTestDataDescriptor, getIfCalledWith)
-
-type IfCalledWithFortestedFunctionType = (contract: ContractEntity<TestedFunctionType>, arg: () => number, arg2: () => string) => ContractEntity<TestedFunctionType>
+        caseNameContract.getStubForMixin()
+    ))
 
 
-function ifCalledWithFunction(
-    contract: Contract<TestedFunctionType>,
-    arg: () => number,
-    arg2: () => string
-): ContractEntity<TestedFunctionType> {
-    return new IfCalledWith<TestedFunctionType>().ifCalledWith.call(contract, arg, arg2)
-}
-
-export const IfcalledWithContractParties = [ifCalledWithFunction]
-export const IfcalledWithContract = new Contract<IfCalledWithFortestedFunctionType>()
+export const IfcalledWithContractParties = [IfCalledWith.prototype.ifCalledWith.call.bind(IfCalledWith.prototype.ifCalledWith)]
+export const IfcalledWithContract = new Contract<typeof IfCalledWith.prototype.ifCalledWith>()
     .setTitle("ifCalledWith sets the parameter for the run")
     .ifCalledWith(ContractTestData.getContractWithDefaultCase, ...getParametersGetter())
     .thenReturn("The Parameters are put into the run", ContractTestData.getContractWithParametersSet)
