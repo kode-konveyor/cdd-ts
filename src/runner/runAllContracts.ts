@@ -10,9 +10,7 @@ export async function runAllContracts(options: CDDConfiguration): Promise<number
         if(count < 1)
             throw new Error("no contracts tested")
         console.log("number of contracts tested: ",count)
-        if(options.watch)
-            return count
-        process.exit(0)
+        return count
     } catch(e) {
         if(options.watch) {
             console.log(e)

@@ -2,7 +2,7 @@ import { RunDescriptorEntity } from "../src/types/RunDescriptorEntity.js";
 import { makeTestData } from "../src/util/makeTestData.js";
 import { TestedFunctionType } from "./MethodTestData.js";
 import { getParameters, getParametersThrowingException, getParametersWithoutSideEffects } from "./ParametersTestData.js";
-import { getReturnValue, getReturnValueOther, getReturnValueSideEffect } from "./ReturnValueTestData.js";
+import { getReturnValueTestData } from "./ReturnValueTestData.js";
 import { getReturnValueCheckFailing } from "./ReturnValueCheckTestData.js";
 import { getSideEffectCheckCase, getSideEffectCheckCaseFailing } from "./SideEffectCheckCaseTestData.js";
 import { ParameterConstraintCaseType } from "../src/types/ParameterConstraintCaseType.js";
@@ -37,7 +37,7 @@ const runDescriptorTestDataDescriptor
             getRunDescriptorNotTriggeringSideEffect: {
                 __from: "getRunDescriptorWithExplanation",
                 parameterGetters: getParametersWithoutSideEffects(),
-                returnValueGetter: getReturnValueSideEffect
+                returnValueGetter: getReturnValueTestData.getReturnValueSideEffect
             },
                 getRunDescriptorWithParameterConstraint: {
                     __from: "getRunDescriptorNotTriggeringSideEffect",
@@ -49,7 +49,7 @@ const runDescriptorTestDataDescriptor
             },
                 getRunDescriptorCorrectlyBuilt: {
                     __from: "getRunDescriptorParametersAndExplanationSet",
-                    returnValueGetter: getReturnValue
+                    returnValueGetter: getReturnValueTestData.getReturnValue
                 },
                     getRunDescriptorWithReturnValueCheckFailing: {
                         __from: "getRunDescriptorCorrectlyBuilt",
@@ -61,7 +61,7 @@ const runDescriptorTestDataDescriptor
                     },
                 getRunDescriptorWithOtherreturnValue: {
                     __from: "getRunDescriptorParametersAndExplanationSet",
-                    returnValueGetter: getReturnValueOther()
+                    returnValueGetter: getReturnValueTestData.getReturnValueOther
                 },
                 getRunDescriptorThrowingAnotherException: {
                     __from: "getRunDescriptorParametersAndExplanationSet",
@@ -74,14 +74,14 @@ const runDescriptorTestDataDescriptor
                 },
                 getRunDescriptorwithParametersReturnAndSideeffectcheck: {
                     __from: "getRunDescriptorParametersAndExplanationSet",
-                    returnValueGetter: getReturnValue,
+                    returnValueGetter: getReturnValueTestData.getReturnValue,
                     returnValueChecks: [],
                     sideEffectChecks: [getSideEffectCheckCase()],
                 },
                     getRunDescriptorWithTripleReturn: {
                         __from: "getRunDescriptorwithParametersReturnAndSideeffectcheck",
                         explanation: "triple return",
-                        returnValueGetter: () => "3",
+                        returnValueGetter: getReturnValueTestData.getReturnValueSideEffect,
                         sideEffectChecks: [],
                     },
 }

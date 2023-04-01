@@ -58,6 +58,13 @@
     "./src/types/ParameterConstraintType.ts",
     "./src/types/ParameterConstraintCaseType.ts",
     "src/types/CDDConfiguration.ts",
+    "./src/runner/argparser.ts",
+    "./src/runner/defaultConfig.ts",
+    "./src/runner/configFromFile.ts",
+    "./src/runner/makeConfig.ts",
+    "./src/runner/storeConfig.ts",
+    "./src/runner/mkargv.ts",
+    "src/runner/checkNumberOfTests.ts",
   ],
   "include": [
     "**/*.ts",
