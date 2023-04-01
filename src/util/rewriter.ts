@@ -1,5 +1,5 @@
 
-export function rewriter(key: string, value: any): any {
+export function rewriter(key: string|number, value: any): any {
     if (typeof value === "function") {
         if(value.displayName !== undefined) {
             return value.displayName

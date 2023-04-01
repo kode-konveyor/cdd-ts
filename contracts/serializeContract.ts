@@ -21,4 +21,4 @@ export const serializeContract = new Contract<typeof serialize>()
         e.stack = "fake stacktrace"
         return e
     })
-    .thenReturn("can serialize error", () => "{\n \"__class\": \"Error\",\n \"stack\": \"fake stacktrace\",\n \"message\": \"hello\"\n}")
+    .thenReturn("can serialize error", () => "{\n \"__class\": \"Error\",\n \"message\": \"hello\",\n \"stack\": \"fake stacktrace\"\n}")

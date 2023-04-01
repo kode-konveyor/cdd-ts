@@ -10,6 +10,15 @@ export const CDDConfigurationTestDataDescriptor = {
         moduleResolution: "",
         jsDir: ""
     },
+    defaultConfig: {
+        __from: "",
+        watch: false,
+        distFiles: 'dist/**/*.js',
+        contracts: 'contracts/**/*Contract.ts',
+        jsDir: "dist",
+        moduleResolution: "ES",
+        debug: false
+    },
     getCDDConfigurationWithJsDir: {
         __from: "getCDDConfiguration",
         jsDir: JS_DIR

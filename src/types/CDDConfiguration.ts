@@ -6,5 +6,5 @@ export interface CDDConfiguration {
     distFiles: string;
     contracts: string;
     debug: boolean;
-    numberofTests: string;
+    numberofTests?: string;
 }

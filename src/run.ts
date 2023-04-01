@@ -10,12 +10,16 @@ import { mkargv } from "./runner/mkargv.js";
 import { argparser } from "./runner/argparser.js";
 import { defaultConfig } from "./runner/defaultConfig.js";
 import { configFromFile } from "./runner/configFromFile.js";
-import { makeConfig } from "./runner/makeConfig.js";
+import { mergeConfig } from "./runner/mergeConfig.js";
 import { checkNumberOfTests } from "./runner/checkNumberOfTests.js";
+import { program } from "commander";
+import { CDDConfiguration } from "./types/CDDConfiguration.js";
 
 const myPath = url.fileURLToPath(import.meta.url);
+argparser.parse(process.argv);
+const options: CDDConfiguration = program.opts();
 
-export const config = makeConfig(process.argv,argparser, defaultConfig, configFromFile)
+export const config = mergeConfig(defaultConfig, configFromFile, options)
 
 if(config.watch) {
     if(config.debug)
@@ -24,7 +28,7 @@ if(config.watch) {
     .then((files) => {
         for(const file of files) {
             fs.watch(file,() => {
-                console.log("running contracts becausea ",file)
+                console.log("running contracts because",file)
                 child_process.fork(myPath,mkargv(config))
             })
         }
