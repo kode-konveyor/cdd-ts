@@ -36,7 +36,7 @@ export class CheckReturnValue<T extends MethodType> {
                 this.caseName(),
                 expected,
                 actual,
-                diff(expected, String(actual))
+                diff(expected, actual)
             ));
         }
     }

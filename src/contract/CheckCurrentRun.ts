@@ -3,6 +3,9 @@ import { MethodType } from "../types/MethodType.js";
 import { CaseName } from "../check/CaseName.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
+import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+
+type WithCorrectRun<T extends MethodType, K extends ContractEntity<T>> = K & Required<{currentRun: RunDescriptorEntity<T>}>
 
 export class CheckCurrentRun<T extends MethodType> extends ContractEntity<T> {
     constructor(
@@ -12,9 +15,9 @@ export class CheckCurrentRun<T extends MethodType> extends ContractEntity<T> {
         super();
     }
 
-    checkCurrentRun(): void {
+    checkCurrentRun(): WithCorrectRun<T,this> {
         if (this.currentRun !== undefined) {
-            if (this.currentRun.returnValueGetter == null && this.currentRun.thrown == null)
+            if (this.currentRun.returnValueGetter === undefined && this.currentRun.thrown == null)
                 throw new Error(messageFormat(
                     "{1}: current run is incomplete: neither thenReturn nor thenThrow was called",
                     this.caseName()));
@@ -25,5 +28,6 @@ export class CheckCurrentRun<T extends MethodType> extends ContractEntity<T> {
             this.cases[currentCase].runs.push(this.currentRun);
             this.currentRun = undefined
         }
+        return this as WithCorrectRun<T,this>
     }
 }

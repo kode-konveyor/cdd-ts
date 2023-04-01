@@ -1,5 +1,7 @@
-import { DescriptorAddType } from "../src/util/makeTestData.js";
+import { ContractEntity } from "../src/types/ContractEntity.js";
+import { DescriptorAddType, TestDataDescriptor } from "../src/util/makeTestData.js";
 import { CaseDescriptorTestData } from "./CaseDescriptorTestData.js";
+import { TestedFunctionType } from "./MethodTestData.js";
 import { RunDescriptorTestData, RUN_EXPLANATION } from "./RunDescriptorTestData.js";
 import { getSideEffectCheckCase } from "./SideEffectCheckCaseTestData.js";
 
@@ -7,9 +9,7 @@ export const CONTRACT_EXPLANATION = "The function under test";
 export const RUN_IDENTIFICATION = "The function under test::run explanation:"
 export const NONDEFAULT_CASE_NAME = "Global multiplier is 3";
 
-export const ContractTestDataDescriptor
-// :TestDataDescriptor<ContractEntity<TestedFunctionType>>
-= {
+export const ContractTestDataDescriptor = {
     getContract: { __from: "" },
         getContractWithTitle: { __from: "getContract",
             explanation: CONTRACT_EXPLANATION
@@ -47,6 +47,9 @@ export const ContractTestDataDescriptor
                 getContractWithCorrectCurrentRun: { __from: "getContractWithDefaultCase",
                     currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt() 
                 },
+                    getContractWithParameterConstraint: { __from: "getContractWithDefaultCase",
+                        currentRun: RunDescriptorTestData.getRunDescriptorWithParameterConstraint() 
+                    },
                     getContractWithGlobalSideEffectCheck: { __from: "getContractWithCorrectCurrentRun",
                         sideEffectChecks: [getSideEffectCheckCase()]
                     },
@@ -93,6 +96,14 @@ export const ContractTestDataDescriptor
                         __add: ["cases", NONDEFAULT_CASE_NAME, CaseDescriptorTestData.getCaseDescriptorWithManipulatorset()] as DescriptorAddType,
                     },
                 getContractWithParametersSet: { __from: "getContractWithDefaultCase",
-                    currentRun: RunDescriptorTestData.getRunDescriptorParametersSet()
+                    currentRun: RunDescriptorTestData.getRunDescriptorParametersSet(),
                 },
-}
+            getContractWithCorrectRunInDefaultCaseNoCurrentRun: { __from: "getContractWithTitle",
+                cases: {"":CaseDescriptorTestData.getCaseDescriptorWithCorrectRun()}
+            },
+            getContractWithRunInDefaultCaseTwice: { __from: "getContractWithTitle",
+                cases: {"":CaseDescriptorTestData.getCaseDescriptorWithCorrectRunTwice()}
+            },
+
+} satisfies TestDataDescriptor<ContractEntity<TestedFunctionType>>;
+

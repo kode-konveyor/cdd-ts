@@ -5,7 +5,7 @@ import { MethodType } from "../types/MethodType.js";
 export class ThenReturn<T extends MethodType> extends ContractEntity<T>{
     thenReturn<THIS extends ContractEntity<T>>(
         explanation: string,
-        returnValue: () => ReturnType<T>
+        returnValue: (() => ReturnType<T>)
     ): THIS {
         if (this.currentRun == null)
             throw new Error(THENRETURN_MISSING_IFCALLEDWITH_MESSAGE_FORMAT)

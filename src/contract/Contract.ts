@@ -32,7 +32,7 @@ export class Contract<T extends MethodType> extends ContractEntity<T>  {
         readonly thenReturn: typeof ThenReturn.prototype.thenReturn<Contract<T>>  = ThenReturn.prototype.thenReturn,
         readonly thenThrow: typeof ThenThrow.prototype.thenThrow<Contract<T>>  = ThenThrow.prototype.thenThrow,
         readonly suchThat: SuchThatType<T>  = SuchThat.prototype.suchThat as SuchThatType<T>,
-        readonly withParameterConstraints   = WithParameterConstraints.prototype.withParameterConstraints,
+        readonly withParameterConstraints: typeof WithParameterConstraints.prototype.withParameterConstraints<Contract<T>>  = WithParameterConstraints.prototype.withParameterConstraints,
         readonly meanwhile: typeof MeanWhile.prototype.meanwhile<Contract<T>>  = MeanWhile.prototype.meanwhile,
         readonly getStub: typeof GetStub.prototype.getStub  = GetStub.prototype.getStub,
         readonly check: typeof Check.prototype.check  = Check.prototype.check,

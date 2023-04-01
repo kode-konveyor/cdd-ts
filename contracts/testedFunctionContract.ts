@@ -12,6 +12,6 @@ export const testedFunctionContract = new Contract<TestedFunctionType>()
     .thenReturn("returns the first parameter as string", getReturnValue)
     .suchThat(
         "the return value is the string representation of the first parameter",
-        (returnValue: string, parameter1: number, parameter2: string) => (returnValue === String(parameter1))?undefined:"fail"
+        (returnValue: string, parameter1: number) => (returnValue === String(parameter1))?undefined:"fail"
     )
     .meanwhile("logs to console", getSideEffectChecker());

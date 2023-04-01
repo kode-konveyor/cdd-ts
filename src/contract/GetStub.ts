@@ -33,7 +33,15 @@ export class GetStub<T extends MethodType> extends ContractEntity<T> {
                         // made sure that it is not null as the first thing. TS forgot that here
                         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
                         String(caseName)))
-                if(run.returnValueChecks.length > 0 || equal(getParametersFromGetters(run.parameterGetters), params)) {
+                if(run.parameterConstraints.length > 0) {
+                    if(
+                        run.parameterConstraints.reduce(
+                            (prev,current)=>
+                                prev && (current[1](...params) === undefined),
+                        true)) {
+                            retvals.push(run.returnValueGetter as ReturnType<T>)
+                        }
+                } else if(run.returnValueChecks.length > 0 || equal(getParametersFromGetters(run.parameterGetters), params)) {
                     if (run.thrown === undefined)
                         retvals.push(run.returnValueGetter as ReturnType<T>)
                     else

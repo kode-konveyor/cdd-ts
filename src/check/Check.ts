@@ -17,7 +17,7 @@ export class Check <T extends MethodType> extends ContractEntity<T> {
         let checked = 0;
         if (this.currentRun != null) {
             const currentCase = (this.currentCase != null) ? this.currentCase : "";
-            if(this.cases[currentCase] == null) {
+            if(this.cases[currentCase] === undefined) {
                 this.cases[currentCase] = new CaseDescriptorEntity()
             }
             this.cases[currentCase].runs.push(this.currentRun)

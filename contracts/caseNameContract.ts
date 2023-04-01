@@ -19,5 +19,5 @@ export const caseNameContract = new Contract<CaseName<MethodType>["caseName"]>()
     .thenReturn("For each undefined things uses 'undefined'",()=>"undefined:undefined:undefined")
     .ifCalledWith(ContractTestData.getContractWithFailingReturnvalueCheck)
     .suchThat("we have no constraints on input", () => undefined)
-    .thenReturn("a totally made up string signalling that the stub was called",
-        ()=>"NAME OF CONTRACT:undefined:undefined")
+    .thenReturn("the return value for the test data",
+        ()=>"The function under test:undefined:undefined")

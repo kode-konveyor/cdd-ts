@@ -9,6 +9,9 @@ const caseDescriptorTestdataDescriptor = {
     getCaseDescriptorWithCorrectRun: { __from: "getCaseDescriptor",
         runs: [RunDescriptorTestData.getRunDescriptorCorrectlyBuilt()]
     },
+    getCaseDescriptorWithCorrectRunTwice: { __from: "getCaseDescriptor",
+        runs: [RunDescriptorTestData.getRunDescriptorCorrectlyBuilt(),RunDescriptorTestData.getRunDescriptorCorrectlyBuilt()]
+    },
     getCaseDescriptorWithOtherReturnValue: { __from: "getCaseDescriptor",
         runs: [RunDescriptorTestData.getRunDescriptorWithOtherreturnValue()]
     },
