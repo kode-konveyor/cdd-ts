@@ -1,27 +1,20 @@
 import { Contract } from "../src/contract/Contract.js";
 import { ContractEntity } from "../src/types/ContractEntity.js";
-import { MethodType } from "../src/types/MethodType.js";
-import { ContractTestDataDescriptor, CONTRACT_EXPLANATION } from "../testdata/ContractTestdata.js";
+import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js";
 import { SetTitle } from "../src/contract/SetTitle.js";
 import { TestedFunctionType } from "../testdata/MethodTestData.js";
 import { makeTestData } from "../src/util/makeTestData.js";
+import { LabelTestdata } from "../testdata/LabelTestdata.js";
 
-const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>,typeof ContractTestDataDescriptor>(ContractTestDataDescriptor,()=>new ContractEntity<TestedFunctionType>())
+const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>, typeof ContractTestDataDescriptor>(ContractTestDataDescriptor, () => new ContractEntity<TestedFunctionType>())
 
-const setTitleFunction = (title: string): ContractEntity<MethodType> => SetTitle.prototype.setTitle.call(ContractTestData.getContract(), title);
-const contractFunction = (title: string): Contract<(arg: number, arg2: string) => string> => new Contract<TestedFunctionType>().setTitle.call(ContractTestData.getContract(), title);
+const contract = new Contract<TestedFunctionType>()
 
 export const SetTitleContractParties = [
-    setTitleFunction,
-    contractFunction]
+    SetTitle.prototype.setTitle.call.bind(SetTitle.prototype.setTitle),
+    contract.setTitle.call.bind(contract.setTitle)]
 
-export const SetTitleContract = new Contract<typeof setTitleFunction>()
+export const SetTitleContract = new Contract<typeof SetTitle.prototype.setTitle>()
     .setTitle("setTitle sets the title of the contract")
-    .ifCalledWith(() => CONTRACT_EXPLANATION)
+    .ifCalledWith(ContractTestData.getContract, LabelTestdata.default)
     .thenReturn("a contract with the title set and an empty default case", ContractTestData.getContractWithDefaultCase)
-
-/*
-.setTitle("setTitle sets the title of the contract")
-
-
-*/

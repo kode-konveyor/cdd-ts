@@ -1,9 +1,23 @@
-export function getFormatString(): string {
-    return "{1}: {2}";
+export function getFormatParametersList(): Array<() => string> {
+    return [() => "hihi", () => "hehe"];
 }
-export function getFormatStringMultiple(): string {
-    return "{egyik}: {masik}{egyik}";
+export function getFormatParametersStructured(): { egyik: string; masik: string; } {
+    return {
+        egyik: "hihi",
+        masik: "hehe"
+    };
 }
-export function getFormatStringReferencing(): string {
-    return "{egyik}: {masik}";
+
+export const FormatStringTestData = {
+    default: () => "{1}: {2}",
+    multiple: () => "{egyik}: {masik}{egyik}",
+    referencing: () => "{egyik}: {masik}",
+    formatted: () =>  "hihi: hehe",
+    formattedMultiple: () => "hihi: hehehihi",
+    parametersAsListOne: () => "hihi",
+    parametersAsListTwo: () => "hehe",
+    parametersAsObject: () => {return {
+        egyik: "hihi",
+        masik: "hehe"
+    }}
 }

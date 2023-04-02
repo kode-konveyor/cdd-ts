@@ -1,11 +1,11 @@
 import { RunDescriptorEntity } from "../src/types/RunDescriptorEntity.js";
-import { makeTestData } from "../src/util/makeTestData.js";
+import { makeTestData, TestDataDescriptor } from "../src/util/makeTestData.js";
 import { TestedFunctionType } from "./MethodTestData.js";
-import { getParameters, getParametersThrowingException, getParametersWithoutSideEffects } from "./ParametersTestData.js";
 import { getReturnValueTestData } from "./ReturnValueTestData.js";
 import { getReturnValueCheckFailing } from "./ReturnValueCheckTestData.js";
 import { getSideEffectCheckCase, getSideEffectCheckCaseFailing } from "./SideEffectCheckCaseTestData.js";
 import { ParameterConstraintCaseType } from "../src/types/ParameterConstraintCaseType.js";
+import { ParameterTestData } from "./ParametersTestData.js";
 
 export const EXCEPTION_IDENTIFIER_ACTUALLY_THROWN = "cannot be two";
 export const NONEXISTING_EXCEPTION_IDENTIFIER = "no one expects the spanish inquisition";
@@ -20,7 +20,7 @@ const runDescriptorTestDataDescriptor
     },
         getRunDescriptorParametersSet: {
             __from: "getRunDescriptor",
-            parameterGetters: getParameters()
+            parameterGetters: ParameterTestData.default()
         },
         getRunDescriptorWithExplanation: {
             __from: "getRunDescriptor",
@@ -28,7 +28,7 @@ const runDescriptorTestDataDescriptor
         },
             getRunDescriptorThrowingException: {
                 __from: "getRunDescriptorWithExplanation",
-                parameterGetters: getParametersThrowingException(),
+                parameterGetters: ParameterTestData.exceptionThrowing(),
             },
                 getRunDescriptorCheckingException: {
                     __from: "getRunDescriptorThrowingException",
@@ -36,7 +36,7 @@ const runDescriptorTestDataDescriptor
                 },
             getRunDescriptorNotTriggeringSideEffect: {
                 __from: "getRunDescriptorWithExplanation",
-                parameterGetters: getParametersWithoutSideEffects(),
+                parameterGetters: ParameterTestData.withoutSideEffects(),
                 returnValueGetter: getReturnValueTestData.getReturnValueSideEffect
             },
                 getRunDescriptorWithParameterConstraint: {
@@ -45,7 +45,7 @@ const runDescriptorTestDataDescriptor
                 },
             getRunDescriptorParametersAndExplanationSet: {
                 __from: "getRunDescriptorWithExplanation",
-                parameterGetters: getParameters(),
+                parameterGetters: ParameterTestData.default(),
             },
                 getRunDescriptorCorrectlyBuilt: {
                     __from: "getRunDescriptorParametersAndExplanationSet",
@@ -65,7 +65,7 @@ const runDescriptorTestDataDescriptor
                 },
                 getRunDescriptorThrowingAnotherException: {
                     __from: "getRunDescriptorParametersAndExplanationSet",
-                    parameterGetters: getParametersThrowingException(),
+                    parameterGetters: ParameterTestData.exceptionThrowing(),
                     thrown: NOT_THE_EXCEPTION_IDENTIFIER_WHICH_IS_THROWN
                 },
                 getRunDescriptorThrowing: {
@@ -84,6 +84,7 @@ const runDescriptorTestDataDescriptor
                         returnValueGetter: getReturnValueTestData.getReturnValueSideEffect,
                         sideEffectChecks: [],
                     },
-}
+} satisfies TestDataDescriptor<RunDescriptorEntity<TestedFunctionType>>
+
 export const RunDescriptorTestData = makeTestData<RunDescriptorEntity<TestedFunctionType>, typeof runDescriptorTestDataDescriptor>
     (runDescriptorTestDataDescriptor, () => new RunDescriptorEntity<TestedFunctionType>())

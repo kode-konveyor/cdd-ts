@@ -10,6 +10,7 @@ function testedFunction(arg: number, arg2: string): string {
     return String(arg * GLobalObject.multiplier);
 }
 
-export function getMethod(): TestedFunctionType {
-    return testedFunction
+
+export const TestedFunctionTestData = {
+    default: () => testedFunction
 }
