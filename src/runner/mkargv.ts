@@ -9,7 +9,8 @@ export function mkargv(config: CDDConfiguration): Array<string> {
                 args.push("-d");
         } else if (field !== "watch") {
             args.push("--" + field);
-            args.push((config as unknown as Record<string, string>)[field]);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+            args.push((config as unknown as Record<string, string>)[field] as string);
         }
     }
     if(config.debug)

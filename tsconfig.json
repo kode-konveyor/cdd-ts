@@ -18,7 +18,7 @@
     "exactOptionalPropertyTypes": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": false, //https://github.com/microsoft/TypeScript/issues/41848
+    "noUncheckedIndexedAccess": true, //https://github.com/microsoft/TypeScript/issues/41848
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "allowUnusedLabels": false,

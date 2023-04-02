@@ -24,6 +24,7 @@ export const makeTestDataContract = new Contract<typeof makeTestData<CDDConfigur
     .ifCalledWith(MakeTestDataTestData.withNamedGetter, MakeTestDataTestData.constructor)
     .thenReturn("if __from is not empty, the named getter is used for the data", MadeTestDataTestData.withnamedGetter)
     .suchThat("the getter referenced in __from is not modified", value => {
+        // @ts-expect-error
         if (value['getOne']().moduleResolution !== "") {
             throw new Error("leak detected")
         }

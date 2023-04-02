@@ -20,8 +20,10 @@ class CheckConsoleErrorMessage implements SideEffectCheckerType {
     }
 
     check():void {
-        if(this.record[0][0].match("expected 10 tests") == null)
-            throw new Error(serialize(this.record[0][0]))
+        // @ts-expect-error
+        const writtenToStdout:string = this.record[0][0];
+        if(writtenToStdout.match("expected 10 tests") == null)
+            throw new Error(serialize(writtenToStdout))
 
     }
 }

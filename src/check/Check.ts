@@ -20,10 +20,12 @@ export class Check <T extends MethodType> extends ContractEntity<T> {
             if(this.cases[currentCase] === undefined) {
                 this.cases[currentCase] = new CaseDescriptorEntity()
             }
-            this.cases[currentCase].runs.push(this.currentRun)
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+            (this.cases[currentCase] as CaseDescriptorEntity<T>).runs.push(this.currentRun)
         }
         for (const casename in this.cases) {
-            const thisCase = this.cases[casename];
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+            const thisCase:CaseDescriptorEntity<T> = this.cases[casename] as CaseDescriptorEntity<T>;
             this.checkedCase = casename
             if (thisCase.setUp != null)
                 thisCase.setUp()
