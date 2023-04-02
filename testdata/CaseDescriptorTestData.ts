@@ -1,7 +1,7 @@
 import { CaseDescriptorEntity } from "../src/types/CaseDescriptorEntity.js";
 import { MethodType } from "../src/types/MethodType.js";
 import { makeTestData } from "../src/util/makeTestData.js";
-import { getEnvironmentManipulatorThrice } from "./EnvironmentManipulatorTestData.js";
+import { EnvironmentmanipulatortestData } from "./EnvironmentManipulatorTestData.js";
 import { RunDescriptorTestData } from "./RunDescriptorTestData.js";
 
 const caseDescriptorTestdataDescriptor = {
@@ -31,8 +31,8 @@ const caseDescriptorTestdataDescriptor = {
         runs: [RunDescriptorTestData.getRunDescriptorThrowingAnotherException()]
     },
     getCaseDescriptorWithManipulatorset: { __from: "getCaseDescriptor",
-        setUp: getEnvironmentManipulatorThrice().setUp,
-        tearDown: getEnvironmentManipulatorThrice().tearDown
+        setUp: EnvironmentmanipulatortestData.thrice().setUp,
+        tearDown: EnvironmentmanipulatortestData.thrice().tearDown
     },
     getCaseDescriptorWithManipulatorsetAndRun: { __from: "getCaseDescriptorWithManipulatorset",
         runs: [RunDescriptorTestData.getRunDescriptorWithTripleReturn()]

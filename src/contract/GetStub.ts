@@ -7,6 +7,7 @@ import { getParametersFromGetters } from "../util/getParametersFromGetters.js";
 import { CaseName } from "../check/CaseName.js";
 import { CheckCurrentRun } from "./CheckCurrentRun.js";
 import { serialize } from "../util/serialize.js";
+import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 
 export class GetStub<T extends MethodType> extends ContractEntity<T> {
     constructor(
@@ -23,7 +24,8 @@ export class GetStub<T extends MethodType> extends ContractEntity<T> {
         this.checkCurrentRun()
         if (caseName == null)
             caseName = ""
-        const currentCase = this.cases[caseName];
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+        const currentCase = this.cases[caseName] as CaseDescriptorEntity<T>;
 
         const stub = (...params: Parameters<T>): ReturnType<T> => {
             const retvals: Array<ReturnType<T>> = []
@@ -53,7 +55,7 @@ export class GetStub<T extends MethodType> extends ContractEntity<T> {
                     serialize(params),
                     retvals.length.toString()))
             }
-            return retvals[0]()
+            return (retvals[0] as T)()
         }
         return stub as T;
     }

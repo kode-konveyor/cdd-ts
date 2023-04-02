@@ -19,6 +19,7 @@ export const checkCurrentRunContract = new Contract<typeof CheckCurrentRun.proto
 
     .ifCalledWith(contractTestData.getContractWithCorrectCurrentRun)
     .suchThat("The contract is put to the current case", (retval, contract) =>
+        // @ts-expect-error
         (contract as ContractEntity<MethodType>).cases[""].runs[0].explanation === RUN_EXPLANATION ? undefined : serialize(contract)
     )
     .suchThat("The current run is cleared", (retval, contract) =>
@@ -28,10 +29,12 @@ export const checkCurrentRunContract = new Contract<typeof CheckCurrentRun.proto
 
     .ifCalledWith(contractTestData.getContractWithCorrectRunInDefaultCase)
     .suchThat("The contract is put to the current case", (retval, contract) =>
-    (contract as ContractEntity<MethodType>).cases[""].runs[0].explanation === RUN_EXPLANATION ? undefined : serialize(contract)
+        // @ts-expect-error
+        (contract as ContractEntity<MethodType>).cases[""].runs[0].explanation === RUN_EXPLANATION ? undefined : serialize(contract)
     )
     .suchThat("After the case which is currently there", (retval, contract) =>
-    (contract as ContractEntity<MethodType>).cases[""].runs[1].explanation === RUN_EXPLANATION ? undefined : serialize(contract)
+        // @ts-expect-error
+        (contract as ContractEntity<MethodType>).cases[""].runs[1].explanation === RUN_EXPLANATION ? undefined : serialize(contract)
     )
     .suchThat("The current run is cleared", (retval, contract) =>
         (contract as ContractEntity<MethodType>).currentRun === undefined ? undefined : "oops"

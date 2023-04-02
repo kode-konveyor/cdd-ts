@@ -25,7 +25,8 @@ export class CheckCurrentRun<T extends MethodType> extends ContractEntity<T> {
             if (this.cases[currentCase] == null) {
                 this.cases[currentCase] = new CaseDescriptorEntity();
             }
-            this.cases[currentCase].runs.push(this.currentRun);
+            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+            (this.cases[currentCase] as CaseDescriptorEntity<T>).runs.push(this.currentRun);
             this.currentRun = undefined
         }
         return this as WithCorrectRun<T,this>

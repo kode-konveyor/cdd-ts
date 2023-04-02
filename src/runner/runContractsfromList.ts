@@ -1,6 +1,7 @@
+import { CDDConfiguration } from "../types/CDDConfiguration.js";
 import { runOneContract } from "./runOneContract.js";
 
-export async function runContractsfromList(contracts: Array<string>): Promise<number> {
+export async function runContractsfromList(config: CDDConfiguration, contracts: Array<string>): Promise<number> {
     try {
         const nullPromise = new Promise<number>((resolve) => resolve(0));
     return await contracts.reduce(
@@ -9,7 +10,7 @@ export async function runContractsfromList(contracts: Array<string>): Promise<nu
                 const baseName = contractFile.split('/').pop();
                 const contractName = (baseName as string).replace(".ts", "");
                 const previous = await prev;
-                const current = await runOneContract(contractFile, contractName);
+                const current = await runOneContract(config, contractFile, contractName);
                 return previous + current;
             } catch (e) {
                 throw e

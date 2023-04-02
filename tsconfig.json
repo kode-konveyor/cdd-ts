@@ -18,7 +18,7 @@
     "exactOptionalPropertyTypes": false,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedIndexedAccess": false, //https://github.com/microsoft/TypeScript/issues/41848
+    "noUncheckedIndexedAccess": true, //https://github.com/microsoft/TypeScript/issues/41848
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
     "allowUnusedLabels": false,
@@ -39,25 +39,6 @@
       "dom"
     ],
   },
-  "files": [
-    "src/contract/Contract.ts",
-    "src/runner/runAllContracts.ts",
-    "src/util/messageFormat.ts",
-    "src/util/makeGetters.ts",
-    "src/util/getParametersFromGetters.ts",
-    "src/types/ReturnValueCheckType.ts",
-    "src/types/SideEffectCheckCaseType.ts",
-    "src/types/SideEffectChecker.ts",
-    "src/types/RunDescriptorEntity.ts",
-    "src/types/ParameterGettersType.ts",
-    "src/types/ReturnValueCheckCaseType.ts",
-    "src/types/CaseDescriptorEntity.ts",
-    "src/types/MethodType.ts",
-    "src/types/EnvironmentManipulatorType.ts",
-    "./src/types/ReturnValueGetterType.ts",
-    "./src/types/ParameterConstraintType.ts",
-    "./src/types/ParameterConstraintCaseType.ts",
-  ],
   "include": [
     "**/*.ts",
   ],

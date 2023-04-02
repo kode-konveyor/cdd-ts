@@ -20,19 +20,21 @@ export function makeTestData<T extends unknown, K extends TestDataDescriptor<T>>
     }
     for(const key in descriptor) {
         let data:T;
-        if(descriptor[key] === undefined)
-            throw Error("should not happen")
-        if((descriptor[key] as Descriptorfields).__from === "")
+        const thisDescriptor = (descriptor[key] as Descriptorfields)
+        if(thisDescriptor.__from === "")
             data = constructor()
         else {
-            if(ret[descriptor[key].__from] === undefined)
-                throw new Error(messageFormat("No such testdata found: {1} did you reference a later item in __from?", descriptor[key].__from))
-            data = ret[descriptor[key].__from]()
+            if(ret[thisDescriptor.__from] === undefined)
+                throw new Error(messageFormat("No such testdata found: {1} did you reference a later item in __from?", thisDescriptor.__from))
+            data = (ret[thisDescriptor.__from] as Function)()
         }
         for(const field in descriptor[key]) {
             if(field === "__add") {
-                const [foo,bar,baz] = (descriptor[key] as Record<string,[string,string,unknown]>)[field];
-                (data as Record<string, Record<string,unknown>>)[foo][bar] = baz
+                const [foo,bar,baz] = ((descriptor[key] as Record<string,[string,string,unknown]>)[field]) as DescriptorAddType;
+                const otherRecord = (data as Record<string, Record<string, unknown>>)[foo];
+                if(otherRecord === undefined)
+                    throw new Error(messageFormat("no record named {1}",foo))
+                otherRecord[bar] = baz
             } else if(field !== "__from")
             (data as Record<string, unknown>)[field] = (descriptor[key] as Record<string,unknown>)[field]
         }

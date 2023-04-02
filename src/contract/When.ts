@@ -6,11 +6,10 @@ import { messageFormat } from "../util/messageFormat.js";
 
 export class When<T extends MethodType> extends ContractEntity<T>{
 
-    when<THIS extends ContractEntity<T>>(
-        this: THIS,
+    when<R extends ContractEntity<T>>(
         explanation: string,
         environmentManipulator: EnvironmentManipulatorType
-    ): THIS {
+    ):R  {
         if (this.currentRun != null) {
             const currentCase = (this.currentCase != null) ? this.currentCase : "";
             const lastCase = this.cases[currentCase];
@@ -25,6 +24,6 @@ export class When<T extends MethodType> extends ContractEntity<T>{
         caseDescriptor.tearDown = environmentManipulator.tearDown;
         this.cases[explanation] = caseDescriptor;
         this.currentRun = undefined;
-        return this;
+        return this as unknown as R;
     }
 }

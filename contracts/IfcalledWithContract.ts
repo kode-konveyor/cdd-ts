@@ -1,6 +1,6 @@
 import { Contract } from "../src/contract/Contract.js"
 import { ContractEntity } from "../src/types/ContractEntity.js"
-import { getParametersGetter } from "../testdata/ParametersGetterTestData.js"
+import { ParameterGetterTestData } from "../testdata/ParametersGetterTestData.js"
 import { IfCalledWith } from "../src/contract/IfCalledWith.js"
 import { TestedFunctionType } from "../testdata/MethodTestData.js"
 import { makeTestData } from "../src/util/makeTestData.js"
@@ -19,13 +19,13 @@ const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>,typeof 
 export const IfcalledWithContractParties = [IfCalledWith.prototype.ifCalledWith.call.bind(IfCalledWith.prototype.ifCalledWith)]
 export const IfcalledWithContract = new Contract<typeof IfCalledWith.prototype.ifCalledWith>()
     .setTitle("ifCalledWith sets the parameter for the run")
-    .ifCalledWith(ContractTestData.getContractWithDefaultCase, ...getParametersGetter())
+    .ifCalledWith(ContractTestData.getContractWithDefaultCase, ...ParameterGetterTestData.default)
     .thenReturn("The Parameters are put into the run", ContractTestData.getContractWithParametersSet)
-    .ifCalledWith(ContractTestData.getContractWithFreshRun, ...getParametersGetter())
+    .ifCalledWith(ContractTestData.getContractWithFreshRun, ...ParameterGetterTestData.default)
     .thenThrow("if there is a current run, and it is not fully defined, an error is thrown", "current run is incomplete")
-    .ifCalledWith(ContractTestData.getContractWithNonDefaultCaseAndCurrentRun, ...getParametersGetter())
+    .ifCalledWith(ContractTestData.getContractWithNonDefaultCaseAndCurrentRun, ...ParameterGetterTestData.default)
     .thenReturn("we put the current run into the current case", ContractTestData.getContractWithNonDefaultCaseWithARunStored)
-    .ifCalledWith(ContractTestData.getContractWithTitleAndRun, ...getParametersGetter())
+    .ifCalledWith(ContractTestData.getContractWithTitleAndRun, ...ParameterGetterTestData.default)
     .thenReturn("if there was no current case, we create it", ContractTestData.getContractWithParametersInDefaultCase)
     .ifCalledWith(ContractTestData.getContractWithFreshRun)
     .thenThrow("if the previous run is not defined with at least a return value or exception, an error is signalled",
