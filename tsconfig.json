@@ -65,6 +65,8 @@
     "./src/runner/storeConfig.ts",
     "./src/runner/mkargv.ts",
     "src/runner/checkNumberOfTests.ts",
+    "testdata/SerializedTestdata.ts",
+    "testdata/SerializableTestdata.ts",
   ],
   "include": [
     "**/*.ts",
