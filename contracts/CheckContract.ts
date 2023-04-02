@@ -51,7 +51,7 @@ export const CheckContract =
         .ifCalledWith(ContractTestData.getContractThrowingAnotherException, TestedFunctionTestData.default)
         .thenThrow(
             "in case a different exception is thrown than what is in the contract, a 'Not the expected exception thrown' error is thrown",
-            RUN_IDENTIFICATION + "Not the expected exception thrown. Got:Error: first arg cannot be two")
+            RUN_IDENTIFICATION + "Not the expected exception thrown. Got:Error: first arg cannot be two\nstack:\nError: first arg cannot be two")
 
         .ifCalledWith(ContractTestData.getContractWithFailingSideEffectCheck, TestedFunctionTestData.default)
         .thenThrow(
@@ -71,3 +71,7 @@ export const CheckContract =
 
         .ifCalledWith(ContractTestData.getContractWithTitle,TestedFunctionTestData.default)
         .thenThrow("invalid contract will result in an exception","Error: no checks in contract The function under test")
+
+        .ifCalledWith(ContractTestData.getContractWithNonDefaultCaseWithARunStored,TestedFunctionTestData.default)
+        .thenThrow("in case of non-default case, a current run gets to that case",
+            "The function under test:Global multiplier is 3:undefined: return value mismatch:\nexpected:undefined\nactual  :\"1\"\n---diff---:\n$")
