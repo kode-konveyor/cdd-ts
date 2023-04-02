@@ -35,3 +35,5 @@ export const makeTestDataContract = new Contract<typeof makeTestData<CDDConfigur
     .thenThrow("if __from references an item which is later or does not exist, that is an error",
         "did you reference a later item in __from?")
 
+    .ifCalledWith(MakeTestDataTestData.badAdd, MakeTestDataTestData.constructor)
+    .thenThrow("if __add references an item which does not exist, that is an error","no record named baz")

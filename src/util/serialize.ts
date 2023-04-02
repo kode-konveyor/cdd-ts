@@ -37,7 +37,6 @@ function includes(array: Array<unknown>, value:unknown): boolean {
 
 function str(key:string|number, holder:Record<string,unknown>, gap: string, seen: Array<Object>): string {
     const mind = gap;
-    let partial: Array<unknown>;
     let value = holder[key];
 
     if (
@@ -86,7 +85,7 @@ function str(key:string|number, holder:Record<string,unknown>, gap: string, seen
             seen.push(value as Object);
 
             gap += indent;
-            partial = [];
+            const partial = [];
 
             for (const k of Object.keys(value as Object).sort()) {
                 const v = str(k, value as unknown as Record<string,Object>, gap, seen);
@@ -103,4 +102,3 @@ function str(key:string|number, holder:Record<string,unknown>, gap: string, seen
     }
     return value as string
 }
-

@@ -37,3 +37,5 @@ export const checkNumberOfTestsContract = new Contract<typeof checkNumberOfTests
     .ifCalledWith(CDDConfigurationTestData.getCDDConfigurationTenTests,getReturnValueTestData.getReturnValueEleven)
     .meanwhile("puts a warning to the console",new CheckConsoleErrorMessage())
     .thenReturn("if the numbers do not match, return false",BooleanTestData.false)
+    .ifCalledWith(CDDConfigurationTestData.getCDDConfigurationES,getReturnValueTestData.getReturnValue)
+    .thenReturn("if there is no number of tests defined in the config, then return true", BooleanTestData.true)
