@@ -13,8 +13,8 @@ import { caseNameContract } from "./caseNameContract.js";
 
 export const getStubContractParties = [GetStub.prototype.getStub.call.bind(GetStub.prototype.getStub)]
 
-const contractTestData = makeTestData(ContractTestDataDescriptor,() => new GetStub<MethodType>(
-//    checkCurrentRunContract.getStubForMixin(),
+const contractTestData = makeTestData(ContractTestDataDescriptor, () => new GetStub<MethodType>(
+    //    checkCurrentRunContract.getStubForMixin(),
     CheckCurrentRun.prototype.checkCurrentRun,
     caseNameContract.getStubForMixin()
 ))
@@ -23,8 +23,8 @@ export const getStubContract = new Contract<typeof GetStub.prototype.getStub>()
     .setTitle("returns a stub behaving according to the contract")
 
     .ifCalledWith(contractTestData.getContractWithTitleAndRun)
-    .suchThat("For the parameters defined it returns the defined return value",(stub) => {
-        return (stub(...getParametersFromGetters(ParameterTestData.default()))=== getReturnValueTestData.getReturnValue())? undefined: "oops"
+    .suchThat("For the parameters defined it returns the defined return value", (stub) => {
+        return (stub(...getParametersFromGetters(ParameterTestData.default())) === getReturnValueTestData.getReturnValue()) ? undefined : "oops"
     })
     .thenReturn("for a simple contract returns a function behaving according to the contract", TestedFunctionTestData.default)
 
@@ -34,22 +34,22 @@ export const getStubContract = new Contract<typeof GetStub.prototype.getStub>()
             stub(...getParametersFromGetters(ParameterTestData.exceptionThrowing()))
             return "no exception was thrown"
         } catch (catched) {
-            return (String(catched).match(EXCEPTION_IDENTIFIER_ACTUALLY_THROWN) != null)?undefined:catched
+            return (String(catched).match(EXCEPTION_IDENTIFIER_ACTUALLY_THROWN) != null) ? undefined : catched
         }
     })
     .thenReturn("for a throwing contract returns a function throwing when needed", TestedFunctionTestData.default)
 
     .ifCalledWith(contractTestData.getContractWithParameterConstraint)
     .suchThat("For the standing parameter check gives the return value", (stub) => {
-        const ret = stub(...getParametersFromGetters(ParameterTestData.default()));
-        return ret  === "3" ?undefined:ret
+        const ret = stub(...getParametersFromGetters(ParameterTestData.exceptionThrowing()));
+        return ret === "1" ? undefined : ret
     })
     .suchThat("For the failing parameter check throws exception, even if ifCalledWith set that parameter (if no another run covering it)", (stub) => {
         try {
-            stub(...getParametersFromGetters(ParameterTestData.withoutSideEffects()));
+            stub(...getParametersFromGetters(ParameterTestData.withSideEffects()));
             return "no exception thrown"
         } catch (catched) {
-            return (String(catched).match("those parameters are not defined exactly once for this case") != null)?undefined:catched
+            return (String(catched).match("those parameters are not defined exactly once for this case") != null) ? undefined : catched
         }
     })
     .thenReturn("for a run with a parameter check, the stub gives the return value there if the parameter check stands", TestedFunctionTestData.default)

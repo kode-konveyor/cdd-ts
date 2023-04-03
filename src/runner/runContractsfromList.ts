@@ -2,8 +2,6 @@ import { CDDConfiguration } from "../types/CDDConfiguration.js";
 import { runOneContract } from "./runOneContract.js";
 
 export async function runContractsfromList(config: CDDConfiguration, contracts: Array<string>): Promise<number> {
-    try {
-        const nullPromise = new Promise<number>((resolve) => resolve(0));
     return await contracts.reduce(
         async (prev,contractFile):Promise<number> => {
             try {
@@ -16,11 +14,8 @@ export async function runContractsfromList(config: CDDConfiguration, contracts: 
                 throw e
             }
         },
-        nullPromise
+        new Promise<number>((resolve) => resolve(0))
     );
-    } catch (e) {
-        throw e
-    }
 }
 
 

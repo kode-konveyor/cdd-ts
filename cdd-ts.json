@@ -1,5 +1,4 @@
 {
     "jsDir": "dist",
-    "moduleResolution": "ES",
-    "numberofTests": "82"
+    "moduleResolution": "ES"
 }

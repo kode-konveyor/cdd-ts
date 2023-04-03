@@ -1,6 +1,7 @@
 import equal from "fast-deep-equal";
 import { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
 import { messageFormat } from "../src/util/messageFormat.js";
+import { serialize } from "../src/util/serialize.js";
 
 export const GLobalObject = {
     value: [] as Array<any>,
@@ -20,8 +21,8 @@ export class SeChecker implements SideEffectCheckerType {
         if (!(equal(GLobalObject.value, this.expected)))
             throw new Error(messageFormat(
                 "SeChecker:\nexpected:{1}\nactual  :{2}",
-                this.expected.toString(),
-                GLobalObject.value.toString()
+                serialize(this.expected),
+                serialize(GLobalObject.value)
             ))
     }
 

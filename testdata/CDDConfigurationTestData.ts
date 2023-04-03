@@ -34,6 +34,10 @@ export const CDDConfigurationTestDataDescriptor = {
     getCDDConfigurationTenTests: {
         __from: "getCDDConfigurationWithJsDir",
         numberofTests: "10"
+    },
+    runsomeContracts: {
+        __from: "defaultConfig",
+        contracts: 'contracts/diffContract.ts',
     }
 } satisfies TestDataDescriptor<CDDConfiguration>;
 

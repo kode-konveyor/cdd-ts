@@ -3,6 +3,7 @@ import { ContractEntity } from "../types/ContractEntity.js";
 import { MethodType } from "../types/MethodType.js";
 import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 import { messageFormat } from "../util/messageFormat.js";
+import { nullPromise } from "../runner/nullPromise.js";
 
 
 export class Check <T extends MethodType> extends ContractEntity<T> {
@@ -12,9 +13,9 @@ export class Check <T extends MethodType> extends ContractEntity<T> {
         super();
     }
 
-    check(sut: T): number {
+    async check(sut: T): Promise<number> {
         this.testedFunction = sut
-        let checked = 0;
+        let checked: number = 0
         if (this.currentRun != null) {
             const currentCase = (this.currentCase != null) ? this.currentCase : "";
             if(this.cases[currentCase] === undefined) {
@@ -29,9 +30,12 @@ export class Check <T extends MethodType> extends ContractEntity<T> {
             this.checkedCase = casename
             if (thisCase.setUp != null)
                 thisCase.setUp()
-            thisCase.runs.forEach(currentRun => {
-                checked += this.handleRun(currentRun)
-            })
+            checked += await thisCase.runs.reduce(async (prev,current) => {
+                const currentResult = await this.handleRun(current)
+                const previous = await prev
+                return previous+currentResult
+            },
+            nullPromise)
             if (thisCase.tearDown != null)
                 thisCase.tearDown()
         }

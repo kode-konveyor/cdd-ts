@@ -93,7 +93,6 @@ function str(key:string|number, holder:Record<string,unknown>, gap: string, seen
                     partial.push(quote(k) + ": " + v);
                 }
             }
-
             const v = "{\n" + gap + partial.join(",\n" + gap) + "\n" + mind + "}"
             gap = mind;
             return v;
