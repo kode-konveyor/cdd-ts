@@ -1,4 +1,5 @@
 import equal from "fast-deep-equal";
+import { Mutex } from "../src/check/Mutex.js";
 import { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
 import { messageFormat } from "../src/util/messageFormat.js";
 import { serialize } from "../src/util/serialize.js";
@@ -8,12 +9,15 @@ export const GLobalObject = {
     multiplier: 1
 }
 
+const mutex = new Mutex()
 
 export class SeChecker implements SideEffectCheckerType {
 
     public expected: Array<any> = [["hello b"]]
+    private unlock!: () => void
 
-    setUp = (): void => {
+    setUp = async (): Promise<void> => {
+        this.unlock = await mutex.lock()
         GLobalObject.value = []
     };
 
@@ -27,6 +31,7 @@ export class SeChecker implements SideEffectCheckerType {
     }
 
     tearDown = (): void => {
+        this.unlock()
     };
 
 }

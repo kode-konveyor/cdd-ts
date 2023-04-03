@@ -1,6 +1,6 @@
 import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { CaseName } from "./CaseName.js";
-import { setUpSideEffectChecks } from "./SetUpSideEffectChecks.js";
+import { setUpSideEffectChecks, tearDownSideEffectChecks } from "./SetUpSideEffectChecks.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { MethodType } from "../types/MethodType.js";
@@ -11,6 +11,8 @@ import { HandleException } from "./HandleException.js";
 import { OneSideEffectCheck } from "./OneSideEffectCheck.js";
 import { RunSideEffectChecks } from "./RunSideEffectChecks.js";
 import { RunReturnValueChecks } from "./RunReturnValueChecks.js";
+
+
 
 export class HandleRun <T extends MethodType> extends ContractEntity<T> {
     constructor(
@@ -23,29 +25,38 @@ export class HandleRun <T extends MethodType> extends ContractEntity<T> {
     ) {
         super();
     }
-    
+
     async handleRun(
         currentRun: RunDescriptorEntity<T>
     ): Promise<number> {
             this.currentRunExplanation = currentRun.explanation;
             if (currentRun.parameterGetters === undefined)
                 throw new Error(this.caseName() + ": no ifcalledWith");
-            setUpSideEffectChecks.call(this, currentRun);
-            let result: ReturnType<T>;
-            const parameters: Parameters<T> = getParametersFromGetters(currentRun.parameterGetters) as Parameters<T>
             try {
-                result = await this.testedFunction(...(parameters));
+                await setUpSideEffectChecks.call(this, currentRun);
+                let result: ReturnType<T>;
+                const parameters: Parameters<T> = getParametersFromGetters(currentRun.parameterGetters) as Parameters<T>
+                try {
+                    result = await this.testedFunction(...(parameters));
                 } catch (e) {
-                this.handleException(currentRun, e);
-                return 1;
+                    tearDownSideEffectChecks.call(this,currentRun);
+                
+                    this.handleException(currentRun, e);
+                    return 1;
                 }
-            if (currentRun.thrown != null)
-                throw new Error(messageFormat(
-                    EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT,
-                    this.caseName()));
-            await this.checkReturnValue(currentRun, result)
-            this.runReturnValueChecks(currentRun, result, parameters);
-            this.runSideEffectChecks(currentRun);
+                if (currentRun.thrown != null)
+                    throw new Error(messageFormat(
+                        EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT,
+                        this.caseName()));
+                await this.checkReturnValue(currentRun, result)
+                this.runReturnValueChecks(currentRun, result, parameters);
+                this.runSideEffectChecks(currentRun);
+            } catch (e) {
+                tearDownSideEffectChecks.call(this,currentRun);
+                throw e                
+            }
+            tearDownSideEffectChecks.call(this,currentRun);
             return 1;
+
     }
 }

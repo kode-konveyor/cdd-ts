@@ -33,10 +33,10 @@ export const CheckContract =
 
         .ifCalledWith(ContractTestData.getContractWithFailingReturnvalueCheck, TestedFunctionTestData.default)
         .thenThrow("if a return value check fails, a 'return value check did not hold' error is thrown", RUN_IDENTIFICATION + " fail: return value check did not hold")
-/* 
-        .ifCalledWith(ContractTestData.getContractWithManipulatorSetAndRun, TestedFunctionTestData.default)
+ 
+        .ifCalledWith(ContractTestData.getContractWithManipulatorSetAndRun, TestedFunctionTestData.withGlobal)
         .thenReturn("with a 'when' we can use an environment manipulator to set up the environment", CheckResultTestData.one)
-*/
+
         .ifCalledWith(ContractTestData.getContractThrowingTheDefinedException, TestedFunctionTestData.default)
         .thenReturn("if an exception is defined with thenThrow, then the check expects the error message to conform to the regex", CheckResultTestData.one)
 
@@ -59,12 +59,12 @@ export const CheckContract =
         .thenThrow(
             "In case a side effect check fails, a 'side effect check: (name): did not hold' error is thrown",
             RUN_IDENTIFICATION + " side effect check: failing sideEffectCheck: did not hold")
-/*
-        .ifCalledWith(ContractTestData.getContractWithGlobalSideEffectCheck, TestedFunctionTestData.default)
+
+        .ifCalledWith(ContractTestData.getContractWithGlobalSideEffectCheck, TestedFunctionTestData.withGlobal)
         .thenReturn(
             "In case a side effect check is defined globally (before the first ifCalledWith), the side effect check is done for all of the runs",
             CheckResultTestData.one)
-*/
+
         .ifCalledWith(ContractTestData.getContractWithGlobalSideEffectCheckNotHolding, TestedFunctionTestData.default)
         .thenThrow(
             "A global side effect check throws the same error as a local one",

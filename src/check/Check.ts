@@ -5,7 +5,6 @@ import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { nullPromise } from "../runner/nullPromise.js";
 
-
 export class Check <T extends MethodType> extends ContractEntity<T> {
     constructor(
         readonly handleRun =  HandleRun.prototype.handleRun
