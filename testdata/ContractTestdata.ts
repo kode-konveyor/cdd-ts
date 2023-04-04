@@ -17,6 +17,9 @@ export const ContractTestDataDescriptor = {
             getContractWithOtherReturnValue: { __from: "getContractWithTitle",
                 currentRun: RunDescriptorTestData.getRunDescriptorWithOtherreturnValue()
             },
+            getContractWithSideEffectCheckAndThrowingRun: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorWithsideeffectCheckAndRunThrowing()
+            },
             getContractWithFailingReturnvalueCheck: { __from: "getContractWithTitle",
                 currentRun: RunDescriptorTestData.getRunDescriptorWithReturnValueCheckFailing()
             },

@@ -38,6 +38,26 @@ export const CDDConfigurationTestDataDescriptor = {
     runsomeContracts: {
         __from: "defaultConfig",
         contracts: 'contracts/diffContract.ts',
+    },
+    runEmptyContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/emptyContract.ts',
+    },
+    emptyContractConstContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/emptyContractConstContract.ts',
+    },
+    emptyContractPartiesContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/emptyContractPartiesContract.ts',
+    },
+    runNoContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/NoSuchContract.ts',
+    },
+    runOneContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/oneContract.ts',
     }
 } satisfies TestDataDescriptor<CDDConfiguration>;
 

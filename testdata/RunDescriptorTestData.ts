@@ -82,6 +82,10 @@ const runDescriptorTestDataDescriptor = {
                         returnValueGetter: getReturnValueTestData.getReturnValueSideEffect,
                         sideEffectChecks: [],
                     },
+                    getRunDescriptorWithsideeffectCheckAndRunThrowing: {
+                        __from: "getRunDescriptorwithParametersReturnAndSideeffectcheck",
+                        returnValueGetter: getReturnValueTestData.getReturnValueSideEffect,
+                    },
     } satisfies TestDataDescriptor<RunDescriptorEntity<TestedFunctionType>>
 
 export const RunDescriptorTestData = makeTestData<RunDescriptorEntity<TestedFunctionType>, typeof runDescriptorTestDataDescriptor>

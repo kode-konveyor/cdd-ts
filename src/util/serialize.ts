@@ -1,6 +1,7 @@
 
 export function serialize(object: any): string {
-    return str("", {"": object},"",[]);// harmless mutation
+    // Stryker disable next-line ArrayDeclaration
+    return str("", {"": object},"",[]);
 }
 
 const indent = " ";
@@ -83,7 +84,23 @@ function str(key:string|number, holder:Record<string,unknown>, gap: string, seen
             }
 
             seen.push(value as Object);
-
+            if (Object.prototype.toString.apply(value) === "[object Array]") {
+                const partial = (value as Array<unknown>).map((v,i) => {
+                    return (str(i, value as Record<string,unknown>, gap, seen) as unknown as boolean) || "null";
+                })
+                const v = partial.length === 0
+                    ? "[]"
+                    : (
+                            "[\n"
+                            + gap
+                            + partial.join(",\n" + gap)
+                            + "\n"
+                            + mind
+                            + "]"
+                        )
+                gap = mind;
+                return v;
+            }
             gap += indent;
             const partial = [];
 

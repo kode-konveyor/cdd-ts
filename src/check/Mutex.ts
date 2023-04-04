@@ -6,7 +6,7 @@ export class Mutex {
         this.current = Promise.resolve();
     }
 
-    lock: () => Promise<() => void> = () => {
+    lock: () => Promise<() => void> = async () => {
         let _resolve: () => void;
         const p = new Promise<void>(resolve => {
             _resolve = () => resolve();
@@ -17,6 +17,6 @@ export class Mutex {
         // Don't allow the next request until the new promise is done
         this.current = p;
         // Return the new promise
-        return rv;
+        return await rv;
     };
 }

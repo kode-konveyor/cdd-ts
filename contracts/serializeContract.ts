@@ -19,4 +19,17 @@ export const serializeContract = new Contract<typeof serialize>()
     .ifCalledWith(SerializableTestData.empty)
     .thenReturn("empty object serializes to '{}'", SerializedTestdata.serializedEmpty)
 
+    .ifCalledWith(SerializableTestData.config)
+    .thenReturn("empty object serializes to '{}'", SerializedTestdata.config)
 
+    .ifCalledWith(SerializableTestData.defaultConfig)
+    .thenReturn("empty object serializes to '{}'", SerializedTestdata.defaultConfig)
+
+    .ifCalledWith(SerializableTestData.contractEntity)
+    .thenReturn("empty object serializes to '{}'", SerializedTestdata.contractEntity)
+
+    .ifCalledWith(SerializableTestData.argparser)
+    .thenReturn("empty object serializes to '{}'", SerializedTestdata.argparser)
+
+    .ifCalledWith(SerializableTestData.defaultargv)
+    .thenReturn("empty object serializes to '{}'", SerializedTestdata.defaultargv)

@@ -12,12 +12,11 @@ import { defaultConfig } from "./runner/defaultConfig.js";
 import { configFromFile } from "./runner/configFromFile.js";
 import { mergeConfig } from "./runner/mergeConfig.js";
 import { checkNumberOfTests } from "./runner/checkNumberOfTests.js";
-import { program } from "commander";
 import { CDDConfiguration } from "./types/CDDConfiguration.js";
 
 const myPath = url.fileURLToPath(import.meta.url);
 argparser.parse(process.argv);
-const options: CDDConfiguration = program.opts();
+const options: CDDConfiguration = argparser.opts();
 
 export const config = mergeConfig(defaultConfig, configFromFile, options)
 

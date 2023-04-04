@@ -33,7 +33,10 @@ export const CheckContract =
 
         .ifCalledWith(ContractTestData.getContractWithFailingReturnvalueCheck, TestedFunctionTestData.default)
         .thenThrow("if a return value check fails, a 'return value check did not hold' error is thrown", RUN_IDENTIFICATION + " fail: return value check did not hold")
- 
+
+        .ifCalledWith(ContractTestData.getContractWithSideEffectCheckAndThrowingRun, TestedFunctionTestData.default)
+        .thenThrow("side effect checks are recommended to enter a mutex in setUp and unlock it in tearDown. TearDown will be called even if the test fails","return value mismatch")
+
         .ifCalledWith(ContractTestData.getContractWithManipulatorSetAndRun, TestedFunctionTestData.withGlobal)
         .thenReturn("with a 'when' we can use an environment manipulator to set up the environment", CheckResultTestData.one)
 
@@ -64,7 +67,7 @@ export const CheckContract =
         .thenReturn(
             "In case a side effect check is defined globally (before the first ifCalledWith), the side effect check is done for all of the runs",
             CheckResultTestData.one)
-
+    
         .ifCalledWith(ContractTestData.getContractWithGlobalSideEffectCheckNotHolding, TestedFunctionTestData.default)
         .thenThrow(
             "A global side effect check throws the same error as a local one",
@@ -76,3 +79,4 @@ export const CheckContract =
         .ifCalledWith(ContractTestData.getContractWithNonDefaultCaseWithARunStored,TestedFunctionTestData.default)
         .thenThrow("in case of non-default case, a current run gets to that case",
             "The function under test:Global multiplier is 3:undefined: return value mismatch:\nexpected:undefined\nactual  :\"1\"\n---diff---:\n$")
+    

@@ -40,7 +40,6 @@ export class HandleRun <T extends MethodType> extends ContractEntity<T> {
                     result = await this.testedFunction(...(parameters));
                 } catch (e) {
                     tearDownSideEffectChecks.call(this,currentRun);
-                
                     this.handleException(currentRun, e);
                     return 1;
                 }
