@@ -3,6 +3,7 @@ import { CDDConfiguration } from "../src/types/CDDConfiguration";
 import { makeTestData, TestDataDescriptor } from "../src/util/makeTestData.js";
 import { MakeTestDataTestData } from "../testdata/MakeTestDataTestData.js";
 import { MadeTestDataTestData } from "../testdata/MadeTestDataTestData.js";
+import { ReturnValueCheckerTestData } from "../testdata/ReturnValueCheckerTestData.js";
 
 export const makeTestDataContractParties = [makeTestData]
 
@@ -23,12 +24,7 @@ export const makeTestDataContract = new Contract<typeof makeTestData<CDDConfigur
 
     .ifCalledWith(MakeTestDataTestData.withNamedGetter, MakeTestDataTestData.constructor)
     .thenReturn("if __from is not empty, the named getter is used for the data", MadeTestDataTestData.withnamedGetter)
-    .suchThat("the getter referenced in __from is not modified", value => {
-        // @ts-expect-error
-        if (value['getOne']().moduleResolution !== "") {
-            throw new Error("leak detected")
-        }
-    })
+    .suchThat("the getter referenced in __from is not modified", ReturnValueCheckerTestData.makeTestDataLeakTest)
 
     .ifCalledWith(MakeTestDataTestData.withNonexistingReference, MakeTestDataTestData.constructor)
 

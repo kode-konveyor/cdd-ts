@@ -26,7 +26,7 @@ export class Contract<T extends MethodType> extends ContractEntity<T>  {
     
     constructor(
         readonly ifCalledWith: typeof IfCalledWith.prototype.ifCalledWith<Contract<T>> = IfCalledWith.prototype.ifCalledWith,
-        private readonly checkCurrentRun = CheckCurrentRun.prototype.checkCurrentRun,
+        private readonly checkCurrentRun:typeof CheckCurrentRun.prototype.checkCurrentRun<T>  = CheckCurrentRun.prototype.checkCurrentRun,
         readonly setTitle: typeof SetTitle.prototype.setTitle<Contract<T>>  = SetTitle.prototype.setTitle,
         readonly when: typeof When.prototype.when<Contract<T>>  = When.prototype.when,
         readonly thenReturn: typeof ThenReturn.prototype.thenReturn<Contract<T>>  = ThenReturn.prototype.thenReturn,

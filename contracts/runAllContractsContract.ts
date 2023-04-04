@@ -1,5 +1,6 @@
 import { Contract, runAllContracts } from "../src/cdd-ts.js"
 import { Check } from "../src/check/Check.js"
+import { checkThrow, checkThrowAsync } from "../src/util/checkThrow.js"
 import { makeTestData } from "../src/util/makeTestData.js"
 import { CDDConfigurationTestData } from "../testdata/CDDConfigurationTestData.js"
 import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js"
@@ -29,53 +30,33 @@ export const runAllContractsContract = {
             if (checkCount !== 2)
                 throw new Error("expected 2 contracts, but got "+ String(checkCount) + ".")
 
-            try {
-                await runAllContracts(CDDConfigurationTestData.runEmptyContract())
-                throw new Error("empty contract did not throw")
-            } catch (e) {
-                if((e as Error).message.match("no checks in contract empty contract") == null) {
-                    console.log(e)
-                    throw new Error("empty contract did check something")
-                }
-            }
-            try {
-                await runAllContracts(CDDConfigurationTestData.emptyContractConstContract())
-                throw new Error("emptyContractConstContract contract did not throw")
-            } catch (e) {
-                if((e as Error).message.match(" please export emptyContractConstContract from testdata/contracts/emptyContractConstContract.ts") == null) {
-                    console.log(e)
-                    throw new Error("emptyContractConstContract contract did check something")
-                }
-            }
-            try {
-                await runAllContracts(CDDConfigurationTestData.emptyContractPartiesContract())
-                throw new Error("emptyContractConstContract contract did not throw")
-            } catch (e) {
-                if((e as Error).message.match("please export emptyContractPartiesContractParties from testdata/contracts/emptyContractPartiesContract.ts") == null) {
-                    console.log(e)
-                    throw new Error("emptyContractConstContract contract did check something")
-                }
-            }
-            try {
-                await runAllContracts(CDDConfigurationTestData.runNoContract())
-                throw new Error("no contract did not throw")
-            } catch (e) {
-                if((e as Error).message.match("no contracts tested") == null) {
-                    console.log(e)
-                    throw new Error("no contract did check something")
-                }
-            }
+            checkCount += await checkThrowAsync(
+                runAllContracts,
+                [CDDConfigurationTestData.runEmptyContract()],
+                "no checks in contract empty contract"
+            )
+            checkCount += await checkThrowAsync(
+                runAllContracts,
+                [CDDConfigurationTestData.emptyContractConstContract()],
+                " please export emptyContractConstContract from testdata/contracts/emptyContractConstContract.ts"
+            )
+            checkCount += await checkThrowAsync(
+                runAllContracts,
+                [CDDConfigurationTestData.emptyContractPartiesContract()],
+                "please export emptyContractPartiesContractParties from testdata/contracts/emptyContractPartiesContract.ts"
+            )
+            checkCount += await checkThrowAsync(
+                runAllContracts,
+                [CDDConfigurationTestData.runNoContract()],
+                "no contracts tested"
+            )
             checkCount += await runAllContracts(CDDConfigurationTestData.runOneContract())
+            checkCount += await checkThrowAsync(
+                CheckContract.check.bind(CheckContract),
+                [CheckContract.check.call.bind(CheckContract.check)],
+                "return value mismatch"
+            )
 
-            try {
-                await CheckContract.check(CheckContract.check.call.bind(CheckContract.check))
-                throw new Error("check contract did not throw")
-            } catch (e) {
-                if((e as Error).message.match("return value mismatch") == null) {
-                    console.log(e)
-                    throw new Error("check contract did not throw what it should")
-                }
-            }
-            return checkCount + 7
+            return checkCount
     }
 }
