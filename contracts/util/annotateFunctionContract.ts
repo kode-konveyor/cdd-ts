@@ -1,7 +1,7 @@
-import { Contract } from "../src/contract/Contract.js";
-import { annotateFunction } from "../src/util/annotateFunction.js";
-import { AnnotatedFunctionTestData } from "../testdata/AnnotatedFunctionTestData.js";
-import { ReturnValueCheckerTestData } from "../testdata/ReturnValueCheckerTestData.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { annotateFunction } from "../../src/util/annotateFunction.js";
+import { AnnotatedFunctionTestData } from "../../testdata/AnnotatedFunctionTestData.js";
+import { ReturnValueCheckerTestData } from "../../testdata/ReturnValueCheckerTestData.js";
 
 export const annotateFunctionContractParties = [annotateFunction]
 

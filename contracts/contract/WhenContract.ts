@@ -1,11 +1,11 @@
-import { Contract } from "../src/contract/Contract.js";
-import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js";
-import { EnvironmentmanipulatortestData } from "../testdata/EnvironmentManipulatorTestData.js";
-import { When } from "../src/contract/When.js";
-import { TestedFunctionType } from "../testdata/MethodTestData.js";
-import { makeTestData } from "../src/util/makeTestData.js";
-import { LabelTestdata } from "../testdata/LabelTestdata.js";
-import { ReturnValueCheckerTestData } from "../testdata/ReturnValueCheckerTestData.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
+import { EnvironmentmanipulatortestData } from "../../testdata/EnvironmentManipulatorTestData.js";
+import { When } from "../../src/contract/When.js";
+import { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import { makeTestData } from "../../src/util/makeTestData.js";
+import { LabelTestdata } from "../../testdata/LabelTestdata.js";
+import { ReturnValueCheckerTestData } from "../../testdata/ReturnValueCheckerTestData.js";
 
 const ContractTestData = makeTestData<Contract<TestedFunctionType>,typeof ContractTestDataDescriptor>(ContractTestDataDescriptor,()=>new Contract<TestedFunctionType>())
 

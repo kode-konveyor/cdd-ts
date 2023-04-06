@@ -1,10 +1,10 @@
-import { Contract } from "../src/contract/Contract.js";
-import { ContractEntity } from "../src/types/ContractEntity.js";
-import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js";
-import { SetTitle } from "../src/contract/SetTitle.js";
-import { TestedFunctionType } from "../testdata/MethodTestData.js";
-import { makeTestData } from "../src/util/makeTestData.js";
-import { LabelTestdata } from "../testdata/LabelTestdata.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
+import { SetTitle } from "../../src/contract/SetTitle.js";
+import { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import { makeTestData } from "../../src/util/makeTestData.js";
+import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 
 const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>, typeof ContractTestDataDescriptor>(ContractTestDataDescriptor, () => new ContractEntity<TestedFunctionType>())
 

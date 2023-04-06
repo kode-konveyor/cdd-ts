@@ -1,14 +1,14 @@
-import { Contract } from "../src/contract/Contract.js"
-import { ContractEntity } from "../src/types/ContractEntity.js"
-import { ParameterGetterTestData } from "../testdata/ParametersGetterTestData.js"
-import { IfCalledWith } from "../src/contract/IfCalledWith.js"
-import { TestedFunctionType } from "../testdata/MethodTestData.js"
-import { makeTestData } from "../src/util/makeTestData.js"
-import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js"
-import { CheckCurrentRun } from "../src/contract/CheckCurrentRun.js"
+import { Contract } from "../../src/contract/Contract.js"
+import { ContractEntity } from "../../src/types/ContractEntity.js"
+import { ParameterGetterTestData } from "../../testdata/ParametersGetterTestData.js"
+import { IfCalledWith } from "../../src/contract/IfCalledWith.js"
+import { TestedFunctionType } from "../../testdata/MethodTestData.js"
+import { makeTestData } from "../../src/util/makeTestData.js"
+import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js"
+import { CheckCurrentRun } from "../../src/contract/CheckCurrentRun.js"
 import { caseNameContract } from "./caseNameContract.js"
 
-const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>,typeof ContractTestDataDescriptor>(
+const ContractTestData = makeTestData<ContractEntity<TestedFunctionType>, typeof ContractTestDataDescriptor>(
     ContractTestDataDescriptor,
     () => new IfCalledWith(
         CheckCurrentRun.prototype.checkCurrentRun,

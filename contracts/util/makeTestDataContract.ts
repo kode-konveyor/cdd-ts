@@ -1,9 +1,9 @@
-import { Contract } from "../src/contract/Contract.js";
-import { CDDConfiguration } from "../src/types/CDDConfiguration";
-import { makeTestData, TestDataDescriptor } from "../src/util/makeTestData.js";
-import { MakeTestDataTestData } from "../testdata/MakeTestDataTestData.js";
-import { MadeTestDataTestData } from "../testdata/MadeTestDataTestData.js";
-import { ReturnValueCheckerTestData } from "../testdata/ReturnValueCheckerTestData.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { CDDConfiguration } from "../../src/types/CDDConfiguration";
+import { makeTestData, TestDataDescriptor } from "../../src/util/makeTestData.js";
+import { MakeTestDataTestData } from "../../testdata/MakeTestDataTestData.js";
+import { MadeTestDataTestData } from "../../testdata/MadeTestDataTestData.js";
+import { ReturnValueCheckerTestData } from "../../testdata/ReturnValueCheckerTestData.js";
 
 export const makeTestDataContractParties = [makeTestData]
 

@@ -1,7 +1,7 @@
-import { Contract } from "../src/contract/Contract.js";
-import { serialize } from "../src/util/serialize.js";
-import { SerializedTestdata } from "../testdata/SerializedTestdata.js";
-import { SerializableTestData } from "../testdata/SerializableTestdata.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { serialize } from "../../src/util/serialize.js";
+import { SerializedTestdata } from "../../testdata/SerializedTestdata.js";
+import { SerializableTestData } from "../../testdata/SerializableTestdata.js";
 
 
 export const serializeContractParties = [serialize]

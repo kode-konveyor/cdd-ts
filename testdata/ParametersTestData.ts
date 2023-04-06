@@ -8,6 +8,8 @@ export const ParameterTestData = {
     default: () => makeGetters(PARAMETERS) as [() => number, () => string],
     defaultFirst: () => PARAMETERS[0],
     defaultSecond: () => PARAMETERS[1],
+    defaultSimple: () => PARAMETERS,
+    throwingSimple: () => PARAMETERS_THROWING_EXCEPTION,
     exceptionThrowing: () => makeGetters(PARAMETERS_THROWING_EXCEPTION) as [() => number, () => string],
     withSideEffects: () => makeGetters(PARAMETERS_WITH_SIDE_EFFECT) as [() => number, () => string]
 }

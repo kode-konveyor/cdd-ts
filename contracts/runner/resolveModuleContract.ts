@@ -1,7 +1,7 @@
-import { Contract } from "../src/contract/Contract.js";
-import { resolveModule } from "../src/runner/resolveModule.js";
-import { CDDConfigurationTestData } from "../testdata/CDDConfigurationTestData.js";
-import { ModuleNameTestData } from "../testdata/ModuleNameTestData.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { resolveModule } from "../../src/runner/resolveModule.js";
+import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js";
+import { ModuleNameTestData } from "../../testdata/ModuleNameTestData.js";
 
 export const resolveModuleContractParties = [resolveModule]
 export const resolveModuleContract = new Contract<typeof resolveModule>()

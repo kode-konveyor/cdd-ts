@@ -1,9 +1,9 @@
-import { Contract } from "../src/contract/Contract.js";
-import { checkNumberOfTests } from "../src/runner/checkNumberOfTests.js";
-import { CDDConfigurationTestData } from "../testdata/CDDConfigurationTestData.js";
-import { getReturnValueTestData } from "../testdata/ReturnValueTestData.js";
-import { BooleanTestData } from "../testdata/BooleanTestData.js";
-import { ConsoleLogChecker } from "../src/util/ConsoleLogChecker.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { checkNumberOfTests } from "../../src/runner/checkNumberOfTests.js";
+import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js";
+import { getReturnValueTestData } from "../../testdata/ReturnValueTestData.js";
+import { BooleanTestData } from "../../testdata/BooleanTestData.js";
+import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker.js";
 
 export const checkNumberOfTestsContractParties = [checkNumberOfTests]
 

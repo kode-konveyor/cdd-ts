@@ -1,11 +1,11 @@
-import { CheckCurrentRun } from "../src/contract/CheckCurrentRun.js";
-import { Contract } from "../src/contract/Contract.js";
-import { GetStub } from "../src/contract/GetStub.js";
-import { MethodType } from "../src/types/MethodType.js";
-import { makeTestData } from "../src/util/makeTestData.js";
-import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js";
-import { TestedFunctionTestData } from "../testdata/MethodTestData.js";
-import { ReturnValueCheckerTestData } from "../testdata/ReturnValueCheckerTestData.js";
+import { CheckCurrentRun } from "../../src/contract/CheckCurrentRun.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { GetStub } from "../../src/contract/GetStub.js";
+import { MethodType } from "../../src/types/MethodType.js";
+import { makeTestData } from "../../src/util/makeTestData.js";
+import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
+import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
+import { ReturnValueCheckerTestData } from "../../testdata/ReturnValueCheckerTestData.js";
 import { caseNameContract } from "./caseNameContract.js";
 
 export const getStubContractParties = [GetStub.prototype.getStub.call.bind(GetStub.prototype.getStub)]

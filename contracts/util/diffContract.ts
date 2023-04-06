@@ -1,7 +1,7 @@
-import { Contract } from "../src/contract/Contract.js";
-import { diff } from "../src/util/diff.js";
-import { DiffResultTestData } from "../testdata/DiffResultTestData.js";
-import { DiffTestData } from "../testdata/DiffTestData.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { diff } from "../../src/util/diff.js";
+import { DiffResultTestData } from "../../testdata/DiffResultTestData.js";
+import { DiffTestData } from "../../testdata/DiffTestData.js";
 
 export const diffContractParties = [diff]
 export const diffContract = new Contract<typeof diff>()

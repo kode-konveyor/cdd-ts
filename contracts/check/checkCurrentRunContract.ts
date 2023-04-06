@@ -1,13 +1,13 @@
-import { Contract } from "../src/cdd-ts.js";
-import { CheckCurrentRun } from "../src/contract/CheckCurrentRun.js";
-import { ContractEntity } from "../src/types/ContractEntity.js";
-import { MethodType } from "../src/types/MethodType.js";
-import { makeTestData } from "../src/util/makeTestData.js";
-import { CallType } from "../testdata/CallType.js";
-import { ContractTestDataDescriptor } from "../testdata/ContractTestdata.js";
-import { TestedFunctionType } from "../testdata/MethodTestData.js";
-import { ReturnValueCheckerTestData } from "../testdata/ReturnValueCheckerTestData.js";
-import { caseNameContract } from "./caseNameContract.js";
+import { Contract } from "../../src/cdd-ts.js";
+import { CheckCurrentRun } from "../../src/contract/CheckCurrentRun.js";
+import { ContractEntity } from "../../src/types/ContractEntity.js";
+import { MethodType } from "../../src/types/MethodType.js";
+import { makeTestData } from "../../src/util/makeTestData.js";
+import { CallType } from "../../testdata/CallType.js";
+import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
+import { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import { ReturnValueCheckerTestData } from "../../testdata/ReturnValueCheckerTestData.js";
+import { caseNameContract } from "../contract/caseNameContract.js";
 
 export const checkCurrentRunContractParties = [CheckCurrentRun.prototype.checkCurrentRun.call.bind(CheckCurrentRun.prototype.checkCurrentRun)]
 
@@ -16,7 +16,7 @@ const contractTestData = makeTestData<ContractEntity<MethodType>, typeof Contrac
 type ckrcall = CallType<
     TestedFunctionType,
     typeof CheckCurrentRun.prototype.checkCurrentRun<TestedFunctionType>
-    ,ContractEntity<TestedFunctionType>>
+    , ContractEntity<TestedFunctionType>>
 
 export const checkCurrentRunContract = new Contract<ckrcall>()
     .setTitle("checks whether the current run is okay, and pushes it to the current case")

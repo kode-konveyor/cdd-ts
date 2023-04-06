@@ -41,7 +41,7 @@ export const CDDConfigurationTestDataDescriptor = {
     },
     runsomeContracts: {
         __from: "defaultConfig",
-        contracts: 'contracts/diffContract.ts',
+        contracts: 'contracts/util/diffContract.ts',
     },
     runEmptyContract: {
         __from: "defaultConfig",

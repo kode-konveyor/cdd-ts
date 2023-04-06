@@ -1,9 +1,9 @@
-import { Contract } from "../src/contract/Contract.js"
-import { TestedFunctionTestData, TestedFunctionType } from "../testdata/MethodTestData.js"
-import { Check } from "../src/check/Check.js"
-import { ContractTestDataDescriptor, RUN_IDENTIFICATION } from "../testdata/ContractTestdata.js"
-import { makeTestData } from "../src/util/makeTestData.js"
-import { CheckResultTestData } from "../testdata/CheckResultTestData.js"
+import { Contract } from "../../src/contract/Contract.js"
+import { TestedFunctionTestData, TestedFunctionType } from "../../testdata/MethodTestData.js"
+import { Check } from "../../src/check/Check.js"
+import { ContractTestDataDescriptor, RUN_IDENTIFICATION } from "../../testdata/ContractTestdata.js"
+import { makeTestData } from "../../src/util/makeTestData.js"
+import { CheckResultTestData } from "../../testdata/CheckResultTestData.js"
 
 const ContractTestData = makeTestData<Contract<TestedFunctionType>,typeof ContractTestDataDescriptor>(
     ContractTestDataDescriptor,

@@ -1,6 +1,6 @@
-import { Contract } from "../src/contract/Contract.js";
-import { messageFormat } from "../src/util/messageFormat.js";
-import { FormatStringTestData } from "../testdata/FormatStringTestData.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { messageFormat } from "../../src/util/messageFormat.js";
+import { FormatStringTestData } from "../../testdata/FormatStringTestData.js";
 
 export const messageFormatContractParties = [messageFormat]
 
