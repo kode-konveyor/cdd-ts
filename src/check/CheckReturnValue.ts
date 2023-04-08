@@ -8,37 +8,36 @@ import { serialize } from "../util/serialize.js";
 import { diff } from "../util/diff.js";
 
 export class CheckReturnValue<T extends MethodType> {
-    constructor(
-        readonly caseName = CaseName.prototype.caseName,
-    ) {
-    }
+  constructor(readonly caseName = CaseName.prototype.caseName) {}
 
-    async checkReturnValue(
-        currentRun: RunDescriptorEntity<T>,
-        result: ReturnType<T>
-    ): Promise<void> {
-            if(currentRun.returnValueChecks.length !== 0)
-                return
-            const actual = serialize(result);
-            const returnValueGetter = currentRun.returnValueGetter;
-            if (returnValueGetter == null)
-                throw new Error(messageFormat(
-                    RETURN_VALUE_MISMATCH_MESSAGE_FORMAT,
-                    this.caseName(),
-                    "undefined",
-                    actual,
-                    ""
-                ))
-            const expected = serialize(returnValueGetter());
-            if (actual !== expected) {
-                throw new Error(messageFormat(
-                    RETURN_VALUE_MISMATCH_MESSAGE_FORMAT,
-                    this.caseName(),
-                    expected,
-                    actual,
-                    diff(expected, actual)
-                ));
-            }
+  async checkReturnValue(
+    currentRun: RunDescriptorEntity<T>,
+    result: ReturnType<T>
+  ): Promise<void> {
+    if (currentRun.returnValueChecks.length !== 0) return;
+    const actual = serialize(result);
+    const returnValueGetter = currentRun.returnValueGetter;
+    if (returnValueGetter == null)
+      throw new Error(
+        messageFormat(
+          RETURN_VALUE_MISMATCH_MESSAGE_FORMAT,
+          this.caseName(),
+          "undefined",
+          actual,
+          ""
+        )
+      );
+    const expected = serialize(returnValueGetter());
+    if (actual !== expected) {
+      throw new Error(
+        messageFormat(
+          RETURN_VALUE_MISMATCH_MESSAGE_FORMAT,
+          this.caseName(),
+          expected,
+          actual,
+          diff(expected, actual)
+        )
+      );
     }
+  }
 }
-

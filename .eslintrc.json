@@ -3,18 +3,13 @@
     "browser": true,
     "es2021": true
   },
-  "extends": [
-    "standard-with-typescript",
-    "prettier"
-  ],
+  "extends": ["standard-with-typescript", "prettier"],
   "overrides": [],
   "parserOptions": {
     "ecmaVersion": "latest",
     "format": "json",
     "sourceType": "module",
-    "project": [
-      "./tsconfig.json"
-    ]
+    "project": ["./tsconfig.json"]
   },
   "rules": {
     "no-useless-catch": "off",

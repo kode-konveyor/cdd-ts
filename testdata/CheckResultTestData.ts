@@ -1,5 +1,3 @@
-
-
 export const CheckResultTestData = {
-    one:  () => 1
+  one: () => 1,
 };

@@ -1,2 +1,1 @@
-
-export const emptyContractConstContractParties = [ ]
+export const emptyContractConstContractParties = [];

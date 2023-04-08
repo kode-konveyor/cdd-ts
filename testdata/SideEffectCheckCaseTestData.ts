@@ -3,6 +3,14 @@ import { LabelTestdata } from "./LabelTestdata.js";
 import { SideEffectCheckerTestData } from "./SideEffectCheckerTestData.js";
 
 export const SideEffectCheckCaseTestData = {
-    default: ()=> ([LabelTestdata.logsToConsole(), SideEffectCheckerTestData.default()()] as [string,SideEffectCheckerType]),
-    failing: ()=> ([LabelTestdata.logsToConsole(), SideEffectCheckerTestData.failing()()] as [string,SideEffectCheckerType]),
-}
+  default: () =>
+    [LabelTestdata.logsToConsole(), SideEffectCheckerTestData.default()()] as [
+      string,
+      SideEffectCheckerType
+    ],
+  failing: () =>
+    [LabelTestdata.logsToConsole(), SideEffectCheckerTestData.failing()()] as [
+      string,
+      SideEffectCheckerType
+    ],
+};

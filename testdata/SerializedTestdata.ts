@@ -1,5 +1,5 @@
 export const SerializedTestdata = {
-    serializedComplexObject: () => `{
+  serializedComplexObject: () => `{
  "arraywithEmpty": [
  null,
  null
@@ -17,26 +17,26 @@ export const SerializedTestdata = {
  "simpleString": "foo",
  "yetAnotherComplexString": "\\u0000-\\t\\u000b-\\u001f"
 }`,
-    serializedCircularObject: () => `{
+  serializedCircularObject: () => `{
  "circular": CIRCULAR OBJECT
 }`,
-    serializedObjectWithFunctions: () => `{
+  serializedObjectWithFunctions: () => `{
  "a": "foo",
  "b": "() => { const egy = 1; return String(egy); }",
  "c": "() => "1""
 }`,
-    serializedError: () => `{
+  serializedError: () => `{
  "__class": "Error",
  "message": "hello",
  "stack": "fake stacktrace"
 }`,
-    serializedEmpty: () => "{\n \n}",
-    config: ()=> `{
+  serializedEmpty: () => "{\n \n}",
+  config: () => `{
  "jsDir": "dist",
  "moduleResolution": "ES",
  "numberofTests": "113"
 }`,
-    defaultConfig: ()=> `{
+  defaultConfig: () => `{
  "contracts": "contracts/**/*Contract.ts",
  "debug": false,
  "distFiles": "dist/**/*.js",
@@ -44,13 +44,13 @@ export const SerializedTestdata = {
  "moduleResolution": "ES",
  "watch": false
 }`,
-    contractEntity: ()=> `{
+  contractEntity: () => `{
  "cases": {
   
  },
  "returnValueChecks": []
 }`,
-    argparser: () => `[
+  argparser: () => `[
 [
 "output the version number -V, --version",
 "watch mode -w, --watch",
@@ -65,7 +65,7 @@ export const SerializedTestdata = {
 "1.0.13",
 "check the contracts"
 ]`,
-    defaultargv: () => `[
+  defaultargv: () => `[
 "--distFiles",
 "dist/**/*.js",
 "--contracts",
@@ -74,5 +74,5 @@ export const SerializedTestdata = {
 "dist",
 "--moduleResolution",
 "ES"
-]`
+]`,
 };

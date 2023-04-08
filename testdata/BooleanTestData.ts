@@ -1,5 +1,4 @@
-
 export const BooleanTestData = {
-    true: () => true,
-    false: () => false
+  true: () => true,
+  false: () => false,
 };

@@ -20,31 +20,48 @@ import { CheckReturnValue } from "../check/CheckReturnValue.js";
 import { GetStubForMixin } from "./GetStubForMixin.js";
 import { ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
 
-
-export class Contract<T extends MethodType> extends ContractEntity<T>  {
-    
-    constructor(
-        readonly ifCalledWith: typeof IfCalledWith.prototype.ifCalledWith<Contract<T>> = IfCalledWith.prototype.ifCalledWith,
-        private readonly checkCurrentRun:typeof CheckCurrentRun.prototype.checkCurrentRun<T>  = CheckCurrentRun.prototype.checkCurrentRun,
-        readonly setTitle: typeof SetTitle.prototype.setTitle<Contract<T>>  = SetTitle.prototype.setTitle,
-        readonly when: typeof When.prototype.when<Contract<T>>  = When.prototype.when,
-        readonly thenReturn: typeof ThenReturn.prototype.thenReturn<Contract<T>>  = ThenReturn.prototype.thenReturn,
-        readonly thenThrow: typeof ThenThrow.prototype.thenThrow<Contract<T>>  = ThenThrow.prototype.thenThrow,
-        readonly suchThat: typeof SuchThat.prototype.suchThat<Contract<T>,ReturnValueCheckType<T>> = SuchThat.prototype.suchThat,
-        readonly meanwhile: typeof MeanWhile.prototype.meanwhile<Contract<T>>  = MeanWhile.prototype.meanwhile,
-        readonly getStub: typeof GetStub.prototype.getStub  = GetStub.prototype.getStub,
-        readonly check: typeof Check.prototype.check  = Check.prototype.check,
-        readonly getStubForMixin = GetStubForMixin.prototype.getStubForMixin,
-        private readonly handleRun =  HandleRun.prototype.handleRun,
-        private readonly handleException = HandleException.prototype.handleException,
-        private readonly caseName = CaseName.prototype.caseName,
-        private readonly oneSideEffectCheck = OneSideEffectCheck.prototype.oneSideEffectCheck,
-        private readonly runSideEffectChecks = RunSideEffectChecks.prototype.runSideEffectChecks,
-        private readonly runReturnValueChecks = RunReturnValueChecks.prototype.runReturnValueChecks,
-        private readonly checkReturnValue = CheckReturnValue.prototype.checkReturnValue,
-    ) {
-        super();
-    }
-
+export class Contract<T extends MethodType> extends ContractEntity<T> {
+  constructor(
+    readonly ifCalledWith: typeof IfCalledWith.prototype.ifCalledWith<
+      Contract<T>
+    > = IfCalledWith.prototype.ifCalledWith,
+    private readonly checkCurrentRun: typeof CheckCurrentRun.prototype.checkCurrentRun<T> = CheckCurrentRun
+      .prototype.checkCurrentRun,
+    readonly setTitle: typeof SetTitle.prototype.setTitle<
+      Contract<T>
+    > = SetTitle.prototype.setTitle,
+    readonly when: typeof When.prototype.when<Contract<T>> = When.prototype
+      .when,
+    readonly thenReturn: typeof ThenReturn.prototype.thenReturn<
+      Contract<T>
+    > = ThenReturn.prototype.thenReturn,
+    readonly thenThrow: typeof ThenThrow.prototype.thenThrow<
+      Contract<T>
+    > = ThenThrow.prototype.thenThrow,
+    readonly suchThat: typeof SuchThat.prototype.suchThat<
+      Contract<T>,
+      ReturnValueCheckType<T>
+    > = SuchThat.prototype.suchThat,
+    readonly meanwhile: typeof MeanWhile.prototype.meanwhile<
+      Contract<T>
+    > = MeanWhile.prototype.meanwhile,
+    readonly getStub: typeof GetStub.prototype.getStub = GetStub.prototype
+      .getStub,
+    readonly check: typeof Check.prototype.check = Check.prototype.check,
+    readonly getStubForMixin = GetStubForMixin.prototype.getStubForMixin,
+    private readonly handleRun = HandleRun.prototype.handleRun,
+    private readonly handleException = HandleException.prototype
+      .handleException,
+    private readonly caseName = CaseName.prototype.caseName,
+    private readonly oneSideEffectCheck = OneSideEffectCheck.prototype
+      .oneSideEffectCheck,
+    private readonly runSideEffectChecks = RunSideEffectChecks.prototype
+      .runSideEffectChecks,
+    private readonly runReturnValueChecks = RunReturnValueChecks.prototype
+      .runReturnValueChecks,
+    private readonly checkReturnValue = CheckReturnValue.prototype
+      .checkReturnValue
+  ) {
+    super();
+  }
 }
-

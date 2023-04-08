@@ -2,24 +2,23 @@ import { ContractEntity } from "../types/ContractEntity.js";
 import { MethodType } from "../types/MethodType.js";
 import { ThrowIfCalledWithMissingFor } from "./ThrowIfCalledWithMissingFor.js";
 
-export class ThenReturn<T extends MethodType> extends ContractEntity<T>{
+export class ThenReturn<T extends MethodType> extends ContractEntity<T> {
+  constructor(
+    readonly throwIfCalledWithMissingFor = ThrowIfCalledWithMissingFor.prototype
+      .throwIfCalledWithMissingFor
+  ) {
+    super();
+  }
 
-    constructor(
-        readonly throwIfCalledWithMissingFor = ThrowIfCalledWithMissingFor.prototype.throwIfCalledWithMissingFor
-    ) {
-        super()
-    }
-
-    thenReturn<THIS extends ContractEntity<T>>(
-        explanation: string,
-        returnValue: (() => ReturnType<T>)
-    ): THIS {
-        if (this.currentRun == null)
-            this.throwIfCalledWithMissingFor("thenReturn")
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.currentRun!.explanation = explanation;
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        this.currentRun!.returnValueGetter = returnValue;
-        return this as unknown as THIS;
-    }
+  thenReturn<THIS extends ContractEntity<T>>(
+    explanation: string,
+    returnValue: () => ReturnType<T>
+  ): THIS {
+    if (this.currentRun == null) this.throwIfCalledWithMissingFor("thenReturn");
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.currentRun!.explanation = explanation;
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    this.currentRun!.returnValueGetter = returnValue;
+    return this as unknown as THIS;
+  }
 }

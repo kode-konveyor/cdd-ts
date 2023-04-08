@@ -1,8 +1,6 @@
 {
   "$schema": "./node_modules/@stryker-mutator/core/schema/stryker-schema.json",
-  "mutate": [
-    "src/*/*.ts"
-  ],
+  "mutate": ["src/*/*.ts"],
   "thresholds": {
     "low": 100,
     "high": 100
@@ -15,12 +13,7 @@
     "command": "runContracts"
   },
   "buildCommand": "tsc",
-  "reporters": [
-    "progress",
-    "clear-text",
-    "html",
-    "json"
-  ],
+  "reporters": ["progress", "clear-text", "html", "json"],
   "concurrency": 2,
   "coverageAnalysis": "perTest"
 }

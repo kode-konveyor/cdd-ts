@@ -1,8 +1,7 @@
-
 export const FunctionAnnotationtestData = {
-    default: `() => {
+  default: `() => {
  "jsDir": "",
  "moduleResolution": ""
 }`,
-    getter: "() => 1"
+  getter: "() => 1",
 };

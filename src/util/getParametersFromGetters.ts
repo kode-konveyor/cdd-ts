@@ -1,5 +1,7 @@
-export function getParametersFromGetters(getters: Array<() => unknown>): Array<unknown> {
-    return getters.map(x => {
-        return x()
-    });
+export function getParametersFromGetters(
+  getters: Array<() => unknown>
+): Array<unknown> {
+  return getters.map((x) => {
+    return x();
+  });
 }

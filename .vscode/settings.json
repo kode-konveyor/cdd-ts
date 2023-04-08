@@ -1,8 +1,6 @@
 {
   "editor.formatOnSave": true,
-  "javaPMD.rulesets": [
-    "pmd.xml"
-  ],
+  "javaPMD.rulesets": ["pmd.xml"],
   "java.configuration.updateBuildConfiguration": "automatic",
   "[Makefile]": {
     "editor.insertSpaces": false,

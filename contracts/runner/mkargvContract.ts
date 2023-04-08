@@ -5,14 +5,23 @@ import { ArgvTestData } from "../../testdata/ArgvTestData.js";
 import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker.js";
 import { PatternTestData } from "../../testdata/PatternTestData.js";
 
-export const mkargvContractParties = [ mkargv ]
+export const mkargvContractParties = [mkargv];
 export const mkargvContract = new Contract<typeof mkargv>()
-    .setTitle("makes an argv array out of configuration")
+  .setTitle("makes an argv array out of configuration")
 
-    .ifCalledWith(CDDConfigurationTestData.defaultConfig)
-    .meanwhile("if no debug is given, no stdout", new ConsoleLogChecker(PatternTestData.emptystdout))
-    .thenReturn("returns an array of all parameters in the long form and their argument", ArgvTestData.defaultConfig)
+  .ifCalledWith(CDDConfigurationTestData.defaultConfig)
+  .meanwhile(
+    "if no debug is given, no stdout",
+    new ConsoleLogChecker(PatternTestData.emptystdout)
+  )
+  .thenReturn(
+    "returns an array of all parameters in the long form and their argument",
+    ArgvTestData.defaultConfig
+  )
 
-    .ifCalledWith(CDDConfigurationTestData.debug)
-    .meanwhile("if debug is given, prints the argv to stdout", new ConsoleLogChecker(PatternTestData.mkArgv))
-    .thenReturn("--debug have no argument", ArgvTestData.debug)
+  .ifCalledWith(CDDConfigurationTestData.debug)
+  .meanwhile(
+    "if debug is given, prints the argv to stdout",
+    new ConsoleLogChecker(PatternTestData.mkArgv)
+  )
+  .thenReturn("--debug have no argument", ArgvTestData.debug);

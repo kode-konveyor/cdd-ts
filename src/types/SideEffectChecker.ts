@@ -1,6 +1,5 @@
-
 export interface SideEffectCheckerType {
-    setUp: () => void;
-    check: () => void;
-    tearDown: () => void;
+  setUp: () => void;
+  check: () => void;
+  tearDown: () => void;
 }

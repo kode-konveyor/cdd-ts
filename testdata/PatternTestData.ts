@@ -1,6 +1,5 @@
-
 export const PatternTestData = {
-    mkArgv: `\\[
+  mkArgv: `\\[
 "--distFiles",
 "dist.*js",
 "--contracts",
@@ -11,7 +10,7 @@ export const PatternTestData = {
 "ES",
 "-d"
 ]`,
-    mergeConfig: `{
+  mergeConfig: `{
  "contracts": "contracts.*Contract.ts",
  "debug": true,
  "distFiles": "dist.*.js",
@@ -19,5 +18,5 @@ export const PatternTestData = {
  "moduleResolution": "ES",
  "watch": false
 }`,
-   emptystdout: '\\[]'
+  emptystdout: "\\[]",
 };
