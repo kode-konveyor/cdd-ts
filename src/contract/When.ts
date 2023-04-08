@@ -2,22 +2,23 @@ import { ContractEntity } from "../types/ContractEntity.js";
 import { MethodType } from "../types/MethodType.js";
 import { EnvironmentManipulatorType } from "../types/EnvironmentManipulatorType.js";
 import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
-import { messageFormat } from "../util/messageFormat.js";
+import { CaseName } from "../check/CaseName.js";
+import { CheckCurrentRun } from "./CheckCurrentRun.js";
 
 export class When<T extends MethodType> extends ContractEntity<T>{
+
+    constructor(
+        public checkCurrentRun= CheckCurrentRun.prototype.checkCurrentRun,
+        public caseName = CaseName.prototype.caseName,
+    ) {
+        super();
+    }
 
     when<R extends ContractEntity<T>>(
         explanation: string,
         environmentManipulator: EnvironmentManipulatorType
     ):R  {
-        if (this.currentRun != null) {
-            const currentCase = (this.currentCase != null) ? this.currentCase : "";
-            const lastCase = this.cases[currentCase];
-            if (lastCase == null)
-                throw new Error(messageFormat("no such case:{1} in {2}",currentCase,JSON.stringify(this)))
-            lastCase.runs.push(this.currentRun);
-        }
-
+        this.checkCurrentRun()
         this.currentCase = explanation;
         const caseDescriptor = new CaseDescriptorEntity();
         caseDescriptor.setUp = environmentManipulator.setUp;

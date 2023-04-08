@@ -1,6 +1,6 @@
 import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { CaseName } from "./CaseName.js";
-import { setUpSideEffectChecks } from "./SetUpSideEffectChecks.js";
+import { setUpSideEffectChecks, tearDownSideEffectChecks } from "./SetUpSideEffectChecks.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { MethodType } from "../types/MethodType.js";
@@ -23,29 +23,38 @@ export class HandleRun <T extends MethodType> extends ContractEntity<T> {
     ) {
         super();
     }
-    
-    handleRun(
-        currentRun: RunDescriptorEntity<T>
-    ): number {
-        this.currentRunExplanation = currentRun.explanation;
-        if (currentRun.parameterGetters === undefined)
-            throw new Error(this.caseName() + ": no ifcalledWith");
-        setUpSideEffectChecks.call(this, currentRun);
-        let result: ReturnType<T>;
-        const parameters: Parameters<T> = getParametersFromGetters(currentRun.parameterGetters) as Parameters<T>
-        try {
-            result = this.testedFunction(...(parameters));
-        } catch (e) {
-            this.handleException(currentRun, e);
+
+    async handleRun(
+        currentRun: RunDescriptorEntity<T>,
+        sut: T
+    ): Promise<number> {
+            this.currentRunExplanation = currentRun.explanation;
+            if (currentRun.parameterGetters === undefined)
+                throw new Error(this.caseName() + ": no ifcalledWith");
+            try {
+                await setUpSideEffectChecks.call(this, currentRun);
+                let result: ReturnType<T>;
+                const parameters: Parameters<T> = getParametersFromGetters(currentRun.parameterGetters) as Parameters<T>
+                try {
+                    result = await sut(...(parameters));
+                } catch (e) {
+                    tearDownSideEffectChecks.call(this,currentRun);
+                    this.handleException(currentRun, e);
+                    return 1;
+                }
+                if (currentRun.thrown != null)
+                    throw new Error(messageFormat(
+                        EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT,
+                        this.caseName()));
+                await this.checkReturnValue(currentRun, result)
+                this.runReturnValueChecks(currentRun, result, parameters);
+                this.runSideEffectChecks(currentRun);
+            } catch (e) {
+                tearDownSideEffectChecks.call(this,currentRun);
+                throw e                
+            }
+            tearDownSideEffectChecks.call(this,currentRun);
             return 1;
-        }
-        if (currentRun.thrown != null)
-            throw new Error(messageFormat(
-                EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT,
-                this.caseName()));
-        this.checkReturnValue(currentRun, result)
-        this.runReturnValueChecks(currentRun, result, parameters);
-        this.runSideEffectChecks(currentRun);
-        return 1;
+
     }
 }

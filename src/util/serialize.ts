@@ -1,6 +1,7 @@
 
 export function serialize(object: any): string {
-    return str("", {"": object},"",[]);// harmless mutation
+    // Stryker disable next-line ArrayDeclaration
+    return str("", {"": object},"",[]);
 }
 
 const indent = " ";
@@ -37,7 +38,6 @@ function includes(array: Array<unknown>, value:unknown): boolean {
 
 function str(key:string|number, holder:Record<string,unknown>, gap: string, seen: Array<Object>): string {
     const mind = gap;
-    let partial: Array<unknown>;
     let value = holder[key];
 
     if (
@@ -84,9 +84,25 @@ function str(key:string|number, holder:Record<string,unknown>, gap: string, seen
             }
 
             seen.push(value as Object);
-
+            if (Object.prototype.toString.apply(value) === "[object Array]") {
+                const partial = (value as Array<unknown>).map((v,i) => {
+                    return (str(i, value as Record<string,unknown>, gap, seen) as unknown as boolean) || "null";
+                })
+                const v = partial.length === 0
+                    ? "[]"
+                    : (
+                            "[\n"
+                            + gap
+                            + partial.join(",\n" + gap)
+                            + "\n"
+                            + mind
+                            + "]"
+                        )
+                gap = mind;
+                return v;
+            }
             gap += indent;
-            partial = [];
+            const partial = [];
 
             for (const k of Object.keys(value as Object).sort()) {
                 const v = str(k, value as unknown as Record<string,Object>, gap, seen);
@@ -94,7 +110,6 @@ function str(key:string|number, holder:Record<string,unknown>, gap: string, seen
                     partial.push(quote(k) + ": " + v);
                 }
             }
-
             const v = "{\n" + gap + partial.join(",\n" + gap) + "\n" + mind + "}"
             gap = mind;
             return v;
@@ -103,4 +118,3 @@ function str(key:string|number, holder:Record<string,unknown>, gap: string, seen
     }
     return value as string
 }
-

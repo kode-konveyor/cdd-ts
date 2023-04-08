@@ -1,9 +1,10 @@
 import equal from "fast-deep-equal";
 import { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
 import { messageFormat } from "../src/util/messageFormat.js";
+import { serialize } from "../src/util/serialize.js";
 
-export const GLobalObject = {
-    value: [] as Array<any>,
+export const GlobalObject = {
+    value: [true] as Array<any>,
     multiplier: 1
 }
 
@@ -12,30 +13,38 @@ export class SeChecker implements SideEffectCheckerType {
 
     public expected: Array<any> = [["hello b"]]
 
-    setUp = (): void => {
-        GLobalObject.value = []
+    setUp = async (): Promise<void> => {
+        if(GlobalObject.value[0]!== true)
+            throw new Error("ouch")
+        GlobalObject.value = []
     };
 
     check = (): void => {
-        if (!(equal(GLobalObject.value, this.expected)))
+        if (!(equal(GlobalObject.value, this.expected)))
             throw new Error(messageFormat(
                 "SeChecker:\nexpected:{1}\nactual  :{2}",
-                this.expected.toString(),
-                GLobalObject.value.toString()
+                serialize(this.expected),
+                serialize(GlobalObject.value)
             ))
     }
 
     tearDown = (): void => {
+        GlobalObject.value = [true]
     };
 
 }
 
-export function getSideEffectChecker(): SideEffectCheckerType {
+function getSideEffectChecker(): SideEffectCheckerType {
     return new SeChecker();
 }
 
-export function getSideEffectCheckerFailing(): SideEffectCheckerType {
+function getSideEffectCheckerFailing(): SideEffectCheckerType {
     const sideEffectChecker = getSideEffectChecker() as SeChecker
     sideEffectChecker.expected = [["these are not the droids you are looking for"]];
     return sideEffectChecker
+}
+
+export const SideEffectCheckerTestData = {
+    default: ()=> getSideEffectChecker,
+    failing: ()=> getSideEffectCheckerFailing
 }

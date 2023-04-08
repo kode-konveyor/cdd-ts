@@ -17,6 +17,7 @@ export class OneSideEffectCheck<T extends MethodType> extends ContractEntity<T> 
             try {
                 entry[1].check();
             } catch (error) {
+                entry[1].tearDown();
                 throw new Error(messageFormat(
                     SIDE_EFFECT_CHECK_FAILURE_MESSAGE,
                     this.caseName(),

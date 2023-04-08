@@ -12,5 +12,10 @@ export const MakeTestDataTestData = {
             getTwo: { __from: "getOne", moduleResolution: "ES" },
             getOne: { __from: "", jsDir: JS_DIR }
         };
+    },
+    badAdd: () => {
+        return {
+            getOne: { __from: "", __add: ["baz"] }
+        };
     }
 };

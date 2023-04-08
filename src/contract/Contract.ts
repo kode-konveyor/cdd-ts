@@ -18,7 +18,6 @@ import { RunSideEffectChecks } from "../check/RunSideEffectChecks.js";
 import { RunReturnValueChecks } from "../check/RunReturnValueChecks.js";
 import { CheckReturnValue } from "../check/CheckReturnValue.js";
 import { GetStubForMixin } from "./GetStubForMixin.js";
-import { WithParameterConstraints } from "./WithParameterConstraints.js";
 import { ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
 
 
@@ -26,13 +25,12 @@ export class Contract<T extends MethodType> extends ContractEntity<T>  {
     
     constructor(
         readonly ifCalledWith: typeof IfCalledWith.prototype.ifCalledWith<Contract<T>> = IfCalledWith.prototype.ifCalledWith,
-        private readonly checkCurrentRun = CheckCurrentRun.prototype.checkCurrentRun,
+        private readonly checkCurrentRun:typeof CheckCurrentRun.prototype.checkCurrentRun<T>  = CheckCurrentRun.prototype.checkCurrentRun,
         readonly setTitle: typeof SetTitle.prototype.setTitle<Contract<T>>  = SetTitle.prototype.setTitle,
         readonly when: typeof When.prototype.when<Contract<T>>  = When.prototype.when,
         readonly thenReturn: typeof ThenReturn.prototype.thenReturn<Contract<T>>  = ThenReturn.prototype.thenReturn,
         readonly thenThrow: typeof ThenThrow.prototype.thenThrow<Contract<T>>  = ThenThrow.prototype.thenThrow,
         readonly suchThat: typeof SuchThat.prototype.suchThat<Contract<T>,ReturnValueCheckType<T>> = SuchThat.prototype.suchThat,
-        readonly withParameterConstraints: typeof WithParameterConstraints.prototype.withParameterConstraints<Contract<T>>  = WithParameterConstraints.prototype.withParameterConstraints,
         readonly meanwhile: typeof MeanWhile.prototype.meanwhile<Contract<T>>  = MeanWhile.prototype.meanwhile,
         readonly getStub: typeof GetStub.prototype.getStub  = GetStub.prototype.getStub,
         readonly check: typeof Check.prototype.check  = Check.prototype.check,

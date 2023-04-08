@@ -1,4 +1,10 @@
+import { argparser } from "../src/runner/argparser.js";
+import { configFromFile } from "../src/runner/configFromFile.js";
+import { defaultConfig } from "../src/runner/defaultConfig.js";
+import { mkargv } from "../src/runner/mkargv.js";
+import { ContractEntity } from "../src/types/ContractEntity.js";
 import { annotateFunction } from "../src/util/annotateFunction.js";
+import { CDDConfigurationTestData } from "./CDDConfigurationTestData.js";
 
 const circular = {
     circular: null as unknown
@@ -6,6 +12,7 @@ const circular = {
 circular.circular = circular;
 const error = new Error("hello");
 error.stack = "fake stacktrace";
+
 export const SerializableTestDataDescriptor = {
     complexObject: {
         boolean: true,
@@ -20,7 +27,8 @@ export const SerializableTestDataDescriptor = {
         },
         simpleNumber: 3,
         infinity: 1 / 0,
-        null: null
+        null: null,
+        arraywithEmpty: [undefined,undefined]
     },
     circular,
     objectWithFunctions: {
@@ -32,7 +40,16 @@ export const SerializableTestDataDescriptor = {
         c: annotateFunction(() => String(1))
     },
     error,
-    empty: {}
+    empty: {},
+    config: configFromFile,
+    defaultConfig,
+    contractEntity: new ContractEntity(),
+    argparser: [
+        argparser.options.map(desc=> desc.description+" "+ desc.flags),
+        argparser.name(),
+        (argparser as unknown as {_version:string})._version,
+        argparser.description()],
+    defaultargv: mkargv(CDDConfigurationTestData.defaultConfig())
 };
 export type SerializableTestdata = {
     [K in keyof typeof SerializableTestDataDescriptor]: () => typeof SerializableTestDataDescriptor[K];

@@ -19,6 +19,10 @@ export const CDDConfigurationTestDataDescriptor = {
         moduleResolution: "ES",
         debug: false
     },
+    debug: {
+        __from: "defaultConfig",
+        debug: true
+    },
     getCDDConfigurationWithJsDir: {
         __from: "getCDDConfiguration",
         jsDir: JS_DIR
@@ -34,6 +38,30 @@ export const CDDConfigurationTestDataDescriptor = {
     getCDDConfigurationTenTests: {
         __from: "getCDDConfigurationWithJsDir",
         numberofTests: "10"
+    },
+    runsomeContracts: {
+        __from: "defaultConfig",
+        contracts: 'contracts/util/diffContract.ts',
+    },
+    runEmptyContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/emptyContract.ts',
+    },
+    emptyContractConstContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/emptyContractConstContract.ts',
+    },
+    emptyContractPartiesContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/emptyContractPartiesContract.ts',
+    },
+    runNoContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/NoSuchContract.ts',
+    },
+    runOneContract: {
+        __from: "defaultConfig",
+        contracts: 'testdata/contracts/oneContract.ts',
     }
 } satisfies TestDataDescriptor<CDDConfiguration>;
 

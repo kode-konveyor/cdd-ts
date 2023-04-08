@@ -15,7 +15,7 @@ export class CheckCurrentRun<T extends MethodType> extends ContractEntity<T> {
         super();
     }
 
-    checkCurrentRun(): WithCorrectRun<T,this> {
+    checkCurrentRun<T extends MethodType>(): WithCorrectRun<T,ContractEntity<T>> {
         if (this.currentRun !== undefined) {
             if (this.currentRun.returnValueGetter === undefined && this.currentRun.thrown == null)
                 throw new Error(messageFormat(
@@ -25,10 +25,9 @@ export class CheckCurrentRun<T extends MethodType> extends ContractEntity<T> {
             if (this.cases[currentCase] == null) {
                 this.cases[currentCase] = new CaseDescriptorEntity();
             }
-            // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-            (this.cases[currentCase] as CaseDescriptorEntity<T>).runs.push(this.currentRun);
+            (this.cases[currentCase] as unknown as CaseDescriptorEntity<T>).runs.push(this.currentRun as unknown as RunDescriptorEntity<T>);
             this.currentRun = undefined
         }
-        return this as WithCorrectRun<T,this>
+        return this as unknown as WithCorrectRun<T,ContractEntity<T>>
     }
 }

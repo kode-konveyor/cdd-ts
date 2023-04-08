@@ -1,22 +1,58 @@
 import { ContractEntity } from "../src/types/ContractEntity.js";
 import { DescriptorAddType, TestDataDescriptor } from "../src/util/makeTestData.js";
 import { CaseDescriptorTestData } from "./CaseDescriptorTestData.js";
+import { LabelTestdata } from "./LabelTestdata.js";
 import { TestedFunctionType } from "./MethodTestData.js";
-import { RunDescriptorTestData, RUN_EXPLANATION } from "./RunDescriptorTestData.js";
-import { getSideEffectCheckCase } from "./SideEffectCheckCaseTestData.js";
+import { RunDescriptorTestData } from "./RunDescriptorTestData.js";
 
-export const CONTRACT_EXPLANATION = "The function under test";
-export const RUN_IDENTIFICATION = "The function under test::run explanation:"
-export const NONDEFAULT_CASE_NAME = "Global multiplier is 3";
 
 export const ContractTestDataDescriptor = {
     getContract: { __from: "" },
         getContractWithTitle: { __from: "getContract",
-            explanation: CONTRACT_EXPLANATION
+            explanation: LabelTestdata.default()
         },
+            getContractWithOtherReturnValue: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorWithOtherreturnValue()
+            },
+            getContractWithSideEffectCheckAndThrowingRun: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorWithsideeffectCheckAndRunThrowing()
+            },
+            getContractWithFailingReturnvalueCheck: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorWithReturnValueCheckFailing()
+            },
+            getContractWithReturnvalueCheck: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorWithReturnValueCheck()
+            },
+            getContractThrowingUnexpectedException: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorThrowingException()
+            },
+            getContractNotThrowingDefinedException: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorThrowing()
+            },
+            getContractCheckingTheDefinedException: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorCheckingException()
+            },
+            getContractThrowingAnotherException: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorThrowingAnotherException()
+            },
+            getContractWithFailingSideEffectCheck: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorWithSideEffectCheckCheckFailing()
+            },
             getContractWithTitleAndRun: { __from: "getContractWithTitle",
                 currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt()
             },
+            getContractWithCorrectCurrentRun: { __from: "getContractWithTitle",
+                currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt() 
+            },
+                getContractWithCorrectrunandEmptyDefaultCase: { __from: "getContractWithCorrectCurrentRun",
+                cases: {"": CaseDescriptorTestData.getCaseDescriptor()}
+                },
+                getContractTriggeringSideEffect: { __from: "getContractWithTitle",
+                    currentRun: RunDescriptorTestData.getRunDescriptorTriggeringSideEffect()
+                },
+                getContractTriggeringAndCheckingSideEffect: { __from: "getContractWithTitle",
+                    currentRun: RunDescriptorTestData.getRunDescriptorTriggeringAndCheckingSideEffect()
+                }, 
             getContractWithDefaultCase: { __from: "getContractWithTitle",
                 cases: {"": CaseDescriptorTestData.getCaseDescriptor()}
             },
@@ -26,36 +62,12 @@ export const ContractTestDataDescriptor = {
                     getContractWithRunInDefaultCase: { __from: "getContractWithFreshRun",
                         cases: {"":CaseDescriptorTestData.getCaseDescriptorWithCorrectRun()}
                     },
-                        getContractThrowingAnotherException: { __from: "getContractWithRunInDefaultCase",
-                            cases: {"":CaseDescriptorTestData.getCaseDescriptorWithThrowingAnotherExceptionRun()}
-                        },
-                        getContractThrowingUnexpectedException: { __from: "getContractWithRunInDefaultCase",
-                            cases: {"":CaseDescriptorTestData.getCaseDescriptorWithThrowingExceptio()}
-                        },
-                        getContractWithFailingReturnvalueCheck: { __from: "getContractWithRunInDefaultCase",
-                            cases: {"":CaseDescriptorTestData.getCaseDescriptorWithReturnValueCheckFailing()}
-                        },
-                        getContractWithFailingSideEffectCheck: { __from: "getContractWithRunInDefaultCase",
-                            cases: {"":CaseDescriptorTestData.getCaseDescriptorWithSideEffectCheckCheckFailing()}
-                        },
-                        getContractWithOtherReturnValue: { __from: "getContractWithRunInDefaultCase",
-                            cases: {"":CaseDescriptorTestData.getCaseDescriptorWithOtherReturnValue()}
-                        },
-                    getContractNotThrowingDefinedException: { __from: "getContractWithFreshRun",
-                        cases: {"":CaseDescriptorTestData.getCaseDescriptorWithThrowingRun()}
-                    },
-                getContractWithCorrectCurrentRun: { __from: "getContractWithDefaultCase",
-                    currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt() 
+                getContractWithParametersSet: { __from: "getContractWithDefaultCase",
+                    currentRun: RunDescriptorTestData.getRunDescriptorParametersSet(),
                 },
-                    getContractWithParameterConstraint: { __from: "getContractWithDefaultCase",
-                        currentRun: RunDescriptorTestData.getRunDescriptorWithParameterConstraint() 
-                    },
-                    getContractWithGlobalSideEffectCheck: { __from: "getContractWithCorrectCurrentRun",
-                        sideEffectChecks: [getSideEffectCheckCase()]
-                    },
-                        getContractWithGlobalSideEffectCheckNotHolding: { __from: "getContractWithGlobalSideEffectCheck",
-                            currentRun: RunDescriptorTestData.getRunDescriptorNotTriggeringSideEffect()
-                        },
+                getContractWithCorrectRunAndEmptyDefaultCase: { __from: "getContractWithDefaultCase",
+                    currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt(),
+                },
                 getContractThrowingTheDefinedException: { __from: "getContractWithDefaultCase",
                     currentRun: RunDescriptorTestData.getRunDescriptorCheckingException()
                 },
@@ -69,38 +81,38 @@ export const ContractTestDataDescriptor = {
                             currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt()
                         },
                 getContractWithNonDefaultCase: { __from: "getContractWithDefaultCase",
-                    currentCase:NONDEFAULT_CASE_NAME,
-                    __add: ["cases", NONDEFAULT_CASE_NAME, CaseDescriptorTestData.getCaseDescriptor()] as DescriptorAddType,
+                    currentCase:LabelTestdata.nondefaultCaseName(),
+                    __add: ["cases", LabelTestdata.nondefaultCaseName(), CaseDescriptorTestData.getCaseDescriptor()] as DescriptorAddType,
                 },
                     getContractWithManipulatorSet: { __from: "getContractWithNonDefaultCase",
-                        __add: ["cases", NONDEFAULT_CASE_NAME, CaseDescriptorTestData.getCaseDescriptorWithManipulatorset()]  as DescriptorAddType,
+                        __add: ["cases", LabelTestdata.nondefaultCaseName(), CaseDescriptorTestData.getCaseDescriptorWithManipulatorset()]  as DescriptorAddType,
                     },
                     getContractWithRunInNonDefaultCaseNoCurrentRun: { __from: "getContractWithManipulatorSet",
                             __add: ["cases", "", CaseDescriptorTestData.getCaseDescriptorWithCorrectRun()] as DescriptorAddType,
                         },
                     getContractWithManipulatorSetAndRun: { __from: "getContractWithNonDefaultCase",
-                        __add: ["cases", NONDEFAULT_CASE_NAME, CaseDescriptorTestData.getCaseDescriptorWithManipulatorsetAndRun()] as DescriptorAddType,
+                        __add: ["cases", LabelTestdata.nondefaultCaseName(), CaseDescriptorTestData.getCaseDescriptorWithManipulatorsetAndRun()] as DescriptorAddType,
                     },
                     getContractWithNonDefaultCaseAndCurrentRun: { __from: "getContractWithNonDefaultCase",
                         currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt(),
                     },
                         getContractWithNonDefaultCaseAndCurrentRunInCheck: { __from: "getContractWithNonDefaultCaseAndCurrentRun",
-                            currentRunExplanation: RUN_EXPLANATION,
-                            checkedCase: NONDEFAULT_CASE_NAME
+                            currentRunExplanation: LabelTestdata.runExplanation(),
+                            checkedCase: LabelTestdata.nondefaultCaseName()
                         },
-                    getContractWithNonDefaultCaseWithARunStored: { __from: "getContractWithNonDefaultCaseAndCurrentRun",
+                    getContractWithNonDefaultCaseWithARunStored: { __from: "getContractWithNonDefaultCase",
                         currentRun: RunDescriptorTestData.getRunDescriptorParametersSet(),
-                        __add: ["cases", NONDEFAULT_CASE_NAME, CaseDescriptorTestData.getCaseDescriptorWithCorrectRun()] as DescriptorAddType,
+                        __add: ["cases", LabelTestdata.nondefaultCaseName(), CaseDescriptorTestData.getCaseDescriptorWithCorrectRun()] as DescriptorAddType,
                     },
                     getContractWithRunInDefaultCaseAndNonDefaultCaseWithManipulatorSet: { __from: "getContractWithNonDefaultCaseAndCurrentRun",
-                        __add: ["cases", NONDEFAULT_CASE_NAME, CaseDescriptorTestData.getCaseDescriptorWithManipulatorset()] as DescriptorAddType,
+                        __add: ["cases", LabelTestdata.nondefaultCaseName(), CaseDescriptorTestData.getCaseDescriptorWithManipulatorset()] as DescriptorAddType,
                     },
-                getContractWithParametersSet: { __from: "getContractWithDefaultCase",
-                    currentRun: RunDescriptorTestData.getRunDescriptorParametersSet(),
-                },
             getContractWithCorrectRunInDefaultCaseNoCurrentRun: { __from: "getContractWithTitle",
                 cases: {"":CaseDescriptorTestData.getCaseDescriptorWithCorrectRun()}
             },
+            getContractWithCorrectRunInNonDefaultCaseNoCurrentRun: { __from: "getContractWithTitle",
+            __add: ["cases", LabelTestdata.nondefaultCaseName(), CaseDescriptorTestData.getCaseDescriptorWithCorrectRun()] as DescriptorAddType,
+        },
             getContractWithRunInDefaultCaseTwice: { __from: "getContractWithTitle",
                 cases: {"":CaseDescriptorTestData.getCaseDescriptorWithCorrectRunTwice()}
             },

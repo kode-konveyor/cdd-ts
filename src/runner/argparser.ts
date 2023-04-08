@@ -1,7 +1,6 @@
-import { program } from "commander";
+import { createCommand } from "commander";
 
-
-export const argparser = program
+export const argparser = createCommand("runContracts")
     .version("1.0.13")
     .description("check the contracts")
     .option("-w, --watch", "watch mode")

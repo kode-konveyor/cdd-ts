@@ -15,7 +15,6 @@ export class RunSideEffectChecks <T extends MethodType> extends ContractEntity<T
     runSideEffectChecks(
         currentRun: RunDescriptorEntity<T>
     ): void {
-        this.sideEffectChecks.forEach(this.oneSideEffectCheck())
         currentRun.sideEffectChecks.forEach(this.oneSideEffectCheck())
     }
 }
