@@ -5,8 +5,6 @@ export type AsGettersBetterImplementation<
   ? AsGettersBetterImplementation<tail, [...converted, () => head]>
   : converted;
 
-// export type ParameterGetters<T extends MethodType> = AsGetters<Parameters<T>>
-
 export type AsGetters<T extends Array<unknown>> = {
   [K in keyof T]: () => T[K];
 };

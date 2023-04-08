@@ -8,6 +8,8 @@ import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 type WithCorrectRun<T extends MethodType, K extends ContractEntity<T>> = K &
   Required<{ currentRun: RunDescriptorEntity<T> }>;
 
+const CURRENT_RUN_IS_INCOMPLETE =
+  "{1}: current run is incomplete: neither thenReturn nor thenThrow was called";
 export class CheckCurrentRun<T extends MethodType> extends ContractEntity<T> {
   constructor(readonly caseName = CaseName.prototype.caseName) {
     super();
@@ -23,10 +25,7 @@ export class CheckCurrentRun<T extends MethodType> extends ContractEntity<T> {
         this.currentRun.thrown == null
       )
         throw new Error(
-          messageFormat(
-            "{1}: current run is incomplete: neither thenReturn nor thenThrow was called",
-            this.caseName()
-          )
+          messageFormat(CURRENT_RUN_IS_INCOMPLETE, this.caseName())
         );
       const currentCase = this.currentCase != null ? this.currentCase : "";
       if (this.cases[currentCase] == null) {

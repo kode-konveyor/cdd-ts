@@ -21,6 +21,10 @@ export const HandleExceptionContractParties = [
     HandleException.prototype.handleException
   ),
 ];
+const NOT_THE_EXPECTED_EXCEPTION =
+  "Error: The function under test:undefined:undefined:Not the expected exception thrown. Got:Error: hello\nstack:\nfake stacktrace";
+const UNEXPECTED_EXCEPTION =
+  "Error: The function under test:undefined:undefined: unexpected exception:Error: hello\nstack:\nfake stacktrace";
 export const HandleExceptionContract = new Contract<
   typeof HandleException.prototype.handleException
 >()
@@ -33,7 +37,7 @@ export const HandleExceptionContract = new Contract<
   )
   .thenThrow(
     "If no exception was defined, then an exception signaling that is thrown",
-    "Error: The function under test:undefined:undefined: unexpected exception:Error: hello\nstack:\nfake stacktrace"
+    UNEXPECTED_EXCEPTION
   )
 
   .ifCalledWith(
@@ -43,5 +47,5 @@ export const HandleExceptionContract = new Contract<
   )
   .thenThrow(
     "If another exception was defined, then an exception signaling that is thrown",
-    "Error: The function under test:undefined:undefined:Not the expected exception thrown. Got:Error: hello\nstack:\nfake stacktrace"
+    NOT_THE_EXPECTED_EXCEPTION
   );

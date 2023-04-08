@@ -1,3 +1,4 @@
+/* eslint-disable kodekonveyor/no-literals */
 import { createCommand } from "commander";
 
 export const argparser = createCommand("runContracts")

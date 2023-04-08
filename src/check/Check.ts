@@ -14,6 +14,7 @@ import { RunSideEffectChecks } from "./RunSideEffectChecks.js";
 
 const mutex = new Mutex();
 
+const NO_CHECKS_IN_CONTRACT = "no checks in contract {1}";
 export class Check<T extends MethodType> extends ContractEntity<T> {
   constructor(
     readonly handleRun = HandleRun.prototype.handleRun,
@@ -69,9 +70,7 @@ export class Check<T extends MethodType> extends ContractEntity<T> {
       if (casename !== "") mutex.unlock();
     }
     if (checked === 0) {
-      throw new Error(
-        messageFormat("no checks in contract {1}", this.explanation)
-      );
+      throw new Error(messageFormat(NO_CHECKS_IN_CONTRACT, this.explanation));
     }
     return checked;
   }

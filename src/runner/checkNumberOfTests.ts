@@ -1,6 +1,7 @@
 import { CDDConfiguration } from "../types/CDDConfiguration.js";
 import { messageFormat } from "../util/messageFormat.js";
 
+const NOT_THE_EXPECTED_NUMBER_OF_TESTS = "expected {1} tests, got {2}";
 export function checkNumberOfTests(
   config: CDDConfiguration,
   tested: number
@@ -9,7 +10,7 @@ export function checkNumberOfTests(
     if (tested !== Number(config.numberofTests)) {
       throw new Error(
         messageFormat(
-          "expected {1} tests, got {2}",
+          NOT_THE_EXPECTED_NUMBER_OF_TESTS,
           String(config.numberofTests),
           tested
         )

@@ -3,6 +3,7 @@ import { MethodType } from "../types/MethodType.js";
 import { SideEffectCheckerType } from "../types/SideEffectChecker.js";
 import { ThrowIfCalledWithMissingFor } from "./ThrowIfCalledWithMissingFor.js";
 
+const MEANWHILE = "meanWhile";
 export class MeanWhile<T extends MethodType> extends ContractEntity<T> {
   constructor(
     readonly throwIfCalledWithMissingFor = ThrowIfCalledWithMissingFor.prototype
@@ -16,7 +17,7 @@ export class MeanWhile<T extends MethodType> extends ContractEntity<T> {
     checker: SideEffectCheckerType
   ): THIS {
     this.currentRun?.sideEffectChecks.push([reason, checker]) ??
-      this.throwIfCalledWithMissingFor("meanWhile");
+      this.throwIfCalledWithMissingFor(MEANWHILE);
     return this as unknown as THIS;
   }
 }

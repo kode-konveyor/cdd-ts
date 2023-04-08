@@ -15,6 +15,8 @@ export const ThenReturnContractParties = [
   ThenReturn.prototype.thenReturn.call.bind(ThenReturn.prototype.thenReturn),
 ];
 
+const NO_IFCALLEDWITH_BEFORE_THENRETURN =
+  "ifCalledWith is missing before thenReturn";
 export const ThenReturnContract = new Contract<
   typeof ThenReturn.prototype.thenReturn.call
 >()
@@ -35,5 +37,5 @@ export const ThenReturnContract = new Contract<
   )
   .thenThrow(
     "if no ifCalledWith was called before, an error is thrown",
-    "ifCalledWith is missing before thenReturn"
+    NO_IFCALLEDWITH_BEFORE_THENRETURN
   );

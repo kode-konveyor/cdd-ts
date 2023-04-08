@@ -28,6 +28,7 @@ export class GetStub<T extends MethodType> extends ContractEntity<T> {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         if (
           run.returnValueChecks.length > 0 ||
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           equal(getParametersFromGetters(run.parameterGetters!), params)
         ) {
           if (run.thrown === undefined)

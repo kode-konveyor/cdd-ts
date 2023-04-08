@@ -18,6 +18,8 @@ import { CDDConfiguration } from "../src/types/CDDConfiguration.js";
 import { When } from "../src/contract/When.js";
 import { LabelTestdata } from "./LabelTestdata.js";
 
+const NOT_DEFINED_EXACTLY_ONCE =
+  "those parameters are not defined exactly once for this case";
 export const ReturnValueCheckTestData = {
   annotateFunctionDefault: forFunctionAnnotation(
     FunctionAnnotationtestData.default
@@ -77,7 +79,7 @@ export const ReturnValueCheckTestData = {
         number,
         string
       ],
-      "those parameters are not defined exactly once for this case",
+      NOT_DEFINED_EXACTLY_ONCE,
       undefined
     ),
   makeTestDataLeakTest: (

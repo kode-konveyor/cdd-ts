@@ -6,6 +6,7 @@ import { BooleanTestData } from "../../testdata/BooleanTestData.js";
 
 export const checkNumberOfTestsContractParties = [checkNumberOfTests];
 
+const EXPECTED_TEN_TESTS = "expected 10 tests, got 11";
 export const checkNumberOfTestsContract = new Contract<
   typeof checkNumberOfTests
 >()
@@ -19,10 +20,7 @@ export const checkNumberOfTestsContract = new Contract<
     CDDConfigurationTestData.getCDDConfigurationTenTests,
     getReturnValueTestData.getReturnValueEleven
   )
-  .thenThrow(
-    "if the numbers do not match, it is an error",
-    "expected 10 tests, got 11"
-  )
+  .thenThrow("if the numbers do not match, it is an error", EXPECTED_TEN_TESTS)
   .ifCalledWith(
     CDDConfigurationTestData.getCDDConfigurationES,
     getReturnValueTestData.getReturnValue

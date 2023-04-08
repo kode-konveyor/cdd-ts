@@ -16,19 +16,24 @@ import { CDDConfiguration } from "./types/CDDConfiguration.js";
 
 const myPath = url.fileURLToPath(import.meta.url);
 const options: CDDConfiguration = argparser.parse(process.argv).opts();
+const RUNNING_BECAUSE = "running contracts because";
+const WATCHING = "watching";
 
 export const config = mergeConfig(defaultConfig, configFromFile, options);
+
 if (config.watch) {
-  if (config.debug) console.log("watching", config.distFiles);
+  if (config.debug) console.log(WATCHING, config.distFiles);
   glob(config.distFiles, {})
+    // eslint-disable-next-line promise/prefer-await-to-then
     .then((files) => {
       for (const file of files) {
         fs.watch(file, () => {
-          console.log("running contracts because", file);
+          console.log(RUNNING_BECAUSE, file);
           child_process.fork(myPath, mkargv(config));
         });
       }
     })
+    // eslint-disable-next-line promise/prefer-await-to-then
     .catch((reason) => {
       console.error(reason);
     });

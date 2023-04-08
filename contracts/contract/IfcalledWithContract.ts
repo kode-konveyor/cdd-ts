@@ -20,6 +20,9 @@ const ContractTestData = makeTestData<
     )
 );
 
+const RUN_IS_INCOMPLETE =
+  "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called";
+
 export const IfcalledWithContractParties = [
   IfCalledWith.prototype.ifCalledWith.call.bind(
     IfCalledWith.prototype.ifCalledWith
@@ -43,7 +46,7 @@ export const IfcalledWithContract = new Contract<
   )
   .thenThrow(
     "if there is a current run, and it is not fully defined, an error is thrown",
-    "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called"
+    RUN_IS_INCOMPLETE
   )
   .ifCalledWith(
     ContractTestData.getContractWithNonDefaultCaseAndCurrentRun,
@@ -64,5 +67,5 @@ export const IfcalledWithContract = new Contract<
   .ifCalledWith(ContractTestData.getContractWithFreshRun)
   .thenThrow(
     "if the previous run is not defined with at least a return value or exception, an error is signalled",
-    "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called"
+    RUN_IS_INCOMPLETE
   );

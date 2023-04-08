@@ -16,6 +16,7 @@ const ContractTestData = makeTestData<
   typeof ContractTestDataDescriptor
 >(ContractTestDataDescriptor, () => new Contract<TestedFunctionType>());
 
+const RETURNVALUE_MISMATCH = "returnvalue mismatch";
 const CheckContract = new Contract<typeof Check.prototype.check>()
   .setTitle(
     "check checks whether the contract actually corresponds to the behaviour of the SUT"
@@ -26,10 +27,19 @@ const CheckContract = new Contract<typeof Check.prototype.check>()
   )
   .thenThrow(
     "side effect checks are recommended to enter a mutex in setUp and unlock it in tearDown. TearDown will be called even if the test fails",
-    "returnvalue mismatch"
+    RETURNVALUE_MISMATCH
   );
 
 export const runAllContractsContractParties = [1];
+const NO_EXCEPTION_THROWN = "no exception was thrown";
+const BAR = "bar";
+const RETURN_VALUE_MISMATCH = "return value mismatch";
+const NO_CONTRACT_TESTED = "no contracts tested";
+const PLEASE_EXPORT_PARTIES =
+  "please export emptyContractPartiesContractParties from testdata/contracts/emptyContractPartiesContract.ts";
+const PLEASE_EXPORT_CONTRACT =
+  " please export emptyContractConstContract from testdata/contracts/emptyContractConstContract.ts";
+const NO_CHECKS_IN_EMPTY_CONTRACT = "no checks in contract empty contract";
 export const runAllContractsContract = {
   async check() {
     const oldlog = console.error;
@@ -51,26 +61,26 @@ export const runAllContractsContract = {
     checkCount += await checkThrowAsync(
       runAllContracts,
       [CDDConfigurationTestData.runEmptyContract()],
-      "no checks in contract empty contract",
+      NO_CHECKS_IN_EMPTY_CONTRACT,
       1
     );
 
     checkCount += await checkThrowAsync(
       runAllContracts,
       [CDDConfigurationTestData.emptyContractConstContract()],
-      " please export emptyContractConstContract from testdata/contracts/emptyContractConstContract.ts",
+      PLEASE_EXPORT_CONTRACT,
       1
     );
     checkCount += await checkThrowAsync(
       runAllContracts,
       [CDDConfigurationTestData.emptyContractPartiesContract()],
-      "please export emptyContractPartiesContractParties from testdata/contracts/emptyContractPartiesContract.ts",
+      PLEASE_EXPORT_PARTIES,
       1
     );
     checkCount += await checkThrowAsync(
       runAllContracts,
       [CDDConfigurationTestData.runNoContract()],
-      "no contracts tested",
+      NO_CONTRACT_TESTED,
       1
     );
     checkCount += await runAllContracts(
@@ -79,7 +89,7 @@ export const runAllContractsContract = {
     checkCount += await checkThrowAsync(
       CheckContract.check.bind(CheckContract),
       [CheckContract.check.call.bind(CheckContract.check)],
-      "return value mismatch",
+      RETURN_VALUE_MISMATCH,
       1
     );
 
@@ -94,7 +104,7 @@ export const runAllContractsContract = {
     checkCount += await checkThrowAsync(
       checker.check.bind(checker),
       [],
-      "bar",
+      BAR,
       1
     );
 
@@ -104,7 +114,7 @@ export const runAllContractsContract = {
     checkCount += await checkThrowAsync(
       checkerChecker,
       [],
-      "no exception was thrown",
+      NO_EXCEPTION_THROWN,
       1
     );
 

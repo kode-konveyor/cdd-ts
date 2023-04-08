@@ -6,6 +6,8 @@ import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import { ParameterTestData } from "../../testdata/ParametersTestData.js";
 
 export const checkThrowContractParties = [checkThrow, checkThrowAsync];
+const NO_EXCEPTION = "no exception was thrown";
+const FIRST_ARG_CANNOT_BE_ULL = "first arg cannot be two";
 export const checkThrowContract = new Contract<typeof checkThrow>()
   .setTitle("checks if an exception is thrown")
 
@@ -17,7 +19,7 @@ export const checkThrowContract = new Contract<typeof checkThrow>()
   )
   .thenThrow(
     "If no exception is thrown by the sut, it is an error",
-    "no exception was thrown"
+    NO_EXCEPTION
   )
 
   .ifCalledWith(
@@ -39,5 +41,5 @@ export const checkThrowContract = new Contract<typeof checkThrow>()
   )
   .thenThrow(
     "if an unexpected exception was thrown, return that",
-    "first arg cannot be two"
+    FIRST_ARG_CANNOT_BE_ULL
   );

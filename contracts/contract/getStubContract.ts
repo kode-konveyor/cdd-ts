@@ -14,13 +14,10 @@ export const getStubContractParties = [
 
 const contractTestData = makeTestData(
   ContractTestDataDescriptor,
-  () =>
-    new GetStub<MethodType>(
-      //    checkCurrentRunContract.getStubForMixin(),
-      CheckCurrentRun.prototype.checkCurrentRun
-    )
+  () => new GetStub<MethodType>(CheckCurrentRun.prototype.checkCurrentRun)
 );
 
+const NO_RUNS_IN_THE_CASE = "no runs in the case";
 export const getStubContract = new Contract<typeof GetStub.prototype.getStub>()
   .setTitle("returns a stub behaving according to the contract")
 
@@ -47,7 +44,7 @@ export const getStubContract = new Contract<typeof GetStub.prototype.getStub>()
   .ifCalledWith(contractTestData.getContract)
   .thenThrow(
     "if ther are no runs in the case, it is an error",
-    "no runs in the case"
+    NO_RUNS_IN_THE_CASE
   )
 
   .ifCalledWith(

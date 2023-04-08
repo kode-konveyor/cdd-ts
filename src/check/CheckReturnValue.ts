@@ -7,6 +7,8 @@ import { CaseName } from "./CaseName.js";
 import { serialize } from "../util/serialize.js";
 import { diff } from "../util/diff.js";
 
+const UNDEFINED_AS_STRING = "undefined";
+const EMPTY_STRING = "";
 export class CheckReturnValue<T extends MethodType> {
   constructor(readonly caseName = CaseName.prototype.caseName) {}
 
@@ -22,9 +24,9 @@ export class CheckReturnValue<T extends MethodType> {
         messageFormat(
           RETURN_VALUE_MISMATCH_MESSAGE_FORMAT,
           this.caseName(),
-          "undefined",
+          UNDEFINED_AS_STRING,
           actual,
-          ""
+          EMPTY_STRING
         )
       );
     const expected = serialize(returnValueGetter());

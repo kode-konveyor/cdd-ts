@@ -21,11 +21,19 @@ export const CheckContractParties = [
   contract.check.call.bind(contract.check),
 ];
 
-const otherReturnvalueRegEx = RegExp(
+const RETURN_VALUE_MISMATCH_PATTERN =
   LabelTestdata.runIdentification() +
-    " return value mismatch:.*expected:.2.*actual  :.1",
-  "ms"
+  " return value mismatch:.*expected:.2.*actual  :.1";
+const MATCH_NEWLINE = "ms";
+const otherReturnvalueRegEx = RegExp(
+  RETURN_VALUE_MISMATCH_PATTERN,
+  MATCH_NEWLINE
 );
+const RETURN_VALUE_MISMATCH =
+  'The function under test:Global multiplier is 3:undefined: return value mismatch:\nexpected:undefined\nactual  :"1"\n---diff---:\n$';
+const NO_CHECKS_IN_CONTRACT =
+  "Error: no checks in contract The function under test";
+const RETURN_VALUE_MISMATCH_SHORT = "return value mismatch";
 export const CheckContract = new Contract<typeof Check.prototype.check>()
   .setTitle(
     "check checks whether the contract actually corresponds to the behaviour of the SUT"
@@ -73,7 +81,7 @@ export const CheckContract = new Contract<typeof Check.prototype.check>()
   )
   .thenThrow(
     "side effect checks are recommended to enter a mutex in setUp and unlock it in tearDown. TearDown will be called even if the test fails",
-    "return value mismatch"
+    RETURN_VALUE_MISMATCH_SHORT
   )
 
   .ifCalledWith(
@@ -138,7 +146,7 @@ export const CheckContract = new Contract<typeof Check.prototype.check>()
   )
   .thenThrow(
     "invalid contract will result in an exception",
-    "Error: no checks in contract The function under test"
+    NO_CHECKS_IN_CONTRACT
   )
 
   .ifCalledWith(
@@ -147,5 +155,5 @@ export const CheckContract = new Contract<typeof Check.prototype.check>()
   )
   .thenThrow(
     "in case of non-default case, a current run gets to that case",
-    'The function under test:Global multiplier is 3:undefined: return value mismatch:\nexpected:undefined\nactual  :"1"\n---diff---:\n$'
+    RETURN_VALUE_MISMATCH
   );

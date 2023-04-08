@@ -16,6 +16,8 @@ function getAdder(contract: Contract<MethodType>) {
   };
 }
 
+const PLEASE_EXPORT_CONTRACT = "{1}:{2}: please export {2} from {1}";
+const PLEASE_EXPORT_PARTIES = "{1}:{2}: please export {2}Parties from {1}";
 export async function runOneContract(
   config: CDDConfiguration,
   contractFile: string,
@@ -27,20 +29,12 @@ export async function runOneContract(
   const contract: Contract<MethodType> = module[contractName];
   if (contract === undefined)
     throw new Error(
-      messageFormat(
-        "{1}:{2}: please export {2} from {1}",
-        contractFile,
-        contractName
-      )
+      messageFormat(PLEASE_EXPORT_CONTRACT, contractFile, contractName)
     );
   const parties: Array<MethodType> = module[contractName + "Parties"];
   if (parties === undefined)
     throw new Error(
-      messageFormat(
-        "{1}:{2}: please export {2} from {1}",
-        contractFile,
-        contractName + "Parties"
-      )
+      messageFormat(PLEASE_EXPORT_PARTIES, contractFile, contractName)
     );
   const numChecked = await parties.reduce(getAdder(contract), nullPromise);
   return numChecked;

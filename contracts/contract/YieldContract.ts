@@ -15,6 +15,8 @@ export const YieldContractParties = [
   Yield.prototype.yield.call.bind(Yield.prototype.yield),
 ];
 
+const IFCALLEDWITH_MISSING_BEFORE_YIELD =
+  "ifCalledWith is missing before yield";
 export const YieldContract = new Contract<typeof Yield.prototype.yield>()
   .ifCalledWith(
     contractTestData.getContractWithFreshRun,
@@ -30,4 +32,7 @@ export const YieldContract = new Contract<typeof Yield.prototype.yield>()
     ParameterTestData.default,
     getReturnValueTestDataIndirect.getReturnValue
   )
-  .thenThrow("", "ifCalledWith is missing before yield");
+  .thenThrow(
+    "if no ifCalledWith was called, it is an error",
+    IFCALLEDWITH_MISSING_BEFORE_YIELD
+  );

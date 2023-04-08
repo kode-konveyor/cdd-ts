@@ -8,6 +8,7 @@ export const GlobalObject = {
   multiplier: 1,
 };
 
+const SECHECKER_ERROR = "SeChecker:\nexpected:{1}\nactual  :{2}";
 export class SeChecker implements SideEffectCheckerType {
   public expected: Array<any> = [["hello b"]];
 
@@ -20,7 +21,7 @@ export class SeChecker implements SideEffectCheckerType {
     if (!equal(GlobalObject.value, this.expected))
       throw new Error(
         messageFormat(
-          "SeChecker:\nexpected:{1}\nactual  :{2}",
+          SECHECKER_ERROR,
           serialize(this.expected),
           serialize(GlobalObject.value)
         )

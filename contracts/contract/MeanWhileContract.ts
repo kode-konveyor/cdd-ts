@@ -14,6 +14,8 @@ const ContractTestData = makeTestData<
 export const MeanWhileContractParties = [
   MeanWhile.prototype.meanwhile.call.bind(MeanWhile.prototype.meanwhile),
 ];
+const NO_IFCALLEDWITH_BEFIRE_MEANWHILE =
+  "ifCalledWith is missing before meanWhile";
 export const MeanWhileContract = new Contract<
   typeof MeanWhile.prototype.meanwhile
 >()
@@ -31,4 +33,7 @@ export const MeanWhileContract = new Contract<
     LabelTestdata.logsToConsole,
     SideEffectCheckerTestData.default()
   )
-  .thenThrow("", "ifCalledWith is missing before meanWhile");
+  .thenThrow(
+    "if ifCalledWith is missing, that is an error",
+    NO_IFCALLEDWITH_BEFIRE_MEANWHILE
+  );

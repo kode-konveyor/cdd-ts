@@ -10,6 +10,9 @@ import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestDat
 
 export const makeTestDataContractParties = [makeTestData];
 
+const DID_YOU_REFERENCE_A_LATER_ITEM =
+  "did you reference a later item in __from?";
+const NO_RECORD_FOUND = "no record named baz";
 export const makeTestDataContract = new Contract<
   typeof makeTestData<CDDConfiguration, TestDataDescriptor<CDDConfiguration>>
 >()
@@ -62,11 +65,11 @@ export const makeTestDataContract = new Contract<
 
   .thenThrow(
     "if __from references an item which is later or does not exist, that is an error",
-    "did you reference a later item in __from?"
+    DID_YOU_REFERENCE_A_LATER_ITEM
   )
 
   .ifCalledWith(MakeTestDataTestData.badAdd, MakeTestDataTestData.constructor)
   .thenThrow(
     "if __add references an item which does not exist, that is an error",
-    "no record named baz"
+    NO_RECORD_FOUND
   );

@@ -29,6 +29,8 @@ type ckrcall = CallType<
   ContractEntity<TestedFunctionType>
 >;
 
+const CURRENT_RUN_IS_INCOMPLETE =
+  "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called";
 export const checkCurrentRunContract = new Contract<ckrcall>()
   .setTitle(
     "checks whether the current run is okay, and pushes it to the current case"
@@ -75,5 +77,5 @@ export const checkCurrentRunContract = new Contract<ckrcall>()
   .ifCalledWith(contractTestData.getContractWithFreshRun)
   .thenThrow(
     "throws error for a run without both return and thrown value",
-    "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called"
+    CURRENT_RUN_IS_INCOMPLETE
   );

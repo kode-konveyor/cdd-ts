@@ -19,6 +19,9 @@ export type TestData<
   D extends TestDataDescriptor<T>
 > = Record<keyof D, () => T>;
 
+const NO_SUCH_TESTDATA =
+  "No such testdata found: {1} did you reference a later item in __from?";
+const NO_SUCH_RECORD = "no record named {1}";
 export function makeTestData<
   T extends unknown,
   K extends TestDataDescriptor<T>
@@ -35,12 +38,7 @@ export function makeTestData<
     if (thisDescriptor.__from === "") data = constructor();
     else {
       if (ret[thisDescriptor.__from] === undefined)
-        throw new Error(
-          messageFormat(
-            "No such testdata found: {1} did you reference a later item in __from?",
-            thisDescriptor.__from
-          )
-        );
+        throw new Error(messageFormat(NO_SUCH_TESTDATA, thisDescriptor.__from));
       data = (ret[thisDescriptor.__from] as Function)();
     }
     for (const field in descriptor[key]) {
@@ -52,7 +50,7 @@ export function makeTestData<
           foo
         ];
         if (otherRecord === undefined)
-          throw new Error(messageFormat("no record named {1}", foo));
+          throw new Error(messageFormat(NO_SUCH_RECORD, foo));
         otherRecord[bar] = baz;
       } else if (field !== "__from")
         (data as Record<string, unknown>)[field] = (

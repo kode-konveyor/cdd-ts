@@ -14,6 +14,8 @@ const ContractTestData = makeTestData<
 export const SuchThatContractParties = [
   SuchThat.prototype.suchThat.call.bind(SuchThat.prototype.suchThat),
 ];
+const NO_IFCALLEDWITH_BEFORE_SUCHTHAT =
+  "ifCalledWith is missing before suchThat";
 export const SuchThatContract = new Contract<
   typeof SuchThat.prototype.suchThat
 >()
@@ -29,4 +31,7 @@ export const SuchThatContract = new Contract<
     LabelTestdata.pass,
     ReturnValueCheckTestData.passing
   )
-  .thenThrow("", "ifCalledWith is missing before suchThat");
+  .thenThrow(
+    "If ifCalledWith is missing, that is an error",
+    NO_IFCALLEDWITH_BEFORE_SUCHTHAT
+  );
