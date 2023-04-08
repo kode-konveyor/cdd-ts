@@ -1,18 +1,8 @@
 import { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
-import { getSideEffectChecker, getSideEffectCheckerFailing } from "./SideEffectCheckerTestData.js";
+import { LabelTestdata } from "./LabelTestdata.js";
+import { SideEffectCheckerTestData } from "./SideEffectCheckerTestData.js";
 
-
-export function getSideEffectCheckCase(): [string, SideEffectCheckerType] {
-    return [
-        "logs to console",
-        getSideEffectChecker()
-    ];
-}
-
-
-export function getSideEffectCheckCaseFailing(): [string, SideEffectCheckerType] {
-    return [
-        "failing sideEffectCheck",
-        getSideEffectCheckerFailing()
-    ];
+export const SideEffectCheckCaseTestData = {
+    default: ()=> ([LabelTestdata.logsToConsole(), SideEffectCheckerTestData.default()()] as [string,SideEffectCheckerType]),
+    failing: ()=> ([LabelTestdata.logsToConsole(), SideEffectCheckerTestData.failing()()] as [string,SideEffectCheckerType]),
 }

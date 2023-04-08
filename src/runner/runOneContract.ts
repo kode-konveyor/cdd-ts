@@ -7,8 +7,7 @@ import { nullPromise } from "./nullPromise.js";
 
 function getAdder(contract: Contract<MethodType>) {
     return async function adder (prev: Promise<number>, party: MethodType): Promise<number> {
-        const returned = contract.check(party);
-        const res =  await returned
+        const res =  await contract.check(party)
         const prevValue = await prev
         return prevValue + res;
     }

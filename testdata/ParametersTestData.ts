@@ -7,6 +7,7 @@ export const PARAMETERS_WITH_SIDE_EFFECT = [3, "b"]
 export const ParameterTestData = {
     default: () => makeGetters(PARAMETERS) as [() => number, () => string],
     defaultFirst: () => PARAMETERS[0],
+    returnvaluegGetter: () => () => "1",
     defaultSecond: () => PARAMETERS[1],
     defaultSimple: () => PARAMETERS,
     throwingSimple: () => PARAMETERS_THROWING_EXCEPTION,

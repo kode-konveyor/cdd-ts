@@ -8,7 +8,7 @@ export async function runAllContracts(options: CDDConfiguration): Promise<number
     const count = await runContractsfromList(options,contracts);
     if(count < 1)
         throw new Error("no contracts tested")
-    console.log("number of contracts tested: ",count)
+    console.error("number of contracts tested: ",count)
     return count
 }
 

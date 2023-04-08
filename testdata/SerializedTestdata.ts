@@ -34,7 +34,7 @@ export const SerializedTestdata = {
     config: ()=> `{
  "jsDir": "dist",
  "moduleResolution": "ES",
- "numberofTests": "110"
+ "numberofTests": "113"
 }`,
     defaultConfig: ()=> `{
  "contracts": "contracts/**/*Contract.ts",
@@ -48,11 +48,10 @@ export const SerializedTestdata = {
  "cases": {
   
  },
- "parameterConstraints": [],
- "returnValueChecks": [],
- "sideEffectChecks": []
+ "returnValueChecks": []
 }`,
     argparser: () => `[
+[
 "output the version number -V, --version",
 "watch mode -w, --watch",
 "the files to be watched in watch mode (glob pattern) -f, --distFiles [value]",
@@ -61,6 +60,10 @@ export const SerializedTestdata = {
 "module resolution strategy -m, --moduleResolution <value>",
 "expected number of tested contract clauses -n, --numberofTests <value>",
 "debug -d, --debug"
+],
+"runContracts",
+"1.0.13",
+"check the contracts"
 ]`,
     defaultargv: () => `[
 "--distFiles",

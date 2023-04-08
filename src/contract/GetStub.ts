@@ -4,7 +4,6 @@ import { messageFormat } from "../util/messageFormat.js";
 import { MethodType } from "../types/MethodType.js";
 import { MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT } from "./Messages.js";
 import { getParametersFromGetters } from "../util/getParametersFromGetters.js";
-import { CaseName } from "../check/CaseName.js";
 import { CheckCurrentRun } from "./CheckCurrentRun.js";
 import { serialize } from "../util/serialize.js";
 import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
@@ -12,8 +11,6 @@ import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 export class GetStub<T extends MethodType> extends ContractEntity<T> {
     constructor(
         public checkCurrentRun= CheckCurrentRun.prototype.checkCurrentRun,
-        
-        public caseName = CaseName.prototype.caseName,
     ) {
         super();
     }
@@ -26,23 +23,13 @@ export class GetStub<T extends MethodType> extends ContractEntity<T> {
             caseName = ""
         // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
         const currentCase = this.cases[caseName] as CaseDescriptorEntity<T>;
-
+        if(currentCase?.runs == null)
+            throw new Error("no runs in the case"+ serialize(this))
         const stub = (...params: Parameters<T>): ReturnType<T> => {
             const retvals: Array<ReturnType<T>> = []
             currentCase.runs.forEach(run => {
-                if (run.parameterGetters == null)
-                    throw new Error(messageFormat(
-                        "A run in the case '{1}' have no parameters defined!",
-                        String(caseName)))
-                if(run.parameterConstraints.length > 0) {
-                    if(
-                        run.parameterConstraints.reduce(
-                            (prev,current)=>
-                                prev && (current[1](...params) === undefined),
-                        true)) {
-                            retvals.push(run.returnValueGetter as ReturnType<T>)
-                        }
-                } else if(run.returnValueChecks.length > 0 || equal(getParametersFromGetters(run.parameterGetters), params)) {
+                // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+                if(run.returnValueChecks.length > 0 || equal(getParametersFromGetters(run.parameterGetters!), params)) {
                     if (run.thrown === undefined)
                         retvals.push(run.returnValueGetter as ReturnType<T>)
                     else

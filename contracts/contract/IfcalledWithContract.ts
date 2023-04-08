@@ -22,7 +22,8 @@ export const IfcalledWithContract = new Contract<typeof IfCalledWith.prototype.i
     .ifCalledWith(ContractTestData.getContractWithDefaultCase, ...ParameterGetterTestData.default)
     .thenReturn("The Parameters are put into the run", ContractTestData.getContractWithParametersSet)
     .ifCalledWith(ContractTestData.getContractWithFreshRun, ...ParameterGetterTestData.default)
-    .thenThrow("if there is a current run, and it is not fully defined, an error is thrown", "current run is incomplete")
+    .thenThrow("if there is a current run, and it is not fully defined, an error is thrown",
+        "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called")
     .ifCalledWith(ContractTestData.getContractWithNonDefaultCaseAndCurrentRun, ...ParameterGetterTestData.default)
     .thenReturn("we put the current run into the current case", ContractTestData.getContractWithNonDefaultCaseWithARunStored)
     .ifCalledWith(ContractTestData.getContractWithTitleAndRun, ...ParameterGetterTestData.default)

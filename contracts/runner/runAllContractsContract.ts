@@ -3,6 +3,7 @@ import { Check } from "../../src/check/Check.js"
 import { checkThrowAsync } from "../../src/util/checkThrowAsync.js"
 import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker.js"
 import { makeTestData } from "../../src/util/makeTestData.js"
+import { serialize } from "../../src/util/serialize.js"
 import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js"
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js"
 import { TestedFunctionType, TestedFunctionTestData } from "../../testdata/MethodTestData.js"
@@ -21,13 +22,13 @@ const CheckContract =
 export const runAllContractsContractParties = [1]
 export const runAllContractsContract = {
     async check() {
-        const oldlog = console.log
+        const oldlog = console.error
         const logged: Array<unknown> = []
-        console.log = (...params) => { logged.push(params) }
+        console.error = (...params) => { logged.push(params) }
         let checkCount = await runAllContracts(CDDConfigurationTestData.runsomeContracts())
-        console.log = oldlog
+        console.error = oldlog
         if (String(logged) !== String([['number of contracts tested: ', 1]]))
-            throw new Error("runAllcontract did not run what was needed")
+            throw new Error(serialize(logged))
         if (checkCount !== 1)
             throw new Error("expected 1 contracts, but got " + String(checkCount) + ".")
 

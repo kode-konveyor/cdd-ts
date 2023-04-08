@@ -1,47 +1,50 @@
 import equal from "fast-deep-equal";
-import { Mutex } from "../src/check/Mutex.js";
 import { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
 import { messageFormat } from "../src/util/messageFormat.js";
 import { serialize } from "../src/util/serialize.js";
 
-export const GLobalObject = {
-    value: [] as Array<any>,
+export const GlobalObject = {
+    value: [true] as Array<any>,
     multiplier: 1
 }
 
-const mutex = new Mutex()
 
 export class SeChecker implements SideEffectCheckerType {
 
     public expected: Array<any> = [["hello b"]]
-    private unlock!: () => void
 
     setUp = async (): Promise<void> => {
-        this.unlock = await mutex.lock()
-        GLobalObject.value = []
+        if(GlobalObject.value[0]!== true)
+            throw new Error("ouch")
+        GlobalObject.value = []
     };
 
     check = (): void => {
-        if (!(equal(GLobalObject.value, this.expected)))
+        if (!(equal(GlobalObject.value, this.expected)))
             throw new Error(messageFormat(
                 "SeChecker:\nexpected:{1}\nactual  :{2}",
                 serialize(this.expected),
-                serialize(GLobalObject.value)
+                serialize(GlobalObject.value)
             ))
     }
 
     tearDown = (): void => {
-        this.unlock()
+        GlobalObject.value = [true]
     };
 
 }
 
-export function getSideEffectChecker(): SideEffectCheckerType {
+function getSideEffectChecker(): SideEffectCheckerType {
     return new SeChecker();
 }
 
-export function getSideEffectCheckerFailing(): SideEffectCheckerType {
+function getSideEffectCheckerFailing(): SideEffectCheckerType {
     const sideEffectChecker = getSideEffectChecker() as SeChecker
     sideEffectChecker.expected = [["these are not the droids you are looking for"]];
     return sideEffectChecker
+}
+
+export const SideEffectCheckerTestData = {
+    default: ()=> getSideEffectChecker,
+    failing: ()=> getSideEffectCheckerFailing
 }

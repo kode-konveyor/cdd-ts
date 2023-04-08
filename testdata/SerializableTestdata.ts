@@ -12,6 +12,7 @@ const circular = {
 circular.circular = circular;
 const error = new Error("hello");
 error.stack = "fake stacktrace";
+
 export const SerializableTestDataDescriptor = {
     complexObject: {
         boolean: true,
@@ -43,7 +44,11 @@ export const SerializableTestDataDescriptor = {
     config: configFromFile,
     defaultConfig,
     contractEntity: new ContractEntity(),
-    argparser: argparser.options.map(desc=> desc.description+" "+ desc.flags).slice(0,8),
+    argparser: [
+        argparser.options.map(desc=> desc.description+" "+ desc.flags),
+        argparser.name(),
+        (argparser as unknown as {_version:string})._version,
+        argparser.description()],
     defaultargv: mkargv(CDDConfigurationTestData.defaultConfig())
 };
 export type SerializableTestdata = {

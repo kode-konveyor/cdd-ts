@@ -15,8 +15,10 @@ export const checkThrowContract = new Contract<typeof checkThrow>()
 
     .ifCalledWith(TestedFunctionTestData.default,ParameterTestData.defaultSimple,LabelTestdata.default,ParameterTestData.defaultFirst)
     .thenThrow("If no exception is thrown by the sut, it is an error", "no exception was thrown")
+
     .ifCalledWith(TestedFunctionTestData.default,ParameterTestData.throwingSimple,LabelTestdata.exceptionThrown,ParameterTestData.defaultFirst)
-    .thenReturn("if the expected exception was thrown, return undefined", ParameterTestData.defaultFirst)
+    .thenReturn("if the expected exception was thrown, return the returned parameter", ParameterTestData.defaultFirst)
+
     .ifCalledWith(TestedFunctionTestData.default,ParameterTestData.throwingSimple,LabelTestdata.default,ParameterTestData.defaultFirst)
     .thenThrow("if an unexpected exception was thrown, return that","first arg cannot be two")
 

@@ -3,7 +3,7 @@ import { CDDConfiguration } from "../../src/types/CDDConfiguration";
 import { makeTestData, TestDataDescriptor } from "../../src/util/makeTestData.js";
 import { MakeTestDataTestData } from "../../testdata/MakeTestDataTestData.js";
 import { MadeTestDataTestData } from "../../testdata/MadeTestDataTestData.js";
-import { ReturnValueCheckerTestData } from "../../testdata/ReturnValueCheckerTestData.js";
+import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
 
 export const makeTestDataContractParties = [makeTestData]
 
@@ -17,14 +17,14 @@ export const makeTestDataContract = new Contract<typeof makeTestData<CDDConfigur
     .thenReturn("if __from is '' then a new item with the constructor is created", MadeTestDataTestData.withFrom)
 
     .ifCalledWith(MakeTestDataTestData.withFrom)
-    .thenReturn("if no constructor is defined, a '{}' is used",MadeTestDataTestData.withFromNoConstructor)
+    .thenReturn("if no constructor is defined, a '{}' is used", MadeTestDataTestData.withFromNoConstructor)
 
     .ifCalledWith(MakeTestDataTestData.withField, MakeTestDataTestData.constructor)
     .thenReturn("the fields are set from the descriptor", MadeTestDataTestData.withField)
 
     .ifCalledWith(MakeTestDataTestData.withNamedGetter, MakeTestDataTestData.constructor)
     .thenReturn("if __from is not empty, the named getter is used for the data", MadeTestDataTestData.withnamedGetter)
-    .suchThat("the getter referenced in __from is not modified", ReturnValueCheckerTestData.makeTestDataLeakTest)
+    .suchThat("the getter referenced in __from is not modified", ReturnValueCheckTestData.makeTestDataLeakTest)
 
     .ifCalledWith(MakeTestDataTestData.withNonexistingReference, MakeTestDataTestData.constructor)
 
@@ -32,4 +32,4 @@ export const makeTestDataContract = new Contract<typeof makeTestData<CDDConfigur
         "did you reference a later item in __from?")
 
     .ifCalledWith(MakeTestDataTestData.badAdd, MakeTestDataTestData.constructor)
-    .thenThrow("if __add references an item which does not exist, that is an error","no record named baz")
+    .thenThrow("if __add references an item which does not exist, that is an error", "no record named baz")

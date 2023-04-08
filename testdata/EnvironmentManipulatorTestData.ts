@@ -1,10 +1,14 @@
-import { GLobalObject } from "./SideEffectCheckerTestData.js";
+import { GlobalObject } from "./SideEffectCheckerTestData.js";
 
-export const EnvironmentmanipulatortestData =  {
+export const EnvironmentmanipulatortestData = {
     thrice: () => {
         return {
-            setUp: () => { GLobalObject.multiplier = 3; },
-            tearDown: () => { GLobalObject.multiplier = 1; }
+            setUp: () => {
+                GlobalObject.multiplier = 3;
+            },
+            tearDown: () => {
+                GlobalObject.multiplier = 1;
+            }
         };
     }
 }

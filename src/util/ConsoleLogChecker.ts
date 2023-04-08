@@ -19,8 +19,8 @@ export class ConsoleLogChecker implements SideEffectCheckerType {
 
     check(): void {
         const writtenToStdout: string = serialize(this.record);
-        if (writtenToStdout.match(this.expected) == null)
-            throw new Error(serialize(writtenToStdout));
-
+        if (writtenToStdout.match(this.expected) == null) {
+            throw new Error(writtenToStdout);
+        }
     }
 }

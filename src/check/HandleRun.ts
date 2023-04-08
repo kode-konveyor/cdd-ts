@@ -12,8 +12,6 @@ import { OneSideEffectCheck } from "./OneSideEffectCheck.js";
 import { RunSideEffectChecks } from "./RunSideEffectChecks.js";
 import { RunReturnValueChecks } from "./RunReturnValueChecks.js";
 
-
-
 export class HandleRun <T extends MethodType> extends ContractEntity<T> {
     constructor(
         readonly handleException = HandleException.prototype.handleException,
@@ -27,7 +25,8 @@ export class HandleRun <T extends MethodType> extends ContractEntity<T> {
     }
 
     async handleRun(
-        currentRun: RunDescriptorEntity<T>
+        currentRun: RunDescriptorEntity<T>,
+        sut: T
     ): Promise<number> {
             this.currentRunExplanation = currentRun.explanation;
             if (currentRun.parameterGetters === undefined)
@@ -37,7 +36,7 @@ export class HandleRun <T extends MethodType> extends ContractEntity<T> {
                 let result: ReturnType<T>;
                 const parameters: Parameters<T> = getParametersFromGetters(currentRun.parameterGetters) as Parameters<T>
                 try {
-                    result = await this.testedFunction(...(parameters));
+                    result = await sut(...(parameters));
                 } catch (e) {
                     tearDownSideEffectChecks.call(this,currentRun);
                     this.handleException(currentRun, e);

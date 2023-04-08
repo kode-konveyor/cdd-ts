@@ -15,11 +15,9 @@ import { checkNumberOfTests } from "./runner/checkNumberOfTests.js";
 import { CDDConfiguration } from "./types/CDDConfiguration.js";
 
 const myPath = url.fileURLToPath(import.meta.url);
-argparser.parse(process.argv);
-const options: CDDConfiguration = argparser.opts();
+const options: CDDConfiguration = argparser.parse(process.argv).opts();
 
 export const config = mergeConfig(defaultConfig, configFromFile, options)
-
 if(config.watch) {
     if(config.debug)
         console.log("watching", config.distFiles)
@@ -32,14 +30,21 @@ if(config.watch) {
             })
         }
     })
-    .catch(reason => console.log(reason))
+    .catch(reason => {
+        console.error(reason)
+    })
     const tested = await runAllContracts(config)
     if(!checkNumberOfTests(config,tested))
         process.exit(-1)
 }else {
-    const tested = await runAllContracts(config)
-    if(!checkNumberOfTests(config,tested))
+    try{
+        const tested = await runAllContracts(config)
+        if(!checkNumberOfTests(config,tested))
+            process.exit(-1)
+    } catch(e) {
+        console.error(e)
         process.exit(-1)
+    }
 }
 
 

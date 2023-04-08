@@ -1,6 +1,6 @@
 
 export const PatternTestData = {
-    mkArgv: `[
+    mkArgv: `\\[
 "--distFiles",
 "dist.*js",
 "--contracts",
@@ -18,6 +18,6 @@ export const PatternTestData = {
  "jsDir": "dist",
  "moduleResolution": "ES",
  "watch": false
-}`
-   
+}`,
+   emptystdout: '\\[]'
 };

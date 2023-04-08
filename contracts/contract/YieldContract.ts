@@ -13,3 +13,5 @@ export const YieldContractParties = [Yield.prototype.yield.call.bind(Yield.proto
 export const YieldContract = new Contract<typeof Yield.prototype.yield>()
     .ifCalledWith(contractTestData.getContractWithFreshRun,ParameterTestData.default,getReturnValueTestDataIndirect.getReturnValue)
     .thenReturn("puts both the parameter- and returnvaluegetter to the contract",contractTestData.getContractWithCorrectrunandEmptyDefaultCase)
+    .ifCalledWith(contractTestData.getContract,ParameterTestData.default,getReturnValueTestDataIndirect.getReturnValue)
+    .thenThrow("", "ifCalledWith is missing before yield")

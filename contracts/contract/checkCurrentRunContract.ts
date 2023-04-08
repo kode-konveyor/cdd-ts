@@ -6,12 +6,15 @@ import { makeTestData } from "../../src/util/makeTestData.js";
 import { CallType } from "../../testdata/CallType.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { TestedFunctionType } from "../../testdata/MethodTestData.js";
-import { ReturnValueCheckerTestData } from "../../testdata/ReturnValueCheckerTestData.js";
-import { caseNameContract } from "../contract/caseNameContract.js";
+import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
+import { caseNameContract } from "./caseNameContract.js";
 
 export const checkCurrentRunContractParties = [CheckCurrentRun.prototype.checkCurrentRun.call.bind(CheckCurrentRun.prototype.checkCurrentRun)]
 
-const contractTestData = makeTestData<ContractEntity<MethodType>, typeof ContractTestDataDescriptor>(ContractTestDataDescriptor, () => new CheckCurrentRun(caseNameContract.getStub()))
+const contractTestData = makeTestData<ContractEntity<MethodType>, typeof ContractTestDataDescriptor>(
+    ContractTestDataDescriptor,
+    () => new CheckCurrentRun(caseNameContract.getStubForMixin())
+    )
 
 type ckrcall = CallType<
     TestedFunctionType,
@@ -24,7 +27,7 @@ export const checkCurrentRunContract = new Contract<ckrcall>()
     .thenReturn("if there is no current run, nothing happens", contractTestData.getContract)
 
     .ifCalledWith(contractTestData.getContractWithCorrectCurrentRun)
-    .suchThat("The contract is put to the current case", ReturnValueCheckerTestData.putTotheCurrentCaseAtZero)
+    .suchThat("The contract is put to the current case", ReturnValueCheckTestData.putTotheCurrentCaseAtZero)
     .suchThat("The current run is cleared", (retval, contract) =>
         (contract as ContractEntity<MethodType>).currentRun === undefined ? undefined : "oops"
     )
@@ -32,15 +35,13 @@ export const checkCurrentRunContract = new Contract<ckrcall>()
         contractTestData.getContractWithCorrectRunInDefaultCaseNoCurrentRun)
 
     .ifCalledWith(contractTestData.getContractWithCorrectRunInDefaultCase)
-    .suchThat("The contract is put to the current case", ReturnValueCheckerTestData.putTotheCurrentCaseAtZero)
-    .suchThat("After the case which is currently there", ReturnValueCheckerTestData.putTotheCurrentCaseAtOne)
-    .suchThat("The current run is cleared", ReturnValueCheckerTestData.currentRunIsCleared)
+    .suchThat("The contract is put to the current case", ReturnValueCheckTestData.putTotheCurrentCaseAtZero)
+    .suchThat("After the case which is currently there", ReturnValueCheckTestData.putTotheCurrentCaseAtOne)
+    .suchThat("The current run is cleared", ReturnValueCheckTestData.currentRunIsCleared)
     .thenReturn("if there is a correct rurrent run and non-empty current case, puts it into the current case after the existing one",
         contractTestData.getContractWithRunInDefaultCaseTwice)
 
     .ifCalledWith(contractTestData.getContractWithFreshRun)
-    .withParameterConstraints("neither return and thrown value",
-        ReturnValueCheckerTestData.neitherReturnNorThrown as (...parameters: Array<unknown>) => unknown)
     .thenThrow("throws error for a run without both return and thrown value",
         "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called")
 
