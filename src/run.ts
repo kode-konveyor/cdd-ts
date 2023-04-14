@@ -13,7 +13,7 @@ import { mergeConfig } from "./runner/mergeConfig.js";
 import { checkNumberOfTests } from "./runner/checkNumberOfTests.js";
 import { CDDConfiguration } from "./types/CDDConfiguration.js";
 try {
-  import("@angular/compiler");
+  await import("@angular/compiler");
 } catch {}
 const myPath = url.fileURLToPath(import.meta.url);
 const options: CDDConfiguration = argparser.parse(process.argv).opts();
