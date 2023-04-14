@@ -5,7 +5,6 @@ import glob from "fast-glob";
 import fs from "node:fs";
 import url from "url";
 import child_process from "child_process";
-import "@angular/compiler";
 import { mkargv } from "./runner/mkargv.js";
 import { argparser } from "./runner/argparser.js";
 import { defaultConfig } from "./runner/defaultConfig.js";
@@ -13,7 +12,9 @@ import { configFromFile } from "./runner/configFromFile.js";
 import { mergeConfig } from "./runner/mergeConfig.js";
 import { checkNumberOfTests } from "./runner/checkNumberOfTests.js";
 import { CDDConfiguration } from "./types/CDDConfiguration.js";
-
+try {
+  import("@angular/compiler");
+} catch {}
 const myPath = url.fileURLToPath(import.meta.url);
 const options: CDDConfiguration = argparser.parse(process.argv).opts();
 const RUNNING_BECAUSE = "running contracts because";
