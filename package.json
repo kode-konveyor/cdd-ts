@@ -1,6 +1,6 @@
 {
   "name": "cdd-ts",
-  "version": "1.0.16",
+  "version": "1.0.17",
   "description": "Test-time Contract Development framework for TypeScript",
   "main": "dist/src/cdd-ts.js",
   "bin": {
