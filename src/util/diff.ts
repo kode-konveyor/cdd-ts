@@ -7,7 +7,6 @@ enable();
 
 const BOLD = "bold";
 const STRIKE_THROUGH = "strikethrough";
-const GREY = "grey";
 const NEWLINE = "\n";
 export function diff(expected: string, actual: string): string {
   return diffLines(expected, actual)
@@ -18,8 +17,8 @@ export function diff(expected: string, actual: string): string {
         : // eslint-disable-next-line @typescript-eslint/strict-boolean-expressions
         diff.removed
         ? STRIKE_THROUGH
-        : GREY;
-      if (color === GREY) return diff.value;
+        : false;
+      if (color === false) return diff.value;
       return (diff.value[color] as string).bgYellow;
     })
     .join(NEWLINE);

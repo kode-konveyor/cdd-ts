@@ -13,7 +13,7 @@
   "scripts": {
     "preinstall": "git config core.hooksPath .githooks",
     "qa": "npm run lint &&npm run test&& npm run mutate",
-    "mutate": "stryker run",
+    "mutate": "stryker run && tools/checktsmutate",
     "test": "tsc && chmod a+x dist/src/run.js && runContracts",
     "lint": "eslint . --ext .ts",
     "publish:patch": "npm run qa && npm version patch && git push origin develop --tags && npm publish",
