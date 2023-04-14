@@ -1,4 +1,4 @@
-import { CDDConfiguration } from "../src/types/CDDConfiguration";
+import { type CDDConfiguration } from "../src/types/CDDConfiguration";
 import { annotateFunction } from "../src/util/annotateFunction.js";
 import { CDDConfigurationTestData } from "../testdata/CDDConfigurationTestData.js";
 

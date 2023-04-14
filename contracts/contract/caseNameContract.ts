@@ -1,10 +1,10 @@
 import { Contract } from "../../src/cdd-ts.js";
 import { CaseName } from "../../src/check/CaseName.js";
 import { ContractEntity } from "../../src/types/ContractEntity.js";
-import { MethodType } from "../../src/types/MethodType.js";
+import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
-import { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { CaseNameTestData } from "../../testdata/CaseNameTestData.js";
 
 const ContractTestData = makeTestData<

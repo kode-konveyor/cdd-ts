@@ -1,12 +1,12 @@
 import equal from "fast-deep-equal";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { messageFormat } from "../util/messageFormat.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT } from "./Messages.js";
 import { getParametersFromGetters } from "../util/getParametersFromGetters.js";
 import { CheckCurrentRun } from "./CheckCurrentRun.js";
 import { serialize } from "../util/serialize.js";
-import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
+import { type CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 
 export class GetStub<T extends MethodType> extends ContractEntity<T> {
   constructor(

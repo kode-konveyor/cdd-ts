@@ -11,7 +11,7 @@ import { defaultConfig } from "./runner/defaultConfig.js";
 import { configFromFile } from "./runner/configFromFile.js";
 import { mergeConfig } from "./runner/mergeConfig.js";
 import { checkNumberOfTests } from "./runner/checkNumberOfTests.js";
-import { CDDConfiguration } from "./types/CDDConfiguration.js";
+import { type CDDConfiguration } from "./types/CDDConfiguration.js";
 try {
   await import("@angular/compiler");
 } catch {}

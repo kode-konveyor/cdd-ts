@@ -1,4 +1,4 @@
-import { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
+import { type SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
 import { LabelTestdata } from "./LabelTestdata.js";
 import { SideEffectCheckerTestData } from "./SideEffectCheckerTestData.js";
 

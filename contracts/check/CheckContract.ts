@@ -1,8 +1,6 @@
 import { Contract } from "../../src/contract/Contract.js";
-import {
-  TestedFunctionTestData,
-  TestedFunctionType,
-} from "../../testdata/MethodTestData.js";
+import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import { Check } from "../../src/check/Check.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { makeTestData } from "../../src/util/makeTestData.js";

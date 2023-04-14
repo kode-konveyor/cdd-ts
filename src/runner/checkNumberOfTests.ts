@@ -1,4 +1,4 @@
-import { CDDConfiguration } from "../types/CDDConfiguration.js";
+import { type CDDConfiguration } from "../types/CDDConfiguration.js";
 import { messageFormat } from "../util/messageFormat.js";
 
 const NOT_THE_EXPECTED_NUMBER_OF_TESTS = "expected {1} tests, got {2}";

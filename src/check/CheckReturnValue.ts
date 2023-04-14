@@ -1,6 +1,6 @@
-import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { messageFormat } from "../util/messageFormat.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { RETURN_VALUE_MISMATCH_MESSAGE_FORMAT } from "./Messages.js";
 import { CaseName } from "./CaseName.js";
 

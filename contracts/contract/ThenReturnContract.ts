@@ -3,7 +3,7 @@ import { ThenReturn } from "../../src/contract/ThenReturn.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
-import { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { ParameterTestData } from "../../testdata/ParametersTestData.js";
 
 const ContractTestData = makeTestData<

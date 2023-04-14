@@ -1,6 +1,6 @@
 import { relative, dirname } from "path";
 import url from "url";
-import { CDDConfiguration } from "../types/CDDConfiguration.js";
+import { type CDDConfiguration } from "../types/CDDConfiguration.js";
 
 const fileName = url.fileURLToPath(import.meta.url);
 export const dirName = dirname(fileName);

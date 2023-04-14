@@ -1,7 +1,7 @@
-import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import {
   NOT_THE_EXPECTED_EXCEPTION_THROWN_FORMAT,
   UNEXPECTED_EXCEPTION_MESSAGE_FORMAT,

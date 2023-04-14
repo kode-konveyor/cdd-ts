@@ -1,6 +1,6 @@
 import { MeanWhile } from "./Meanwhile.js";
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { GetStub } from "./GetStub.js";
 import { SetTitle } from "./SetTitle.js";
 import { Check } from "../check/Check.js";
@@ -18,7 +18,7 @@ import { RunSideEffectChecks } from "../check/RunSideEffectChecks.js";
 import { RunReturnValueChecks } from "../check/RunReturnValueChecks.js";
 import { CheckReturnValue } from "../check/CheckReturnValue.js";
 import { GetStubForMixin } from "./GetStubForMixin.js";
-import { ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
+import { type ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
 
 export class Contract<T extends MethodType> extends ContractEntity<T> {
   constructor(

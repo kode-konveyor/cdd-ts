@@ -1,5 +1,5 @@
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { messageFormat } from "../util/messageFormat.js";
 
 const IFCALLEDWITH_MISSING = "ifCalledWith is missing before {1}";

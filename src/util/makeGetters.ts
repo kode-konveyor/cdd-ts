@@ -1,5 +1,5 @@
-import { MethodType } from "../types/MethodType.js";
-import { ParameterGetters } from "../types/ParameterGettersType.js";
+import { type MethodType } from "../types/MethodType.js";
+import { type ParameterGetters } from "../types/ParameterGettersType.js";
 import { annotateFunction } from "./annotateFunction.js";
 
 export function makeGetters<T extends MethodType>(

@@ -1,7 +1,7 @@
 import { messageFormat } from "../util/messageFormat.js";
 import { ContractEntity } from "../types/ContractEntity.js";
-import { SideEffectCheckerType } from "../types/SideEffectChecker.js";
-import { MethodType } from "../types/MethodType.js";
+import { type SideEffectCheckerType } from "../types/SideEffectChecker.js";
+import { type MethodType } from "../types/MethodType.js";
 import { SIDE_EFFECT_CHECK_FAILURE_MESSAGE } from "./Messages.js";
 import { CaseName } from "./CaseName.js";
 

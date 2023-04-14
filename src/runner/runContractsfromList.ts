@@ -1,4 +1,4 @@
-import { CDDConfiguration } from "../types/CDDConfiguration.js";
+import { type CDDConfiguration } from "../types/CDDConfiguration.js";
 import { runOneContract } from "./runOneContract.js";
 
 const PATH_SEPARATOR = "/";
@@ -19,7 +19,9 @@ export async function runContractsfromList(
       const current = await runOneContract(config, contractFile, contractName);
       return previous + current;
     },
-    new Promise<number>((resolve) => resolve(0))
+    new Promise<number>((resolve) => {
+      resolve(0);
+    })
   );
   return sum;
 }

@@ -1,4 +1,4 @@
-import { MethodType } from "./MethodType.js";
+import { type MethodType } from "./MethodType.js";
 
 export type ReturnValueCheckType<T extends MethodType> = (
   returnValue: ReturnType<T>,

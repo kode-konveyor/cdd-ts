@@ -1,6 +1,6 @@
 import { Contract } from "../../src/cdd-ts.js";
 import { GetStubForMixin } from "../../src/contract/GetStubForMixin.js";
-import { MethodType } from "../../src/types/MethodType.js";
+import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";

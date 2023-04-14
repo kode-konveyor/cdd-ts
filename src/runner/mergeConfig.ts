@@ -1,4 +1,4 @@
-import { CDDConfiguration } from "../types/CDDConfiguration";
+import { type CDDConfiguration } from "../types/CDDConfiguration";
 import { deepCopy } from "../util/deepCopy.js";
 import { storeConfig } from "./storeConfig.js";
 

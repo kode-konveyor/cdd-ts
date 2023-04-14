@@ -1,1 +1,3 @@
-export const nullPromise = new Promise<number>((resolve) => resolve(0));
+export const nullPromise = new Promise<number>((resolve) => {
+  resolve(0);
+});

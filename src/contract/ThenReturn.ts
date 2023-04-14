@@ -1,5 +1,5 @@
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { ThrowIfCalledWithMissingFor } from "./ThrowIfCalledWithMissingFor.js";
 
 const THEN_RETURN = "thenReturn";

@@ -1,7 +1,7 @@
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
-import { ParameterGetters } from "../types/ParameterGettersType.js";
-import { ReturnValueGetterType } from "../types/ReturnValueGetterType.js";
+import { type MethodType } from "../types/MethodType.js";
+import { type ParameterGetters } from "../types/ParameterGettersType.js";
+import { type ReturnValueGetterType } from "../types/ReturnValueGetterType.js";
 import { ThrowIfCalledWithMissingFor } from "./ThrowIfCalledWithMissingFor.js";
 
 const YIELD = "yield";

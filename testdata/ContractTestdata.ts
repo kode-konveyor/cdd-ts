@@ -1,11 +1,11 @@
-import { ContractEntity } from "../src/types/ContractEntity.js";
+import { type ContractEntity } from "../src/types/ContractEntity.js";
 import {
-  DescriptorAddType,
-  TestDataDescriptor,
+  type DescriptorAddType,
+  type TestDataDescriptor,
 } from "../src/util/makeTestData.js";
 import { CaseDescriptorTestData } from "./CaseDescriptorTestData.js";
 import { LabelTestdata } from "./LabelTestdata.js";
-import { TestedFunctionType } from "./MethodTestData.js";
+import { type TestedFunctionType } from "./MethodTestData.js";
 import { RunDescriptorTestData } from "./RunDescriptorTestData.js";
 
 export const ContractTestDataDescriptor = {

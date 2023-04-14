@@ -1,6 +1,6 @@
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
-import { EnvironmentManipulatorType } from "../types/EnvironmentManipulatorType.js";
+import { type MethodType } from "../types/MethodType.js";
+import { type EnvironmentManipulatorType } from "../types/EnvironmentManipulatorType.js";
 import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 import { CaseName } from "../check/CaseName.js";
 import { CheckCurrentRun } from "./CheckCurrentRun.js";

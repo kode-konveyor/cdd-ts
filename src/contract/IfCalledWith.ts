@@ -1,8 +1,8 @@
 import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { CaseName } from "../check/CaseName.js";
-import { ParameterGetters } from "../types/ParameterGettersType.js";
+import { type ParameterGetters } from "../types/ParameterGettersType.js";
 import { CheckCurrentRun } from "./CheckCurrentRun.js";
 
 export class IfCalledWith<T extends MethodType> extends ContractEntity<T> {

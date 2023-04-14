@@ -1,7 +1,7 @@
 import { CheckCurrentRun } from "../../src/contract/CheckCurrentRun.js";
 import { Contract } from "../../src/contract/Contract.js";
 import { GetStub } from "../../src/contract/GetStub.js";
-import { MethodType } from "../../src/types/MethodType.js";
+import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";

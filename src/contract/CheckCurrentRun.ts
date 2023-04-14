@@ -1,9 +1,9 @@
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { CaseName } from "../check/CaseName.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
-import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 
 type WithCorrectRun<T extends MethodType, K extends ContractEntity<T>> = K &
   Required<{ currentRun: RunDescriptorEntity<T> }>;

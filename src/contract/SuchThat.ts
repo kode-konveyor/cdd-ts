@@ -1,6 +1,6 @@
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
-import { ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
+import { type MethodType } from "../types/MethodType.js";
+import { type ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
 import { ThrowIfCalledWithMissingFor } from "./ThrowIfCalledWithMissingFor.js";
 
 const SUCH_THAT = "suchThat";

@@ -1,3 +1,3 @@
-import { SideEffectCheckerType } from "./SideEffectChecker.js";
+import { type SideEffectCheckerType } from "./SideEffectChecker.js";
 
 export type SideEffectCheckCaseType = [string, SideEffectCheckerType];

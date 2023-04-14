@@ -1,8 +1,8 @@
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { messageFormat } from "../util/messageFormat.js";
-import { Contract } from "../contract/Contract.js";
+import { type Contract } from "../contract/Contract.js";
 import { resolveModule } from "./resolveModule.js";
-import { CDDConfiguration } from "../types/CDDConfiguration.js";
+import { type CDDConfiguration } from "../types/CDDConfiguration.js";
 import { nullPromise } from "./nullPromise.js";
 
 function getAdder(contract: Contract<MethodType>) {

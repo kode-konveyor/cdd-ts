@@ -1,15 +1,13 @@
 import { Contract, runAllContracts } from "../../src/cdd-ts.js";
-import { Check } from "../../src/check/Check.js";
+import type { Check } from "../../src/check/Check.js";
 import { checkThrowAsync } from "../../src/util/checkThrowAsync.js";
 import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { serialize } from "../../src/util/serialize.js";
 import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
-import {
-  TestedFunctionType,
-  TestedFunctionTestData,
-} from "../../testdata/MethodTestData.js";
+import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
+import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 
 const ContractTestData = makeTestData<
   Contract<TestedFunctionType>,
@@ -109,7 +107,9 @@ export const runAllContractsContract = {
     );
 
     checker.record = [["foo"]];
-    const checkerChecker = (): void => checker.check();
+    const checkerChecker = (): void => {
+      checker.check();
+    };
 
     checkCount += await checkThrowAsync(
       checkerChecker,

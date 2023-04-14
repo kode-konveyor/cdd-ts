@@ -1,5 +1,8 @@
-import { CDDConfiguration } from "../src/types/CDDConfiguration";
-import { makeTestData, TestDataDescriptor } from "../src/util/makeTestData.js";
+import { type CDDConfiguration } from "../src/types/CDDConfiguration";
+import {
+  makeTestData,
+  type TestDataDescriptor,
+} from "../src/util/makeTestData.js";
 
 export const JS_DIR = "some_directory/far/far/away";
 

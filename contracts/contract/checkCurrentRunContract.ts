@@ -1,11 +1,11 @@
 import { Contract } from "../../src/cdd-ts.js";
 import { CheckCurrentRun } from "../../src/contract/CheckCurrentRun.js";
-import { ContractEntity } from "../../src/types/ContractEntity.js";
-import { MethodType } from "../../src/types/MethodType.js";
+import type { ContractEntity } from "../../src/types/ContractEntity.js";
+import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
-import { CallType } from "../../testdata/CallType.js";
+import type { CallType } from "../../testdata/CallType.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
-import { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
 import { caseNameContract } from "./caseNameContract.js";
 

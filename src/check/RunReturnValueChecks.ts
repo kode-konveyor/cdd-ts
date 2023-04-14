@@ -1,8 +1,8 @@
-import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { CaseName } from "./CaseName.js";
 import { RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT } from "./Messages.js";
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { messageFormat } from "../util/messageFormat.js";
 
 export class RunReturnValueChecks<

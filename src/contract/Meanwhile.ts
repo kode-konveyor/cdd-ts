@@ -1,6 +1,6 @@
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
-import { SideEffectCheckerType } from "../types/SideEffectChecker.js";
+import { type MethodType } from "../types/MethodType.js";
+import { type SideEffectCheckerType } from "../types/SideEffectChecker.js";
 import { ThrowIfCalledWithMissingFor } from "./ThrowIfCalledWithMissingFor.js";
 
 const MEANWHILE = "meanWhile";

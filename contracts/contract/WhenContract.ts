@@ -2,7 +2,7 @@ import { Contract } from "../../src/contract/Contract.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { EnvironmentmanipulatortestData } from "../../testdata/EnvironmentManipulatorTestData.js";
 import { When } from "../../src/contract/When.js";
-import { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";

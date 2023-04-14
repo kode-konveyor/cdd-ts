@@ -1,4 +1,4 @@
-import { SideEffectCheckerType } from "../types/SideEffectChecker.js";
+import { type SideEffectCheckerType } from "../types/SideEffectChecker.js";
 import { serialize } from "./serialize.js";
 
 export class ConsoleLogChecker implements SideEffectCheckerType {

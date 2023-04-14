@@ -47,7 +47,7 @@ function str(
   key: string | number,
   holder: Record<string, unknown>,
   gap: string,
-  seen: Array<Object>
+  seen: Array<Record<string, unknown>>
 ): string {
   const mind = gap;
   let value = holder[key];
@@ -96,7 +96,7 @@ function str(
         return "CIRCULAR OBJECT";
       }
 
-      seen.push(value as Object);
+      seen.push(value as Record<string, unknown>);
       if (Object.prototype.toString.apply(value) === "[object Array]") {
         const partial = (value as Array<unknown>).map((v, i) => {
           return (
@@ -118,8 +118,13 @@ function str(
       gap += indent;
       const partial = [];
 
-      for (const k of Object.keys(value as Object).sort()) {
-        const v = str(k, value as unknown as Record<string, Object>, gap, seen);
+      for (const k of Object.keys(value as Record<string, unknown>).sort()) {
+        const v = str(
+          k,
+          value as unknown as Record<string, Record<string, unknown>>,
+          gap,
+          seen
+        );
         if (v != null) {
           partial.push(quote(k) + ": " + v);
         }

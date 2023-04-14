@@ -1,5 +1,5 @@
-import { ContractEntity } from "../src/types/ContractEntity.js";
-import { MethodType } from "../src/types/MethodType.js";
+import { type ContractEntity } from "../src/types/ContractEntity.js";
+import { type MethodType } from "../src/types/MethodType.js";
 
 export type CallType<
   T extends MethodType,

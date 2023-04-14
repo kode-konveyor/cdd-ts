@@ -1,6 +1,6 @@
-import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { CaseName } from "./CaseName.js";
 import { OneSideEffectCheck } from "./OneSideEffectCheck.js";
 

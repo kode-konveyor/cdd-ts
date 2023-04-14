@@ -1,5 +1,5 @@
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { RUN_IDENTIFIER_FORMAT } from "./Messages.js";
 

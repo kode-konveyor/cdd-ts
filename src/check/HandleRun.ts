@@ -1,4 +1,4 @@
-import { RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
+import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { CaseName } from "./CaseName.js";
 import {
   setUpSideEffectChecks,
@@ -6,7 +6,7 @@ import {
 } from "./SetUpSideEffectChecks.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT } from "./Messages.js";
 import { CheckReturnValue } from "./CheckReturnValue.js";
 import { getParametersFromGetters } from "../util/getParametersFromGetters.js";

@@ -1,21 +1,24 @@
-import { CheckCurrentRun } from "../src/contract/CheckCurrentRun.js";
-import { CaseDescriptorEntity } from "../src/types/CaseDescriptorEntity.js";
-import { ContractEntity } from "../src/types/ContractEntity.js";
-import { MethodType } from "../src/types/MethodType.js";
-import { ReturnValueCheckType } from "../src/types/ReturnValueCheckType.js";
-import { RunDescriptorEntity } from "../src/types/RunDescriptorEntity.js";
+import { type CheckCurrentRun } from "../src/contract/CheckCurrentRun.js";
+import { type CaseDescriptorEntity } from "../src/types/CaseDescriptorEntity.js";
+import { type ContractEntity } from "../src/types/ContractEntity.js";
+import { type MethodType } from "../src/types/MethodType.js";
+import { type ReturnValueCheckType } from "../src/types/ReturnValueCheckType.js";
+import { type RunDescriptorEntity } from "../src/types/RunDescriptorEntity.js";
 import { diff } from "../src/util/diff.js";
 import { getParametersFromGetters } from "../src/util/getParametersFromGetters.js";
 import { serialize } from "../src/util/serialize.js";
-import { CallType } from "./CallType";
+import { type CallType } from "./CallType";
 import { checkThrow } from "../src/util/checkThrow.js";
 import { FunctionAnnotationtestData } from "./FunctionAnnotationtestData.js";
-import { TestedFunctionType } from "./MethodTestData.js";
+import { type TestedFunctionType } from "./MethodTestData.js";
 import { ParameterTestData } from "./ParametersTestData.js";
 import { getReturnValueTestData } from "./ReturnValueTestData.js";
-import { TestData, TestDataDescriptor } from "../src/util/makeTestData.js";
-import { CDDConfiguration } from "../src/types/CDDConfiguration.js";
-import { When } from "../src/contract/When.js";
+import {
+  type TestData,
+  type TestDataDescriptor,
+} from "../src/util/makeTestData.js";
+import { type CDDConfiguration } from "../src/types/CDDConfiguration.js";
+import { type When } from "../src/contract/When.js";
 import { LabelTestdata } from "./LabelTestdata.js";
 
 const NOT_DEFINED_EXACTLY_ONCE =
@@ -53,7 +56,7 @@ export const ReturnValueCheckTestData = {
       ? undefined
       : "oops";
   },
-  stubThrowsException: (stub: TestedFunctionType) =>
+  stubThrowsException: (stub: TestedFunctionType) => {
     checkThrow(
       stub,
       getParametersFromGetters(ParameterTestData.exceptionThrowing()) as [
@@ -62,7 +65,8 @@ export const ReturnValueCheckTestData = {
       ],
       LabelTestdata.exceptionThrown(),
       undefined
-    ),
+    );
+  },
   stubReturnsOne: (stub: TestedFunctionType) => {
     const ret = stub(
       ...(getParametersFromGetters(ParameterTestData.exceptionThrowing()) as [
@@ -72,7 +76,7 @@ export const ReturnValueCheckTestData = {
     );
     return ret === "1" ? undefined : ret;
   },
-  stubThrowsMultipleDefinedParameterException: (stub: TestedFunctionType) =>
+  stubThrowsMultipleDefinedParameterException: (stub: TestedFunctionType) => {
     checkThrow(
       stub,
       getParametersFromGetters(ParameterTestData.withSideEffects()) as [
@@ -81,7 +85,8 @@ export const ReturnValueCheckTestData = {
       ],
       NOT_DEFINED_EXACTLY_ONCE,
       undefined
-    ),
+    );
+  },
   makeTestDataLeakTest: (
     value: TestData<CDDConfiguration, TestDataDescriptor<CDDConfiguration>>
   ): void => {

@@ -1,6 +1,6 @@
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 
-export function checkThrow<T extends MethodType, R extends unknown>(
+export function checkThrow<T extends MethodType, R>(
   funktion: T,
   params: Parameters<T>,
   matchString: string,

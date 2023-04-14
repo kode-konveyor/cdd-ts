@@ -1,7 +1,7 @@
 import { runContractsfromList } from "./runContractsfromList.js";
 
 import glob from "fast-glob";
-import { CDDConfiguration } from "../types/CDDConfiguration.js";
+import { type CDDConfiguration } from "../types/CDDConfiguration.js";
 
 const NUMBER_OF_CONTRACTS_TESTED = "number of contracts tested: ";
 export async function runAllContracts(

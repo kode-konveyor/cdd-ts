@@ -3,7 +3,7 @@ import { MeanWhile } from "../../src/contract/Meanwhile.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
-import { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { SideEffectCheckerTestData } from "../../testdata/SideEffectCheckerTestData.js";
 
 const ContractTestData = makeTestData<

@@ -1,10 +1,10 @@
 import { CaseName } from "../../src/check/CaseName.js";
 import { HandleException } from "../../src/check/HandleException.js";
 import { Contract } from "../../src/contract/Contract.js";
-import { ContractEntity } from "../../src/types/ContractEntity.js";
+import type { ContractEntity } from "../../src/types/ContractEntity.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
-import { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { RunDescriptorTestData } from "../../testdata/RunDescriptorTestData.js";
 import { SerializableTestData } from "../../testdata/SerializableTestdata.js";
 

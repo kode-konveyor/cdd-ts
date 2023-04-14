@@ -1,6 +1,6 @@
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 
-export async function checkThrowAsync<T extends MethodType, R extends unknown>(
+export async function checkThrowAsync<T extends MethodType, R>(
   funktion: T,
   params: Parameters<T>,
   matchString: string,

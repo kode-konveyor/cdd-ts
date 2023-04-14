@@ -9,7 +9,9 @@ export class Mutex {
   lock: () => Promise<() => void> = async () => {
     let _resolve: () => void;
     const p = new Promise<void>((resolve) => {
-      _resolve = () => resolve();
+      _resolve = () => {
+        resolve();
+      };
     });
     // eslint-disable-next-line promise/prefer-await-to-then
     const rv = this.current.then(() => _resolve);

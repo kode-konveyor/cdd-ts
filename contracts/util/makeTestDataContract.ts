@@ -1,9 +1,7 @@
 import { Contract } from "../../src/contract/Contract.js";
-import { CDDConfiguration } from "../../src/types/CDDConfiguration";
-import {
-  makeTestData,
-  TestDataDescriptor,
-} from "../../src/util/makeTestData.js";
+import type { CDDConfiguration } from "../../src/types/CDDConfiguration";
+import type { TestDataDescriptor } from "../../src/util/makeTestData.js";
+import { makeTestData } from "../../src/util/makeTestData.js";
 import { MakeTestDataTestData } from "../../testdata/MakeTestDataTestData.js";
 import { MadeTestDataTestData } from "../../testdata/MadeTestDataTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";

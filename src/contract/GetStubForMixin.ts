@@ -1,5 +1,5 @@
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { GetStub } from "./GetStub.js";
 
 export class GetStubForMixin<T extends MethodType> extends ContractEntity<T> {

@@ -1,6 +1,6 @@
 import { HandleRun } from "./HandleRun.js";
 import { ContractEntity } from "../types/ContractEntity.js";
-import { MethodType } from "../types/MethodType.js";
+import { type MethodType } from "../types/MethodType.js";
 import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 import { messageFormat } from "../util/messageFormat.js";
 import { nullPromise } from "../runner/nullPromise.js";

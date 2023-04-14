@@ -1,5 +1,5 @@
 import { CaseDescriptorEntity } from "../src/types/CaseDescriptorEntity.js";
-import { MethodType } from "../src/types/MethodType.js";
+import { type MethodType } from "../src/types/MethodType.js";
 import { makeTestData } from "../src/util/makeTestData.js";
 import { EnvironmentmanipulatortestData } from "./EnvironmentManipulatorTestData.js";
 import { RunDescriptorTestData } from "./RunDescriptorTestData.js";

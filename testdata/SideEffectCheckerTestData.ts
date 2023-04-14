@@ -1,5 +1,5 @@
 import equal from "fast-deep-equal";
-import { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
+import type { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
 import { messageFormat } from "../src/util/messageFormat.js";
 import { serialize } from "../src/util/serialize.js";
 

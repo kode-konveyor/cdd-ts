@@ -1,4 +1,4 @@
-import { CDDConfiguration } from "../types/CDDConfiguration";
+import { type CDDConfiguration } from "../types/CDDConfiguration";
 
 export function storeConfig(
   fromConfig: CDDConfiguration,

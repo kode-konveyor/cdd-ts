@@ -1,6 +1,9 @@
 import { RunDescriptorEntity } from "../src/types/RunDescriptorEntity.js";
-import { makeTestData, TestDataDescriptor } from "../src/util/makeTestData.js";
-import { TestedFunctionType } from "./MethodTestData.js";
+import {
+  makeTestData,
+  type TestDataDescriptor,
+} from "../src/util/makeTestData.js";
+import { type TestedFunctionType } from "./MethodTestData.js";
 import { getReturnValueTestData } from "./ReturnValueTestData.js";
 import { SideEffectCheckCaseTestData } from "./SideEffectCheckCaseTestData.js";
 import { ParameterTestData } from "./ParametersTestData.js";

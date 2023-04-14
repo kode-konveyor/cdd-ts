@@ -1,4 +1,4 @@
-import { CDDConfiguration } from "../types/CDDConfiguration";
+import { type CDDConfiguration } from "../types/CDDConfiguration";
 
 const SLASH_D = "-d";
 export function mkargv(config: CDDConfiguration): Array<string> {

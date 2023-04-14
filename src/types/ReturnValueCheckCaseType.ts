@@ -1,5 +1,5 @@
-import { MethodType } from "./MethodType.js";
-import { ReturnValueCheckType } from "./ReturnValueCheckType.js";
+import { type MethodType } from "./MethodType.js";
+import { type ReturnValueCheckType } from "./ReturnValueCheckType.js";
 
 export type ReturnValueCheckCaseType<T extends MethodType> = [
   string,
