@@ -21,8 +21,11 @@ export const HandleExceptionContractParties = [
     HandleException.prototype.handleException
   ),
 ];
-const NOT_THE_EXPECTED_EXCEPTION =
-  "Error: The function under test:undefined:undefined:Not the expected exception thrown. Got:Error: hello\nstack:\nfake stacktrace";
+const NOT_THE_EXPECTED_EXCEPTION = `Error: The function under test:undefined:run explanation:Not the expected exception thrown.
+Expected:cannot be three
+Got     :Error: hello
+stack:
+fake stacktrace`;
 const UNEXPECTED_EXCEPTION =
   "Error: The function under test:undefined:undefined: unexpected exception:Error: hello\nstack:\nfake stacktrace";
 export const HandleExceptionContract = new Contract<

@@ -14,6 +14,7 @@ export class HandleException<T extends MethodType> extends ContractEntity<T> {
   }
 
   handleException(currentRun: RunDescriptorEntity<T>, catched: unknown): void {
+    this.currentRunExplanation = currentRun.explanation;
     if (currentRun.thrown === undefined) {
       throw new Error(
         messageFormat(
@@ -30,6 +31,7 @@ export class HandleException<T extends MethodType> extends ContractEntity<T> {
           NOT_THE_EXPECTED_EXCEPTION_THROWN_FORMAT,
           this.caseName(),
           String(catched),
+          currentRun.thrown,
           String((catched as Error).stack)
         )
       );

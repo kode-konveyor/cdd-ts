@@ -32,6 +32,14 @@ export const ContractTestDataDescriptor = {
     __from: "getContractWithTitle",
     currentRun: RunDescriptorTestData.getRunDescriptorWithReturnValueCheck(),
   },
+  getContractThrowingUnexpectedExceptionAndOtherRunLater: {
+    __from: "getContractWithTitle",
+    cases: {
+      "": CaseDescriptorTestData.getCaseDescriptorWithThrowingExceptio(),
+    },
+    currentRun:
+      RunDescriptorTestData.getRunDescriptorCorrectlyBuiltWithOtherExplanation(),
+  },
   getContractThrowingUnexpectedException: {
     __from: "getContractWithTitle",
     currentRun: RunDescriptorTestData.getRunDescriptorThrowingException(),

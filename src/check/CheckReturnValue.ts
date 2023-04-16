@@ -6,16 +6,20 @@ import { CaseName } from "./CaseName.js";
 
 import { serialize } from "../util/serialize.js";
 import { diff } from "../util/diff.js";
+import { ContractEntity } from "../types/ContractEntity.js";
 
 const UNDEFINED_AS_STRING = "undefined";
 const EMPTY_STRING = "";
-export class CheckReturnValue<T extends MethodType> {
-  constructor(readonly caseName = CaseName.prototype.caseName) {}
+export class CheckReturnValue<T extends MethodType> extends ContractEntity<T> {
+  constructor(readonly caseName = CaseName.prototype.caseName) {
+    super();
+  }
 
   async checkReturnValue(
     currentRun: RunDescriptorEntity<T>,
     result: ReturnType<T>
   ): Promise<void> {
+    this.currentRunExplanation = currentRun.explanation;
     if (currentRun.returnValueChecks.length !== 0) return;
     const actual = serialize(result);
     const returnValueGetter = currentRun.returnValueGetter;

@@ -51,6 +51,11 @@ const runDescriptorTestDataDescriptor = {
     __from: "getRunDescriptorParametersAndExplanationSet",
     returnValueGetter: getReturnValueTestData.getReturnValue,
   },
+  getRunDescriptorCorrectlyBuiltWithOtherExplanation: {
+    __from: "getRunDescriptorParametersAndExplanationSet",
+    explanation: "some other explanation",
+    returnValueGetter: getReturnValueTestData.getReturnValue,
+  },
   getRunDescriptorWithReturnValueCheckFailing: {
     __from: "getRunDescriptorCorrectlyBuilt",
     returnValueChecks: [ReturnValueCheckCaseTestData.failig()],

@@ -3,6 +3,8 @@ import { EXCEPTION_THROWN } from "./MethodTestData.js";
 export const RUN_EXPLANATION = "run explanation";
 export const CONTRACT_EXPLANATION = "The function under test";
 export const RUN_IDENTIFICATION = "The function under test::run explanation:";
+export const RUN_IDENTIFICATION_OTHER =
+  "The function under test::some other explanation:";
 export const NONDEFAULT_CASE_NAME = "Global multiplier is 3";
 
 export const LabelTestdata = {
@@ -17,4 +19,5 @@ export const LabelTestdata = {
   nondefaultCaseName: () => NONDEFAULT_CASE_NAME,
   undefined: () => undefined,
   runIdentification: () => RUN_IDENTIFICATION,
+  runIdentificationOther: () => RUN_IDENTIFICATION_OTHER,
 };

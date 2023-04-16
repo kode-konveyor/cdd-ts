@@ -16,7 +16,7 @@ EOF
 	exit 1
 fi
 
-if npx prettier -c $(git status --porcelain |grep "^[^ ]" |awk '{print $2}')
+if npx prettier -c $(git status --porcelain |sed 's/[^ ]* -> //'|grep "^[^ D]" |awk '{print $2}')
 then
 	echo "source code is pretty"
 else

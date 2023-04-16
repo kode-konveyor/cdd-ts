@@ -19,6 +19,11 @@ export const CheckContractParties = [
   contract.check.call.bind(contract.check),
 ];
 
+const NOT_THE_EXPECTED_EXCEPTION = `Not the expected exception thrown.
+Expected:cannot be three
+Got     :Error: first arg cannot be two
+stack:
+Error: first arg cannot be two`;
 const RETURN_VALUE_MISMATCH_PATTERN =
   LabelTestdata.runIdentification() +
   " return value mismatch:.*expected:.2.*actual  :.1";
@@ -101,7 +106,7 @@ export const CheckContract = new Contract<typeof Check.prototype.check>()
   )
 
   .ifCalledWith(
-    ContractTestData.getContractThrowingUnexpectedException,
+    ContractTestData.getContractThrowingUnexpectedExceptionAndOtherRunLater,
     TestedFunctionTestData.default
   )
   .thenThrow(
@@ -124,8 +129,7 @@ export const CheckContract = new Contract<typeof Check.prototype.check>()
   )
   .thenThrow(
     "in case a different exception is thrown than what is in the contract, a 'Not the expected exception thrown' error is thrown",
-    LabelTestdata.runIdentification() +
-      "Not the expected exception thrown. Got:Error: first arg cannot be two\nstack:\nError: first arg cannot be two"
+    NOT_THE_EXPECTED_EXCEPTION
   )
 
   .ifCalledWith(
