@@ -1,11 +1,15 @@
 import { Contract } from "../../src/contract/Contract.js";
-import { annotateFunction } from "../../src/util/annotateFunction.js";
+import { AnnotateFunctionService } from "../../src/util/AnnotateFunctionService.js";
 import { AnnotatedFunctionTestData } from "../../testdata/AnnotatedFunctionTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
 
-export const annotateFunctionContractParties = [annotateFunction];
+export const annotateFunctionContractParties = [
+  new AnnotateFunctionService().annotateFunction,
+];
 
-export const annotateFunctionContract = new Contract<typeof annotateFunction>()
+export const annotateFunctionContract = new Contract<
+  typeof AnnotateFunctionService.prototype.annotateFunction
+>()
   .setTitle(
     "Annotates a getter such that it is serialized showing the data it returns with"
   )

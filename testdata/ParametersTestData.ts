@@ -1,4 +1,8 @@
-import { makeGetters } from "../src/util/makeGetters.js";
+import { bound } from "../src/util/bound.js";
+import { MakeGettersService } from "../src/util/MakeGettersService.js";
+
+const makeGetters =
+  bound<MakeGettersService["makeGetters"]>(MakeGettersService);
 
 export const PARAMETERS = [1, "b"];
 export const PARAMETERS_THROWING_EXCEPTION = [2, "a"];

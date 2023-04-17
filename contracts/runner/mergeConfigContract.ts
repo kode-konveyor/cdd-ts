@@ -1,14 +1,13 @@
 import { Contract } from "../../src/contract/Contract.js";
 import { MergeConfigService } from "../../src/runner/MergeConfigService.js";
-import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker.js";
+import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker/ConsoleLogChecker.js";
 import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js";
 import { PatternTestData } from "../../testdata/PatternTestData.js";
+import { bound } from "../../src/util/bound.js";
 
-export const mergeConfigContractParties = [
-  new MergeConfigService().mergeConfig,
-];
+export const mergeConfigContractParties = [bound(MergeConfigService)];
 export const mergeConfigContract = new Contract<
-  typeof MergeConfigService.prototype.mergeConfig
+  MergeConfigService["mergeConfig"]
 >()
   .setTitle(
     "gathers the configuration from the default config, config file and command line parameters"

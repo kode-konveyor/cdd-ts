@@ -12,9 +12,7 @@ export class RunAllContractsService {
       .runContractsfromList,
     readonly resolveModule = ResolveModuleService.prototype.resolveModule,
     readonly runOneContract = RunOneContractService.prototype.runOneContract
-  ) {
-    this.runAllContracts = this.runAllContracts.bind(this);
-  }
+  ) {}
 
   async runAllContracts(options: CDDConfiguration): Promise<number> {
     const contracts = await glob(options.contracts, {});

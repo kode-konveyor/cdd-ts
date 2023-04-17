@@ -7,6 +7,7 @@ import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunService.js";
 import { caseNameContract } from "./caseNameContract.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const ContractTestData = makeTestData<
   ContractEntity<TestedFunctionType>,
@@ -23,11 +24,7 @@ const ContractTestData = makeTestData<
 const RUN_IS_INCOMPLETE =
   "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called";
 
-export const IfcalledWithContractParties = [
-  IfCalledWithService.prototype.ifCalledWith.call.bind(
-    IfCalledWithService.prototype.ifCalledWith
-  ),
-];
+export const IfcalledWithContractParties = [boundCall(IfCalledWithService)];
 export const IfcalledWithContract = new Contract<
   typeof IfCalledWithService.prototype.ifCalledWith
 >()

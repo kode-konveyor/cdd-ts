@@ -13,6 +13,8 @@ import { checkServiceMutex, NO_CHECKS_IN_CONTRACT } from "./Constants.js";
 import { SetUpSideEffectChecksService } from "./SetUpSideEffectChecksService.js";
 import { TearDownSideEffectChecksService } from "./TearDownSideEffectChecksService.js";
 import { nullPromise } from "../runner/Constants.js";
+import { DiffService } from "../util/DiffService.js";
+import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
 
 export class CheckService<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -30,7 +32,10 @@ export class CheckService<T extends MethodType> extends ContractEntity<T> {
     readonly setUpSideEffectChecksService = SetUpSideEffectChecksService
       .prototype.setUpSideEffectChecks,
     readonly tearDownSideEffectChecksService = TearDownSideEffectChecksService
-      .prototype.tearDownSideEffectChecks
+      .prototype.tearDownSideEffectChecks,
+    private readonly diff = DiffService.prototype.diff,
+    readonly getParametersFromGetters = GetParametersFromGettersService
+      .prototype.getParametersFromGetters
   ) {
     super();
   }

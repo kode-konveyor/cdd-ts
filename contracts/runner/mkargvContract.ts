@@ -1,11 +1,11 @@
 import { Contract } from "../../src/cdd-ts.js";
 import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js";
 import { ArgvTestData } from "../../testdata/ArgvTestData.js";
-import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker.js";
+import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker/ConsoleLogChecker.js";
 import { PatternTestData } from "../../testdata/PatternTestData.js";
 import { MkArgvService } from "../../src/runner/MkArgvService.js";
 
-export const mkargvContractParties = [MkArgvService.prototype.mkArgv];
+export const mkargvContractParties = [new MkArgvService().mkArgv];
 export const mkargvContract = new Contract<
   typeof MkArgvService.prototype.mkArgv
 >()

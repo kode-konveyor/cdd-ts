@@ -5,6 +5,7 @@ import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const contractTestData = makeTestData<
   Contract<MethodType>,
@@ -12,9 +13,7 @@ const contractTestData = makeTestData<
 >(ContractTestDataDescriptor, () => new Contract());
 
 export const getStubForMixinContractParties = [
-  GetStubForMixinService.prototype.getStubForMixin.call.bind(
-    GetStubForMixinService.prototype.getStubForMixin
-  ),
+  boundCall(GetStubForMixinService),
 ];
 
 export const getStubForMixinContract = new Contract()

@@ -2,6 +2,7 @@ import { CaseNameService } from "../../src/check/CaseNameService.js";
 import { HandleExceptionService } from "../../src/check/HandleExceptionService.js";
 import { Contract } from "../../src/contract/Contract.js";
 import type { ContractEntity } from "../../src/types/ContractEntity.js";
+import { boundCall } from "../../src/util/boundCall.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
@@ -20,9 +21,7 @@ const ContractTestData = makeTestData<
 );
 
 export const HandleExceptionContractParties = [
-  HandleExceptionService.prototype.handleException.call.bind(
-    HandleExceptionService.prototype.handleException
-  ),
+  boundCall(HandleExceptionService),
 ];
 const NOT_THE_EXPECTED_EXCEPTION = `Error: The function under test:undefined:run explanation:Not the expected exception thrown.
 Expected:cannot be three

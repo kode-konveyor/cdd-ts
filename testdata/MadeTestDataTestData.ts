@@ -1,6 +1,8 @@
 import { type CDDConfiguration } from "../src/types/CDDConfiguration";
-import { annotateFunction } from "../src/util/annotateFunction.js";
+import { AnnotateFunctionService } from "../src/util/AnnotateFunctionService.js";
 import { CDDConfigurationTestData } from "../testdata/CDDConfigurationTestData.js";
+
+const annotateFunction = new AnnotateFunctionService().annotateFunction;
 
 export const MadeTestDataTestData = {
   default: () => {

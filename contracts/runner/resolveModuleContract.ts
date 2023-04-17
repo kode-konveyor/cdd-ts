@@ -4,7 +4,7 @@ import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestDat
 import { ModuleNameTestData } from "../../testdata/ModuleNameTestData.js";
 
 export const resolveModuleContractParties = [
-  ResolveModuleService.prototype.resolveModule,
+  new ResolveModuleService().resolveModule,
 ];
 export const resolveModuleContract = new Contract<
   typeof ResolveModuleService.prototype.resolveModule

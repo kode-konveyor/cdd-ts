@@ -5,6 +5,7 @@ import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { ParameterTestData } from "../../testdata/ParametersTestData.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const ContractTestData = makeTestData<
   ThenReturnService<TestedFunctionType>,
@@ -14,11 +15,7 @@ const ContractTestData = makeTestData<
   () => new ThenReturnService<TestedFunctionType>()
 );
 
-export const ThenReturnContractParties = [
-  ThenReturnService.prototype.thenReturn.call.bind(
-    ThenReturnService.prototype.thenReturn
-  ),
-];
+export const ThenReturnContractParties = [boundCall(ThenReturnService)];
 
 const NO_IFCALLEDWITH_BEFORE_THENRETURN =
   "ifCalledWith is missing before thenReturn";

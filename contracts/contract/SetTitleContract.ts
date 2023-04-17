@@ -5,19 +5,17 @@ import { SetTitleService } from "../../src/contract/SetTitleService.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const ContractTestData = makeTestData<
   ContractEntity<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >(ContractTestDataDescriptor, () => new ContractEntity<TestedFunctionType>());
 
-const contract = new Contract<TestedFunctionType>();
-
+const methodName = "setTitle";
 export const SetTitleContractParties = [
-  SetTitleService.prototype.setTitle.call.bind(
-    SetTitleService.prototype.setTitle
-  ),
-  contract.setTitle.call.bind(contract.setTitle),
+  boundCall(SetTitleService),
+  boundCall(Contract, methodName),
 ];
 
 export const SetTitleContract = new Contract<

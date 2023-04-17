@@ -6,17 +6,17 @@ import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { CheckResultTestData } from "../../testdata/CheckResultTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const ContractTestData = makeTestData<
   CheckService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >(ContractTestDataDescriptor, () => new CheckService<TestedFunctionType>());
 
-const contract = new Contract<TestedFunctionType>();
-
+const methodName = "check";
 export const CheckContractParties = [
-  CheckService.prototype.check.call.bind(CheckService.prototype.check),
-  contract.check.call.bind(contract.check),
+  boundCall(CheckService),
+  boundCall(Contract, methodName),
 ];
 
 const NOT_THE_EXPECTED_EXCEPTION = `Not the expected exception thrown.
@@ -37,6 +37,7 @@ const RETURN_VALUE_MISMATCH =
 const NO_CHECKS_IN_CONTRACT =
   "Error: no checks in contract The function under test";
 const RETURN_VALUE_MISMATCH_SHORT = "return value mismatch";
+
 export const CheckContract = new Contract<typeof CheckService.prototype.check>()
   .setTitle(
     "check checks whether the contract actually corresponds to the behaviour of the SUT"

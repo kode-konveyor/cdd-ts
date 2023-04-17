@@ -5,14 +5,17 @@ import { RETURN_VALUE_MISMATCH_MESSAGE_FORMAT } from "./Messages.js";
 import { CaseNameService } from "./CaseNameService.js";
 
 import { serialize } from "../util/serialize.js";
-import { diff } from "../util/diff.js";
+import { DiffService } from "../util/DiffService.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { UNDEFINED_AS_STRING, EMPTY_STRING } from "./Constants.js";
 
 export class CheckReturnValueService<
   T extends MethodType
 > extends ContractEntity<T> {
-  constructor(readonly caseName = CaseNameService.prototype.caseName) {
+  constructor(
+    readonly caseName = CaseNameService.prototype.caseName,
+    readonly diff = DiffService.prototype.diff
+  ) {
     super();
   }
 
@@ -42,7 +45,7 @@ export class CheckReturnValueService<
           this.caseName(),
           expected,
           actual,
-          diff(expected, actual)
+          this.diff(expected, actual)
         )
       );
     }

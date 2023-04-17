@@ -7,7 +7,7 @@ import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
 import { EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT } from "./Messages.js";
 import { CheckReturnValueService } from "./CheckReturnValueService.js";
-import { getParametersFromGetters } from "../util/getParametersFromGetters.js";
+import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
 import { HandleExceptionService } from "./HandleExceptionService.js";
 import { OneSideEffectCheckService } from "./OneSideEffectCheckService.js";
 import { RunSideEffectChecksService } from "./RunSideEffectChecksService.js";
@@ -28,7 +28,9 @@ export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
     readonly setUpSideEffectChecksService = SetUpSideEffectChecksService
       .prototype.setUpSideEffectChecks,
     readonly tearDownSideEffectChecksService = TearDownSideEffectChecksService
-      .prototype.tearDownSideEffectChecks
+      .prototype.tearDownSideEffectChecks,
+    readonly getParametersFromGetters = GetParametersFromGettersService
+      .prototype.getParametersFromGetters
   ) {
     super();
   }
@@ -40,7 +42,7 @@ export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
     try {
       await this.setUpSideEffectChecksService(currentRun);
       let result: ReturnType<T>;
-      const parameters: Parameters<T> = getParametersFromGetters(
+      const parameters: Parameters<T> = this.getParametersFromGetters(
         currentRun.parameterGetters
       ) as Parameters<T>;
       try {

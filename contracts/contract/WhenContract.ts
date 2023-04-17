@@ -6,17 +6,17 @@ import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const ContractTestData = makeTestData<
   Contract<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >(ContractTestDataDescriptor, () => new Contract<TestedFunctionType>());
 
-const contract = new Contract<TestedFunctionType>();
-
+const methodName = "when";
 export const WhenContractParties = [
-  WhenService.prototype.when.call.bind(WhenService.prototype.when),
-  contract.when.call.bind(contract.when),
+  boundCall(WhenService),
+  boundCall(Contract, methodName),
 ];
 
 export const WhenContract = new Contract<typeof WhenService.prototype.when>()

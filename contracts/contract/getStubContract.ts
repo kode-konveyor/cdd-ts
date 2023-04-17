@@ -7,10 +7,9 @@ import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
-export const getStubContractParties = [
-  GetStubService.prototype.getStub.call.bind(GetStubService.prototype.getStub),
-];
+export const getStubContractParties = [boundCall(GetStubService)];
 
 const contractTestData = makeTestData(
   ContractTestDataDescriptor,

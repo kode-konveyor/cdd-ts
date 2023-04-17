@@ -21,6 +21,8 @@ import { GetStubForMixinService } from "./GetStubForMixinService.js";
 import { type ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
 import { SetUpSideEffectChecksService } from "../check/SetUpSideEffectChecksService.js";
 import { TearDownSideEffectChecksService } from "../check/TearDownSideEffectChecksService.js";
+import { DiffService } from "../util/DiffService.js";
+import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
 
 export class Contract<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -67,7 +69,10 @@ export class Contract<T extends MethodType> extends ContractEntity<T> {
     private readonly setUpSideEffectChecksService = SetUpSideEffectChecksService
       .prototype.setUpSideEffectChecks,
     private readonly tearDownSideEffectChecksService = TearDownSideEffectChecksService
-      .prototype.tearDownSideEffectChecks
+      .prototype.tearDownSideEffectChecks,
+    private readonly diff = DiffService.prototype.diff,
+    private readonly getParametersFromGetters = GetParametersFromGettersService
+      .prototype.getParametersFromGetters
   ) {
     super();
   }

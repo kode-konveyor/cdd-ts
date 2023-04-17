@@ -7,12 +7,11 @@ import type { CallType } from "../../testdata/CallType.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
+import { boundCall } from "../../src/util/boundCall.js";
 import { caseNameContract } from "./caseNameContract.js";
 
 export const checkCurrentRunContractParties = [
-  CheckCurrentRunService.prototype.checkCurrentRun.call.bind(
-    CheckCurrentRunService.prototype.checkCurrentRun
-  ),
+  boundCall(CheckCurrentRunService),
 ];
 
 const contractTestData = makeTestData<

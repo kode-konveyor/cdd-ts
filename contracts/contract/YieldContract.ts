@@ -5,15 +5,14 @@ import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { ParameterTestData } from "../../testdata/ParametersTestData.js";
 import { getReturnValueTestDataIndirect } from "../../testdata/ReturnValueTestData.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const contractTestData = makeTestData(
   ContractTestDataDescriptor,
   () => new YieldService<MethodType>()
 );
 
-export const YieldContractParties = [
-  YieldService.prototype.yield.call.bind(YieldService.prototype.yield),
-];
+export const YieldContractParties = [boundCall(YieldService)];
 
 const IFCALLEDWITH_MISSING_BEFORE_YIELD =
   "ifCalledWith is missing before yield";

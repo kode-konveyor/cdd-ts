@@ -1,6 +1,6 @@
 /* eslint-disable kodekonveyor/no-literals */
-
-import { type CDDConfiguration } from "../types/CDDConfiguration.js";
+import { readFileSync } from "fs";
+import { type CDDConfiguration } from "../types/CDDConfiguration";
 import { createCommand } from "commander";
 
 export const TYPESCRIPT_EXTENSION = ".ts";
@@ -10,9 +10,16 @@ export const SLASH_D = "-d";
 export const PATH_SEPARATOR = "/";
 export const EMPTY_SPACE = "";
 
+export const CONFIG_FILE = "cdd-ts.json";
+
+export const configFromFile: CDDConfiguration = JSON.parse(
+  readFileSync(CONFIG_FILE).toString()
+);
+
 export const nullPromise = new Promise<number>((resolve) => {
   resolve(0);
 });
+
 export const defaultConfig: CDDConfiguration = {
   watch: false,
   distFiles: "dist/**/*.js",

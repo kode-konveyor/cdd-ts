@@ -1,23 +1,28 @@
 import type { CheckService } from "../../src/check/CheckService.js";
 import { Contract } from "../../src/contract/Contract.js";
 import { RunAllContractsService } from "../../src/runner/RunAllContractsService.js";
-import { checkThrowAsync } from "../../src/util/checkThrowAsync.js";
-import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker.js";
+import { CheckThrowAsyncService } from "../../src/util/CheckThrowAsyncService.js";
+import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker/ConsoleLogChecker.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { serialize } from "../../src/util/serialize.js";
 import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
-
-const runAllContracts = new RunAllContractsService().runAllContracts;
+import { bound } from "../../src/util/bound.js";
+const runAllContracts = bound<RunAllContractsService["runAllContracts"]>(
+  RunAllContractsService
+);
+const checkThrowAsync = bound<CheckThrowAsyncService["checkThrowAsync"]>(
+  CheckThrowAsyncService
+);
 const ContractTestData = makeTestData<
   Contract<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >(ContractTestDataDescriptor, () => new Contract<TestedFunctionType>());
 
 const RETURNVALUE_MISMATCH = "returnvalue mismatch";
-const CheckContract = new Contract<typeof CheckService.prototype.check>()
+const CheckContract = new Contract<CheckService<TestedFunctionType>["check"]>()
   .setTitle(
     "check checks whether the contract actually corresponds to the behaviour of the SUT"
   )

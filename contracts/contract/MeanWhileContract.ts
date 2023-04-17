@@ -5,17 +5,14 @@ import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { SideEffectCheckerTestData } from "../../testdata/SideEffectCheckerTestData.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const ContractTestData = makeTestData<
   MeanWhileService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >(ContractTestDataDescriptor, () => new MeanWhileService<TestedFunctionType>());
 
-export const MeanWhileContractParties = [
-  MeanWhileService.prototype.meanWhile.call.bind(
-    MeanWhileService.prototype.meanWhile
-  ),
-];
+export const MeanWhileContractParties = [boundCall(MeanWhileService)];
 const NO_IFCALLEDWITH_BEFIRE_MEANWHILE =
   "ifCalledWith is missing before meanWhile";
 export const MeanWhileContract = new Contract<

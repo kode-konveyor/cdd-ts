@@ -5,12 +5,16 @@ import glob from "fast-glob";
 import fs from "node:fs";
 import url from "url";
 import child_process from "child_process";
-import { configFromFile } from "./runner/configFromFile.js";
 import { type CDDConfiguration } from "./types/CDDConfiguration.js";
 import { CheckNumberOfTestsService } from "./runner/CheckNumberOfTestsService.js";
 import { MergeConfigService } from "./runner/MergeConfigService.js";
 import { MkArgvService } from "./runner/MkArgvService.js";
-import { argparser, defaultConfig } from "./runner/Constants.js";
+import {
+  argparser,
+  configFromFile,
+  defaultConfig,
+} from "./runner/Constants.js";
+import { bound } from "./util/bound.js";
 try {
   await import("@angular/compiler");
 } catch {}
@@ -22,10 +26,13 @@ const WATCHING = "watching";
 const checkNumberOfTestsService =
   CheckNumberOfTestsService.prototype.checkNumberOfTests;
 
-const mergeConfig = new MergeConfigService().mergeConfig;
+const mergeConfig =
+  bound<MergeConfigService["mergeConfig"]>(MergeConfigService);
 
 const mkArgv = MkArgvService.prototype.mkArgv;
-const runAllContracts = new RunAllContractsService().runAllContracts;
+const runAllContracts = bound<RunAllContractsService["runAllContracts"]>(
+  RunAllContractsService
+);
 
 export const config = mergeConfig(defaultConfig, configFromFile, options);
 

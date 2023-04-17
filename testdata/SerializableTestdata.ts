@@ -1,11 +1,15 @@
-import { argparser, defaultConfig } from "../src/runner/Constants.js";
-import { configFromFile } from "../src/runner/configFromFile.js";
+import {
+  argparser,
+  configFromFile,
+  defaultConfig,
+} from "../src/runner/Constants.js";
 import { MkArgvService } from "../src/runner/MkArgvService.js";
 import { ContractEntity } from "../src/types/ContractEntity.js";
-import { annotateFunction } from "../src/util/annotateFunction.js";
+import { AnnotateFunctionService } from "../src/util/AnnotateFunctionService.js";
 import { CDDConfigurationTestData } from "./CDDConfigurationTestData.js";
 
-const mkArgv = MkArgvService.prototype.mkArgv;
+const mkArgv = new MkArgvService().mkArgv;
+const annotateFunction = new AnnotateFunctionService().annotateFunction;
 
 const circular = {
   circular: null as unknown,

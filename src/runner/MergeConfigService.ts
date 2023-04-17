@@ -1,18 +1,19 @@
 import { type CDDConfiguration } from "../types/CDDConfiguration";
-import { deepCopy } from "../util/deepCopy.js";
+import { DeepCopyService } from "../util/DeepCopyService.js";
 import { StoreConfigService } from "./StoreConfigService.js";
 
 export class MergeConfigService {
-  constructor(readonly storeConfig = StoreConfigService.prototype.storeConfig) {
-    this.mergeConfig = this.mergeConfig.bind(this);
-  }
+  constructor(
+    readonly storeConfig = StoreConfigService.prototype.storeConfig,
+    readonly deepCopy = DeepCopyService.prototype.deepCopy
+  ) {}
 
   mergeConfig(
     defaultConfig: CDDConfiguration,
     configFromFile: CDDConfiguration,
     options: CDDConfiguration
   ): CDDConfiguration {
-    const theConfig = deepCopy(defaultConfig);
+    const theConfig = this.deepCopy(defaultConfig);
 
     this.storeConfig(configFromFile, theConfig);
     this.storeConfig(options, theConfig);

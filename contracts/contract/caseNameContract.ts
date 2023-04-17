@@ -1,23 +1,20 @@
-import { Contract } from "../../src/cdd-ts.js";
 import { CaseNameService } from "../../src/check/CaseNameService.js";
 import { ContractEntity } from "../../src/types/ContractEntity.js";
-import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { CaseNameTestData } from "../../testdata/CaseNameTestData.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const ContractTestData = makeTestData<
   ContractEntity<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >(ContractTestDataDescriptor, () => new ContractEntity<TestedFunctionType>());
 
-export const caseNameContractParties = [
-  (contract: ContractEntity<MethodType>) =>
-    CaseNameService.prototype.caseName.call(contract),
-];
+export const caseNameContractParties = [boundCall(CaseNameService)];
 export const caseNameContract = new Contract<
-  CaseNameService<MethodType>["caseName"]
+  CaseNameService<TestedFunctionType>["caseName"]
 >()
   .setTitle("returns the name of the currently checked case")
   .ifCalledWith(

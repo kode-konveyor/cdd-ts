@@ -1,6 +1,10 @@
-import { annotateFunction } from "./annotateFunction.js";
-import { deepCopy } from "./deepCopy.js";
+import { bound } from "./bound.js";
+import { AnnotateFunctionService } from "./AnnotateFunctionService.js";
+import { DeepCopyService } from "./DeepCopyService.js";
 import { messageFormat } from "./messageFormat.js";
+
+const annotateFunction = new AnnotateFunctionService().annotateFunction;
+const deepCopy = bound<DeepCopyService["deepCopy"]>(DeepCopyService);
 
 export type DescriptorAddType = [string, string, unknown];
 

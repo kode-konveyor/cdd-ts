@@ -4,17 +4,14 @@ import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import { boundCall } from "../../src/util/boundCall.js";
 
 const ContractTestData = makeTestData<
   ThenThrowService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >(ContractTestDataDescriptor, () => new ThenThrowService<TestedFunctionType>());
 
-export const ThenThrowContractParties = [
-  ThenThrowService.prototype.thenThrow.call.bind(
-    ThenThrowService.prototype.thenThrow
-  ),
-];
+export const ThenThrowContractParties = [boundCall(ThenThrowService)];
 
 const NO_IFCALLEDWITH_BEFORE_THENTHROW =
   "ifCalledWith is missing before thenThrow";

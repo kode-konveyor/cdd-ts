@@ -4,11 +4,11 @@ import { type ContractEntity } from "../src/types/ContractEntity.js";
 import { type MethodType } from "../src/types/MethodType.js";
 import { type ReturnValueCheckType } from "../src/types/ReturnValueCheckType.js";
 import { type RunDescriptorEntity } from "../src/types/RunDescriptorEntity.js";
-import { diff } from "../src/util/diff.js";
-import { getParametersFromGetters } from "../src/util/getParametersFromGetters.js";
+import { DiffService } from "../src/util/DiffService.js";
+import { GetParametersFromGettersService } from "../src/util/GetParametersFromGettersService.js";
 import { serialize } from "../src/util/serialize.js";
 import { type CallType } from "./CallType";
-import { checkThrow } from "../src/util/checkThrow.js";
+import { CheckThrowService } from "../src/util/CheckThrowService.js";
 import { FunctionAnnotationtestData } from "./FunctionAnnotationtestData.js";
 import { type TestedFunctionType } from "./MethodTestData.js";
 import { ParameterTestData } from "./ParametersTestData.js";
@@ -21,6 +21,10 @@ import { type CDDConfiguration } from "../src/types/CDDConfiguration.js";
 import { type WhenService } from "../src/contract/WhenService.js";
 import { LabelTestdata } from "./LabelTestdata.js";
 
+const checkThrow = new CheckThrowService().checkThrow;
+const diff = new DiffService().diff;
+const getParametersFromGetters = new GetParametersFromGettersService()
+  .getParametersFromGetters;
 const NOT_DEFINED_EXACTLY_ONCE =
   "those parameters are not defined exactly once for this case";
 export const ReturnValueCheckTestData = {

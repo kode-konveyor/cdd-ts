@@ -5,7 +5,7 @@ import { BooleanTestData } from "../../testdata/BooleanTestData.js";
 import { CheckNumberOfTestsService } from "../../src/runner/CheckNumberOfTestsService.js";
 
 export const checkNumberOfTestsContractParties = [
-  CheckNumberOfTestsService.prototype.checkNumberOfTests,
+  new CheckNumberOfTestsService().checkNumberOfTests,
 ];
 
 const EXPECTED_TEN_TESTS = "expected 10 tests, got 11";

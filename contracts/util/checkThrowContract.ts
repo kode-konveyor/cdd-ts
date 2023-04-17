@@ -1,14 +1,19 @@
 import { Contract } from "../../src/cdd-ts.js";
-import { checkThrow } from "../../src/util/checkThrow.js";
-import { checkThrowAsync } from "../../src/util/checkThrowAsync.js";
+import { CheckThrowService } from "../../src/util/CheckThrowService.js";
+import { CheckThrowAsyncService } from "../../src/util/CheckThrowAsyncService.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import { ParameterTestData } from "../../testdata/ParametersTestData.js";
 
-export const checkThrowContractParties = [checkThrow, checkThrowAsync];
+export const checkThrowContractParties = [
+  new CheckThrowService().checkThrow,
+  new CheckThrowAsyncService().checkThrowAsync,
+];
 const NO_EXCEPTION = "no exception was thrown";
 const FIRST_ARG_CANNOT_BE_ULL = "first arg cannot be two";
-export const checkThrowContract = new Contract<typeof checkThrow>()
+export const checkThrowContract = new Contract<
+  typeof CheckThrowService.prototype.checkThrow
+>()
   .setTitle("checks if an exception is thrown")
 
   .ifCalledWith(
