@@ -1,5 +1,5 @@
 import { Contract } from "../../src/cdd-ts.js";
-import { CheckCurrentRun } from "../../src/contract/CheckCurrentRun.js";
+import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunService.js";
 import type { ContractEntity } from "../../src/types/ContractEntity.js";
 import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
@@ -10,8 +10,8 @@ import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestDat
 import { caseNameContract } from "./caseNameContract.js";
 
 export const checkCurrentRunContractParties = [
-  CheckCurrentRun.prototype.checkCurrentRun.call.bind(
-    CheckCurrentRun.prototype.checkCurrentRun
+  CheckCurrentRunService.prototype.checkCurrentRun.call.bind(
+    CheckCurrentRunService.prototype.checkCurrentRun
   ),
 ];
 
@@ -20,12 +20,12 @@ const contractTestData = makeTestData<
   typeof ContractTestDataDescriptor
 >(
   ContractTestDataDescriptor,
-  () => new CheckCurrentRun(caseNameContract.getStubForMixin())
+  () => new CheckCurrentRunService(caseNameContract.getStubForMixin())
 );
 
 type ckrcall = CallType<
   TestedFunctionType,
-  typeof CheckCurrentRun.prototype.checkCurrentRun<TestedFunctionType>,
+  typeof CheckCurrentRunService.prototype.checkCurrentRun<TestedFunctionType>,
   ContractEntity<TestedFunctionType>
 >;
 

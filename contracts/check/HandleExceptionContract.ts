@@ -1,5 +1,5 @@
-import { CaseName } from "../../src/check/CaseName.js";
-import { HandleException } from "../../src/check/HandleException.js";
+import { CaseNameService } from "../../src/check/CaseNameService.js";
+import { HandleExceptionService } from "../../src/check/HandleExceptionService.js";
 import { Contract } from "../../src/contract/Contract.js";
 import type { ContractEntity } from "../../src/types/ContractEntity.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
@@ -13,12 +13,15 @@ const ContractTestData = makeTestData<
   typeof ContractTestDataDescriptor
 >(
   ContractTestDataDescriptor,
-  () => new HandleException<TestedFunctionType>(CaseName.prototype.caseName)
+  () =>
+    new HandleExceptionService<TestedFunctionType>(
+      CaseNameService.prototype.caseName
+    )
 );
 
 export const HandleExceptionContractParties = [
-  HandleException.prototype.handleException.call.bind(
-    HandleException.prototype.handleException
+  HandleExceptionService.prototype.handleException.call.bind(
+    HandleExceptionService.prototype.handleException
   ),
 ];
 const NOT_THE_EXPECTED_EXCEPTION = `Error: The function under test:undefined:run explanation:Not the expected exception thrown.
@@ -29,7 +32,7 @@ fake stacktrace`;
 const UNEXPECTED_EXCEPTION =
   "Error: The function under test:undefined:undefined: unexpected exception:Error: hello\nstack:\nfake stacktrace";
 export const HandleExceptionContract = new Contract<
-  typeof HandleException.prototype.handleException
+  typeof HandleExceptionService.prototype.handleException
 >()
   .setTitle("Handle exceptions")
 

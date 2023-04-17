@@ -11,3 +11,5 @@ export const SIDE_EFFECT_CHECK_FAILURE_MESSAGE =
   "{1}: side effect check: {2}: did not hold:{3}";
 export const RETURN_VALUE_CHECK_FAILURE_MESSAGE_FORMAT =
   "{1}: {2}: return value check did not hold:{3}\nstack:\n{4}";
+export const CURRENT_RUN_IS_INCOMPLETE =
+  "{1}: current run is incomplete: neither thenReturn nor thenThrow was called";

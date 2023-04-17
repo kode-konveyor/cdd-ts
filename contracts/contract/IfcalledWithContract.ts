@@ -1,11 +1,11 @@
 import { Contract } from "../../src/contract/Contract.js";
 import type { ContractEntity } from "../../src/types/ContractEntity.js";
 import { ParameterGetterTestData } from "../../testdata/ParametersGetterTestData.js";
-import { IfCalledWith } from "../../src/contract/IfCalledWith.js";
+import { IfCalledWithService } from "../../src/contract/IfCalledWithService.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
-import { CheckCurrentRun } from "../../src/contract/CheckCurrentRun.js";
+import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunService.js";
 import { caseNameContract } from "./caseNameContract.js";
 
 const ContractTestData = makeTestData<
@@ -14,8 +14,8 @@ const ContractTestData = makeTestData<
 >(
   ContractTestDataDescriptor,
   () =>
-    new IfCalledWith(
-      CheckCurrentRun.prototype.checkCurrentRun,
+    new IfCalledWithService(
+      CheckCurrentRunService.prototype.checkCurrentRun,
       caseNameContract.getStubForMixin()
     )
 );
@@ -24,12 +24,12 @@ const RUN_IS_INCOMPLETE =
   "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called";
 
 export const IfcalledWithContractParties = [
-  IfCalledWith.prototype.ifCalledWith.call.bind(
-    IfCalledWith.prototype.ifCalledWith
+  IfCalledWithService.prototype.ifCalledWith.call.bind(
+    IfCalledWithService.prototype.ifCalledWith
   ),
 ];
 export const IfcalledWithContract = new Contract<
-  typeof IfCalledWith.prototype.ifCalledWith
+  typeof IfCalledWithService.prototype.ifCalledWith
 >()
   .setTitle("ifCalledWith sets the parameter for the run")
   .ifCalledWith(

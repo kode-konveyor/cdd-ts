@@ -1,6 +1,6 @@
-import { CheckCurrentRun } from "../../src/contract/CheckCurrentRun.js";
+import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunService.js";
 import { Contract } from "../../src/contract/Contract.js";
-import { GetStub } from "../../src/contract/GetStub.js";
+import { GetStubService } from "../../src/contract/GetStubService.js";
 import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
@@ -9,16 +9,21 @@ import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
 
 export const getStubContractParties = [
-  GetStub.prototype.getStub.call.bind(GetStub.prototype.getStub),
+  GetStubService.prototype.getStub.call.bind(GetStubService.prototype.getStub),
 ];
 
 const contractTestData = makeTestData(
   ContractTestDataDescriptor,
-  () => new GetStub<MethodType>(CheckCurrentRun.prototype.checkCurrentRun)
+  () =>
+    new GetStubService<MethodType>(
+      CheckCurrentRunService.prototype.checkCurrentRun
+    )
 );
 
 const NO_RUNS_IN_THE_CASE = "no runs in the case";
-export const getStubContract = new Contract<typeof GetStub.prototype.getStub>()
+export const getStubContract = new Contract<
+  typeof GetStubService.prototype.getStub
+>()
   .setTitle("returns a stub behaving according to the contract")
 
   .ifCalledWith(contractTestData.getContractWithTitleAndRun)

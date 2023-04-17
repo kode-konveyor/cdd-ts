@@ -1,66 +1,73 @@
-import { MeanWhile } from "./Meanwhile.js";
+import { MeanWhileService } from "./MeanWhileService.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
-import { GetStub } from "./GetStub.js";
-import { SetTitle } from "./SetTitle.js";
-import { Check } from "../check/Check.js";
-import { IfCalledWith } from "./IfCalledWith.js";
-import { CheckCurrentRun } from "./CheckCurrentRun.js";
-import { When } from "./When.js";
-import { ThenReturn } from "./ThenReturn.js";
-import { ThenThrow } from "./ThenThrow.js";
-import { SuchThat } from "./SuchThat.js";
-import { HandleRun } from "../check/HandleRun.js";
-import { HandleException } from "../check/HandleException.js";
-import { CaseName } from "../check/CaseName.js";
-import { OneSideEffectCheck } from "../check/OneSideEffectCheck.js";
-import { RunSideEffectChecks } from "../check/RunSideEffectChecks.js";
-import { RunReturnValueChecks } from "../check/RunReturnValueChecks.js";
-import { CheckReturnValue } from "../check/CheckReturnValue.js";
-import { GetStubForMixin } from "./GetStubForMixin.js";
+import { GetStubService } from "./GetStubService.js";
+import { SetTitleService } from "./SetTitleService.js";
+import { CheckService } from "../check/CheckService.js";
+import { IfCalledWithService } from "./IfCalledWithService.js";
+import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
+import { WhenService } from "./WhenService.js";
+import { ThenReturnService } from "./ThenReturnService.js";
+import { ThenThrowService } from "./ThenThrowService.js";
+import { SuchThatService } from "./SuchThatService.js";
+import { HandleRunService } from "../check/HandleRunService.js";
+import { HandleExceptionService } from "../check/HandleExceptionService.js";
+import { CaseNameService } from "../check/CaseNameService.js";
+import { OneSideEffectCheckService } from "../check/OneSideEffectCheckService.js";
+import { RunSideEffectChecksService } from "../check/RunSideEffectChecksService.js";
+import { RunReturnValueChecksService } from "../check/RunReturnValueChecksService.js";
+import { CheckReturnValueService } from "../check/CheckReturnValueService.js";
+import { GetStubForMixinService } from "./GetStubForMixinService.js";
 import { type ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
+import { SetUpSideEffectChecksService } from "../check/SetUpSideEffectChecksService.js";
+import { TearDownSideEffectChecksService } from "../check/TearDownSideEffectChecksService.js";
 
 export class Contract<T extends MethodType> extends ContractEntity<T> {
   constructor(
-    readonly ifCalledWith: typeof IfCalledWith.prototype.ifCalledWith<
+    readonly ifCalledWith: typeof IfCalledWithService.prototype.ifCalledWith<
       Contract<T>
-    > = IfCalledWith.prototype.ifCalledWith,
-    private readonly checkCurrentRun: typeof CheckCurrentRun.prototype.checkCurrentRun<T> = CheckCurrentRun
+    > = IfCalledWithService.prototype.ifCalledWith,
+    private readonly checkCurrentRun: typeof CheckCurrentRunService.prototype.checkCurrentRun<T> = CheckCurrentRunService
       .prototype.checkCurrentRun,
-    readonly setTitle: typeof SetTitle.prototype.setTitle<
+    readonly setTitle: typeof SetTitleService.prototype.setTitle<
       Contract<T>
-    > = SetTitle.prototype.setTitle,
-    readonly when: typeof When.prototype.when<Contract<T>> = When.prototype
-      .when,
-    readonly thenReturn: typeof ThenReturn.prototype.thenReturn<
+    > = SetTitleService.prototype.setTitle,
+    readonly when: typeof WhenService.prototype.when<Contract<T>> = WhenService
+      .prototype.when,
+    readonly thenReturn: typeof ThenReturnService.prototype.thenReturn<
       Contract<T>
-    > = ThenReturn.prototype.thenReturn,
-    readonly thenThrow: typeof ThenThrow.prototype.thenThrow<
+    > = ThenReturnService.prototype.thenReturn,
+    readonly thenThrow: typeof ThenThrowService.prototype.thenThrow<
       Contract<T>
-    > = ThenThrow.prototype.thenThrow,
-    readonly suchThat: typeof SuchThat.prototype.suchThat<
+    > = ThenThrowService.prototype.thenThrow,
+    readonly suchThat: typeof SuchThatService.prototype.suchThat<
       Contract<T>,
       ReturnValueCheckType<T>
-    > = SuchThat.prototype.suchThat,
-    readonly meanwhile: typeof MeanWhile.prototype.meanwhile<
+    > = SuchThatService.prototype.suchThat,
+    readonly meanwhile: typeof MeanWhileService.prototype.meanWhile<
       Contract<T>
-    > = MeanWhile.prototype.meanwhile,
-    readonly getStub: typeof GetStub.prototype.getStub = GetStub.prototype
-      .getStub,
-    readonly check: typeof Check.prototype.check = Check.prototype.check,
-    readonly getStubForMixin = GetStubForMixin.prototype.getStubForMixin,
-    private readonly handleRun = HandleRun.prototype.handleRun,
-    private readonly handleException = HandleException.prototype
+    > = MeanWhileService.prototype.meanWhile,
+    readonly getStub: typeof GetStubService.prototype.getStub = GetStubService
+      .prototype.getStub,
+    readonly check: typeof CheckService.prototype.check = CheckService.prototype
+      .check,
+    readonly getStubForMixin = GetStubForMixinService.prototype.getStubForMixin,
+    private readonly handleRun = HandleRunService.prototype.handleRun,
+    private readonly handleException = HandleExceptionService.prototype
       .handleException,
-    private readonly caseName = CaseName.prototype.caseName,
-    private readonly oneSideEffectCheck = OneSideEffectCheck.prototype
+    private readonly caseName = CaseNameService.prototype.caseName,
+    private readonly oneSideEffectCheck = OneSideEffectCheckService.prototype
       .oneSideEffectCheck,
-    private readonly runSideEffectChecks = RunSideEffectChecks.prototype
+    private readonly runSideEffectChecks = RunSideEffectChecksService.prototype
       .runSideEffectChecks,
-    private readonly runReturnValueChecks = RunReturnValueChecks.prototype
-      .runReturnValueChecks,
-    private readonly checkReturnValue = CheckReturnValue.prototype
-      .checkReturnValue
+    private readonly runReturnValueChecks = RunReturnValueChecksService
+      .prototype.runReturnValueChecks,
+    private readonly checkReturnValue = CheckReturnValueService.prototype
+      .checkReturnValue,
+    private readonly setUpSideEffectChecksService = SetUpSideEffectChecksService
+      .prototype.setUpSideEffectChecks,
+    private readonly tearDownSideEffectChecksService = TearDownSideEffectChecksService
+      .prototype.tearDownSideEffectChecks
   ) {
     super();
   }

@@ -1,10 +1,11 @@
-import { argparser } from "../src/runner/argparser.js";
+import { argparser, defaultConfig } from "../src/runner/Constants.js";
 import { configFromFile } from "../src/runner/configFromFile.js";
-import { defaultConfig } from "../src/runner/defaultConfig.js";
-import { mkargv } from "../src/runner/mkargv.js";
+import { MkArgvService } from "../src/runner/MkArgvService.js";
 import { ContractEntity } from "../src/types/ContractEntity.js";
 import { annotateFunction } from "../src/util/annotateFunction.js";
 import { CDDConfigurationTestData } from "./CDDConfigurationTestData.js";
+
+const mkArgv = MkArgvService.prototype.mkArgv;
 
 const circular = {
   circular: null as unknown,
@@ -50,7 +51,7 @@ export const SerializableTestDataDescriptor = {
     (argparser as unknown as { _version: string })._version,
     argparser.description(),
   ],
-  defaultargv: mkargv(CDDConfigurationTestData.defaultConfig()),
+  defaultargv: mkArgv(CDDConfigurationTestData.defaultConfig()),
 };
 export type SerializableTestdata = {
   [K in keyof typeof SerializableTestDataDescriptor]: () => (typeof SerializableTestDataDescriptor)[K];

@@ -1,5 +1,5 @@
 import { Contract } from "../../src/cdd-ts.js";
-import { GetStubForMixin } from "../../src/contract/GetStubForMixin.js";
+import { GetStubForMixinService } from "../../src/contract/GetStubForMixinService.js";
 import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
@@ -12,8 +12,8 @@ const contractTestData = makeTestData<
 >(ContractTestDataDescriptor, () => new Contract());
 
 export const getStubForMixinContractParties = [
-  GetStubForMixin.prototype.getStubForMixin.call.bind(
-    GetStubForMixin.prototype.getStubForMixin
+  GetStubForMixinService.prototype.getStubForMixin.call.bind(
+    GetStubForMixinService.prototype.getStubForMixin
   ),
 ];
 

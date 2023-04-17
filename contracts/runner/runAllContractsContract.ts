@@ -1,5 +1,6 @@
-import { Contract, runAllContracts } from "../../src/cdd-ts.js";
-import type { Check } from "../../src/check/Check.js";
+import type { CheckService } from "../../src/check/CheckService.js";
+import { Contract } from "../../src/contract/Contract.js";
+import { RunAllContractsService } from "../../src/runner/RunAllContractsService.js";
 import { checkThrowAsync } from "../../src/util/checkThrowAsync.js";
 import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
@@ -9,13 +10,14 @@ import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 
+const runAllContracts = new RunAllContractsService().runAllContracts;
 const ContractTestData = makeTestData<
   Contract<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >(ContractTestDataDescriptor, () => new Contract<TestedFunctionType>());
 
 const RETURNVALUE_MISMATCH = "returnvalue mismatch";
-const CheckContract = new Contract<typeof Check.prototype.check>()
+const CheckContract = new Contract<typeof CheckService.prototype.check>()
   .setTitle(
     "check checks whether the contract actually corresponds to the behaviour of the SUT"
   )

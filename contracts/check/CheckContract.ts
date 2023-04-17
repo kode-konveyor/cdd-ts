@@ -1,21 +1,21 @@
 import { Contract } from "../../src/contract/Contract.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
-import { Check } from "../../src/check/Check.js";
+import { CheckService } from "../../src/check/CheckService.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { CheckResultTestData } from "../../testdata/CheckResultTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 
 const ContractTestData = makeTestData<
-  Check<TestedFunctionType>,
+  CheckService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(ContractTestDataDescriptor, () => new Check<TestedFunctionType>());
+>(ContractTestDataDescriptor, () => new CheckService<TestedFunctionType>());
 
 const contract = new Contract<TestedFunctionType>();
 
 export const CheckContractParties = [
-  Check.prototype.check.call.bind(Check.prototype.check),
+  CheckService.prototype.check.call.bind(CheckService.prototype.check),
   contract.check.call.bind(contract.check),
 ];
 
@@ -37,7 +37,7 @@ const RETURN_VALUE_MISMATCH =
 const NO_CHECKS_IN_CONTRACT =
   "Error: no checks in contract The function under test";
 const RETURN_VALUE_MISMATCH_SHORT = "return value mismatch";
-export const CheckContract = new Contract<typeof Check.prototype.check>()
+export const CheckContract = new Contract<typeof CheckService.prototype.check>()
   .setTitle(
     "check checks whether the contract actually corresponds to the behaviour of the SUT"
   )

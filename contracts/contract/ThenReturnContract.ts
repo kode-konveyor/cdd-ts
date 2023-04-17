@@ -1,5 +1,5 @@
 import { Contract } from "../../src/contract/Contract.js";
-import { ThenReturn } from "../../src/contract/ThenReturn.js";
+import { ThenReturnService } from "../../src/contract/ThenReturnService.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
@@ -7,18 +7,23 @@ import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { ParameterTestData } from "../../testdata/ParametersTestData.js";
 
 const ContractTestData = makeTestData<
-  ThenReturn<TestedFunctionType>,
+  ThenReturnService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(ContractTestDataDescriptor, () => new ThenReturn<TestedFunctionType>());
+>(
+  ContractTestDataDescriptor,
+  () => new ThenReturnService<TestedFunctionType>()
+);
 
 export const ThenReturnContractParties = [
-  ThenReturn.prototype.thenReturn.call.bind(ThenReturn.prototype.thenReturn),
+  ThenReturnService.prototype.thenReturn.call.bind(
+    ThenReturnService.prototype.thenReturn
+  ),
 ];
 
 const NO_IFCALLEDWITH_BEFORE_THENRETURN =
   "ifCalledWith is missing before thenReturn";
 export const ThenReturnContract = new Contract<
-  typeof ThenReturn.prototype.thenReturn.call
+  typeof ThenReturnService.prototype.thenReturn.call
 >()
   .setTitle("sets the explanation and expected return value for the case")
   .ifCalledWith(

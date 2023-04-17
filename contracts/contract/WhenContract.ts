@@ -1,7 +1,7 @@
 import { Contract } from "../../src/contract/Contract.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { EnvironmentmanipulatortestData } from "../../testdata/EnvironmentManipulatorTestData.js";
-import { When } from "../../src/contract/When.js";
+import { WhenService } from "../../src/contract/WhenService.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
@@ -15,11 +15,11 @@ const ContractTestData = makeTestData<
 const contract = new Contract<TestedFunctionType>();
 
 export const WhenContractParties = [
-  When.prototype.when.call.bind(When.prototype.when),
+  WhenService.prototype.when.call.bind(WhenService.prototype.when),
   contract.when.call.bind(contract.when),
 ];
 
-export const WhenContract = new Contract<typeof When.prototype.when>()
+export const WhenContract = new Contract<typeof WhenService.prototype.when>()
   .setTitle(
     "when sets up a case with a title, using an environment manipulator"
   )

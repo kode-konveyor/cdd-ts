@@ -1,5 +1,5 @@
 import { Contract } from "../../src/contract/Contract.js";
-import { Yield } from "../../src/contract/Yield.js";
+import { YieldService } from "../../src/contract/YieldService.js";
 import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
@@ -8,16 +8,16 @@ import { getReturnValueTestDataIndirect } from "../../testdata/ReturnValueTestDa
 
 const contractTestData = makeTestData(
   ContractTestDataDescriptor,
-  () => new Yield<MethodType>()
+  () => new YieldService<MethodType>()
 );
 
 export const YieldContractParties = [
-  Yield.prototype.yield.call.bind(Yield.prototype.yield),
+  YieldService.prototype.yield.call.bind(YieldService.prototype.yield),
 ];
 
 const IFCALLEDWITH_MISSING_BEFORE_YIELD =
   "ifCalledWith is missing before yield";
-export const YieldContract = new Contract<typeof Yield.prototype.yield>()
+export const YieldContract = new Contract<typeof YieldService.prototype.yield>()
   .ifCalledWith(
     contractTestData.getContractWithFreshRun,
     ParameterTestData.default,

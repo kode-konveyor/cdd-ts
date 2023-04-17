@@ -1,4 +1,4 @@
-import { type CheckCurrentRun } from "../src/contract/CheckCurrentRun.js";
+import { type CheckCurrentRunService } from "../src/contract/CheckCurrentRunService.js";
 import { type CaseDescriptorEntity } from "../src/types/CaseDescriptorEntity.js";
 import { type ContractEntity } from "../src/types/ContractEntity.js";
 import { type MethodType } from "../src/types/MethodType.js";
@@ -18,7 +18,7 @@ import {
   type TestDataDescriptor,
 } from "../src/util/makeTestData.js";
 import { type CDDConfiguration } from "../src/types/CDDConfiguration.js";
-import { type When } from "../src/contract/When.js";
+import { type WhenService } from "../src/contract/WhenService.js";
 import { LabelTestdata } from "./LabelTestdata.js";
 
 const NOT_DEFINED_EXACTLY_ONCE =
@@ -98,14 +98,14 @@ export const ReturnValueCheckTestData = {
     }
   },
   newCaseChecker: (
-    returnValue: ContractEntity<typeof When.prototype.when.call>
+    returnValue: ContractEntity<typeof WhenService.prototype.when.call>
   ): "no case added" | undefined => {
     if (returnValue.cases[LabelTestdata.nondefaultCaseName()] != null)
       return undefined;
     return "no case added";
   },
   currentCaseChecker: (
-    returnValue: ContractEntity<typeof When.prototype.when.call>
+    returnValue: ContractEntity<typeof WhenService.prototype.when.call>
   ): "currentCase is not the expected" | undefined => {
     if (returnValue.currentCase === LabelTestdata.nondefaultCaseName())
       return undefined;
@@ -129,7 +129,7 @@ function putTotheCurrentCase(
 ): ReturnValueCheckType<
   CallType<
     MethodType,
-    typeof CheckCurrentRun.prototype.checkCurrentRun<MethodType>,
+    typeof CheckCurrentRunService.prototype.checkCurrentRun<MethodType>,
     ContractEntity<MethodType>
   >
 > {

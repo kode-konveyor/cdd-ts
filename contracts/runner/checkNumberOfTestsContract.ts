@@ -1,14 +1,16 @@
 import { Contract } from "../../src/contract/Contract.js";
-import { checkNumberOfTests } from "../../src/runner/checkNumberOfTests.js";
 import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js";
 import { getReturnValueTestData } from "../../testdata/ReturnValueTestData.js";
 import { BooleanTestData } from "../../testdata/BooleanTestData.js";
+import { CheckNumberOfTestsService } from "../../src/runner/CheckNumberOfTestsService.js";
 
-export const checkNumberOfTestsContractParties = [checkNumberOfTests];
+export const checkNumberOfTestsContractParties = [
+  CheckNumberOfTestsService.prototype.checkNumberOfTests,
+];
 
 const EXPECTED_TEN_TESTS = "expected 10 tests, got 11";
 export const checkNumberOfTestsContract = new Contract<
-  typeof checkNumberOfTests
+  typeof CheckNumberOfTestsService.prototype.checkNumberOfTests
 >()
   .setTitle("checks the number of tests ran against the configured number")
   .ifCalledWith(

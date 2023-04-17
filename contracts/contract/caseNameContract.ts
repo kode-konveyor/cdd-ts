@@ -1,5 +1,5 @@
 import { Contract } from "../../src/cdd-ts.js";
-import { CaseName } from "../../src/check/CaseName.js";
+import { CaseNameService } from "../../src/check/CaseNameService.js";
 import { ContractEntity } from "../../src/types/ContractEntity.js";
 import type { MethodType } from "../../src/types/MethodType.js";
 import { makeTestData } from "../../src/util/makeTestData.js";
@@ -14,9 +14,11 @@ const ContractTestData = makeTestData<
 
 export const caseNameContractParties = [
   (contract: ContractEntity<MethodType>) =>
-    CaseName.prototype.caseName.call(contract),
+    CaseNameService.prototype.caseName.call(contract),
 ];
-export const caseNameContract = new Contract<CaseName<MethodType>["caseName"]>()
+export const caseNameContract = new Contract<
+  CaseNameService<MethodType>["caseName"]
+>()
   .setTitle("returns the name of the currently checked case")
   .ifCalledWith(
     ContractTestData.getContractWithNonDefaultCaseAndCurrentRunInCheck

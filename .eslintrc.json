@@ -14,6 +14,7 @@
   "rules": {
     "import/no-default-export": 2,
     "kodekonveyor/no-comment": 2,
+    "kodekonveyor/service": 2,
     "promise/prefer-await-to-then": "error",
     "kodekonveyor/no-literals": 2,
     "no-useless-catch": "off",
