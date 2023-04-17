@@ -1,11 +1,11 @@
 import { relative } from "path";
 import { type CDDConfiguration } from "../types/CDDConfiguration.js";
 import {
-  dirName,
   TYPESCRIPT_EXTENSION,
   JAVASCRIPT_EXTENSION,
   COMMONJS_EXTENSION,
 } from "./Constants.js";
+import { dirName } from "../util/dirName.js";
 
 export class ResolveModuleService {
   resolveModule(config: CDDConfiguration, contractFile: string): string {
