@@ -7,9 +7,6 @@
     "runContracts": "dist/src/run.js"
   },
   "type": "module",
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "preinstall": "git config core.hooksPath .githooks",
     "qa": "npm run lint &&npm run test&& npm run mutate",
@@ -19,21 +16,6 @@
     "publish:patch": "npm run qa && npm version patch && git push origin develop --tags && npm publish",
     "publish:minor": "npm run qa && npm version minor && git push origin develop --tags && npm publish",
     "publish:major": "npm run qa && npm version major && git push origin develop --tags && npm publish"
-  },
-  "jest": {
-    "testEnvironment": "node",
-    "testMatch": [
-      "**/*.test.js"
-    ],
-    "roots": [
-      "<rootDir>/dist"
-    ],
-    "modulePaths": [
-      "<rootDir>/dist"
-    ],
-    "moduleDirectories": [
-      "node_modules"
-    ]
   },
   "dependencies": {
     "colors": "latest",
