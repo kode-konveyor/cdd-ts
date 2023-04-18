@@ -1,4 +1,4 @@
-import { Mutex } from "../util/Mutex.js";
+import { Mutex } from "../util/Mutex/Mutex.js";
 
 export const checkServiceMutex = new Mutex();
 export const NO_CHECKS_IN_CONTRACT = "no checks in contract {1}";

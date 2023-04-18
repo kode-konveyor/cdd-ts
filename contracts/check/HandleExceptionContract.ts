@@ -1,18 +1,18 @@
+import { boundCall } from "../../src/cdd-ts.js";
 import { CaseNameService } from "../../src/check/CaseNameService.js";
 import { HandleExceptionService } from "../../src/check/HandleExceptionService.js";
 import { Contract } from "../../src/contract/Contract.js";
 import type { ContractEntity } from "../../src/types/ContractEntity.js";
-import { boundCall } from "../../src/util/boundCall.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { RunDescriptorTestData } from "../../testdata/RunDescriptorTestData.js";
 import { SerializableTestData } from "../../testdata/SerializableTestdata.js";
 
-const ContractTestData = makeTestData<
+const ContractTestData = new MakeTestDataService<
   ContractEntity<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(
+>().makeTestData(
   ContractTestDataDescriptor,
   () =>
     new HandleExceptionService<TestedFunctionType>(

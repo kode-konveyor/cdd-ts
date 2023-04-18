@@ -2,7 +2,6 @@ import { HandleRunService } from "./HandleRunService.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
 import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
-import { messageFormat } from "../util/messageFormat.js";
 import { CaseNameService } from "./CaseNameService.js";
 import { CheckReturnValueService } from "./CheckReturnValueService.js";
 import { HandleExceptionService } from "./HandleExceptionService.js";
@@ -15,6 +14,7 @@ import { TearDownSideEffectChecksService } from "./TearDownSideEffectChecksServi
 import { nullPromise } from "../runner/Constants.js";
 import { DiffService } from "../util/DiffService.js";
 import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 
 export class CheckService<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -35,7 +35,9 @@ export class CheckService<T extends MethodType> extends ContractEntity<T> {
       .prototype.tearDownSideEffectChecks,
     private readonly diff = DiffService.prototype.diff,
     readonly getParametersFromGetters = GetParametersFromGettersService
-      .prototype.getParametersFromGetters
+      .prototype.getParametersFromGetters,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
   ) {
     super();
   }
@@ -79,7 +81,9 @@ export class CheckService<T extends MethodType> extends ContractEntity<T> {
       if (casename !== "") checkServiceMutex.unlock();
     }
     if (checked === 0) {
-      throw new Error(messageFormat(NO_CHECKS_IN_CONTRACT, this.explanation));
+      throw new Error(
+        this.messageFormat(NO_CHECKS_IN_CONTRACT, this.explanation)
+      );
     }
     return checked;
   }

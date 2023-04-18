@@ -1,18 +1,20 @@
 import equal from "fast-deep-equal";
 import { ContractEntity } from "../types/ContractEntity.js";
-import { messageFormat } from "../util/messageFormat.js";
 import { type MethodType } from "../types/MethodType.js";
 import { MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT } from "./Messages.js";
 import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
 import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
 import { serialize } from "../util/serialize.js";
 import { type CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 
 export class GetStubService<T extends MethodType> extends ContractEntity<T> {
   constructor(
     readonly checkCurrentRun = CheckCurrentRunService.prototype.checkCurrentRun,
     readonly getParametersFromGetters = GetParametersFromGettersService
-      .prototype.getParametersFromGetters
+      .prototype.getParametersFromGetters,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
   ) {
     super();
   }
@@ -40,7 +42,7 @@ export class GetStubService<T extends MethodType> extends ContractEntity<T> {
       });
       if (retvals.length !== 1) {
         throw new Error(
-          messageFormat(
+          this.messageFormat(
             MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT,
             serialize(params),
             retvals.length.toString()

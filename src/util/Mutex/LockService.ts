@@ -1,12 +1,7 @@
-export class Mutex {
-  current: Promise<unknown>;
-  _unlock?: (() => void) | PromiseLike<() => void>;
+import { MutexEntity } from "./MutexEntity.js";
 
-  constructor() {
-    this.current = Promise.resolve();
-  }
-
-  lock: () => Promise<() => void> = async () => {
+export class LockService extends MutexEntity {
+  async lock(): Promise<() => void> {
     let _resolve: () => void;
     const p = new Promise<void>((resolve) => {
       _resolve = () => {
@@ -18,9 +13,5 @@ export class Mutex {
     this.current = p;
     this._unlock = await rv;
     return this._unlock;
-  };
-
-  unlock: () => void = () => {
-    (this._unlock as () => void)();
-  };
+  }
 }

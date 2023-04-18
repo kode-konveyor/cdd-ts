@@ -1,4 +1,4 @@
-import { bound } from "../src/util/bound.js";
+import { bound } from "../src/cdd-ts.js";
 import { MakeGettersService } from "../src/util/MakeGettersService.js";
 import { PARAMETERS } from "./ParametersTestData.js";
 

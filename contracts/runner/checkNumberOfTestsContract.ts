@@ -3,14 +3,15 @@ import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestDat
 import { getReturnValueTestData } from "../../testdata/ReturnValueTestData.js";
 import { BooleanTestData } from "../../testdata/BooleanTestData.js";
 import { CheckNumberOfTestsService } from "../../src/runner/CheckNumberOfTestsService.js";
+import { bound } from "../../src/cdd-ts.js";
 
 export const checkNumberOfTestsContractParties = [
-  new CheckNumberOfTestsService().checkNumberOfTests,
+  bound(CheckNumberOfTestsService),
 ];
 
 const EXPECTED_TEN_TESTS = "expected 10 tests, got 11";
 export const checkNumberOfTestsContract = new Contract<
-  typeof CheckNumberOfTestsService.prototype.checkNumberOfTests
+  CheckNumberOfTestsService["checkNumberOfTests"]
 >()
   .setTitle("checks the number of tests ran against the configured number")
   .ifCalledWith(

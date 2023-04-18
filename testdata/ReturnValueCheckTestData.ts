@@ -13,13 +13,11 @@ import { FunctionAnnotationtestData } from "./FunctionAnnotationtestData.js";
 import { type TestedFunctionType } from "./MethodTestData.js";
 import { ParameterTestData } from "./ParametersTestData.js";
 import { getReturnValueTestData } from "./ReturnValueTestData.js";
-import {
-  type TestData,
-  type TestDataDescriptor,
-} from "../src/util/makeTestData.js";
+import { type TestDataDescriptor } from "src/types/TestDataDescriptor.js";
 import { type CDDConfiguration } from "../src/types/CDDConfiguration.js";
 import { type WhenService } from "../src/contract/WhenService.js";
 import { LabelTestdata } from "./LabelTestdata.js";
+import { type TestData } from "../src/types/TestData.js";
 
 const checkThrow = new CheckThrowService().checkThrow;
 const diff = new DiffService().diff;

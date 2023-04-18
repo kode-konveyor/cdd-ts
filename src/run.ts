@@ -14,7 +14,7 @@ import {
   configFromFile,
   defaultConfig,
 } from "./runner/Constants.js";
-import { bound } from "./util/bound.js";
+import { bound } from "./cdd-ts.js";
 try {
   await import("@angular/compiler");
 } catch {}
@@ -23,13 +23,14 @@ const options: CDDConfiguration = argparser.parse(process.argv).opts();
 const RUNNING_BECAUSE = "running contracts because";
 const WATCHING = "watching";
 
-const checkNumberOfTestsService =
-  CheckNumberOfTestsService.prototype.checkNumberOfTests;
+const checkNumberOfTestsService = bound<
+  CheckNumberOfTestsService["checkNumberOfTests"]
+>(CheckNumberOfTestsService);
 
 const mergeConfig =
   bound<MergeConfigService["mergeConfig"]>(MergeConfigService);
 
-const mkArgv = MkArgvService.prototype.mkArgv;
+const mkArgv = bound<MkArgvService["mkArgv"]>(MkArgvService);
 const runAllContracts = bound<RunAllContractsService["runAllContracts"]>(
   RunAllContractsService
 );

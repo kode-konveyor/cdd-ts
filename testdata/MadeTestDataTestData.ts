@@ -1,8 +1,11 @@
+import { bound } from "../src/cdd-ts.js";
 import { type CDDConfiguration } from "../src/types/CDDConfiguration";
 import { AnnotateFunctionService } from "../src/util/AnnotateFunctionService.js";
 import { CDDConfigurationTestData } from "../testdata/CDDConfigurationTestData.js";
 
-const annotateFunction = new AnnotateFunctionService().annotateFunction;
+const annotateFunction = bound<AnnotateFunctionService["annotateFunction"]>(
+  AnnotateFunctionService
+);
 
 export const MadeTestDataTestData = {
   default: () => {

@@ -1,16 +1,20 @@
 import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
 import { CaseNameService } from "../check/CaseNameService.js";
-import { messageFormat } from "../util/messageFormat.js";
 import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { type WithCorrectRun } from "../types/WithCorrectRun.js";
 import { CURRENT_RUN_IS_INCOMPLETE } from "../check/Messages.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 
 export class CheckCurrentRunService<
   T extends MethodType
 > extends ContractEntity<T> {
-  constructor(readonly caseName = CaseNameService.prototype.caseName) {
+  constructor(
+    readonly caseName = CaseNameService.prototype.caseName,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
+  ) {
     super();
   }
 
@@ -24,7 +28,7 @@ export class CheckCurrentRunService<
         this.currentRun.thrown == null
       )
         throw new Error(
-          messageFormat(CURRENT_RUN_IS_INCOMPLETE, this.caseName())
+          this.messageFormat(CURRENT_RUN_IS_INCOMPLETE, this.caseName())
         );
       const currentCase = this.currentCase != null ? this.currentCase : "";
       if (this.cases[currentCase] == null) {

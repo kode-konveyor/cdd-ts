@@ -1,5 +1,5 @@
 import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
-import { messageFormat } from "../util/messageFormat.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
 import {
@@ -11,7 +11,11 @@ import { CaseNameService } from "./CaseNameService.js";
 export class HandleExceptionService<
   T extends MethodType
 > extends ContractEntity<T> {
-  constructor(readonly caseName = CaseNameService.prototype.caseName) {
+  constructor(
+    readonly caseName = CaseNameService.prototype.caseName,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
+  ) {
     super();
   }
 
@@ -19,7 +23,7 @@ export class HandleExceptionService<
     this.currentRunExplanation = currentRun.explanation;
     if (currentRun.thrown === undefined) {
       throw new Error(
-        messageFormat(
+        this.messageFormat(
           UNEXPECTED_EXCEPTION_MESSAGE_FORMAT,
           this.caseName(),
           String(catched),
@@ -29,7 +33,7 @@ export class HandleExceptionService<
     }
     if (String(catched).match(currentRun.thrown) == null)
       throw new Error(
-        messageFormat(
+        this.messageFormat(
           NOT_THE_EXPECTED_EXCEPTION_THROWN_FORMAT,
           this.caseName(),
           String(catched),

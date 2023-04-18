@@ -1,9 +1,9 @@
+import { bound } from "../../src/cdd-ts.js";
 import { Contract } from "../../src/contract/Contract.js";
 import { MergeConfigService } from "../../src/runner/MergeConfigService.js";
 import { ConsoleLogChecker } from "../../src/util/ConsoleLogChecker/ConsoleLogChecker.js";
 import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js";
 import { PatternTestData } from "../../testdata/PatternTestData.js";
-import { bound } from "../../src/util/bound.js";
 
 export const mergeConfigContractParties = [bound(MergeConfigService)];
 export const mergeConfigContract = new Contract<

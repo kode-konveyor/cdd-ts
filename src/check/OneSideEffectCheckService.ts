@@ -1,14 +1,18 @@
-import { messageFormat } from "../util/messageFormat.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { type SideEffectCheckerType } from "../types/SideEffectChecker.js";
 import { type MethodType } from "../types/MethodType.js";
 import { SIDE_EFFECT_CHECK_FAILURE_MESSAGE } from "./Messages.js";
 import { CaseNameService } from "./CaseNameService.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 
 export class OneSideEffectCheckService<
   T extends MethodType
 > extends ContractEntity<T> {
-  constructor(readonly caseName = CaseNameService.prototype.caseName) {
+  constructor(
+    readonly caseName = CaseNameService.prototype.caseName,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
+  ) {
     super();
   }
 
@@ -19,7 +23,7 @@ export class OneSideEffectCheckService<
       } catch (error) {
         entry[1].tearDown();
         throw new Error(
-          messageFormat(
+          this.messageFormat(
             SIDE_EFFECT_CHECK_FAILURE_MESSAGE,
             this.caseName(),
             entry[0],

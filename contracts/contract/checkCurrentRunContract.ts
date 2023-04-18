@@ -1,25 +1,29 @@
-import { Contract } from "../../src/cdd-ts.js";
 import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunService.js";
 import type { ContractEntity } from "../../src/types/ContractEntity.js";
 import type { MethodType } from "../../src/types/MethodType.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import type { CallType } from "../../testdata/CallType.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { Contract, boundCall } from "../../src/cdd-ts.js";
 import { caseNameContract } from "./caseNameContract.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { MessageFormatService } from "../../src/util/messageFormat.js";
 
 export const checkCurrentRunContractParties = [
   boundCall(CheckCurrentRunService),
 ];
 
-const contractTestData = makeTestData<
+const contractTestData = new MakeTestDataService<
   ContractEntity<MethodType>,
   typeof ContractTestDataDescriptor
->(
+>().makeTestData(
   ContractTestDataDescriptor,
-  () => new CheckCurrentRunService(caseNameContract.getStubForMixin())
+  () =>
+    new CheckCurrentRunService(
+      caseNameContract.getStubForMixin(),
+      MessageFormatService.prototype.messageFormat
+    )
 );
 
 type ckrcall = CallType<

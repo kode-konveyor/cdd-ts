@@ -3,16 +3,16 @@ import type { ContractEntity } from "../../src/types/ContractEntity.js";
 import { ParameterGetterTestData } from "../../testdata/ParametersGetterTestData.js";
 import { IfCalledWithService } from "../../src/contract/IfCalledWithService.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunService.js";
 import { caseNameContract } from "./caseNameContract.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
-const ContractTestData = makeTestData<
+const ContractTestData = new MakeTestDataService<
   ContractEntity<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(
+>().makeTestData(
   ContractTestDataDescriptor,
   () =>
     new IfCalledWithService(

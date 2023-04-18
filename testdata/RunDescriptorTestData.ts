@@ -1,14 +1,12 @@
 import { RunDescriptorEntity } from "../src/types/RunDescriptorEntity.js";
-import {
-  makeTestData,
-  type TestDataDescriptor,
-} from "../src/util/makeTestData.js";
+import { type TestDataDescriptor } from "src/types/TestDataDescriptor.js";
 import { type TestedFunctionType } from "./MethodTestData.js";
 import { getReturnValueTestData } from "./ReturnValueTestData.js";
 import { SideEffectCheckCaseTestData } from "./SideEffectCheckCaseTestData.js";
 import { ParameterTestData } from "./ParametersTestData.js";
 import { ReturnValueCheckCaseTestData } from "./ReturnValueCheckCaseTestData.js";
 import { LabelTestdata } from "./LabelTestdata.js";
+import { MakeTestDataService } from "../src/util/MakeTestDataService.js";
 
 export const NONEXISTING_EXCEPTION_IDENTIFIER =
   "no one expects the spanish inquisition";
@@ -99,10 +97,10 @@ const runDescriptorTestDataDescriptor = {
   },
 } satisfies TestDataDescriptor<RunDescriptorEntity<TestedFunctionType>>;
 
-export const RunDescriptorTestData = makeTestData<
+export const RunDescriptorTestData = new MakeTestDataService<
   RunDescriptorEntity<TestedFunctionType>,
   typeof runDescriptorTestDataDescriptor
->(
+>().makeTestData(
   runDescriptorTestDataDescriptor,
   () => new RunDescriptorEntity<TestedFunctionType>()
 );

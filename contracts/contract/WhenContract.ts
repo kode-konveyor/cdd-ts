@@ -3,15 +3,18 @@ import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { EnvironmentmanipulatortestData } from "../../testdata/EnvironmentManipulatorTestData.js";
 import { WhenService } from "../../src/contract/WhenService.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
-const ContractTestData = makeTestData<
+const ContractTestData = new MakeTestDataService<
   Contract<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(ContractTestDataDescriptor, () => new Contract<TestedFunctionType>());
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () => new Contract<TestedFunctionType>()
+);
 
 const methodName = "when";
 export const WhenContractParties = [

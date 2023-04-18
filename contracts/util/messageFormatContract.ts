@@ -1,10 +1,13 @@
+import { bound } from "../../src/cdd-ts.js";
 import { Contract } from "../../src/contract/Contract.js";
-import { messageFormat } from "../../src/util/messageFormat.js";
+import { MessageFormatService } from "../../src/util/messageFormat.js";
 import { FormatStringTestData } from "../../testdata/FormatStringTestData.js";
 
-export const messageFormatContractParties = [messageFormat];
+export const messageFormatContractParties = [bound(MessageFormatService)];
 
-export const messageFormatContract = new Contract<typeof messageFormat>()
+export const messageFormatContract = new Contract<
+  MessageFormatService["messageFormat"]
+>()
   .ifCalledWith(
     FormatStringTestData.default,
     FormatStringTestData.parametersAsListOne,

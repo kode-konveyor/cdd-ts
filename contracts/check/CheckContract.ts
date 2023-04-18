@@ -3,15 +3,18 @@ import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import { CheckService } from "../../src/check/CheckService.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { CheckResultTestData } from "../../testdata/CheckResultTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
-const ContractTestData = makeTestData<
+const ContractTestData = new MakeTestDataService<
   CheckService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(ContractTestDataDescriptor, () => new CheckService<TestedFunctionType>());
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () => new CheckService<TestedFunctionType>()
+);
 
 const methodName = "check";
 export const CheckContractParties = [

@@ -1,15 +1,18 @@
 import { Contract } from "../../src/contract/Contract.js";
 import { ThenThrowService } from "../../src/contract/ThenThrowService.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
-const ContractTestData = makeTestData<
+const ContractTestData = new MakeTestDataService<
   ThenThrowService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(ContractTestDataDescriptor, () => new ThenThrowService<TestedFunctionType>());
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () => new ThenThrowService<TestedFunctionType>()
+);
 
 export const ThenThrowContractParties = [boundCall(ThenThrowService)];
 

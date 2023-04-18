@@ -1,8 +1,6 @@
 import { type CDDConfiguration } from "../src/types/CDDConfiguration";
-import {
-  makeTestData,
-  type TestDataDescriptor,
-} from "../src/util/makeTestData.js";
+import { type TestDataDescriptor } from "src/types/TestDataDescriptor";
+import { MakeTestDataService } from "../src/util/MakeTestDataService.js";
 
 export const JS_DIR = "some_directory/far/far/away";
 
@@ -67,7 +65,7 @@ export const CDDConfigurationTestDataDescriptor = {
   },
 } satisfies TestDataDescriptor<CDDConfiguration>;
 
-export const CDDConfigurationTestData = makeTestData<
+export const CDDConfigurationTestData = new MakeTestDataService<
   CDDConfiguration,
   typeof CDDConfigurationTestDataDescriptor
->(CDDConfigurationTestDataDescriptor);
+>().makeTestData(CDDConfigurationTestDataDescriptor);

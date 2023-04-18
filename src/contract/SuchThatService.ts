@@ -1,13 +1,16 @@
 import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
 import { type ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 import { SUCH_THAT } from "./Constants.js";
 import { ThrowIfCalledWithMissingForService } from "./ThrowIfCalledWithMissingForService.js";
 
 export class SuchThatService<T extends MethodType> extends ContractEntity<T> {
   constructor(
     readonly throwIfCalledWithMissingFor = ThrowIfCalledWithMissingForService
-      .prototype.throwIfCalledWithMissingFor
+      .prototype.throwIfCalledWithMissingFor,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
   ) {
     super();
   }

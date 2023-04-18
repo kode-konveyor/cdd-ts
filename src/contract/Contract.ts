@@ -23,6 +23,7 @@ import { SetUpSideEffectChecksService } from "../check/SetUpSideEffectChecksServ
 import { TearDownSideEffectChecksService } from "../check/TearDownSideEffectChecksService.js";
 import { DiffService } from "../util/DiffService.js";
 import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 
 export class Contract<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -72,7 +73,9 @@ export class Contract<T extends MethodType> extends ContractEntity<T> {
       .prototype.tearDownSideEffectChecks,
     private readonly diff = DiffService.prototype.diff,
     private readonly getParametersFromGetters = GetParametersFromGettersService
-      .prototype.getParametersFromGetters
+      .prototype.getParametersFromGetters,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
   ) {
     super();
   }

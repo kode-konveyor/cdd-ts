@@ -3,14 +3,17 @@ import { ContractEntity } from "../../src/types/ContractEntity.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { SetTitleService } from "../../src/contract/SetTitleService.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
-const ContractTestData = makeTestData<
+const ContractTestData = new MakeTestDataService<
   ContractEntity<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(ContractTestDataDescriptor, () => new ContractEntity<TestedFunctionType>());
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () => new ContractEntity<TestedFunctionType>()
+);
 
 const methodName = "setTitle";
 export const SetTitleContractParties = [

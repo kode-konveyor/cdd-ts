@@ -1,4 +1,4 @@
-import { Mutex } from "../src/util/Mutex.js";
+import { Mutex } from "../src/util/Mutex/Mutex.js";
 import { GlobalObject } from "./SideEffectCheckerTestData.js";
 
 export type TestedFunctionType = (arg: number, arg2: string) => string;

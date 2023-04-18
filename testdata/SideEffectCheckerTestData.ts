@@ -1,7 +1,7 @@
 import equal from "fast-deep-equal";
 import type { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
-import { messageFormat } from "../src/util/messageFormat.js";
 import { serialize } from "../src/util/serialize.js";
+import { MessageFormatService } from "../src/util/messageFormat.js";
 
 export const GlobalObject = {
   value: [true] as Array<any>,
@@ -10,6 +10,11 @@ export const GlobalObject = {
 
 const SECHECKER_ERROR = "SeChecker:\nexpected:{1}\nactual  :{2}";
 export class SeChecker implements SideEffectCheckerType {
+  constructor(
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
+  ) {}
+
   public expected: Array<any> = [["hello b"]];
 
   setUp = async (): Promise<void> => {
@@ -20,7 +25,7 @@ export class SeChecker implements SideEffectCheckerType {
   check = (): void => {
     if (!equal(GlobalObject.value, this.expected))
       throw new Error(
-        messageFormat(
+        this.messageFormat(
           SECHECKER_ERROR,
           serialize(this.expected),
           serialize(GlobalObject.value)

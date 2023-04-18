@@ -4,14 +4,17 @@ import { type MethodType } from "../types/MethodType.js";
 import { CaseNameService } from "../check/CaseNameService.js";
 import { type ParameterGetters } from "../types/ParameterGettersType.js";
 import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 
 export class IfCalledWithService<
   T extends MethodType
 > extends ContractEntity<T> {
   constructor(
-    public checkCurrentRun = CheckCurrentRunService.prototype.checkCurrentRun,
-
-    public caseName = CaseNameService.prototype.caseName
+    private readonly checkCurrentRun = CheckCurrentRunService.prototype
+      .checkCurrentRun,
+    private readonly caseName = CaseNameService.prototype.caseName,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
   ) {
     super();
   }

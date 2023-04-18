@@ -2,26 +2,32 @@ import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunServic
 import { Contract } from "../../src/contract/Contract.js";
 import { GetStubService } from "../../src/contract/GetStubService.js";
 import type { MethodType } from "../../src/types/MethodType.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
-import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
+import {
+  TestedFunctionTestData,
+  type TestedFunctionType,
+} from "../../testdata/MethodTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
 export const getStubContractParties = [boundCall(GetStubService)];
 
-const contractTestData = makeTestData(
+const contractTestData = new MakeTestDataService<
+  Contract<TestedFunctionType>,
+  typeof ContractTestDataDescriptor
+>().makeTestData(
   ContractTestDataDescriptor,
   () =>
     new GetStubService<MethodType>(
       CheckCurrentRunService.prototype.checkCurrentRun
-    )
+    ) as unknown as Contract<TestedFunctionType>
 );
 
 const NO_RUNS_IN_THE_CASE = "no runs in the case";
 export const getStubContract = new Contract<
-  typeof GetStubService.prototype.getStub
+  GetStubService<TestedFunctionType>["getStub"]
 >()
   .setTitle("returns a stub behaving according to the contract")
 

@@ -1,6 +1,6 @@
 import { CaseDescriptorEntity } from "../src/types/CaseDescriptorEntity.js";
 import { type MethodType } from "../src/types/MethodType.js";
-import { makeTestData } from "../src/util/makeTestData.js";
+import { MakeTestDataService } from "../src/util/MakeTestDataService.js";
 import { EnvironmentmanipulatortestData } from "./EnvironmentManipulatorTestData.js";
 import { RunDescriptorTestData } from "./RunDescriptorTestData.js";
 
@@ -54,7 +54,10 @@ const caseDescriptorTestdataDescriptor = {
   },
 };
 
-export const CaseDescriptorTestData = makeTestData<
+export const CaseDescriptorTestData = new MakeTestDataService<
   CaseDescriptorEntity<MethodType>,
   typeof caseDescriptorTestdataDescriptor
->(caseDescriptorTestdataDescriptor, () => new CaseDescriptorEntity());
+>().makeTestData(
+  caseDescriptorTestdataDescriptor,
+  () => new CaseDescriptorEntity()
+);

@@ -1,22 +1,28 @@
 import { Contract } from "../../src/contract/Contract.js";
 import { YieldService } from "../../src/contract/YieldService.js";
-import type { MethodType } from "../../src/types/MethodType.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { ParameterTestData } from "../../testdata/ParametersTestData.js";
 import { getReturnValueTestDataIndirect } from "../../testdata/ReturnValueTestData.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { type TestedFunctionType } from "../../testdata/MethodTestData.js";
 
-const contractTestData = makeTestData(
+const contractTestData = new MakeTestDataService<
+  Contract<TestedFunctionType>,
+  typeof ContractTestDataDescriptor
+>().makeTestData(
   ContractTestDataDescriptor,
-  () => new YieldService<MethodType>()
+  () =>
+    new YieldService<TestedFunctionType>() as unknown as Contract<TestedFunctionType>
 );
 
 export const YieldContractParties = [boundCall(YieldService)];
 
 const IFCALLEDWITH_MISSING_BEFORE_YIELD =
   "ifCalledWith is missing before yield";
-export const YieldContract = new Contract<typeof YieldService.prototype.yield>()
+export const YieldContract = new Contract<
+  YieldService<TestedFunctionType>["yield"]
+>()
   .ifCalledWith(
     contractTestData.getContractWithFreshRun,
     ParameterTestData.default,

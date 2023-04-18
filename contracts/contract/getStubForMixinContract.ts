@@ -1,16 +1,15 @@
-import { Contract } from "../../src/cdd-ts.js";
 import { GetStubForMixinService } from "../../src/contract/GetStubForMixinService.js";
 import type { MethodType } from "../../src/types/MethodType.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { Contract, boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
-const contractTestData = makeTestData<
+const contractTestData = new MakeTestDataService<
   Contract<MethodType>,
   typeof ContractTestDataDescriptor
->(ContractTestDataDescriptor, () => new Contract());
+>().makeTestData(ContractTestDataDescriptor, () => new Contract());
 
 export const getStubForMixinContractParties = [
   boundCall(GetStubForMixinService),

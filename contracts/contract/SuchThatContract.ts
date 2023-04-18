@@ -1,16 +1,19 @@
 import { Contract } from "../../src/contract/Contract.js";
 import { SuchThatService } from "../../src/contract/SuchThatService.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
-const ContractTestData = makeTestData<
+const ContractTestData = new MakeTestDataService<
   SuchThatService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(ContractTestDataDescriptor, () => new SuchThatService<TestedFunctionType>());
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () => new SuchThatService<TestedFunctionType>()
+);
 
 export const SuchThatContractParties = [boundCall(SuchThatService)];
 const NO_IFCALLEDWITH_BEFORE_SUCHTHAT =

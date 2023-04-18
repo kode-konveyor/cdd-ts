@@ -1,16 +1,16 @@
 import { Contract } from "../../src/contract/Contract.js";
 import { ThenReturnService } from "../../src/contract/ThenReturnService.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { ParameterTestData } from "../../testdata/ParametersTestData.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
-const ContractTestData = makeTestData<
+const ContractTestData = new MakeTestDataService<
   ThenReturnService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(
+>().makeTestData(
   ContractTestDataDescriptor,
   () => new ThenReturnService<TestedFunctionType>()
 );

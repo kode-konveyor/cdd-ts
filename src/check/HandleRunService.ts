@@ -2,7 +2,6 @@ import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { CaseNameService } from "./CaseNameService.js";
 import { SetUpSideEffectChecksService } from "./SetUpSideEffectChecksService.js";
 import { TearDownSideEffectChecksService } from "./TearDownSideEffectChecksService.js";
-import { messageFormat } from "../util/messageFormat.js";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
 import { EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT } from "./Messages.js";
@@ -12,6 +11,7 @@ import { HandleExceptionService } from "./HandleExceptionService.js";
 import { OneSideEffectCheckService } from "./OneSideEffectCheckService.js";
 import { RunSideEffectChecksService } from "./RunSideEffectChecksService.js";
 import { RunReturnValueChecksService } from "./RunReturnValueChecksService.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 
 export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -30,7 +30,9 @@ export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
     readonly tearDownSideEffectChecksService = TearDownSideEffectChecksService
       .prototype.tearDownSideEffectChecks,
     readonly getParametersFromGetters = GetParametersFromGettersService
-      .prototype.getParametersFromGetters
+      .prototype.getParametersFromGetters,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
   ) {
     super();
   }
@@ -54,7 +56,7 @@ export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
       }
       if (currentRun.thrown != null)
         throw new Error(
-          messageFormat(
+          this.messageFormat(
             EXCEPTED_EXCEPTION_NOT_THROWN_MESSAGE_FORMAT,
             this.caseName()
           )

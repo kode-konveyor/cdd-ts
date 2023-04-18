@@ -1,3 +1,4 @@
+import { bound } from "../src/cdd-ts.js";
 import {
   argparser,
   configFromFile,
@@ -9,7 +10,9 @@ import { AnnotateFunctionService } from "../src/util/AnnotateFunctionService.js"
 import { CDDConfigurationTestData } from "./CDDConfigurationTestData.js";
 
 const mkArgv = new MkArgvService().mkArgv;
-const annotateFunction = new AnnotateFunctionService().annotateFunction;
+const annotateFunction = bound<AnnotateFunctionService["annotateFunction"]>(
+  AnnotateFunctionService
+);
 
 const circular = {
   circular: null as unknown,
@@ -58,7 +61,7 @@ export const SerializableTestDataDescriptor = {
   defaultargv: mkArgv(CDDConfigurationTestData.defaultConfig()),
 };
 export type SerializableTestdata = {
-  [K in keyof typeof SerializableTestDataDescriptor]: () => (typeof SerializableTestDataDescriptor)[K];
+  [K in keyof typeof SerializableTestDataDescriptor]: () => typeof SerializableTestDataDescriptor[K];
 };
 
 export const SerializableTestData: SerializableTestdata = (() => {

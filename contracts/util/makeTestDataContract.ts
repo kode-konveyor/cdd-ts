@@ -1,18 +1,22 @@
 import { Contract } from "../../src/contract/Contract.js";
 import type { CDDConfiguration } from "../../src/types/CDDConfiguration";
-import type { TestDataDescriptor } from "../../src/util/makeTestData.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
+import type { TestDataDescriptor } from "src/types/TestDataDescriptor.js";
 import { MakeTestDataTestData } from "../../testdata/MakeTestDataTestData.js";
 import { MadeTestDataTestData } from "../../testdata/MadeTestDataTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { bound } from "../../src/cdd-ts.js";
 
-export const makeTestDataContractParties = [makeTestData];
+export const makeTestDataContractParties = [bound(MakeTestDataService)];
 
 const DID_YOU_REFERENCE_A_LATER_ITEM =
   "did you reference a later item in __from?";
 const NO_RECORD_FOUND = "no record named baz";
 export const makeTestDataContract = new Contract<
-  typeof makeTestData<CDDConfiguration, TestDataDescriptor<CDDConfiguration>>
+  MakeTestDataService<
+    CDDConfiguration,
+    TestDataDescriptor<CDDConfiguration>
+  >["makeTestData"]
 >()
   .setTitle("makes test data from configuration descriptor")
 

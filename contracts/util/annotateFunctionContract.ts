@@ -1,14 +1,13 @@
+import { bound } from "../../src/cdd-ts.js";
 import { Contract } from "../../src/contract/Contract.js";
 import { AnnotateFunctionService } from "../../src/util/AnnotateFunctionService.js";
 import { AnnotatedFunctionTestData } from "../../testdata/AnnotatedFunctionTestData.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
 
-export const annotateFunctionContractParties = [
-  new AnnotateFunctionService().annotateFunction,
-];
+export const annotateFunctionContractParties = [bound(AnnotateFunctionService)];
 
 export const annotateFunctionContract = new Contract<
-  typeof AnnotateFunctionService.prototype.annotateFunction
+  AnnotateFunctionService["annotateFunction"]
 >()
   .setTitle(
     "Annotates a getter such that it is serialized showing the data it returns with"

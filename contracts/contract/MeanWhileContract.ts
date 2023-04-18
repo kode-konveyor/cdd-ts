@@ -1,16 +1,19 @@
 import { Contract } from "../../src/contract/Contract.js";
 import { MeanWhileService } from "../../src/contract/MeanWhileService.js";
-import { makeTestData } from "../../src/util/makeTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { SideEffectCheckerTestData } from "../../testdata/SideEffectCheckerTestData.js";
-import { boundCall } from "../../src/util/boundCall.js";
+import { boundCall } from "../../src/cdd-ts.js";
+import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 
-const ContractTestData = makeTestData<
+const ContractTestData = new MakeTestDataService<
   MeanWhileService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->(ContractTestDataDescriptor, () => new MeanWhileService<TestedFunctionType>());
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () => new MeanWhileService<TestedFunctionType>()
+);
 
 export const MeanWhileContractParties = [boundCall(MeanWhileService)];
 const NO_IFCALLEDWITH_BEFIRE_MEANWHILE =

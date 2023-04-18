@@ -5,13 +5,16 @@ import { type CDDConfiguration } from "../types/CDDConfiguration.js";
 import { NUMBER_OF_CONTRACTS_TESTED } from "./Messages.js";
 import { ResolveModuleService } from "./ResolveModuleService.js";
 import { RunOneContractService } from "./RunOneContractService.js";
+import { MessageFormatService } from "../util/messageFormat.js";
 
 export class RunAllContractsService {
   constructor(
     readonly runContractsfromList = RunContractsfromListService.prototype
       .runContractsfromList,
     readonly resolveModule = ResolveModuleService.prototype.resolveModule,
-    readonly runOneContract = RunOneContractService.prototype.runOneContract
+    readonly runOneContract = RunOneContractService.prototype.runOneContract,
+    private readonly messageFormat = MessageFormatService.prototype
+      .messageFormat
   ) {}
 
   async runAllContracts(options: CDDConfiguration): Promise<number> {

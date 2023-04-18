@@ -1,13 +1,12 @@
+import { bound } from "../../src/cdd-ts.js";
 import { Contract } from "../../src/contract/Contract.js";
 import { ResolveModuleService } from "../../src/runner/ResolveModuleService.js";
 import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestData.js";
 import { ModuleNameTestData } from "../../testdata/ModuleNameTestData.js";
 
-export const resolveModuleContractParties = [
-  new ResolveModuleService().resolveModule,
-];
+export const resolveModuleContractParties = [bound(ResolveModuleService)];
 export const resolveModuleContract = new Contract<
-  typeof ResolveModuleService.prototype.resolveModule
+  ResolveModuleService["resolveModule"]
 >()
   .setTitle("resolves the module from name")
   .ifCalledWith(
