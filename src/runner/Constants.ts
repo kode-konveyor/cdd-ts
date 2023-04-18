@@ -10,7 +10,7 @@ export const SLASH_D = "-d";
 export const PATH_SEPARATOR = "/";
 export const EMPTY_SPACE = "";
 
-export const CONFIG_FILE = "cdd-ts.json";
+export const CONFIG_FILE = "cdd-ts.conf.json";
 
 export const configFromFile: CDDConfiguration = JSON.parse(
   readFileSync(CONFIG_FILE).toString()

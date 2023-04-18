@@ -37,6 +37,7 @@ export const IfcalledWithContract = new Contract<
     "The Parameters are put into the run",
     ContractTestData.getContractWithParametersSet
   )
+
   .ifCalledWith(
     ContractTestData.getContractWithFreshRun,
     ...ParameterGetterTestData.default
@@ -45,6 +46,7 @@ export const IfcalledWithContract = new Contract<
     "if there is a current run, and it is not fully defined, an error is thrown",
     RUN_IS_INCOMPLETE
   )
+
   .ifCalledWith(
     ContractTestData.getContractWithNonDefaultCaseAndCurrentRun,
     ...ParameterGetterTestData.default
@@ -53,6 +55,7 @@ export const IfcalledWithContract = new Contract<
     "we put the current run into the current case",
     ContractTestData.getContractWithNonDefaultCaseWithARunStored
   )
+
   .ifCalledWith(
     ContractTestData.getContractWithTitleAndRun,
     ...ParameterGetterTestData.default
@@ -61,6 +64,7 @@ export const IfcalledWithContract = new Contract<
     "if there was no current case, we create it",
     ContractTestData.getContractWithParametersInDefaultCase
   )
+
   .ifCalledWith(ContractTestData.getContractWithFreshRun)
   .thenThrow(
     "if the previous run is not defined with at least a return value or exception, an error is signalled",
