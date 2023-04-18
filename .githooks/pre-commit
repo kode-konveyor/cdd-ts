@@ -1,5 +1,5 @@
 #!/bin/sh
-
+set -e
 # Redirect output to stderr.
 exec 1>&2
 
@@ -23,5 +23,7 @@ else
 	echo "source code is not pretty, fix that before commit"
 	exit 1
 fi
+
+npm run test
 
 exec git diff-index --check --cached HEAD --

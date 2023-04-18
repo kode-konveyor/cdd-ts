@@ -61,7 +61,7 @@ export const SerializableTestDataDescriptor = {
   defaultargv: mkArgv(CDDConfigurationTestData.defaultConfig()),
 };
 export type SerializableTestdata = {
-  [K in keyof typeof SerializableTestDataDescriptor]: () => typeof SerializableTestDataDescriptor[K];
+  [K in keyof typeof SerializableTestDataDescriptor]: () => (typeof SerializableTestDataDescriptor)[K];
 };
 
 export const SerializableTestData: SerializableTestdata = (() => {
