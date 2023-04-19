@@ -74,4 +74,12 @@ export const makeTestDataContract = new Contract<
   .thenThrow(
     "if __add references an item which does not exist, that is an error",
     NO_RECORD_FOUND
+  )
+  .ifCalledWith(
+    MakeTestDataTestData.withTransform,
+    MakeTestDataTestData.constructor
+  )
+  .thenReturn(
+    "__transform is a transformation fnction for immer",
+    MadeTestDataTestData.withnamedGetter
   );

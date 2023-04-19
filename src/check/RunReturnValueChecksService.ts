@@ -16,14 +16,14 @@ export class RunReturnValueChecksService<
     super();
   }
 
-  runReturnValueChecks(
+  async runReturnValueChecks(
     currentRun: RunDescriptorEntity<T>,
     result: ReturnType<T>,
     parameters: Parameters<T>
-  ): void {
-    currentRun.returnValueChecks.forEach((entry) => {
+  ): Promise<void> {
+    for (const entry of currentRun.returnValueChecks) {
       try {
-        const checkResult = entry[1](result, ...parameters);
+        const checkResult = await entry[1](result, ...parameters);
         if (checkResult !== undefined) {
           // eslint-disable-next-line @typescript-eslint/no-throw-literal
           throw checkResult;
@@ -39,6 +39,6 @@ export class RunReturnValueChecksService<
           )
         );
       }
-    });
+    }
   }
 }

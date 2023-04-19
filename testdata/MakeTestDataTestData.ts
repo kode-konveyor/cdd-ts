@@ -1,3 +1,4 @@
+import { type CDDConfiguration } from "../src/types/CDDConfiguration.js";
 import {
   CDDConfigurationTestData,
   JS_DIR,
@@ -20,10 +21,22 @@ export const MakeTestDataTestData = {
       getTwo: { __from: "getOne", moduleResolution: "ES" },
     };
   },
+  withTransform: () => {
+    return {
+      getOne: { __from: "", jsDir: JS_DIR },
+      getTwo: {
+        __from: "getOne",
+        __transform: (draft: CDDConfiguration) => {
+          draft.moduleResolution = "ES";
+        },
+      },
+    };
+  },
+
   withNonexistingReference: () => {
     return {
       getTwo: { __from: "getOne", moduleResolution: "ES" },
-      getOne: { __from: "", jsDir: JS_DIR },
+      getOne: { jsDir: JS_DIR },
     };
   },
   badAdd: () => {

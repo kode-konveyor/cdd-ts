@@ -6,6 +6,7 @@ import { NO_SUCH_TESTDATA, NO_SUCH_RECORD } from "./Messages.js";
 import { type TestData } from "../types/TestData.js";
 import { type TestDataDescriptor } from "../types/TestDataDescriptor.js";
 import { MessageFormatService } from "./messageFormat.js";
+import { produce } from "immer";
 
 export class MakeTestDataService<T, K extends TestDataDescriptor<T>> {
   constructor(
@@ -25,14 +26,18 @@ export class MakeTestDataService<T, K extends TestDataDescriptor<T>> {
     }
     for (const key in descriptor) {
       let data: T;
-      const thisDescriptor = descriptor[key] as Descriptorfields;
-      if (thisDescriptor.__from === "") data = constructor();
+      const thisDescriptor = descriptor[key] as Descriptorfields<T>;
+      if (thisDescriptor.__from === undefined || thisDescriptor.__from === "")
+        data = constructor();
       else {
         if (ret[thisDescriptor.__from] === undefined)
           throw new Error(
             this.messageFormat(NO_SUCH_TESTDATA, thisDescriptor.__from)
           );
         data = (ret[thisDescriptor.__from] as () => T)();
+        if (thisDescriptor.__transform !== undefined) {
+          data = produce(data, thisDescriptor.__transform);
+        }
       }
       for (const field in descriptor[key]) {
         if (field === "__add") {
@@ -45,7 +50,7 @@ export class MakeTestDataService<T, K extends TestDataDescriptor<T>> {
           if (otherRecord === undefined)
             throw new Error(this.messageFormat(NO_SUCH_RECORD, foo));
           otherRecord[bar] = baz;
-        } else if (field !== "__from")
+        } else if (field !== "__from" && field !== "__transform")
           (data as Record<string, unknown>)[field] = (
             descriptor[key] as Record<string, unknown>
           )[field];

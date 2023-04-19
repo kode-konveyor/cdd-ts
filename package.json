@@ -24,6 +24,7 @@
     "fast-deep-equal": "latest",
     "fast-glob": "latest",
     "fs-extra": "latest",
+    "immer": "^10.0.1",
     "jest-mock": "latest",
     "relative": "latest"
   },
@@ -40,6 +41,7 @@
     "eslint-plugin-kodekonveyor": "latest",
     "eslint-plugin-n": "latest",
     "eslint-plugin-promise": "latest",
+    "rxjs": "^7.8.0",
     "stryker-cli": "latest",
     "typescript": "latest"
   }

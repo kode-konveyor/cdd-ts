@@ -1,5 +1,6 @@
 import { Mutex } from "../src/util/Mutex/Mutex.js";
 import { GlobalObject } from "./SideEffectCheckerTestData.js";
+import { type Observable, of } from "rxjs";
 
 export type TestedFunctionType = (arg: number, arg2: string) => string;
 
@@ -25,7 +26,12 @@ function testedFunction(arg: number, arg2: string): string {
   return String(arg);
 }
 
+function returningObservable(): Observable<number> {
+  return of(1);
+}
+
 export const TestedFunctionTestData = {
   default: () => testedFunction,
   withGlobal: () => testedFunctionWithGlobal,
+  observable: () => returningObservable,
 };

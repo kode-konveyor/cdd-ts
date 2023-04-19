@@ -81,9 +81,11 @@ const runDescriptorTestDataDescriptor = {
   },
   getRunDescriptorwithParametersReturnAndSideeffectcheck: {
     __from: "getRunDescriptorParametersAndExplanationSet",
-    returnValueGetter: getReturnValueTestData.getReturnValue,
-    returnValueChecks: [],
-    sideEffectChecks: [SideEffectCheckCaseTestData.default()],
+    __transform: (draft) => {
+      draft.returnValueGetter = getReturnValueTestData.getReturnValue;
+      draft.returnValueChecks = [];
+      draft.sideEffectChecks = [SideEffectCheckCaseTestData.default()];
+    },
   },
   getRunDescriptorWithTripleReturn: {
     __from: "getRunDescriptorwithParametersReturnAndSideeffectcheck",
