@@ -23,8 +23,28 @@ const checkThrow = new CheckThrowService().checkThrow;
 const diff = new DiffService().diff;
 const getParametersFromGetters = new GetParametersFromGettersService()
   .getParametersFromGetters;
-const NOT_DEFINED_EXACTLY_ONCE =
-  "those parameters are not defined exactly once for this case";
+const NOT_DEFINED_EXACTLY_ONCE = `those parameters are not defined exactly once for this case:
+\\[
+ 3,
+ "b"
+]
+checked:
+\\[
+ \\[
+  "run explanation",
+  \\[
+   1,
+   "b"
+  ]
+ ],
+ \\[
+  "run explanation",
+  \\[
+   1,
+   "b"
+  ]
+ ]
+]`;
 export const ReturnValueCheckTestData = {
   annotateFunctionDefault: forFunctionAnnotation(
     FunctionAnnotationtestData.default
