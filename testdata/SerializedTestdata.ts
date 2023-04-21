@@ -1,8 +1,8 @@
 export const SerializedTestdata = {
   serializedComplexObject: () => `{
  "arraywithEmpty": [
- null,
- null
+  null,
+  null
  ],
  "boolean": true,
  "complexString": "a \\t \\b \\b 
@@ -51,28 +51,28 @@ export const SerializedTestdata = {
  "returnValueChecks": []
 }`,
   argparser: () => `[
-[
-"output the version number -V, --version",
-"watch mode -w, --watch",
-"the files to be watched in watch mode (glob pattern) -f, --distFiles [value]",
-"the contracts (glob pattern) -c, --contracts [value]",
-"the js directory used for computing import -j, --jsDir <value>",
-"module resolution strategy -m, --moduleResolution <value>",
-"expected number of tested contract clauses -n, --numberofTests <value>",
-"debug -d, --debug"
-],
-"runContracts",
-"1.0.13",
-"check the contracts"
+ [
+  "output the version number -V, --version",
+  "watch mode -w, --watch",
+  "the files to be watched in watch mode (glob pattern) -f, --distFiles [value]",
+  "the contracts (glob pattern) -c, --contracts [value]",
+  "the js directory used for computing import -j, --jsDir <value>",
+  "module resolution strategy -m, --moduleResolution <value>",
+  "expected number of tested contract clauses -n, --numberofTests <value>",
+  "debug -d, --debug"
+ ],
+ "runContracts",
+ "1.0.13",
+ "check the contracts"
 ]`,
   defaultargv: () => `[
-"--distFiles",
-"dist/**/*.js",
-"--contracts",
-"contracts/**/*Contract.ts",
-"--jsDir",
-"dist",
-"--moduleResolution",
-"ES"
+ "--distFiles",
+ "dist/**/*.js",
+ "--contracts",
+ "contracts/**/*Contract.ts",
+ "--jsDir",
+ "dist",
+ "--moduleResolution",
+ "ES"
 ]`,
 };

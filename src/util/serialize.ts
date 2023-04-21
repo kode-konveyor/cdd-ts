@@ -97,6 +97,7 @@ function str(
       }
 
       seen.push(value as Record<string, unknown>);
+      gap += indent;
       if (Object.prototype.toString.apply(value) === "[object Array]") {
         const partial = (value as Array<unknown>).map((v, i) => {
           return (
@@ -115,7 +116,6 @@ function str(
         gap = mind;
         return v;
       }
-      gap += indent;
       const partial = [];
 
       for (const k of Object.keys(value as Record<string, unknown>).sort()) {

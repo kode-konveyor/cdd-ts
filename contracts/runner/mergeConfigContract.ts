@@ -37,6 +37,6 @@ export const mergeConfigContract = new Contract<
     new ConsoleLogChecker(PatternTestData.mergeConfig)
   )
   .thenReturn(
-    "merges the configurations into one",
+    "merges the configurations into one and prints",
     CDDConfigurationTestData.debug
   );
