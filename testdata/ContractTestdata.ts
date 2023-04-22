@@ -97,6 +97,10 @@ export const ContractTestDataDescriptor = {
     __from: "getContractWithDefaultCase",
     currentRun: RunDescriptorTestData.getRunDescriptorParametersSet(),
   },
+  getContractWithParametersAndParameterCheckerSet: {
+    __from: "getContractWithDefaultCase",
+    currentRun: RunDescriptorTestData.getRunDescriptorParametersAndCheckerSet(),
+  },
   getContractWithCorrectRunAndEmptyDefaultCase: {
     __from: "getContractWithDefaultCase",
     currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt(),

@@ -10,5 +10,6 @@ export class RunDescriptorEntity<T extends MethodType> {
   returnValueGetter?: ReturnValueGetterType<T>;
   returnValueChecks: Array<ReturnValueCheckType<T>> = [];
   sideEffectChecks: Array<[string, SideEffectCheckerType]> = [];
+  parameterCheck?: (...params: Parameters<T>) => unknown;
   explanation!: string;
 }

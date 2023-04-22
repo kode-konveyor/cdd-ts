@@ -1,5 +1,5 @@
 import { Contract } from "../../src/contract/Contract.js";
-import { ParameterGetterTestData } from "../../testdata/ParametersGetterTestData.js";
+import { ParameterGetterTestData } from "../../testdata/ParameterGetterTestData.js";
 import { IfCalledWithService } from "../../src/contract/IfCalledWithService.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
@@ -7,20 +7,19 @@ import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunServic
 import { caseNameContract } from "./caseNameContract.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
-import { type DotCall } from "./DotCall.js";
+import { type DotCall } from "../../src/types/DotCall.js";
 import { type ThenReturnOrThenThrowType } from "../../src/types/ThenReturnOrThenThrowType.js";
+import { messageFormatContract } from "../util/messageFormatContract.js";
 
+const ifCalledWithService = new IfCalledWithService(
+  CheckCurrentRunService.prototype.checkCurrentRun,
+  caseNameContract.getStubForMixin(),
+  messageFormatContract.getStub()
+);
 const ParameterTestdata = new MakeTestDataService<
   IfCalledWithService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
->().makeTestData(
-  ContractTestDataDescriptor,
-  () =>
-    new IfCalledWithService(
-      CheckCurrentRunService.prototype.checkCurrentRun,
-      caseNameContract.getStubForMixin()
-    )
-);
+>().makeTestData(ContractTestDataDescriptor, () => ifCalledWithService);
 
 const ReturnValueTestData = new MakeTestDataService<
   ThenReturnOrThenThrowType<TestedFunctionType>,
@@ -28,10 +27,7 @@ const ReturnValueTestData = new MakeTestDataService<
 >().makeTestData(
   ContractTestDataDescriptor,
   () =>
-    new IfCalledWithService(
-      CheckCurrentRunService.prototype.checkCurrentRun,
-      caseNameContract.getStubForMixin()
-    ) as unknown as ThenReturnOrThenThrowType<TestedFunctionType>
+    ifCalledWithService as unknown as ThenReturnOrThenThrowType<TestedFunctionType>
 );
 
 export const IfcalledWithContractParties = [boundCall(IfCalledWithService)];
@@ -49,6 +45,24 @@ export const IfcalledWithContract = new Contract<
   .thenReturn(
     "The Parameters are put into the run",
     ReturnValueTestData.getContractWithParametersSet
+  )
+
+  .ifCalledWith(
+    ParameterTestdata.getContractWithDefaultCase,
+    ParameterGetterTestData.withChecker
+  )
+  .thenReturn(
+    "if a checker is given, both the parameters and checker are put into the run",
+    ReturnValueTestData.getContractWithParametersAndParameterCheckerSet
+  )
+
+  .ifCalledWith(
+    ParameterTestdata.getContractWithDefaultCase,
+    ParameterGetterTestData.withCheckerFailing
+  )
+  .thenThrow(
+    "the parameter is checked against the checker, and an error is thrown if the check fails",
+    'the parameter did not pass the check: "b"'
   )
 
   .ifCalledWith(

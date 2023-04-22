@@ -1,4 +1,4 @@
-import { type MethodType } from "../../src/types/MethodType.js";
+import { type MethodType } from "./MethodType.js";
 
 export type DotCall<THIS, T extends MethodType> = (
   self: THIS,

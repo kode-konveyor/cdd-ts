@@ -6,6 +6,9 @@ import { type ParameterGetters } from "../types/ParameterGettersType.js";
 import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
 import { MessageFormatService } from "../util/messageFormat.js";
 import { type ThenReturnOrThenThrowType } from "../types/ThenReturnOrThenThrowType.js";
+import { serialize } from "../util/serialize.js";
+import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
+import { PARAMETER_DIDNT_PASS_THE_CHECK } from "./Messages.js";
 
 export class IfCalledWithService<
   T extends MethodType
@@ -15,17 +18,46 @@ export class IfCalledWithService<
       .checkCurrentRun,
     private readonly caseName = CaseNameService.prototype.caseName,
     private readonly messageFormat = MessageFormatService.prototype
-      .messageFormat
+      .messageFormat,
+    private readonly getParametersFromGetters = GetParametersFromGettersService
+      .prototype.getParametersFromGetters
   ) {
     super();
   }
 
   ifCalledWith(
-    ...parameterGetters: ParameterGetters<T>
+    ...parameterGetters:
+      | ParameterGetters<T>
+      | [
+          {
+            default: ParameterGetters<T>;
+            checker: (...getters: Parameters<T>) => unknown;
+          }
+        ]
   ): ThenReturnOrThenThrowType<T> {
     this.checkCurrentRun();
     this.currentRun = new RunDescriptorEntity();
-    this.currentRun.parameterGetters = parameterGetters;
+    if (0 in parameterGetters && "default" in parameterGetters[0]) {
+      const getters = parameterGetters[0].default;
+      this.currentRun.parameterGetters = getters;
+      const checker = parameterGetters[0].checker;
+      this.currentRun.parameterCheck = checker;
+      const parameters = this.getParametersFromGetters(
+        getters
+      ) as Parameters<T>;
+      const checkResult = checker(...parameters);
+      if (checkResult !== undefined) {
+        throw new Error(
+          this.messageFormat(
+            PARAMETER_DIDNT_PASS_THE_CHECK,
+            serialize(checkResult)
+          )
+        );
+      }
+    } else {
+      this.currentRun.parameterGetters =
+        parameterGetters as ParameterGetters<T>;
+    }
     return this as unknown as ThenReturnOrThenThrowType<T>;
   }
 }

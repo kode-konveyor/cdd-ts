@@ -5,7 +5,7 @@ import { CaseNameTestData } from "../../testdata/CaseNameTestData.js";
 import { Contract } from "../../src/contract/Contract.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
-import { type DotCall } from "./DotCall.js";
+import { type DotCall } from "../../src/types/DotCall.js";
 
 const ContractTestData = new MakeTestDataService<
   CaseNameService<TestedFunctionType>,
@@ -24,20 +24,22 @@ export const caseNameContract = new Contract<
   >
 >()
   .setTitle("returns the name of the currently checked case")
+
+  .ifCalledWith({
+    default: [ContractTestData.getContractWithFailingReturnvalueCheck],
+    checker: () => undefined,
+  })
+  .thenReturn("the return value for the test data", CaseNameTestData.default)
+
+  .ifCalledWith(ContractTestData.getContract)
+  .thenReturn(
+    "For each undefined things uses 'undefined'",
+    CaseNameTestData.undefined
+  )
   .ifCalledWith(
     ContractTestData.getContractWithNonDefaultCaseAndCurrentRunInCheck
   )
   .thenReturn(
     "contains the name of the contract, the current case, and the current run",
     CaseNameTestData.nonDefaultCase
-  )
-  .ifCalledWith(ContractTestData.getContract)
-  .thenReturn(
-    "For each undefined things uses 'undefined'",
-    CaseNameTestData.undefined
-  )
-  .ifCalledWith(ContractTestData.getContractWithFailingReturnvalueCheck)
-  .thenReturn(
-    "the return value for the test data",
-    CaseNameTestData.withAlwaysPassingCheck
   );

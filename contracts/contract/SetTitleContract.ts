@@ -6,7 +6,7 @@ import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
-import { type DotCall } from "./DotCall.js";
+import { type DotCall } from "../../src/types/DotCall.js";
 import { type IfCalledWithType } from "../../src/types/IfCalledWithType.js";
 
 const ParameterTestData = new MakeTestDataService<

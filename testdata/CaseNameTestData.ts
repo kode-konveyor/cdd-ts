@@ -4,8 +4,4 @@ export const CaseNameTestData = {
     "The function under test:Global multiplier is 3:run explanation",
   undefined: () => "undefined:undefined:undefined",
   default: () => DEFAULT_IDENTIFIER,
-  withAlwaysPassingCheck: {
-    default: () => DEFAULT_IDENTIFIER,
-    check: () => undefined,
-  },
 };

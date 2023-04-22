@@ -7,6 +7,7 @@ import { ParameterTestData } from "./ParameterTestData.js";
 import { LabelTestdata } from "./LabelTestdata.js";
 import { MakeTestDataService } from "../src/util/MakeTestDataService.js";
 import { ReturnValueCheckTestData } from "./ReturnValueCheckTestData.js";
+import { ParameterCheckerTestData } from "./ParameterCheckerTestData.js";
 
 export const NONEXISTING_EXCEPTION_IDENTIFIER =
   "no one expects the spanish inquisition";
@@ -19,6 +20,10 @@ const runDescriptorTestDataDescriptor = {
   getRunDescriptorParametersSet: {
     __from: "getRunDescriptor",
     parameterGetters: ParameterTestData.default(),
+  },
+  getRunDescriptorParametersAndCheckerSet: {
+    __from: "getRunDescriptorParametersSet",
+    parameterCheck: ParameterCheckerTestData.default,
   },
   getRunDescriptorWithExplanation: {
     __from: "getRunDescriptor",

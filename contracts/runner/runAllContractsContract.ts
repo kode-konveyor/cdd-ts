@@ -10,7 +10,7 @@ import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestDat
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
-import { type DotCall } from "../contract/DotCall.js";
+import { type DotCall } from "../../src/types/DotCall.js";
 
 const runAllContracts = bound<RunAllContractsService["runAllContracts"]>(
   RunAllContractsService

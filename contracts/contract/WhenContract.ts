@@ -8,7 +8,7 @@ import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestDat
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 import { type ContractEntity } from "../../src/types/ContractEntity.js";
-import { type DotCall } from "./DotCall.js";
+import { type DotCall } from "../../src/types/DotCall.js";
 
 const ContractTestData = new MakeTestDataService<
   WhenService<TestedFunctionType>,

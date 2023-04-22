@@ -12,8 +12,7 @@ export class CheckCurrentRunService<
 > extends ContractEntity<T> {
   constructor(
     readonly caseName = CaseNameService.prototype.caseName,
-    private readonly messageFormat = MessageFormatService.prototype
-      .messageFormat
+    readonly messageFormat = MessageFormatService.prototype.messageFormat
   ) {
     super();
   }

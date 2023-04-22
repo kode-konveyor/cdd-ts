@@ -1,11 +1,11 @@
-import { caseNameContract } from "../contracts/contract/caseNameContract.js";
-import { MakeTestDataService } from "../src/cdd-ts.js";
 import { CheckCurrentRunService } from "../src/contract/CheckCurrentRunService.js";
 import type { ContractEntity } from "../src/types/ContractEntity.js";
+import type { TestedFunctionType } from "./MethodTestData.js";
+import { MakeTestDataService } from "../src/cdd-ts.js";
+import { caseNameContract } from "../contracts/contract/caseNameContract.js";
+import { messageFormatContract } from "../contracts/util/messageFormatContract.js";
 import { type WithCorrectRun } from "../src/types/WithCorrectRun.js";
-import { MessageFormatService } from "../src/util/messageFormat.js";
 import { ContractTestDataDescriptor } from "./ContractTestdata.js";
-import { type TestedFunctionType } from "./MethodTestData.js";
 
 export const CheckCurrentRunContractTestData = new MakeTestDataService<
   WithCorrectRun<TestedFunctionType, ContractEntity<TestedFunctionType>>,
@@ -15,6 +15,6 @@ export const CheckCurrentRunContractTestData = new MakeTestDataService<
   () =>
     new CheckCurrentRunService(
       caseNameContract.getStubForMixin(),
-      MessageFormatService.prototype.messageFormat
+      messageFormatContract.getStub()
     ) as WithCorrectRun<TestedFunctionType, ContractEntity<TestedFunctionType>>
 );

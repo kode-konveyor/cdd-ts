@@ -29,17 +29,21 @@ export class GetStubService<T extends MethodType> extends ContractEntity<T> {
     const stub = (...params: Parameters<T>): ReturnType<T> => {
       const retvals: Array<ReturnType<T>> = [];
       const checkedParams: Array<[string, Parameters<T>]> = [];
-      currentCase.runs.forEach((run) => {
+      for (const run of currentCase.runs) {
         // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         const runParams = this.getParametersFromGetters(run.parameterGetters!);
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        if (run.returnValueChecks.length > 0 || equal(runParams, params)) {
+        if (run.parameterCheck !== undefined) {
+          if (run.parameterCheck(...params) === undefined) {
+            return (run.returnValueGetter as ReturnType<T>)();
+          }
+        }
+        if (equal(runParams, params)) {
           if (run.thrown === undefined)
             retvals.push(run.returnValueGetter as ReturnType<T>);
           else throw new Error(String(run.thrown));
         }
         checkedParams.push([run.explanation, runParams as Parameters<T>]);
-      });
+      }
       if (retvals.length !== 1) {
         throw new Error(
           this.messageFormat(

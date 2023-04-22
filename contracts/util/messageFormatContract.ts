@@ -34,4 +34,17 @@ export const messageFormatContract = new Contract<
   .thenReturn(
     "with no format parameters it returns the format string",
     FormatStringTestData.formattedMultiple
+  )
+  .ifCalledWith(
+    FormatStringTestData.currentRunIsInComplete,
+    FormatStringTestData.defaultCasereference
+  )
+  .thenReturn(
+    "case for IfCalledWith current run incomplete",
+    FormatStringTestData.currentRunIsIncompleteMessage
+  )
+  .ifCalledWith(FormatStringTestData.didNotPassChecker)
+  .thenReturn(
+    "case for ifcalledWith did not pass the check",
+    FormatStringTestData.didNotPassMessage
   );

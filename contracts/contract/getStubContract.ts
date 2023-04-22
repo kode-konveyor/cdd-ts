@@ -1,4 +1,3 @@
-import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunService.js";
 import { Contract } from "../../src/contract/Contract.js";
 import { GetStubService } from "../../src/contract/GetStubService.js";
 import type { MethodType } from "../../src/types/MethodType.js";
@@ -11,7 +10,7 @@ import {
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
-import { type DotCall } from "./DotCall.js";
+import { type DotCall } from "../../src/types/DotCall.js";
 
 export const getStubContractParties = [boundCall(GetStubService)];
 
@@ -20,10 +19,7 @@ const contractTestData = new MakeTestDataService<
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
-  () =>
-    new GetStubService<MethodType>(
-      CheckCurrentRunService.prototype.checkCurrentRun
-    )
+  () => new GetStubService<MethodType>()
 );
 
 export const getStubContract = new Contract<
@@ -54,7 +50,7 @@ export const getStubContract = new Contract<
 
   .ifCalledWith(contractTestData.getContract)
   .thenThrow(
-    "if ther are no runs in the case, it is an error",
+    "if there are no runs in the case, it is an error",
     "no runs in the case"
   )
 
@@ -75,7 +71,7 @@ export const getStubContract = new Contract<
     LabelTestdata.undefined
   )
   .thenReturn(
-    "it is possible to create a contract with the same input multiple times",
+    "it is possible to create a contract with the same input multiple times. If there was a parameter checker for that input, the corresponding return value is returned, else it is an error.",
     {
       default: TestedFunctionTestData.default,
       check:

@@ -26,7 +26,7 @@ import { MessageFormatService } from "../util/messageFormat.js";
 export class Contract<T extends MethodType> extends ContractEntity<T> {
   constructor(
     readonly ifCalledWith: IfCalledWithService<T>["ifCalledWith"] = IfCalledWithService
-      .prototype.ifCalledWith,
+      .prototype.ifCalledWith as IfCalledWithService<T>["ifCalledWith"],
     private readonly checkCurrentRun: CheckCurrentRunService<T>["checkCurrentRun"] = CheckCurrentRunService
       .prototype.checkCurrentRun,
     readonly setTitle: SetTitleService<T>["setTitle"] = SetTitleService

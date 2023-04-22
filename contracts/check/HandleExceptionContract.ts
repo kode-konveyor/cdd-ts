@@ -7,7 +7,7 @@ import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { RunDescriptorTestData } from "../../testdata/RunDescriptorTestData.js";
 import { SerializableTestData } from "../../testdata/SerializableTestdata.js";
-import { type DotCall } from "../contract/DotCall.js";
+import { type DotCall } from "../../src/types/DotCall.js";
 
 const ContractTestData = new MakeTestDataService<
   HandleExceptionService<TestedFunctionType>,
