@@ -5,7 +5,7 @@ import { CaseNameService } from "../check/CaseNameService.js";
 import { type ParameterGetters } from "../types/ParameterGettersType.js";
 import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
 import { MessageFormatService } from "../util/messageFormat.js";
-import { type ThenReturnOrThenThrowType } from "../types/ThenReturnOrThenThrowType.js";
+import { type IfCalledWithReturnType } from "../types/IfCalledWithReturnType.js";
 import { serialize } from "../util/serialize.js";
 import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
 import { PARAMETER_DIDNT_PASS_THE_CHECK } from "./Messages.js";
@@ -34,7 +34,7 @@ export class IfCalledWithService<
             checker: (...getters: Parameters<T>) => unknown;
           }
         ]
-  ): ThenReturnOrThenThrowType<T> {
+  ): IfCalledWithReturnType<T> {
     this.checkCurrentRun();
     this.currentRun = new RunDescriptorEntity();
     if (0 in parameterGetters && "default" in parameterGetters[0]) {
@@ -58,6 +58,6 @@ export class IfCalledWithService<
       this.currentRun.parameterGetters =
         parameterGetters as ParameterGetters<T>;
     }
-    return this as unknown as ThenReturnOrThenThrowType<T>;
+    return this as unknown as IfCalledWithReturnType<T>;
   }
 }

@@ -8,7 +8,7 @@ import { caseNameContract } from "./caseNameContract.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 import { type DotCall } from "../../src/types/DotCall.js";
-import { type ThenReturnOrThenThrowType } from "../../src/types/ThenReturnOrThenThrowType.js";
+import { type IfCalledWithReturnType } from "../../src/types/IfCalledWithReturnType.js";
 import { messageFormatContract } from "../util/messageFormatContract.js";
 
 const ifCalledWithService = new IfCalledWithService(
@@ -22,12 +22,12 @@ const ParameterTestdata = new MakeTestDataService<
 >().makeTestData(ContractTestDataDescriptor, () => ifCalledWithService);
 
 const ReturnValueTestData = new MakeTestDataService<
-  ThenReturnOrThenThrowType<TestedFunctionType>,
+  IfCalledWithReturnType<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
   () =>
-    ifCalledWithService as unknown as ThenReturnOrThenThrowType<TestedFunctionType>
+    ifCalledWithService as unknown as IfCalledWithReturnType<TestedFunctionType>
 );
 
 export const IfcalledWithContractParties = [boundCall(IfCalledWithService)];

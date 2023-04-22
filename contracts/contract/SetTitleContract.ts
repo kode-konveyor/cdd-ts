@@ -7,7 +7,7 @@ import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 import { type DotCall } from "../../src/types/DotCall.js";
-import { type IfCalledWithType } from "../../src/types/IfCalledWithType.js";
+import { type SetTitleReturnType } from "../../src/types/SetTitleReturnType.js";
 
 const ParameterTestData = new MakeTestDataService<
   SetTitleService<TestedFunctionType>,
@@ -19,12 +19,12 @@ const ParameterTestData = new MakeTestDataService<
 );
 
 const ReturntestData = new MakeTestDataService<
-  IfCalledWithType<TestedFunctionType>,
+  SetTitleReturnType<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
   () =>
-    new ContractEntity<TestedFunctionType>() as unknown as IfCalledWithType<TestedFunctionType>
+    new ContractEntity<TestedFunctionType>() as unknown as SetTitleReturnType<TestedFunctionType>
 );
 
 const methodName = "setTitle";

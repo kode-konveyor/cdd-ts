@@ -5,6 +5,7 @@ import { CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 import { CaseNameService } from "../check/CaseNameService.js";
 import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
 import { MessageFormatService } from "../util/messageFormat.js";
+import { type WhenServiceResultType } from "../types/WhenServiceResultType.js";
 
 export class WhenService<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -17,10 +18,10 @@ export class WhenService<T extends MethodType> extends ContractEntity<T> {
     super();
   }
 
-  when<R extends ContractEntity<T>>(
+  when(
     explanation: string,
     environmentManipulator: EnvironmentManipulatorType
-  ): R {
+  ): WhenServiceResultType<T> {
     this.checkCurrentRun();
     this.currentCase = explanation;
     const caseDescriptor = new CaseDescriptorEntity();
@@ -28,6 +29,6 @@ export class WhenService<T extends MethodType> extends ContractEntity<T> {
     caseDescriptor.tearDown = environmentManipulator.tearDown;
     this.cases[explanation] = caseDescriptor;
     this.currentRun = undefined;
-    return this as unknown as R;
+    return this as unknown as WhenServiceResultType<T>;
   }
 }

@@ -4,6 +4,7 @@ import { type GetStubForMixinService } from "../contract/GetStubForMixinService.
 import { type GetStubService } from "../contract/GetStubService.js";
 import { type IfCalledWithService } from "../contract/IfCalledWithService.js";
 import { type MeanWhileService } from "../contract/MeanWhileService.js";
+import { type WhenService } from "../contract/WhenService.js";
 
 export interface ThenreturnResultType<T extends MethodType> {
   ifCalledWith: IfCalledWithService<T>["ifCalledWith"];
@@ -11,4 +12,5 @@ export interface ThenreturnResultType<T extends MethodType> {
   getStubForMixin: GetStubForMixinService<T>["getStubForMixin"];
   meanwhile: MeanWhileService<T>["meanWhile"];
   check: CheckService<T>["check"];
+  when: WhenService<T>["when"];
 }

@@ -7,7 +7,7 @@ import { SideEffectCheckerTestData } from "../../testdata/SideEffectCheckerTestD
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 import { type DotCall } from "../../src/types/DotCall.js";
-import { type IfCalledWithType } from "../../src/types/IfCalledWithType.js";
+import { type SetTitleReturnType } from "../../src/types/SetTitleReturnType.js";
 
 const meanWhileService = new MeanWhileService<TestedFunctionType>();
 
@@ -17,11 +17,11 @@ const ParameterTestData = new MakeTestDataService<
 >().makeTestData(ContractTestDataDescriptor, () => meanWhileService);
 
 const ReturnValueTestData = new MakeTestDataService<
-  IfCalledWithType<TestedFunctionType>,
+  SetTitleReturnType<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
-  () => meanWhileService as unknown as IfCalledWithType<TestedFunctionType>
+  () => meanWhileService as unknown as SetTitleReturnType<TestedFunctionType>
 );
 
 export const MeanWhileContractParties = [boundCall(MeanWhileService)];

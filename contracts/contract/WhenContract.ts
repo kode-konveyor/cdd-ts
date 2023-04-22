@@ -9,14 +9,24 @@ import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 import { type ContractEntity } from "../../src/types/ContractEntity.js";
 import { type DotCall } from "../../src/types/DotCall.js";
+import { type WhenServiceResultType } from "../../src/types/WhenServiceResultType.js";
 
-const ContractTestData = new MakeTestDataService<
+const ParameterTestData = new MakeTestDataService<
   WhenService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
   () =>
     new Contract<TestedFunctionType>() as unknown as WhenService<TestedFunctionType>
+);
+
+const ReturnValueTestData = new MakeTestDataService<
+  WhenServiceResultType<TestedFunctionType>,
+  typeof ContractTestDataDescriptor
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () =>
+    new Contract<TestedFunctionType>() as unknown as WhenServiceResultType<TestedFunctionType>
 );
 
 const methodName = "when";
@@ -36,26 +46,26 @@ export const WhenContract = new Contract<
   )
 
   .ifCalledWith(
-    ContractTestData.getContractWithDefaultCase,
+    ParameterTestData.getContractWithDefaultCase,
     LabelTestdata.caseName,
     EnvironmentmanipulatortestData.thrice
   )
   .thenReturn("a contract with the title set", {
-    default: ContractTestData.getContractWithManipulatorSet,
-    check: (
-      returnValue: ContractEntity<typeof WhenService.prototype.when.call>
-    ) => {
-      return ReturnValueCheckTestData.newCaseChecker(returnValue) === undefined
+    default: ReturnValueTestData.getContractWithManipulatorSet,
+    check: (returnValue: WhenServiceResultType<TestedFunctionType>) => {
+      return ReturnValueCheckTestData.newCaseChecker(
+        returnValue as unknown as ContractEntity<TestedFunctionType>
+      ) === undefined
         ? undefined
         : ReturnValueCheckTestData.currentCaseChecker;
     },
   })
   .ifCalledWith(
-    ContractTestData.getContractWithCorrectCurrentRun,
+    ParameterTestData.getContractWithCorrectCurrentRun,
     LabelTestdata.caseName,
     EnvironmentmanipulatortestData.thrice
   )
   .thenReturn(
     "if there was already a run (ifCalledWith was called), it is put into the previously active case",
-    ContractTestData.getContractWithRunInNonDefaultCaseNoCurrentRun
+    ReturnValueTestData.getContractWithRunInNonDefaultCaseNoCurrentRun
   );
