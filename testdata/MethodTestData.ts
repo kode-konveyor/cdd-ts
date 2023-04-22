@@ -32,6 +32,6 @@ function returningObservable(): Observable<number> {
 
 export const TestedFunctionTestData = {
   default: () => testedFunction,
-  withGlobal: () => testedFunctionWithGlobal,
+  withGlobal: () => testedFunctionWithGlobal as unknown as TestedFunctionType,
   observable: () => returningObservable,
 };

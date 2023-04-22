@@ -13,17 +13,15 @@ export const annotateFunctionContract = new Contract<
     "Annotates a getter such that it is serialized showing the data it returns with"
   )
   .ifCalledWith(AnnotatedFunctionTestData.default)
-  .thenReturn("shows the data", AnnotatedFunctionTestData.default)
-  .suchThat(
-    "the displayName attribute contains the annotation",
-    ReturnValueCheckTestData.annotateFunctionDefault
-  )
+  .thenReturn("shows the data", {
+    default: AnnotatedFunctionTestData.default,
+    check: ReturnValueCheckTestData.annotateFunctionDefault,
+  })
   .ifCalledWith(AnnotatedFunctionTestData.getter)
   .thenReturn(
     "getters returning different values have different names even if created in the same place",
-    AnnotatedFunctionTestData.getter
-  )
-  .suchThat(
-    "the displayName attribute contains the annotation",
-    ReturnValueCheckTestData.annotateFunctionGetter
+    {
+      default: AnnotatedFunctionTestData.getter,
+      check: ReturnValueCheckTestData.annotateFunctionGetter,
+    }
   );

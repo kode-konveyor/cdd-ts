@@ -6,8 +6,10 @@ import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { SideEffectCheckerTestData } from "../../testdata/SideEffectCheckerTestData.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { type DotCall } from "./DotCall.js";
+import { type IfCalledWithType } from "../../src/types/IfCalledWithType.js";
 
-const ContractTestData = new MakeTestDataService<
+const ParameterTestData = new MakeTestDataService<
   MeanWhileService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
@@ -15,27 +17,40 @@ const ContractTestData = new MakeTestDataService<
   () => new MeanWhileService<TestedFunctionType>()
 );
 
+const ReturnValueTestData = new MakeTestDataService<
+  IfCalledWithType<TestedFunctionType>,
+  typeof ContractTestDataDescriptor
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () =>
+    new MeanWhileService<TestedFunctionType>() as unknown as IfCalledWithType<TestedFunctionType>
+);
+
 export const MeanWhileContractParties = [boundCall(MeanWhileService)];
-const NO_IFCALLEDWITH_BEFIRE_MEANWHILE =
-  "ifCalledWith is missing before meanWhile";
 export const MeanWhileContract = new Contract<
-  typeof MeanWhileService.prototype.meanWhile
+  DotCall<
+    MeanWhileService<TestedFunctionType>,
+    MeanWhileService<TestedFunctionType>["meanWhile"]
+  >
 >()
-  .setTitle("defines a return value check")
+  .setTitle("defines a side effect check")
 
   .ifCalledWith(
-    ContractTestData.getContractTriggeringSideEffect,
+    ParameterTestData.getContractTriggeringSideEffect,
     LabelTestdata.logsToConsole,
     SideEffectCheckerTestData.default()
   )
-  .thenReturn("", ContractTestData.getContractTriggeringAndCheckingSideEffect)
+  .thenReturn(
+    "defines the side effect check",
+    ReturnValueTestData.getContractTriggeringAndCheckingSideEffect
+  )
 
   .ifCalledWith(
-    ContractTestData.getContractWithTitle,
+    ParameterTestData.getContractWithTitle,
     LabelTestdata.logsToConsole,
     SideEffectCheckerTestData.default()
   )
   .thenThrow(
     "if ifCalledWith is missing, that is an error",
-    NO_IFCALLEDWITH_BEFIRE_MEANWHILE
+    "ifCalledWith is missing before meanWhile"
   );

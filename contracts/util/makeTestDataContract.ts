@@ -9,9 +9,6 @@ import { bound } from "../../src/cdd-ts.js";
 
 export const makeTestDataContractParties = [bound(MakeTestDataService)];
 
-const DID_YOU_REFERENCE_A_LATER_ITEM =
-  "did you reference a later item in __from?";
-const NO_RECORD_FOUND = "no record named baz";
 export const makeTestDataContract = new Contract<
   MakeTestDataService<
     CDDConfiguration,
@@ -51,14 +48,10 @@ export const makeTestDataContract = new Contract<
     MakeTestDataTestData.withNamedGetter,
     MakeTestDataTestData.constructor
   )
-  .thenReturn(
-    "if __from is not empty, the named getter is used for the data",
-    MadeTestDataTestData.withnamedGetter
-  )
-  .suchThat(
-    "the getter referenced in __from is not modified",
-    ReturnValueCheckTestData.makeTestDataLeakTest
-  )
+  .thenReturn("if __from is not empty, the named getter is used for the data", {
+    default: MadeTestDataTestData.withnamedGetter,
+    check: ReturnValueCheckTestData.makeTestDataLeakTest,
+  })
 
   .ifCalledWith(
     MakeTestDataTestData.withNonexistingReference,
@@ -67,13 +60,13 @@ export const makeTestDataContract = new Contract<
 
   .thenThrow(
     "if __from references an item which is later or does not exist, that is an error",
-    DID_YOU_REFERENCE_A_LATER_ITEM
+    "did you reference a later item in __from?"
   )
 
   .ifCalledWith(MakeTestDataTestData.badAdd, MakeTestDataTestData.constructor)
   .thenThrow(
     "if __add references an item which does not exist, that is an error",
-    NO_RECORD_FOUND
+    "no record named baz"
   )
   .ifCalledWith(
     MakeTestDataTestData.withTransform,

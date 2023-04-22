@@ -2,15 +2,15 @@ import { boundCall } from "../../src/cdd-ts.js";
 import { CaseNameService } from "../../src/check/CaseNameService.js";
 import { HandleExceptionService } from "../../src/check/HandleExceptionService.js";
 import { Contract } from "../../src/contract/Contract.js";
-import type { ContractEntity } from "../../src/types/ContractEntity.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { RunDescriptorTestData } from "../../testdata/RunDescriptorTestData.js";
 import { SerializableTestData } from "../../testdata/SerializableTestdata.js";
+import { type DotCall } from "../contract/DotCall.js";
 
 const ContractTestData = new MakeTestDataService<
-  ContractEntity<TestedFunctionType>,
+  HandleExceptionService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
@@ -23,15 +23,12 @@ const ContractTestData = new MakeTestDataService<
 export const HandleExceptionContractParties = [
   boundCall(HandleExceptionService),
 ];
-const NOT_THE_EXPECTED_EXCEPTION = `Error: The function under test:undefined:run explanation:Not the expected exception thrown.
-Expected:cannot be three
-Got     :Error: hello
-stack:
-fake stacktrace`;
-const UNEXPECTED_EXCEPTION =
-  "Error: The function under test:undefined:undefined: unexpected exception:Error: hello\nstack:\nfake stacktrace";
+
 export const HandleExceptionContract = new Contract<
-  typeof HandleExceptionService.prototype.handleException
+  DotCall<
+    HandleExceptionService<TestedFunctionType>,
+    HandleExceptionService<TestedFunctionType>["handleException"]
+  >
 >()
   .setTitle("Handle exceptions")
 
@@ -42,7 +39,7 @@ export const HandleExceptionContract = new Contract<
   )
   .thenThrow(
     "If no exception was defined, then an exception signaling that is thrown",
-    UNEXPECTED_EXCEPTION
+    "Error: The function under test:undefined:undefined: unexpected exception:Error: hello\nstack:\nfake stacktrace"
   )
 
   .ifCalledWith(
@@ -52,5 +49,9 @@ export const HandleExceptionContract = new Contract<
   )
   .thenThrow(
     "If another exception was defined, then an exception signaling that is thrown",
-    NOT_THE_EXPECTED_EXCEPTION
+    `Error: The function under test:undefined:run explanation:Not the expected exception thrown.
+Expected:cannot be three
+Got     :Error: hello
+stack:
+fake stacktrace`
   );

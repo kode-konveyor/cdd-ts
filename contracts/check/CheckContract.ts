@@ -7,6 +7,7 @@ import { CheckResultTestData } from "../../testdata/CheckResultTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { type ContractEntity } from "../../src/types/ContractEntity.js";
 
 const ContractTestData = new MakeTestDataService<
   CheckService<TestedFunctionType>,
@@ -22,26 +23,12 @@ export const CheckContractParties = [
   boundCall(Contract, methodName),
 ];
 
-const NOT_THE_EXPECTED_EXCEPTION = `Not the expected exception thrown.
-Expected:cannot be three
-Got     :Error: first arg cannot be two
-stack:
-Error: first arg cannot be two`;
-const RETURN_VALUE_MISMATCH_PATTERN =
-  LabelTestdata.runIdentification() +
-  " return value mismatch:.*expected:.2.*actual  :.1";
-const MATCH_NEWLINE = "ms";
-const otherReturnvalueRegEx = RegExp(
-  RETURN_VALUE_MISMATCH_PATTERN,
-  MATCH_NEWLINE
-);
-const RETURN_VALUE_MISMATCH =
-  'The function under test:Global multiplier is 3:undefined: return value mismatch:\nexpected:undefined\nactual  :"1"\n---diff---:\n$';
-const NO_CHECKS_IN_CONTRACT =
-  "Error: no checks in contract The function under test";
-const RETURN_VALUE_MISMATCH_SHORT = "return value mismatch";
+type CheckServiceTypeUnpromised = (
+  self: ContractEntity<TestedFunctionType>,
+  sut: TestedFunctionType
+) => number;
 
-export const CheckContract = new Contract<typeof CheckService.prototype.check>()
+export const CheckContract = new Contract<CheckServiceTypeUnpromised>()
   .setTitle(
     "check checks whether the contract actually corresponds to the behaviour of the SUT"
   )
@@ -70,7 +57,7 @@ export const CheckContract = new Contract<typeof CheckService.prototype.check>()
   )
   .thenThrow(
     "if the return value is not according to the contract a 'return value mismatch' error is thrown",
-    otherReturnvalueRegEx
+    /The function under test::run explanation: return value mismatch:.*expected:.2.*actual {2}:.1/ms
   )
 
   .ifCalledWith(
@@ -79,7 +66,7 @@ export const CheckContract = new Contract<typeof CheckService.prototype.check>()
   )
   .thenThrow(
     "if a return value check fails, a 'return value check did not hold' error is thrown",
-    LabelTestdata.runIdentification() + " fail: return value check did not hold"
+    LabelTestdata.runIdentification() + ".*: return value check did not hold"
   )
 
   .ifCalledWith(
@@ -88,7 +75,7 @@ export const CheckContract = new Contract<typeof CheckService.prototype.check>()
   )
   .thenThrow(
     "side effect checks are recommended to enter a mutex in setUp and unlock it in tearDown. TearDown will be called even if the test fails",
-    RETURN_VALUE_MISMATCH_SHORT
+    "return value mismatch"
   )
 
   .ifCalledWith(
@@ -133,7 +120,11 @@ export const CheckContract = new Contract<typeof CheckService.prototype.check>()
   )
   .thenThrow(
     "in case a different exception is thrown than what is in the contract, a 'Not the expected exception thrown' error is thrown",
-    NOT_THE_EXPECTED_EXCEPTION
+    `Not the expected exception thrown.
+Expected:cannot be three
+Got     :Error: first arg cannot be two
+stack:
+Error: first arg cannot be two`
   )
 
   .ifCalledWith(
@@ -152,7 +143,7 @@ export const CheckContract = new Contract<typeof CheckService.prototype.check>()
   )
   .thenThrow(
     "invalid contract will result in an exception",
-    NO_CHECKS_IN_CONTRACT
+    "Error: no checks in contract The function under test"
   )
 
   .ifCalledWith(
@@ -161,5 +152,5 @@ export const CheckContract = new Contract<typeof CheckService.prototype.check>()
   )
   .thenThrow(
     "in case of non-default case, a current run gets to that case",
-    RETURN_VALUE_MISMATCH
+    'The function under test:Global multiplier is 3:undefined: return value mismatch:\nexpected:undefined\nactual  :"1"\n---diff---:\n$'
   );

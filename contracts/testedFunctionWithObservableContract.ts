@@ -1,6 +1,7 @@
-import { type Observable, firstValueFrom, of } from "rxjs";
+import { type Observable, of } from "rxjs";
 import { Contract } from "../src/contract/Contract.js";
 import { TestedFunctionTestData } from "../testdata/MethodTestData.js";
+import { ReturnValueCheckTestData } from "../testdata/ReturnValueCheckTestData.js";
 
 export const testedFunctionWithObservableContractParties = [
   TestedFunctionTestData.observable(),
@@ -9,14 +10,9 @@ export const testedFunctionWithObservableContractParties = [
 export const testedFunctionWithObservableContract = new Contract<
   () => Observable<number>
 >()
-  .setTitle("A nice tested functions")
+  .setTitle("A nice tested function returning observable")
   .ifCalledWith()
-  .thenReturn("returns the first parameter as string", () => of(1))
-  .suchThat(
-    "the return value is an observable returning one",
-    async (returnValue) => {
-      const h = await firstValueFrom(returnValue);
-      if (h === 1) return undefined;
-      return "not one";
-    }
-  );
+  .thenReturn("returns the first parameter as string", {
+    default: () => of(1),
+    check: ReturnValueCheckTestData.theFirstvalueIsOne,
+  });

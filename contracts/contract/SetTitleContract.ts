@@ -6,13 +6,25 @@ import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { type DotCall } from "./DotCall.js";
+import { type IfCalledWithType } from "../../src/types/IfCalledWithType.js";
 
-const ContractTestData = new MakeTestDataService<
-  ContractEntity<TestedFunctionType>,
+const ParameterTestData = new MakeTestDataService<
+  SetTitleService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
-  () => new ContractEntity<TestedFunctionType>()
+  () =>
+    new ContractEntity<TestedFunctionType>() as SetTitleService<TestedFunctionType>
+);
+
+const ReturntestData = new MakeTestDataService<
+  IfCalledWithType<TestedFunctionType>,
+  typeof ContractTestDataDescriptor
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () =>
+    new ContractEntity<TestedFunctionType>() as unknown as IfCalledWithType<TestedFunctionType>
 );
 
 const methodName = "setTitle";
@@ -22,11 +34,14 @@ export const SetTitleContractParties = [
 ];
 
 export const SetTitleContract = new Contract<
-  typeof SetTitleService.prototype.setTitle
+  DotCall<
+    SetTitleService<TestedFunctionType>,
+    SetTitleService<TestedFunctionType>["setTitle"]
+  >
 >()
   .setTitle("setTitle sets the title of the contract")
-  .ifCalledWith(ContractTestData.getContract, LabelTestdata.default)
+  .ifCalledWith(ParameterTestData.getContract, LabelTestdata.default)
   .thenReturn(
     "a contract with the title set and an empty default case",
-    ContractTestData.getContractWithDefaultCase
+    ReturntestData.getContractWithDefaultCase
   );

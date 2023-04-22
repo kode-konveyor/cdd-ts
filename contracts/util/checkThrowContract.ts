@@ -3,14 +3,13 @@ import { CheckThrowService } from "../../src/util/CheckThrowService.js";
 import { CheckThrowAsyncService } from "../../src/util/CheckThrowAsyncService.js";
 import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
-import { ParameterTestData } from "../../testdata/ParametersTestData.js";
+import { ParameterTestData } from "../../testdata/ParameterTestData.js";
 
 export const checkThrowContractParties = [
   new CheckThrowService().checkThrow,
   new CheckThrowAsyncService().checkThrowAsync,
 ];
-const NO_EXCEPTION = "no exception was thrown";
-const FIRST_ARG_CANNOT_BE_ULL = "first arg cannot be two";
+
 export const checkThrowContract = new Contract<
   typeof CheckThrowService.prototype.checkThrow
 >()
@@ -24,7 +23,7 @@ export const checkThrowContract = new Contract<
   )
   .thenThrow(
     "If no exception is thrown by the sut, it is an error",
-    NO_EXCEPTION
+    "no exception was thrown"
   )
 
   .ifCalledWith(
@@ -46,5 +45,5 @@ export const checkThrowContract = new Contract<
   )
   .thenThrow(
     "if an unexpected exception was thrown, return that",
-    FIRST_ARG_CANNOT_BE_ULL
+    "first arg cannot be two"
   );

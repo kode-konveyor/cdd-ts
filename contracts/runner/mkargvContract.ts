@@ -12,18 +12,18 @@ export const mkargvContract = new Contract<
   .setTitle("makes an argv array out of configuration")
 
   .ifCalledWith(CDDConfigurationTestData.defaultConfig)
-  .meanwhile(
-    "if no debug is given, no stdout",
-    new ConsoleLogChecker(PatternTestData.emptystdout)
-  )
   .thenReturn(
     "returns an array of all parameters in the long form and their argument",
     ArgvTestData.defaultConfig
   )
+  .meanwhile(
+    "if no debug is given, no stdout",
+    new ConsoleLogChecker(PatternTestData.emptystdout)
+  )
 
   .ifCalledWith(CDDConfigurationTestData.debug)
+  .thenReturn("--debug have no argument", ArgvTestData.debug)
   .meanwhile(
     "if debug is given, prints the argv to stdout",
     new ConsoleLogChecker(PatternTestData.mkArgv)
-  )
-  .thenReturn("--debug have no argument", ArgvTestData.debug);
+  );

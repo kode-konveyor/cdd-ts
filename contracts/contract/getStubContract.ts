@@ -11,74 +11,74 @@ import {
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { type DotCall } from "./DotCall.js";
 
 export const getStubContractParties = [boundCall(GetStubService)];
 
 const contractTestData = new MakeTestDataService<
-  Contract<TestedFunctionType>,
+  GetStubService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
   () =>
     new GetStubService<MethodType>(
       CheckCurrentRunService.prototype.checkCurrentRun
-    ) as unknown as Contract<TestedFunctionType>
+    )
 );
 
-const NO_RUNS_IN_THE_CASE = "no runs in the case";
 export const getStubContract = new Contract<
-  GetStubService<TestedFunctionType>["getStub"]
+  DotCall<
+    GetStubService<TestedFunctionType>,
+    GetStubService<TestedFunctionType>["getStub"]
+  >
 >()
   .setTitle("returns a stub behaving according to the contract")
 
   .ifCalledWith(contractTestData.getContractWithTitleAndRun)
-  .suchThat(
-    "For the parameters defined it returns the defined return value",
-    ReturnValueCheckTestData.stubReturnsDefinedReturnValue
-  )
   .thenReturn(
     "for a simple contract returns a function behaving according to the contract",
-    TestedFunctionTestData.default
+    {
+      default: TestedFunctionTestData.default,
+      check: ReturnValueCheckTestData.stubReturnsDefinedReturnValue,
+    }
   )
 
   .ifCalledWith(contractTestData.getContractThrowingTheDefinedException)
-  .suchThat(
-    "For the parameters defined to throw an exception, throw the defined exception",
-    ReturnValueCheckTestData.stubThrowsException
-  )
   .thenReturn(
     "for a throwing contract returns a function throwing when needed",
-    TestedFunctionTestData.default
+    {
+      default: TestedFunctionTestData.default,
+      check: ReturnValueCheckTestData.stubThrowsException,
+    }
   )
 
   .ifCalledWith(contractTestData.getContract)
   .thenThrow(
     "if ther are no runs in the case, it is an error",
-    NO_RUNS_IN_THE_CASE
+    "no runs in the case"
   )
 
   .ifCalledWith(
     contractTestData.getContractWithCorrectRunInNonDefaultCaseNoCurrentRun,
     LabelTestdata.nondefaultCaseName
   )
-  .suchThat(
-    "For the parameters defined it returns the defined return value",
-    ReturnValueCheckTestData.stubReturnsDefinedReturnValue
-  )
   .thenReturn(
     "if we give a case name as parameter, the stub for that case is returned",
-    TestedFunctionTestData.default
+    {
+      default: TestedFunctionTestData.default,
+      check: ReturnValueCheckTestData.stubReturnsDefinedReturnValue,
+    }
   )
 
   .ifCalledWith(
     contractTestData.getContractWithRunInDefaultCaseTwice,
     LabelTestdata.undefined
   )
-  .suchThat(
-    "if the contract defines outcome for the same parameter zero or more than one time, the stub throws an error if called with that parameters",
-    ReturnValueCheckTestData.stubThrowsMultipleDefinedParameterException
-  )
   .thenReturn(
     "it is possible to create a contract with the same input multiple times",
-    TestedFunctionTestData.default
+    {
+      default: TestedFunctionTestData.default,
+      check:
+        ReturnValueCheckTestData.stubThrowsMultipleDefinedParameterException,
+    }
   );

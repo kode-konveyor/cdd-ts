@@ -7,13 +7,16 @@ import { LabelTestdata } from "../../testdata/LabelTestdata.js";
 import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { type ContractEntity } from "../../src/types/ContractEntity.js";
+import { type DotCall } from "./DotCall.js";
 
 const ContractTestData = new MakeTestDataService<
-  Contract<TestedFunctionType>,
+  WhenService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
-  () => new Contract<TestedFunctionType>()
+  () =>
+    new Contract<TestedFunctionType>() as unknown as WhenService<TestedFunctionType>
 );
 
 const methodName = "when";
@@ -22,7 +25,12 @@ export const WhenContractParties = [
   boundCall(Contract, methodName),
 ];
 
-export const WhenContract = new Contract<typeof WhenService.prototype.when>()
+export const WhenContract = new Contract<
+  DotCall<
+    WhenService<TestedFunctionType>,
+    WhenService<TestedFunctionType>["when"]
+  >
+>()
   .setTitle(
     "when sets up a case with a title, using an environment manipulator"
   )
@@ -32,19 +40,16 @@ export const WhenContract = new Contract<typeof WhenService.prototype.when>()
     LabelTestdata.caseName,
     EnvironmentmanipulatortestData.thrice
   )
-  .thenReturn(
-    "a contract with the title set",
-    ContractTestData.getContractWithManipulatorSet
-  )
-  .suchThat(
-    "a new case is created using the title",
-    ReturnValueCheckTestData.newCaseChecker
-  )
-  .suchThat(
-    "the current case is set to the title",
-    ReturnValueCheckTestData.currentCaseChecker
-  )
-
+  .thenReturn("a contract with the title set", {
+    default: ContractTestData.getContractWithManipulatorSet,
+    check: (
+      returnValue: ContractEntity<typeof WhenService.prototype.when.call>
+    ) => {
+      return ReturnValueCheckTestData.newCaseChecker(returnValue) === undefined
+        ? undefined
+        : ReturnValueCheckTestData.currentCaseChecker;
+    },
+  })
   .ifCalledWith(
     ContractTestData.getContractWithCorrectCurrentRun,
     LabelTestdata.caseName,

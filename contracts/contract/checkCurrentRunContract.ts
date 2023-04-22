@@ -1,84 +1,49 @@
 import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunService.js";
 import type { ContractEntity } from "../../src/types/ContractEntity.js";
-import type { MethodType } from "../../src/types/MethodType.js";
-import type { CallType } from "../../testdata/CallType.js";
-import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
+import type { CallType } from "../../src/types/CallType.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
-import { ReturnValueCheckTestData } from "../../testdata/ReturnValueCheckTestData.js";
 import { Contract, boundCall } from "../../src/cdd-ts.js";
-import { caseNameContract } from "./caseNameContract.js";
-import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
-import { MessageFormatService } from "../../src/util/messageFormat.js";
+import { CheckCurrentRunResultTestData } from "../../testdata/CheckCurrentRunResultTestData.js";
+import { CheckCurrentRunContractTestData } from "../../testdata/CheckCurrentRunContractTestData.js";
 
 export const checkCurrentRunContractParties = [
   boundCall(CheckCurrentRunService),
 ];
 
-const contractTestData = new MakeTestDataService<
-  ContractEntity<MethodType>,
-  typeof ContractTestDataDescriptor
->().makeTestData(
-  ContractTestDataDescriptor,
-  () =>
-    new CheckCurrentRunService(
-      caseNameContract.getStubForMixin(),
-      MessageFormatService.prototype.messageFormat
-    )
-);
-
-type ckrcall = CallType<
+type CheckCurrentRunCallType = CallType<
   TestedFunctionType,
   typeof CheckCurrentRunService.prototype.checkCurrentRun<TestedFunctionType>,
   ContractEntity<TestedFunctionType>
 >;
 
-const CURRENT_RUN_IS_INCOMPLETE =
-  "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called";
-export const checkCurrentRunContract = new Contract<ckrcall>()
+export const checkCurrentRunContract = new Contract<CheckCurrentRunCallType>()
   .setTitle(
     "checks whether the current run is okay, and pushes it to the current case"
   )
-  .ifCalledWith(contractTestData.getContract)
+  .ifCalledWith(CheckCurrentRunContractTestData.getContract)
   .thenReturn(
     "if there is no current run, nothing happens",
-    contractTestData.getContract
+    CheckCurrentRunResultTestData.default
   )
 
-  .ifCalledWith(contractTestData.getContractWithCorrectCurrentRun)
-  .suchThat(
-    "The contract is put to the current case",
-    ReturnValueCheckTestData.putTotheCurrentCaseAtZero
-  )
-  .suchThat("The current run is cleared", (retval, contract) =>
-    (contract as ContractEntity<MethodType>).currentRun === undefined
-      ? undefined
-      : "oops"
+  .ifCalledWith(
+    CheckCurrentRunContractTestData.getContractWithCorrectCurrentRun
   )
   .thenReturn(
     "if there is a correct rurrent run, puts it into the current case",
-    contractTestData.getContractWithCorrectRunInDefaultCaseNoCurrentRun
+    CheckCurrentRunResultTestData.putsItToThecurrentCase
   )
 
-  .ifCalledWith(contractTestData.getContractWithCorrectRunInDefaultCase)
-  .suchThat(
-    "The contract is put to the current case",
-    ReturnValueCheckTestData.putTotheCurrentCaseAtZero
-  )
-  .suchThat(
-    "After the case which is currently there",
-    ReturnValueCheckTestData.putTotheCurrentCaseAtOne
-  )
-  .suchThat(
-    "The current run is cleared",
-    ReturnValueCheckTestData.currentRunIsCleared
+  .ifCalledWith(
+    CheckCurrentRunContractTestData.getContractWithCorrectRunInDefaultCase
   )
   .thenReturn(
     "if there is a correct rurrent run and non-empty current case, puts it into the current case after the existing one",
-    contractTestData.getContractWithRunInDefaultCaseTwice
+    CheckCurrentRunResultTestData.putsItIntoTheCurrentCaseAfterTheExistingOne
   )
 
-  .ifCalledWith(contractTestData.getContractWithFreshRun)
+  .ifCalledWith(CheckCurrentRunContractTestData.getContractWithFreshRun)
   .thenThrow(
     "throws error for a run without both return and thrown value",
-    CURRENT_RUN_IS_INCOMPLETE
+    "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called"
   );

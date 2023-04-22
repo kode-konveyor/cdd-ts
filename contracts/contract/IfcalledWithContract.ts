@@ -1,5 +1,4 @@
 import { Contract } from "../../src/contract/Contract.js";
-import type { ContractEntity } from "../../src/types/ContractEntity.js";
 import { ParameterGetterTestData } from "../../testdata/ParametersGetterTestData.js";
 import { IfCalledWithService } from "../../src/contract/IfCalledWithService.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
@@ -8,9 +7,11 @@ import { CheckCurrentRunService } from "../../src/contract/CheckCurrentRunServic
 import { caseNameContract } from "./caseNameContract.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { type DotCall } from "./DotCall.js";
+import { type ThenReturnOrThenThrowType } from "../../src/types/ThenReturnOrThenThrowType.js";
 
-const ContractTestData = new MakeTestDataService<
-  ContractEntity<TestedFunctionType>,
+const ParameterTestdata = new MakeTestDataService<
+  IfCalledWithService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
@@ -21,52 +22,67 @@ const ContractTestData = new MakeTestDataService<
     )
 );
 
-const RUN_IS_INCOMPLETE =
-  "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called";
+const ReturnValueTestData = new MakeTestDataService<
+  ThenReturnOrThenThrowType<TestedFunctionType>,
+  typeof ContractTestDataDescriptor
+>().makeTestData(
+  ContractTestDataDescriptor,
+  () =>
+    new IfCalledWithService(
+      CheckCurrentRunService.prototype.checkCurrentRun,
+      caseNameContract.getStubForMixin()
+    ) as unknown as ThenReturnOrThenThrowType<TestedFunctionType>
+);
 
 export const IfcalledWithContractParties = [boundCall(IfCalledWithService)];
 export const IfcalledWithContract = new Contract<
-  typeof IfCalledWithService.prototype.ifCalledWith
+  DotCall<
+    IfCalledWithService<TestedFunctionType>,
+    IfCalledWithService<TestedFunctionType>["ifCalledWith"]
+  >
 >()
   .setTitle("ifCalledWith sets the parameter for the run")
   .ifCalledWith(
-    ContractTestData.getContractWithDefaultCase,
+    ParameterTestdata.getContractWithDefaultCase,
     ...ParameterGetterTestData.default
   )
   .thenReturn(
     "The Parameters are put into the run",
-    ContractTestData.getContractWithParametersSet
+    ReturnValueTestData.getContractWithParametersSet
   )
 
   .ifCalledWith(
-    ContractTestData.getContractWithFreshRun,
+    ParameterTestdata.getContractWithFreshRun,
     ...ParameterGetterTestData.default
   )
   .thenThrow(
     "if there is a current run, and it is not fully defined, an error is thrown",
-    RUN_IS_INCOMPLETE
+    "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called"
   )
 
   .ifCalledWith(
-    ContractTestData.getContractWithNonDefaultCaseAndCurrentRun,
+    ParameterTestdata.getContractWithNonDefaultCaseAndCurrentRun,
     ...ParameterGetterTestData.default
   )
   .thenReturn(
     "we put the current run into the current case",
-    ContractTestData.getContractWithNonDefaultCaseWithARunStored
+    ReturnValueTestData.getContractWithNonDefaultCaseWithARunStored
   )
 
   .ifCalledWith(
-    ContractTestData.getContractWithTitleAndRun,
+    ParameterTestdata.getContractWithTitleAndRun,
     ...ParameterGetterTestData.default
   )
   .thenReturn(
     "if there was no current case, we create it",
-    ContractTestData.getContractWithParametersInDefaultCase
+    ReturnValueTestData.getContractWithParametersInDefaultCase
   )
 
-  .ifCalledWith(ContractTestData.getContractWithFreshRun)
+  .ifCalledWith(
+    ParameterTestdata.getContractWithFreshRun,
+    ...ParameterGetterTestData.default
+  )
   .thenThrow(
     "if the previous run is not defined with at least a return value or exception, an error is signalled",
-    RUN_IS_INCOMPLETE
+    "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called"
   );

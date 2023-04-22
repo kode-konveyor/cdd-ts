@@ -1,23 +1,21 @@
-import { type CheckCurrentRunService } from "../src/contract/CheckCurrentRunService.js";
 import { type CaseDescriptorEntity } from "../src/types/CaseDescriptorEntity.js";
 import { type ContractEntity } from "../src/types/ContractEntity.js";
 import { type MethodType } from "../src/types/MethodType.js";
-import { type ReturnValueCheckType } from "../src/types/ReturnValueCheckType.js";
 import { type RunDescriptorEntity } from "../src/types/RunDescriptorEntity.js";
 import { DiffService } from "../src/util/DiffService.js";
 import { GetParametersFromGettersService } from "../src/util/GetParametersFromGettersService.js";
 import { serialize } from "../src/util/serialize.js";
-import { type CallType } from "./CallType";
 import { CheckThrowService } from "../src/util/CheckThrowService.js";
 import { FunctionAnnotationtestData } from "./FunctionAnnotationtestData.js";
 import { type TestedFunctionType } from "./MethodTestData.js";
-import { ParameterTestData } from "./ParametersTestData.js";
+import { ParameterTestData } from "./ParameterTestData.js";
 import { getReturnValueTestData } from "./ReturnValueTestData.js";
 import { type TestDataDescriptor } from "src/types/TestDataDescriptor.js";
 import { type CDDConfiguration } from "../src/types/CDDConfiguration.js";
 import { type WhenService } from "../src/contract/WhenService.js";
 import { LabelTestdata } from "./LabelTestdata.js";
 import { type TestData } from "../src/types/TestData.js";
+import { type Observable, firstValueFrom } from "rxjs";
 
 const checkThrow = new CheckThrowService().checkThrow;
 const diff = new DiffService().diff;
@@ -136,6 +134,13 @@ export const ReturnValueCheckTestData = {
 
   failing: () => () => "returnvalue check failure",
   passing: () => () => undefined,
+  returnValueIsStringOfParameter: (returnValue: string, parameters: unknown) =>
+    returnValue === String(parameters) ? undefined : "fail",
+  theFirstvalueIsOne: async (returnValue: Observable<number>) => {
+    const h = await firstValueFrom(returnValue);
+    if (h === 1) return undefined;
+    return "not one";
+  },
 };
 
 function forFunctionAnnotation(name: string) {
@@ -146,15 +151,7 @@ function forFunctionAnnotation(name: string) {
   };
 }
 
-function putTotheCurrentCase(
-  runNumber: number
-): ReturnValueCheckType<
-  CallType<
-    MethodType,
-    typeof CheckCurrentRunService.prototype.checkCurrentRun<MethodType>,
-    ContractEntity<MethodType>
-  >
-> {
+function putTotheCurrentCase(runNumber: number) {
   return (
     returnValue: ContractEntity<MethodType>,
     contract: ContractEntity<MethodType>

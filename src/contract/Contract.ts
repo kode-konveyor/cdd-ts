@@ -9,7 +9,6 @@ import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
 import { WhenService } from "./WhenService.js";
 import { ThenReturnService } from "./ThenReturnService.js";
 import { ThenThrowService } from "./ThenThrowService.js";
-import { SuchThatService } from "./SuchThatService.js";
 import { HandleRunService } from "../check/HandleRunService.js";
 import { HandleExceptionService } from "../check/HandleExceptionService.js";
 import { CaseNameService } from "../check/CaseNameService.js";
@@ -18,7 +17,6 @@ import { RunSideEffectChecksService } from "../check/RunSideEffectChecksService.
 import { RunReturnValueChecksService } from "../check/RunReturnValueChecksService.js";
 import { CheckReturnValueService } from "../check/CheckReturnValueService.js";
 import { GetStubForMixinService } from "./GetStubForMixinService.js";
-import { type ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
 import { SetUpSideEffectChecksService } from "../check/SetUpSideEffectChecksService.js";
 import { TearDownSideEffectChecksService } from "../check/TearDownSideEffectChecksService.js";
 import { DiffService } from "../util/DiffService.js";
@@ -27,34 +25,25 @@ import { MessageFormatService } from "../util/messageFormat.js";
 
 export class Contract<T extends MethodType> extends ContractEntity<T> {
   constructor(
-    readonly ifCalledWith: typeof IfCalledWithService.prototype.ifCalledWith<
-      Contract<T>
-    > = IfCalledWithService.prototype.ifCalledWith,
-    private readonly checkCurrentRun: typeof CheckCurrentRunService.prototype.checkCurrentRun<T> = CheckCurrentRunService
+    readonly ifCalledWith: IfCalledWithService<T>["ifCalledWith"] = IfCalledWithService
+      .prototype.ifCalledWith,
+    private readonly checkCurrentRun: CheckCurrentRunService<T>["checkCurrentRun"] = CheckCurrentRunService
       .prototype.checkCurrentRun,
-    readonly setTitle: typeof SetTitleService.prototype.setTitle<
-      Contract<T>
-    > = SetTitleService.prototype.setTitle,
-    readonly when: typeof WhenService.prototype.when<Contract<T>> = WhenService
-      .prototype.when,
-    readonly thenReturn: typeof ThenReturnService.prototype.thenReturn<
-      Contract<T>
-    > = ThenReturnService.prototype.thenReturn,
-    readonly thenThrow: typeof ThenThrowService.prototype.thenThrow<
-      Contract<T>
-    > = ThenThrowService.prototype.thenThrow,
-    readonly suchThat: typeof SuchThatService.prototype.suchThat<
-      Contract<T>,
-      ReturnValueCheckType<T>
-    > = SuchThatService.prototype.suchThat,
-    readonly meanwhile: typeof MeanWhileService.prototype.meanWhile<
-      Contract<T>
-    > = MeanWhileService.prototype.meanWhile,
-    readonly getStub: typeof GetStubService.prototype.getStub = GetStubService
-      .prototype.getStub,
-    readonly check: typeof CheckService.prototype.check = CheckService.prototype
-      .check,
-    readonly getStubForMixin = GetStubForMixinService.prototype.getStubForMixin,
+    readonly setTitle: SetTitleService<T>["setTitle"] = SetTitleService
+      .prototype.setTitle,
+    readonly when: WhenService<T>["when"] = WhenService.prototype.when,
+    readonly thenReturn: ThenReturnService<T>["thenReturn"] = ThenReturnService
+      .prototype.thenReturn,
+    readonly thenThrow: ThenThrowService<T>["thenThrow"] = ThenThrowService
+      .prototype.thenThrow,
+    readonly meanwhile: MeanWhileService<T>["meanWhile"] = MeanWhileService
+      .prototype.meanWhile,
+    readonly getStub: GetStubService<T>["getStub"] = GetStubService.prototype
+      .getStub,
+    readonly check: CheckService<T>["check"] = CheckService.prototype.check,
+    // @ts-expect-error functions treated with this will always have at least self as parameter
+    readonly getStubForMixin: GetStubForMixinService<T>["getStubForMixin"] = GetStubForMixinService
+      .prototype.getStubForMixin,
     private readonly handleRun = HandleRunService.prototype.handleRun,
     private readonly handleException = HandleExceptionService.prototype
       .handleException,

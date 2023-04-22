@@ -9,5 +9,5 @@ const makeGetters =
 export const AnnotatedFunctionTestData = {
   default: (): (() => CDDConfiguration) =>
     CDDConfigurationTestData.getCDDConfiguration,
-  getter: () => makeGetters([1])[0],
+  getter: () => makeGetters([1])[0] as () => number,
 };

@@ -5,6 +5,7 @@ import { CaseNameService } from "../check/CaseNameService.js";
 import { type ParameterGetters } from "../types/ParameterGettersType.js";
 import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
 import { MessageFormatService } from "../util/messageFormat.js";
+import { type ThenReturnOrThenThrowType } from "../types/ThenReturnOrThenThrowType.js";
 
 export class IfCalledWithService<
   T extends MethodType
@@ -19,12 +20,12 @@ export class IfCalledWithService<
     super();
   }
 
-  ifCalledWith<R extends ContractEntity<T>>(
+  ifCalledWith(
     ...parameterGetters: ParameterGetters<T>
-  ): R {
+  ): ThenReturnOrThenThrowType<T> {
     this.checkCurrentRun();
     this.currentRun = new RunDescriptorEntity();
     this.currentRun.parameterGetters = parameterGetters;
-    return this as unknown as R;
+    return this as unknown as ThenReturnOrThenThrowType<T>;
   }
 }

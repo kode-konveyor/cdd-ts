@@ -10,6 +10,7 @@ import { CDDConfigurationTestData } from "../../testdata/CDDConfigurationTestDat
 import { ContractTestDataDescriptor } from "../../testdata/ContractTestdata.js";
 import { TestedFunctionTestData } from "../../testdata/MethodTestData.js";
 import type { TestedFunctionType } from "../../testdata/MethodTestData.js";
+import { type DotCall } from "../contract/DotCall.js";
 
 const runAllContracts = bound<RunAllContractsService["runAllContracts"]>(
   RunAllContractsService
@@ -18,15 +19,21 @@ const checkThrowAsync = bound<CheckThrowAsyncService["checkThrowAsync"]>(
   CheckThrowAsyncService
 );
 const ContractTestData = new MakeTestDataService<
-  Contract<TestedFunctionType>,
+  CheckService<TestedFunctionType>,
   typeof ContractTestDataDescriptor
 >().makeTestData(
   ContractTestDataDescriptor,
-  () => new Contract<TestedFunctionType>()
+  () =>
+    new Contract<TestedFunctionType>() as unknown as CheckService<TestedFunctionType>
 );
 
 const RETURNVALUE_MISMATCH = "returnvalue mismatch";
-const CheckContract = new Contract<CheckService<TestedFunctionType>["check"]>()
+const CheckContract = new Contract<
+  DotCall<
+    CheckService<TestedFunctionType>,
+    CheckService<TestedFunctionType>["check"]
+  >
+>()
   .setTitle(
     "check checks whether the contract actually corresponds to the behaviour of the SUT"
   )
@@ -97,7 +104,12 @@ export const runAllContractsContract = {
     );
     checkCount += await checkThrowAsync(
       CheckContract.check.bind(CheckContract),
-      [CheckContract.check.call.bind(CheckContract.check)],
+      [
+        CheckContract.check.call.bind(CheckContract.check) as DotCall<
+          CheckService<TestedFunctionType>,
+          (sut: TestedFunctionType) => Promise<number>
+        >,
+      ],
       RETURN_VALUE_MISMATCH,
       1
     );

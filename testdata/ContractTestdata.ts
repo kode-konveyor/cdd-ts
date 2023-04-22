@@ -26,10 +26,6 @@ export const ContractTestDataDescriptor = {
     currentRun:
       RunDescriptorTestData.getRunDescriptorWithReturnValueCheckFailing(),
   },
-  getContractWithReturnvalueCheck: {
-    __from: "getContractWithTitle",
-    currentRun: RunDescriptorTestData.getRunDescriptorWithReturnValueCheck(),
-  },
   getContractThrowingUnexpectedExceptionAndOtherRunLater: {
     __from: "getContractWithTitle",
     cases: {
@@ -84,6 +80,10 @@ export const ContractTestDataDescriptor = {
   getContractWithDefaultCase: {
     __from: "getContractWithTitle",
     cases: { "": CaseDescriptorTestData.getCaseDescriptor() },
+  },
+  getContractWithReturnvalueCheck: {
+    __from: "getContractWithDefaultCase",
+    currentRun: RunDescriptorTestData.getRunDescriptorWithReturnValueCheck(),
   },
   getContractWithFreshRun: {
     __from: "getContractWithDefaultCase",

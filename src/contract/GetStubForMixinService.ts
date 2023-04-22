@@ -2,6 +2,14 @@ import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
 import { GetStubService } from "./GetStubService.js";
 
+// eslint-disable-next-line kodekonveyor/service
+type OmitFirtsParameter<T extends MethodType> = Parameters<T> extends [
+  unknown,
+  ...infer R
+]
+  ? R
+  : never;
+
 export class GetStubForMixinService<
   T extends MethodType
 > extends ContractEntity<T> {
@@ -9,13 +17,10 @@ export class GetStubForMixinService<
     super();
   }
 
-  getStubForMixin<KLASS>(): (
-    this: KLASS,
-    ...params: Parameters<T>
-  ) => ReturnType<T> {
+  getStubForMixin(): (...params: OmitFirtsParameter<T>) => ReturnType<T> {
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
-    return function (this: KLASS, ...params: Parameters<T>) {
+    return function (this: Parameters<T>[0], ...params: OmitFirtsParameter<T>) {
       return self.getStub()(this, ...params);
     };
   }

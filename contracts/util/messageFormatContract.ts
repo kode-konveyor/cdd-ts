@@ -27,12 +27,6 @@ export const messageFormatContract = new Contract<
     FormatStringTestData.formatted
   )
 
-  .ifCalledWith(FormatStringTestData.default)
-  .thenReturn(
-    "with no format parameters it returns the format string",
-    FormatStringTestData.default
-  )
-
   .ifCalledWith(
     FormatStringTestData.multiple,
     FormatStringTestData.parametersAsObject

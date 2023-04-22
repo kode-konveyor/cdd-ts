@@ -3,6 +3,7 @@ export const getReturnValueTestData = {
   getReturnValueOther: () => "2",
   getReturnValueSideEffect: () => "3",
   getReturnValueTen: () => 10,
+  getReturnValueMinusOne: () => -1,
   getReturnValueEleven: () => 11,
 };
 

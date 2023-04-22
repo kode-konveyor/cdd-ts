@@ -26,7 +26,7 @@ export const checkNumberOfTestsContract = new Contract<
   .thenThrow("if the numbers do not match, it is an error", EXPECTED_TEN_TESTS)
   .ifCalledWith(
     CDDConfigurationTestData.getCDDConfigurationES,
-    getReturnValueTestData.getReturnValue
+    getReturnValueTestData.getReturnValueMinusOne
   )
   .thenReturn(
     "if there is no number of tests defined in the config, then return true",

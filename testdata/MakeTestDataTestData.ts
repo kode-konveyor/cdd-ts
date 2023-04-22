@@ -41,7 +41,10 @@ export const MakeTestDataTestData = {
   },
   badAdd: () => {
     return {
-      getOne: { __from: "", __add: ["baz"] },
+      getOne: {
+        __from: "",
+        __add: ["baz", "bar", "foo"] as [string, string, unknown],
+      },
     };
   },
 };

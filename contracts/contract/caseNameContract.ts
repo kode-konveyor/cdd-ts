@@ -5,6 +5,7 @@ import { CaseNameTestData } from "../../testdata/CaseNameTestData.js";
 import { Contract } from "../../src/contract/Contract.js";
 import { boundCall } from "../../src/cdd-ts.js";
 import { MakeTestDataService } from "../../src/util/MakeTestDataService.js";
+import { type DotCall } from "./DotCall.js";
 
 const ContractTestData = new MakeTestDataService<
   CaseNameService<TestedFunctionType>,
@@ -15,8 +16,12 @@ const ContractTestData = new MakeTestDataService<
 );
 
 export const caseNameContractParties = [boundCall(CaseNameService)];
+
 export const caseNameContract = new Contract<
-  CaseNameService<TestedFunctionType>["caseName"]
+  DotCall<
+    CaseNameService<TestedFunctionType>,
+    CaseNameService<TestedFunctionType>["caseName"]
+  >
 >()
   .setTitle("returns the name of the currently checked case")
   .ifCalledWith(
@@ -32,5 +37,7 @@ export const caseNameContract = new Contract<
     CaseNameTestData.undefined
   )
   .ifCalledWith(ContractTestData.getContractWithFailingReturnvalueCheck)
-  .suchThat("we have no constraints on input", () => undefined)
-  .thenReturn("the return value for the test data", CaseNameTestData.default);
+  .thenReturn(
+    "the return value for the test data",
+    CaseNameTestData.withAlwaysPassingCheck
+  );

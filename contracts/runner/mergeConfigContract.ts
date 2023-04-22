@@ -18,13 +18,13 @@ export const mergeConfigContract = new Contract<
     CDDConfigurationTestData.getCDDConfigurationES,
     CDDConfigurationTestData.defaultConfig
   )
-  .meanwhile(
-    "if debug is not given, does not print the config to stdout",
-    new ConsoleLogChecker(PatternTestData.emptystdout)
-  )
   .thenReturn(
     "merges the configurations into one",
     CDDConfigurationTestData.defaultConfig
+  )
+  .meanwhile(
+    "if debug is not given, does not print the config to stdout",
+    new ConsoleLogChecker(PatternTestData.emptystdout)
   )
 
   .ifCalledWith(
@@ -32,11 +32,11 @@ export const mergeConfigContract = new Contract<
     CDDConfigurationTestData.getCDDConfigurationES,
     CDDConfigurationTestData.debug
   )
-  .meanwhile(
-    "if debug is given, prints the config to stdout",
-    new ConsoleLogChecker(PatternTestData.mergeConfig)
-  )
   .thenReturn(
     "merges the configurations into one and prints",
     CDDConfigurationTestData.debug
+  )
+  .meanwhile(
+    "if debug is given, prints the config to stdout",
+    new ConsoleLogChecker(PatternTestData.mergeConfig)
   );

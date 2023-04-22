@@ -1,7 +1,10 @@
 import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
+import { type ReturnValueCheckType } from "../types/ReturnValueCheckType.js";
+import { type RunDescriptorEntity } from "../types/RunDescriptorEntity.js";
 import { MessageFormatService } from "../util/messageFormat.js";
 import { THEN_RETURN } from "./Constants.js";
+import { type ThenreturnResultType } from "../types/ThenreturnResultType.js";
 import { ThrowIfCalledWithMissingForService } from "./ThrowIfCalledWithMissingForService.js";
 
 export class ThenReturnService<T extends MethodType> extends ContractEntity<T> {
@@ -14,15 +17,21 @@ export class ThenReturnService<T extends MethodType> extends ContractEntity<T> {
     super();
   }
 
-  thenReturn<THIS extends ContractEntity<T>>(
+  thenReturn(
     explanation: string,
-    returnValue: () => ReturnType<T>
-  ): THIS {
+    returnValue:
+      | (() => ReturnType<T>)
+      | { default: () => ReturnType<T>; check: ReturnValueCheckType<T> }
+  ): ThenreturnResultType<T> {
     if (this.currentRun == null) this.throwIfCalledWithMissingFor(THEN_RETURN);
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this.currentRun!.explanation = explanation;
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this.currentRun!.returnValueGetter = returnValue;
-    return this as unknown as THIS;
+    const run = this.currentRun as RunDescriptorEntity<T>;
+    run.explanation = explanation;
+    if ("default" in returnValue) {
+      run.returnValueChecks.push(returnValue.check);
+      run.returnValueGetter = returnValue.default;
+    } else {
+      run.returnValueGetter = returnValue;
+    }
+    return this as unknown as ThenreturnResultType<T>;
   }
 }

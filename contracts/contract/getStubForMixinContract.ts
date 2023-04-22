@@ -19,11 +19,10 @@ export const getStubForMixinContract = new Contract()
   .setTitle("returns a stub where the first parameter is treated as this")
 
   .ifCalledWith(contractTestData.getContractWithTitleAndRun)
-  .suchThat(
-    "For the parameters defined it returns the defined return value",
-    ReturnValueCheckTestData.mixinStubReturnsDefinedReturnValue
-  )
   .thenReturn(
     "for a simple contract returns a function behaving according to the contract",
-    TestedFunctionTestData.default
+    {
+      default: TestedFunctionTestData.default,
+      check: ReturnValueCheckTestData.mixinStubReturnsDefinedReturnValue,
+    }
   );

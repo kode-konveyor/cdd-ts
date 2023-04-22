@@ -16,8 +16,6 @@ const ContractTestData = new MakeTestDataService<
 
 export const ThenThrowContractParties = [boundCall(ThenThrowService)];
 
-const NO_IFCALLEDWITH_BEFORE_THENTHROW =
-  "ifCalledWith is missing before thenThrow";
 export const ThenThrowContract = new Contract<
   typeof ThenThrowService.prototype.thenThrow.call
 >()
@@ -38,5 +36,5 @@ export const ThenThrowContract = new Contract<
   )
   .thenThrow(
     "if no ifCalledWith was called before, an error is thrown",
-    NO_IFCALLEDWITH_BEFORE_THENTHROW
+    "ifCalledWith is missing before thenThrow"
   );

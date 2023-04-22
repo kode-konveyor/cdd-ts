@@ -3,10 +3,10 @@ import { type TestDataDescriptor } from "src/types/TestDataDescriptor.js";
 import { type TestedFunctionType } from "./MethodTestData.js";
 import { getReturnValueTestData } from "./ReturnValueTestData.js";
 import { SideEffectCheckCaseTestData } from "./SideEffectCheckCaseTestData.js";
-import { ParameterTestData } from "./ParametersTestData.js";
-import { ReturnValueCheckCaseTestData } from "./ReturnValueCheckCaseTestData.js";
+import { ParameterTestData } from "./ParameterTestData.js";
 import { LabelTestdata } from "./LabelTestdata.js";
 import { MakeTestDataService } from "../src/util/MakeTestDataService.js";
+import { ReturnValueCheckTestData } from "./ReturnValueCheckTestData.js";
 
 export const NONEXISTING_EXCEPTION_IDENTIFIER =
   "no one expects the spanish inquisition";
@@ -56,11 +56,11 @@ const runDescriptorTestDataDescriptor = {
   },
   getRunDescriptorWithReturnValueCheckFailing: {
     __from: "getRunDescriptorCorrectlyBuilt",
-    returnValueChecks: [ReturnValueCheckCaseTestData.failig()],
+    returnValueChecks: [ReturnValueCheckTestData.failing()],
   },
   getRunDescriptorWithReturnValueCheck: {
     __from: "getRunDescriptorCorrectlyBuilt",
-    returnValueChecks: [ReturnValueCheckCaseTestData.passing()],
+    returnValueChecks: [ReturnValueCheckTestData.passing()],
   },
   getRunDescriptorWithSideEffectCheckCheckFailing: {
     __from: "getRunDescriptorCorrectlyBuilt",
