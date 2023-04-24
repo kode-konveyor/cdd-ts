@@ -15,7 +15,9 @@ export class RunSideEffectChecksService<
     super();
   }
 
-  runSideEffectChecks(currentRun: RunDescriptorEntity<T>): void {
-    currentRun.sideEffectChecks.forEach(this.oneSideEffectCheck());
+  async runSideEffectChecks(currentRun: RunDescriptorEntity<T>): Promise<void> {
+    for (const [name, checker] of currentRun.sideEffectChecks) {
+      await this.oneSideEffectCheck(name, checker);
+    }
   }
 }

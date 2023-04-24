@@ -50,7 +50,7 @@ export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
       try {
         result = await sut(...parameters);
       } catch (e) {
-        this.tearDownSideEffectChecksService(currentRun);
+        await this.tearDownSideEffectChecksService(currentRun);
         this.handleException(currentRun, e);
         return 1;
       }
@@ -63,12 +63,12 @@ export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
         );
       await this.checkReturnValue(currentRun, result);
       await this.runReturnValueChecks(currentRun, result, parameters);
-      this.runSideEffectChecks(currentRun);
+      await this.runSideEffectChecks(currentRun);
     } catch (e) {
-      this.tearDownSideEffectChecksService(currentRun);
+      await this.tearDownSideEffectChecksService(currentRun);
       throw e;
     }
-    this.tearDownSideEffectChecksService(currentRun);
+    await this.tearDownSideEffectChecksService(currentRun);
     return 1;
   }
 }

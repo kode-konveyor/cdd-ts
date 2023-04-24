@@ -16,22 +16,23 @@ export class OneSideEffectCheckService<
     super();
   }
 
-  oneSideEffectCheck() {
-    return (entry: [string, SideEffectCheckerType]) => {
-      try {
-        entry[1].check();
-      } catch (error) {
-        entry[1].tearDown();
-        throw new Error(
-          this.messageFormat(
-            SIDE_EFFECT_CHECK_FAILURE_MESSAGE,
-            this.caseName(),
-            entry[0],
-            String(error)
-          )
-        );
-      }
-      entry[1].tearDown();
-    };
+  async oneSideEffectCheck(
+    name: string,
+    checker: SideEffectCheckerType
+  ): Promise<void> {
+    try {
+      await checker.check();
+    } catch (error) {
+      await checker.tearDown();
+      throw new Error(
+        this.messageFormat(
+          SIDE_EFFECT_CHECK_FAILURE_MESSAGE,
+          this.caseName(),
+          name,
+          String(error)
+        )
+      );
+    }
+    await checker.tearDown();
   }
 }

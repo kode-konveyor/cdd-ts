@@ -72,7 +72,7 @@ export class CheckService<T extends MethodType> extends ContractEntity<T> {
           return previous + currentResult;
         }, nullPromise);
         if (thisCase.tearDown != null) {
-          thisCase.tearDown();
+          await thisCase.tearDown();
         }
       } catch (e) {
         if (casename !== "") checkServiceMutex.unlock();
