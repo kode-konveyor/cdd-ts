@@ -16,7 +16,6 @@ export const LabelTestdata = {
   fail: () => "fail",
   logsToConsole: () => "logs to console",
   failingSideEffectCheck: () => "failing sideEffectCheck",
-  nondefaultCaseName: () => NONDEFAULT_CASE_NAME,
   undefined: () => undefined,
   runIdentification: () => RUN_IDENTIFICATION,
   runIdentificationOther: () => RUN_IDENTIFICATION_OTHER,

@@ -128,10 +128,10 @@ export const ContractTestDataDescriptor = {
   },
   getContractWithNonDefaultCase: {
     __from: "getContractWithDefaultCase",
-    currentCase: LabelTestdata.nondefaultCaseName(),
+    currentCase: LabelTestdata.caseName(),
     __add: [
       "cases",
-      LabelTestdata.nondefaultCaseName(),
+      LabelTestdata.caseName(),
       CaseDescriptorTestData.getCaseDescriptor(),
     ] as DescriptorAddType,
   },
@@ -139,7 +139,7 @@ export const ContractTestDataDescriptor = {
     __from: "getContractWithNonDefaultCase",
     __add: [
       "cases",
-      LabelTestdata.nondefaultCaseName(),
+      LabelTestdata.caseName(),
       CaseDescriptorTestData.getCaseDescriptorWithManipulatorset(),
     ] as DescriptorAddType,
   },
@@ -155,7 +155,7 @@ export const ContractTestDataDescriptor = {
     __from: "getContractWithNonDefaultCase",
     __add: [
       "cases",
-      LabelTestdata.nondefaultCaseName(),
+      LabelTestdata.caseName(),
       CaseDescriptorTestData.getCaseDescriptorWithManipulatorsetAndRun(),
     ] as DescriptorAddType,
   },
@@ -166,14 +166,14 @@ export const ContractTestDataDescriptor = {
   getContractWithNonDefaultCaseAndCurrentRunInCheck: {
     __from: "getContractWithNonDefaultCaseAndCurrentRun",
     currentRunExplanation: LabelTestdata.runExplanation(),
-    checkedCase: LabelTestdata.nondefaultCaseName(),
+    checkedCase: LabelTestdata.caseName(),
   },
   getContractWithNonDefaultCaseWithARunStored: {
     __from: "getContractWithNonDefaultCase",
     currentRun: RunDescriptorTestData.getRunDescriptorParametersSet(),
     __add: [
       "cases",
-      LabelTestdata.nondefaultCaseName(),
+      LabelTestdata.caseName(),
       CaseDescriptorTestData.getCaseDescriptorWithCorrectRun(),
     ] as DescriptorAddType,
   },
@@ -181,7 +181,7 @@ export const ContractTestDataDescriptor = {
     __from: "getContractWithNonDefaultCaseAndCurrentRun",
     __add: [
       "cases",
-      LabelTestdata.nondefaultCaseName(),
+      LabelTestdata.caseName(),
       CaseDescriptorTestData.getCaseDescriptorWithManipulatorset(),
     ] as DescriptorAddType,
   },
@@ -193,7 +193,7 @@ export const ContractTestDataDescriptor = {
     __from: "getContractWithTitle",
     __add: [
       "cases",
-      LabelTestdata.nondefaultCaseName(),
+      LabelTestdata.caseName(),
       CaseDescriptorTestData.getCaseDescriptorWithCorrectRun(),
     ] as DescriptorAddType,
   },

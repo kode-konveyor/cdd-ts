@@ -22,6 +22,7 @@ import { TearDownSideEffectChecksService } from "../check/TearDownSideEffectChec
 import { DiffService } from "../util/DiffService.js";
 import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
 import { MessageFormatService } from "../util/messageFormat.js";
+import { GetCaseToStubService } from "./GetCaseToStubService.js";
 
 export class Contract<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -64,8 +65,12 @@ export class Contract<T extends MethodType> extends ContractEntity<T> {
     private readonly getParametersFromGetters = GetParametersFromGettersService
       .prototype.getParametersFromGetters,
     private readonly messageFormat = MessageFormatService.prototype
-      .messageFormat
+      .messageFormat,
+    private readonly getCaseToStub = GetCaseToStubService.prototype
+      .getCaseToStub
   ) {
     super();
   }
+
+  static states: Array<string> = [];
 }

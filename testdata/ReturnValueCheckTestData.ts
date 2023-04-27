@@ -120,15 +120,13 @@ export const ReturnValueCheckTestData = {
   newCaseChecker: (
     returnValue: ContractEntity<typeof WhenService.prototype.when.call>
   ): "no case added" | undefined => {
-    if (returnValue.cases[LabelTestdata.nondefaultCaseName()] != null)
-      return undefined;
+    if (returnValue.cases[LabelTestdata.caseName()] != null) return undefined;
     return "no case added";
   },
   currentCaseChecker: (
     returnValue: ContractEntity<typeof WhenService.prototype.when.call>
   ): "currentCase is not the expected" | undefined => {
-    if (returnValue.currentCase === LabelTestdata.nondefaultCaseName())
-      return undefined;
+    if (returnValue.currentCase === LabelTestdata.caseName()) return undefined;
     return "currentCase is not the expected";
   },
 

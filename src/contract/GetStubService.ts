@@ -7,6 +7,7 @@ import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
 import { serialize } from "../util/serialize.js";
 import { type CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 import { MessageFormatService } from "../util/messageFormat.js";
+import { GetCaseToStubService } from "./GetCaseToStubService.js";
 
 export class GetStubService<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -14,14 +15,16 @@ export class GetStubService<T extends MethodType> extends ContractEntity<T> {
     readonly getParametersFromGetters = GetParametersFromGettersService
       .prototype.getParametersFromGetters,
     private readonly messageFormat = MessageFormatService.prototype
-      .messageFormat
+      .messageFormat,
+    private readonly getCaseToStub = GetCaseToStubService.prototype
+      .getCaseToStub
   ) {
     super();
   }
 
-  getStub(caseName?: string): T {
+  getStub(): T {
     this.checkCurrentRun();
-    if (caseName == null) caseName = "";
+    const caseName = this.getCaseToStub();
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     const currentCase = this.cases[caseName] as CaseDescriptorEntity<T>;
     if (currentCase?.runs == null)
