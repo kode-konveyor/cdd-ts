@@ -13,4 +13,12 @@ export const testedFunctionContract = new Contract<TestedFunctionType>()
   .thenReturn("returns the first parameter as string", {
     default: getReturnValueTestData.getReturnValue,
     check: ReturnValueCheckTestData.returnValueIsStringOfParameter,
-  });
+  })
+  .meanwhile(
+    "this is a side effect check without setUp and tearDown, just to flex that we can do that",
+    {
+      check() {
+        return undefined;
+      },
+    }
+  );

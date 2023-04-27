@@ -13,4 +13,9 @@ export const SideEffectCheckCaseTestData = {
       string,
       SideEffectCheckerType
     ],
+  failingWithoutTearDown: () =>
+    [
+      LabelTestdata.logsToConsole(),
+      SideEffectCheckerTestData.failingWithoutTearDown()(),
+    ] as [string, SideEffectCheckerType],
 };

@@ -8,7 +8,7 @@ export class TearDownSideEffectChecksService {
   ): Promise<void> {
     if (currentRun.sideEffectChecks.length !== 0) sideEffectMutex.unlock();
     for (const entry of currentRun.sideEffectChecks) {
-      await entry[1].tearDown();
+      if (entry[1].tearDown !== undefined) await entry[1].tearDown();
     }
   }
 }

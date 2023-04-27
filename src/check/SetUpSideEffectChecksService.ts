@@ -8,7 +8,7 @@ export class SetUpSideEffectChecksService {
   ): Promise<void> {
     if (currentRun.sideEffectChecks.length !== 0) await sideEffectMutex.lock();
     for (const entry of currentRun.sideEffectChecks) {
-      await entry[1].setUp();
+      if (entry[1].setUp !== undefined) await entry[1].setUp();
     }
   }
 }

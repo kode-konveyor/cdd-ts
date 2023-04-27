@@ -23,7 +23,7 @@ export class OneSideEffectCheckService<
     try {
       await checker.check();
     } catch (error) {
-      await checker.tearDown();
+      if (checker.tearDown !== undefined) await checker.tearDown();
       throw new Error(
         this.messageFormat(
           SIDE_EFFECT_CHECK_FAILURE_MESSAGE,
@@ -33,6 +33,5 @@ export class OneSideEffectCheckService<
         )
       );
     }
-    await checker.tearDown();
   }
 }

@@ -71,6 +71,10 @@ const runDescriptorTestDataDescriptor = {
     __from: "getRunDescriptorCorrectlyBuilt",
     sideEffectChecks: [SideEffectCheckCaseTestData.failing()],
   },
+  getRunDescriptorWithSideEffectCheckCheckFailingWithoutTeardown: {
+    __from: "getRunDescriptorCorrectlyBuilt",
+    sideEffectChecks: [SideEffectCheckCaseTestData.failingWithoutTearDown()],
+  },
   getRunDescriptorWithOtherreturnValue: {
     __from: "getRunDescriptorParametersAndExplanationSet",
     returnValueGetter: getReturnValueTestData.getReturnValueOther,

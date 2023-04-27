@@ -132,7 +132,17 @@ Error: first arg cannot be two`
     TestedFunctionTestData.default
   )
   .thenThrow(
-    "In case a side effect check fails, a 'side effect check: (name): did not hold' error is thrown",
+    "In case a side effect check fails, a 'side effect check: (name): did not hold' error is thrown, and the tearDown of the checker is called",
+    LabelTestdata.runIdentification() +
+      " side effect check: logs to console: did not hold:Error: .with tearDown.SeChecker:"
+  )
+
+  .ifCalledWith(
+    ContractTestData.getContractWithFailingSideEffectCheckWithoutTearDown,
+    TestedFunctionTestData.default
+  )
+  .thenThrow(
+    "If there is no tearDown of the side effect checker, then it is not called",
     LabelTestdata.runIdentification() +
       " side effect check: logs to console: did not hold"
   )

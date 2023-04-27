@@ -6,6 +6,7 @@ import { MessageFormatService } from "../src/util/messageFormat.js";
 export const GlobalObject = {
   value: [true] as Array<any>,
   multiplier: 1,
+  error: null as unknown,
 };
 
 const SECHECKER_ERROR = "SeChecker:\nexpected:{1}\nactual  :{2}";
@@ -23,17 +24,24 @@ export class SeChecker implements SideEffectCheckerType {
   };
 
   check = (): void => {
-    if (!equal(GlobalObject.value, this.expected))
-      throw new Error(
+    if (!equal(GlobalObject.value, this.expected)) {
+      const error = new Error(
         this.messageFormat(
           SECHECKER_ERROR,
           serialize(this.expected),
           serialize(GlobalObject.value)
         )
       );
+      GlobalObject.error = error;
+      throw error;
+    }
   };
 
   tearDown = (): void => {
+    if (GlobalObject.error != null) {
+      (GlobalObject.error as Error).message =
+        "(with tearDown)" + (GlobalObject.error as Error).message;
+    }
     GlobalObject.value = [true];
   };
 }
@@ -53,4 +61,11 @@ function getSideEffectCheckerFailing(): SideEffectCheckerType {
 export const SideEffectCheckerTestData = {
   default: () => getSideEffectChecker,
   failing: () => getSideEffectCheckerFailing,
+  failingWithoutTearDown: () => () => {
+    return {
+      check: () => {
+        throw new Error("failing");
+      },
+    };
+  },
 };

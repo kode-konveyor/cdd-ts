@@ -56,6 +56,11 @@ export const ContractTestDataDescriptor = {
     currentRun:
       RunDescriptorTestData.getRunDescriptorWithSideEffectCheckCheckFailing(),
   },
+  getContractWithFailingSideEffectCheckWithoutTearDown: {
+    __from: "getContractWithTitle",
+    currentRun:
+      RunDescriptorTestData.getRunDescriptorWithSideEffectCheckCheckFailingWithoutTeardown(),
+  },
   getContractWithTitleAndRun: {
     __from: "getContractWithTitle",
     currentRun: RunDescriptorTestData.getRunDescriptorCorrectlyBuilt(),

@@ -34,7 +34,7 @@ export const SerializedTestdata = {
   config: () => `{
  "jsDir": "dist",
  "moduleResolution": "ES",
- "numberofTests": "115"
+ "numberofTests": "117"
 }`,
   defaultConfig: () => `{
  "contracts": "contracts/**/*Contract.ts",
