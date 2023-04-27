@@ -38,6 +38,11 @@ export const getStubContract = new Contract<
       check: ReturnValueCheckTestData.stubReturnsDefinedReturnValue,
     }
   )
+  .ifCalledWith(contractTestData.getContractWithTitleAndRun)
+  .thenReturn("the returned stub is a sinon stub, with all of its functions", {
+    default: TestedFunctionTestData.default,
+    check: ReturnValueCheckTestData.stubIsSinonStub,
+  })
 
   .ifCalledWith(contractTestData.getContractThrowingTheDefinedException)
   .thenReturn(

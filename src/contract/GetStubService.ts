@@ -11,6 +11,7 @@ import { serialize } from "../util/serialize.js";
 import { type CaseDescriptorEntity } from "../types/CaseDescriptorEntity.js";
 import { MessageFormatService } from "../util/messageFormat.js";
 import { GetCaseToStubService } from "./GetCaseToStubService.js";
+import Sinon from "sinon";
 
 export class GetStubService<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -25,7 +26,7 @@ export class GetStubService<T extends MethodType> extends ContractEntity<T> {
     super();
   }
 
-  getStub(): T {
+  getStub(): Sinon.SinonStubbedMember<T> {
     this.checkCurrentRun();
     // eslint-disable-next-line @typescript-eslint/no-this-alias
     const self = this;
@@ -63,6 +64,8 @@ export class GetStubService<T extends MethodType> extends ContractEntity<T> {
       }
       return (retvals[0] as T)();
     };
-    return stub as T;
+    const sinonStub = Sinon.stub<Parameters<T>, ReturnType<T>>();
+    sinonStub.callsFake(stub);
+    return sinonStub as unknown as Sinon.SinonStubbedMember<T>;
   }
 }

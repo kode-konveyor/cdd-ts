@@ -1,6 +1,7 @@
 import { Mutex } from "../src/util/Mutex/Mutex.js";
 import { GlobalObject } from "./SideEffectCheckerTestData.js";
 import { type Observable, of } from "rxjs";
+import type Sinon from "sinon";
 
 export type TestedFunctionType = (arg: number, arg2: string) => string;
 
@@ -31,7 +32,7 @@ function returningObservable(): Observable<number> {
 }
 
 export const TestedFunctionTestData = {
-  default: () => testedFunction,
+  default: () => testedFunction as Sinon.SinonStubbedMember<TestedFunctionType>,
   withGlobal: () => testedFunctionWithGlobal as unknown as TestedFunctionType,
   observable: () => returningObservable,
 };

@@ -40,7 +40,7 @@ export class Contract<T extends MethodType> extends ContractEntity<T> {
     readonly meanwhile: MeanWhileService<T>["meanWhile"] = MeanWhileService
       .prototype.meanWhile,
     readonly getStub: GetStubService<T>["getStub"] = GetStubService.prototype
-      .getStub,
+      .getStub as unknown as GetStubService<T>["getStub"],
     readonly check: CheckService<T>["check"] = CheckService.prototype.check,
     // @ts-expect-error functions treated with this will always have at least self as parameter
     readonly getStubForMixin: GetStubForMixinService<T>["getStubForMixin"] = GetStubForMixinService

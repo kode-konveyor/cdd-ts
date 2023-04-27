@@ -26,9 +26,11 @@
     "fs-extra": "latest",
     "immer": "^10.0.1",
     "jest-mock": "latest",
-    "relative": "latest"
+    "relative": "latest",
+    "sinon": "latest"
   },
   "devDependencies": {
+    "@types/sinon": "latest",
     "@angular/compiler": "latest",
     "@stryker-mutator/core": "latest",
     "@types/diff": "latest",

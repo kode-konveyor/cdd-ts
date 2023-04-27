@@ -16,6 +16,8 @@ import { type WhenService } from "../src/contract/WhenService.js";
 import { LabelTestdata } from "./LabelTestdata.js";
 import { type TestData } from "../src/types/TestData.js";
 import { type Observable, firstValueFrom } from "rxjs";
+import type Sinon from "sinon";
+import { SerializedTestdata } from "./SerializedTestdata.js";
 
 const checkThrow = new CheckThrowService().checkThrow;
 const diff = new DiffService().diff;
@@ -63,6 +65,14 @@ export const ReturnValueCheckTestData = {
     ) === getReturnValueTestData.getReturnValue()
       ? undefined
       : "oops";
+  },
+  stubIsSinonStub: (
+    stub: Sinon.SinonStubbedMember<TestedFunctionType>
+  ): string | undefined => {
+    stub(ParameterTestData.defaultFirst(), ParameterTestData.defaultSecond());
+    if (!(serialize(stub.args) === SerializedTestdata.args))
+      return serialize(stub.args);
+    return undefined;
   },
   mixinStubReturnsDefinedReturnValue: (
     stub: (this: number, arg2: string) => string
