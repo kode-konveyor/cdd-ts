@@ -1,7 +1,10 @@
 import equal from "fast-deep-equal";
 import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
-import { MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT } from "./Messages.js";
+import {
+  MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT,
+  NO_RUNS_IN_CASE,
+} from "./Messages.js";
 import { GetParametersFromGettersService } from "../util/GetParametersFromGettersService.js";
 import { CheckCurrentRunService } from "./CheckCurrentRunService.js";
 import { serialize } from "../util/serialize.js";
@@ -24,12 +27,14 @@ export class GetStubService<T extends MethodType> extends ContractEntity<T> {
 
   getStub(): T {
     this.checkCurrentRun();
-    const caseName = this.getCaseToStub();
-    // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
-    const currentCase = this.cases[caseName] as CaseDescriptorEntity<T>;
-    if (currentCase?.runs == null)
-      throw new Error("no runs in the case" + serialize(this));
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
+    const self = this;
     const stub = (...params: Parameters<T>): ReturnType<T> => {
+      const caseName = self.getCaseToStub();
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      const currentCase = self.cases[caseName] as CaseDescriptorEntity<T>;
+      if (currentCase?.runs == null)
+        throw new Error(this.messageFormat(NO_RUNS_IN_CASE, caseName));
       const retvals: Array<ReturnType<T>> = [];
       const checkedParams: Array<[string, Parameters<T>]> = [];
       for (const run of currentCase.runs) {

@@ -87,6 +87,17 @@ export const ReturnValueCheckTestData = {
       undefined
     );
   },
+  stubThrowsNoRunException: (stub: TestedFunctionType) => {
+    checkThrow(
+      stub,
+      getParametersFromGetters(ParameterTestData.exceptionThrowing()) as [
+        number,
+        string
+      ],
+      LabelTestdata.norunException(),
+      undefined
+    );
+  },
   stubReturnsOne: (stub: TestedFunctionType) => {
     const ret = stub(
       ...(getParametersFromGetters(ParameterTestData.exceptionThrowing()) as [

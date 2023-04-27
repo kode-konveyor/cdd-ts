@@ -49,9 +49,12 @@ export const getStubContract = new Contract<
   )
 
   .ifCalledWith(contractTestData.getContract)
-  .thenThrow(
-    "if there are no runs in the case, it is an error",
-    "no runs in the case"
+  .thenReturn(
+    "if there are no runs in the case, the stub throws an error when runs",
+    {
+      default: TestedFunctionTestData.default,
+      check: ReturnValueCheckTestData.stubThrowsNoRunException,
+    }
   )
 
   .ifCalledWith(contractTestData.getContractWithRunInDefaultCaseTwice)

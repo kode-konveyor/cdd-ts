@@ -11,6 +11,7 @@ export const LabelTestdata = {
   default: () => CONTRACT_EXPLANATION,
   caseName: () => NONDEFAULT_CASE_NAME,
   exceptionThrown: () => EXCEPTION_THROWN,
+  norunException: () => "no runs in the case: ''",
   runExplanation: () => RUN_EXPLANATION,
   pass: () => "pass",
   fail: () => "fail",

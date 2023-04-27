@@ -3,3 +3,4 @@ export const MORE_RETURN_VALUES_FOR_ONE_PARAMETER_SET_MESSAGE_FORMAT =
 export const IFCALLEDWITH_MISSING = "ifCalledWith is missing before {1}";
 export const PARAMETER_DIDNT_PASS_THE_CHECK =
   "{1}: the parameter did not pass the check: {2}";
+export const NO_RUNS_IN_CASE = "no runs in the case: '{1}'";
