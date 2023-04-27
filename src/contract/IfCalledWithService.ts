@@ -50,6 +50,7 @@ export class IfCalledWithService<
         throw new Error(
           this.messageFormat(
             PARAMETER_DIDNT_PASS_THE_CHECK,
+            this.caseName(),
             serialize(checkResult)
           )
         );

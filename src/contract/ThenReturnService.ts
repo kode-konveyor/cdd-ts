@@ -6,6 +6,7 @@ import { MessageFormatService } from "../util/messageFormat.js";
 import { THEN_RETURN } from "./Constants.js";
 import { type ThenreturnResultType } from "../types/ThenreturnResultType.js";
 import { ThrowIfCalledWithMissingForService } from "./ThrowIfCalledWithMissingForService.js";
+import { type PromisedReturnType } from "../types/PromisedReturnType.js";
 
 export class ThenReturnService<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -20,8 +21,8 @@ export class ThenReturnService<T extends MethodType> extends ContractEntity<T> {
   thenReturn(
     explanation: string,
     returnValue:
-      | (() => ReturnType<T>)
-      | { default: () => ReturnType<T>; check: ReturnValueCheckType<T> }
+      | (() => PromisedReturnType<T>)
+      | { default: () => PromisedReturnType<T>; check: ReturnValueCheckType<T> }
   ): ThenreturnResultType<T> {
     if (this.currentRun == null) this.throwIfCalledWithMissingFor(THEN_RETURN);
     const run = this.currentRun as RunDescriptorEntity<T>;

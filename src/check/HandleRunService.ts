@@ -12,6 +12,7 @@ import { OneSideEffectCheckService } from "./OneSideEffectCheckService.js";
 import { RunSideEffectChecksService } from "./RunSideEffectChecksService.js";
 import { RunReturnValueChecksService } from "./RunReturnValueChecksService.js";
 import { MessageFormatService } from "../util/messageFormat.js";
+import { type PromisedReturnType } from "../types/PromisedReturnType.js";
 
 export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
   constructor(
@@ -43,7 +44,7 @@ export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
       throw new Error(this.caseName() + ": no ifcalledWith");
     try {
       await this.setUpSideEffectChecksService(currentRun);
-      let result: ReturnType<T>;
+      let result: PromisedReturnType<T>;
       const parameters: Parameters<T> = this.getParametersFromGetters(
         currentRun.parameterGetters
       ) as Parameters<T>;

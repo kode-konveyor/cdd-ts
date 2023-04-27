@@ -1,7 +1,6 @@
 import { BoundService } from "./util/BoundService.js";
 import { BoundCallService } from "./util/BoundCallService.js";
 import { DiffService } from "./util/DiffService.js";
-export { type Unpromised } from "./types/Unpromised.js";
 export { MakeTestDataService } from "./util/MakeTestDataService.js";
 export { AnnotateFunctionService } from "./util/AnnotateFunctionService.js";
 export { CheckThrowAsyncService } from "./util/CheckThrowAsyncService.js";

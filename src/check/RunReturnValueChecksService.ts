@@ -5,6 +5,7 @@ import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
 import { MessageFormatService } from "../util/messageFormat.js";
 import { serialize } from "../cdd-ts.js";
+import { type PromisedReturnType } from "../types/PromisedReturnType.js";
 
 export class RunReturnValueChecksService<
   T extends MethodType
@@ -19,7 +20,7 @@ export class RunReturnValueChecksService<
 
   async runReturnValueChecks(
     currentRun: RunDescriptorEntity<T>,
-    result: ReturnType<T>,
+    result: PromisedReturnType<T>,
     parameters: Parameters<T>
   ): Promise<void> {
     for (const check of currentRun.returnValueChecks) {

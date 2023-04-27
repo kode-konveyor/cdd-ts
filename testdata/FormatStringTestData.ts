@@ -35,13 +35,15 @@ export const FormatStringTestData = {
     "The function under test:undefined:undefined: current run is incomplete: neither thenReturn nor thenThrow was called",
   didNotPassChecker: {
     default: [
-      () => "the parameter did not pass the check: {1}",
+      () => "{1}: the parameter did not pass the check: {2}",
+      () => "The function under test:undefined:undefined",
       () => '"b"',
-    ] as AsGetters<[string, string]>,
+    ] as AsGetters<[string, string, string]>,
     checker: (...params: Array<unknown>) =>
-      (params[0] as string).match(DID_NOT_PASS) != null && params[1] === '"b"'
+      (params[0] as string).match(DID_NOT_PASS) != null && params[2] === '"b"'
         ? undefined
         : params,
   },
-  didNotPassMessage: () => 'the parameter did not pass the check: "b"',
+  didNotPassMessage: () =>
+    'The function under test:undefined:undefined: the parameter did not pass the check: "b"',
 };
