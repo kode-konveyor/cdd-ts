@@ -2,6 +2,7 @@ import equal from "fast-deep-equal";
 import type { SideEffectCheckerType } from "../src/types/SideEffectChecker.js";
 import { serialize } from "../src/util/serialize.js";
 import { MessageFormatService } from "../src/util/messageFormat.js";
+import { type TestedFunctionType } from "./MethodTestData.js";
 
 export const GlobalObject = {
   value: [true] as Array<any>,
@@ -10,7 +11,7 @@ export const GlobalObject = {
 };
 
 const SECHECKER_ERROR = "SeChecker:\nexpected:{1}\nactual  :{2}";
-export class SeChecker implements SideEffectCheckerType {
+export class SeChecker implements SideEffectCheckerType<TestedFunctionType> {
   constructor(
     private readonly messageFormat = MessageFormatService.prototype
       .messageFormat
@@ -46,11 +47,11 @@ export class SeChecker implements SideEffectCheckerType {
   };
 }
 
-function getSideEffectChecker(): SideEffectCheckerType {
+function getSideEffectChecker(): SideEffectCheckerType<TestedFunctionType> {
   return new SeChecker();
 }
 
-function getSideEffectCheckerFailing(): SideEffectCheckerType {
+function getSideEffectCheckerFailing(): SideEffectCheckerType<TestedFunctionType> {
   const sideEffectChecker = getSideEffectChecker() as SeChecker;
   sideEffectChecker.expected = [
     ["these are not the droids you are looking for"],

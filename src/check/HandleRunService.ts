@@ -64,7 +64,7 @@ export class HandleRunService<T extends MethodType> extends ContractEntity<T> {
         );
       await this.checkReturnValue(currentRun, result);
       await this.runReturnValueChecks(currentRun, result, parameters);
-      await this.runSideEffectChecks(currentRun);
+      await this.runSideEffectChecks(currentRun, result, parameters);
     } catch (e) {
       await this.tearDownSideEffectChecksService(currentRun);
       throw e;

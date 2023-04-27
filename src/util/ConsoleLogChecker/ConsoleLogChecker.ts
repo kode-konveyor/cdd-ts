@@ -1,3 +1,4 @@
+import { type TestedFunctionType } from "../../../testdata/MethodTestData.js";
 import { type SideEffectCheckerType } from "../../types/SideEffectChecker.js";
 import { CheckService } from "./CheckService.js";
 import { ConsoleLogCheckerEntity } from "./ConsoleLogCheckerEntity.js";
@@ -6,7 +7,7 @@ import { TearDownService } from "./TearDownService.js";
 
 export class ConsoleLogChecker
   extends ConsoleLogCheckerEntity
-  implements SideEffectCheckerType
+  implements SideEffectCheckerType<TestedFunctionType>
 {
   constructor(
     expected: string,

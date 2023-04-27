@@ -4,6 +4,7 @@ import { type MethodType } from "../types/MethodType.js";
 import { SIDE_EFFECT_CHECK_FAILURE_MESSAGE } from "./Messages.js";
 import { CaseNameService } from "./CaseNameService.js";
 import { MessageFormatService } from "../util/messageFormat.js";
+import { type PromisedReturnType } from "../types/PromisedReturnType.js";
 
 export class OneSideEffectCheckService<
   T extends MethodType
@@ -18,10 +19,12 @@ export class OneSideEffectCheckService<
 
   async oneSideEffectCheck(
     name: string,
-    checker: SideEffectCheckerType
+    checker: SideEffectCheckerType<T>,
+    result: PromisedReturnType<T>,
+    parameters: Parameters<T>
   ): Promise<void> {
     try {
-      await checker.check();
+      await checker.check(result, ...parameters);
     } catch (error) {
       if (checker.tearDown !== undefined) await checker.tearDown();
       throw new Error(

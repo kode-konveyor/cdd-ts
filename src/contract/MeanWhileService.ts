@@ -18,7 +18,7 @@ export class MeanWhileService<T extends MethodType> extends ContractEntity<T> {
 
   meanWhile(
     reason: string,
-    checker: SideEffectCheckerType
+    checker: SideEffectCheckerType<T>
   ): SetTitleReturnType<T> {
     this.currentRun?.sideEffectChecks.push([reason, checker]) ??
       this.throwIfCalledWithMissingFor(MEANWHILE);

@@ -3,6 +3,7 @@ import { ContractEntity } from "../types/ContractEntity.js";
 import { type MethodType } from "../types/MethodType.js";
 import { CaseNameService } from "./CaseNameService.js";
 import { OneSideEffectCheckService } from "./OneSideEffectCheckService.js";
+import { type PromisedReturnType } from "../types/PromisedReturnType.js";
 
 export class RunSideEffectChecksService<
   T extends MethodType
@@ -15,9 +16,13 @@ export class RunSideEffectChecksService<
     super();
   }
 
-  async runSideEffectChecks(currentRun: RunDescriptorEntity<T>): Promise<void> {
+  async runSideEffectChecks(
+    currentRun: RunDescriptorEntity<T>,
+    result: PromisedReturnType<T>,
+    parameters: Parameters<T>
+  ): Promise<void> {
     for (const [name, checker] of currentRun.sideEffectChecks) {
-      await this.oneSideEffectCheck(name, checker);
+      await this.oneSideEffectCheck(name, checker, result, parameters);
     }
   }
 }

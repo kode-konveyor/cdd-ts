@@ -72,5 +72,7 @@ export class Contract<T extends MethodType> extends ContractEntity<T> {
     super();
   }
 
+  // eslint-disable-next-line kodekonveyor/no-comment
+  // Stryker disable next-line ArrayDeclaration
   static states: Array<string> = [];
 }
