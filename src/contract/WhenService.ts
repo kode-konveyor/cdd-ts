@@ -28,6 +28,7 @@ export class WhenService<T extends MethodType> extends ContractEntity<T> {
     caseDescriptor.setUp = environmentManipulator.setUp;
     caseDescriptor.tearDown = environmentManipulator.tearDown;
     this.cases[explanation] = caseDescriptor;
+    delete this.currentRun;
     this.currentRun = undefined;
     return this as unknown as WhenServiceResultType<T>;
   }

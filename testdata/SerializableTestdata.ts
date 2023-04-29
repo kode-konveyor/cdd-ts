@@ -36,8 +36,9 @@ export const SerializableTestDataDescriptor = {
     simpleNumber: 3,
     infinity: 1 / 0,
     null: null,
-    arraywithEmpty: [undefined, undefined],
+    arraywithEmpty: [undefined, null],
   },
+  undef: undefined,
   circular,
   objectWithFunctions: {
     a: "foo",

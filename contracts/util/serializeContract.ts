@@ -49,7 +49,6 @@ export const serializeContract = new Contract<typeof serialize>()
   .thenReturn("empty object serializes to '{}'", SerializedTestdata.argparser)
 
   .ifCalledWith(SerializableTestData.defaultargv)
-  .thenReturn(
-    "empty object serializes to '{}'",
-    SerializedTestdata.defaultargv
-  );
+  .thenReturn("empty object serializes to '{}'", SerializedTestdata.defaultargv)
+  .ifCalledWith(SerializableTestData.undef)
+  .thenReturn("correctly serializes undefined", SerializedTestdata.undef);

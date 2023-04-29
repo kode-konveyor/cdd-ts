@@ -150,6 +150,7 @@ export const ContractTestDataDescriptor = {
       "",
       CaseDescriptorTestData.getCaseDescriptorWithCorrectRun(),
     ] as DescriptorAddType,
+    currentRun: undefined,
   },
   getContractWithManipulatorSetAndRun: {
     __from: "getContractWithNonDefaultCase",

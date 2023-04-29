@@ -90,6 +90,9 @@ function str(
     case "number":
       return isFinite(value) ? String(value) : "INFINITY";
 
+    case "undefined":
+      return "undefined";
+
     case "object": {
       if (value === null) return "null";
       if (includes(seen, value)) {
@@ -100,14 +103,12 @@ function str(
       gap += indent;
       if (Object.prototype.toString.apply(value) === "[object Array]") {
         const partial = (value as Array<unknown>).map((v, i) => {
-          return (
-            (str(
-              i,
-              value as Record<string, unknown>,
-              gap,
-              seen
-            ) as unknown as boolean) || "null"
-          );
+          return str(
+            i,
+            value as Record<string, unknown>,
+            gap,
+            seen
+          ) as unknown as boolean;
         });
         const v =
           partial.length === 0
@@ -125,9 +126,7 @@ function str(
           gap,
           seen
         );
-        if (v != null) {
-          partial.push(quote(k) + ": " + v);
-        }
+        partial.push(quote(k) + ": " + v);
       }
       const v = "{\n" + gap + partial.join(",\n" + gap) + "\n" + mind + "}";
       gap = mind;

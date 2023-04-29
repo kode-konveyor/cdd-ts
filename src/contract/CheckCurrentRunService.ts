@@ -36,7 +36,7 @@ export class CheckCurrentRunService<
       (this.cases[currentCase] as unknown as CaseDescriptorEntity<T>).runs.push(
         this.currentRun as unknown as RunDescriptorEntity<T>
       );
-      this.currentRun = undefined;
+      delete this.currentRun;
     }
     return this as unknown as WithCorrectRun<T, ContractEntity<T>>;
   }

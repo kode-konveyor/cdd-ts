@@ -1,7 +1,7 @@
 export const SerializedTestdata = {
   serializedComplexObject: () => `{
  "arraywithEmpty": [
-  null,
+  undefined,
   null
  ],
  "boolean": true,
@@ -34,7 +34,7 @@ export const SerializedTestdata = {
   config: () => `{
  "jsDir": "dist",
  "moduleResolution": "ES",
- "numberofTests": "118"
+ "numberofTests": "119"
 }`,
   defaultConfig: () => `{
  "contracts": "contracts/**/*Contract.ts",
@@ -80,4 +80,5 @@ export const SerializedTestdata = {
   "b"
  ]
 ]`,
+  undef: () => "undefined",
 };
