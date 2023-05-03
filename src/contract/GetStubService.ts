@@ -39,7 +39,7 @@ export class GetStubService<T extends MethodType> extends ContractEntity<T> {
       const retvals: Array<ReturnType<T>> = [];
       const checkedParams: Array<[string, Parameters<T>]> = [];
       for (const run of currentCase.runs) {
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion, @typescript-eslint/no-non-null-assertion
         const runParams = this.getParametersFromGetters(run.parameterGetters!);
         if (run.parameterCheck !== undefined) {
           if (run.parameterCheck(...params) === undefined) {
