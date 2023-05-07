@@ -1,6 +1,6 @@
 {
   "name": "@kodekonveyor/cdd-ts",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "Test-time Contract Development framework for TypeScript",
   "main": "dist/src/cdd-ts.js",
   "bin": {
