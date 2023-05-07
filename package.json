@@ -1,5 +1,5 @@
 {
-  "name": "cdd-ts",
+  "name": "@kodekonveyor/cdd-ts",
   "version": "2.2.2",
   "description": "Test-time Contract Development framework for TypeScript",
   "main": "dist/src/cdd-ts.js",
@@ -13,9 +13,9 @@
     "mutate": "stryker run && tools/checktsmutate",
     "test": "tsc && chmod a+x dist/src/run.js && runContracts",
     "lint": "eslint . --ext .ts",
-    "publish:patch": "npm run qa && npm version patch && git push origin develop --tags && npm publish",
-    "publish:minor": "npm run qa && npm version minor && git push origin develop --tags && npm publish",
-    "publish:major": "npm run qa && npm version major && git push origin develop --tags && npm publish"
+    "publish:patch": "npm run qa && npm version patch && git push origin develop --tags && npm publish --access=public",
+    "publish:minor": "npm run qa && npm version minor && git push origin develop --tags && npm publish --access=public",
+    "publish:major": "npm run qa && npm version major && git push origin develop --tags && npm publish --access=public"
   },
   "dependencies": {
     "colors": "latest",
