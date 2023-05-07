@@ -18,7 +18,7 @@ export const MakeTestDataTestData = {
   withNamedGetter: () => {
     return {
       getOne: { __from: "", jsDir: JS_DIR },
-      getTwo: { __from: "getOne", moduleResolution: "ES" },
+      getTwo: { __from: "getOne", moduleResolution: "ES" } as const,
     };
   },
   withTransform: () => {
@@ -35,7 +35,7 @@ export const MakeTestDataTestData = {
 
   withNonexistingReference: () => {
     return {
-      getTwo: { __from: "getOne", moduleResolution: "ES" },
+      getTwo: { __from: "getOne", moduleResolution: "ES" } as const,
       getOne: { jsDir: JS_DIR },
     };
   },

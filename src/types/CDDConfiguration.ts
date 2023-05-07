@@ -1,6 +1,6 @@
 export interface CDDConfiguration {
   jsDir: string;
-  moduleResolution: string;
+  moduleResolution: "ES" | "esbuild";
   watch: boolean;
   distFiles: string;
   contracts: string;

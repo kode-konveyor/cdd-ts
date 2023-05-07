@@ -131,10 +131,8 @@ export const ReturnValueCheckTestData = {
   makeTestDataLeakTest: (
     value: TestData<CDDConfiguration, TestDataDescriptor<CDDConfiguration>>
   ): void => {
-    if (
-      (value["getOne"] as unknown as () => CDDConfiguration)()
-        .moduleResolution !== ""
-    ) {
+    // @ts-expect-error checking for the impossible
+    if (value["getOne"]().moduleResolution !== "") {
       throw new Error("leak detected");
     }
   },

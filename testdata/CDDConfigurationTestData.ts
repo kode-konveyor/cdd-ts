@@ -6,7 +6,7 @@ export const JS_DIR = "some_directory/far/far/away";
 
 export const CDDConfigurationTestDataDescriptor = {
   getCDDConfiguration: {
-    moduleResolution: "",
+    moduleResolution: "" as unknown as "ES",
     jsDir: "",
   },
   defaultConfig: {
